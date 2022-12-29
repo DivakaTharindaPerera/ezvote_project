@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     class Controller{
 
 
@@ -19,7 +19,7 @@
             if(file_exists('../app/View/'.$view.'.php')){
                 require_once '../app/View/'.$view.'.php';
             }else{
-                die('View does not exist');
+                die('View does not exist: '.$view);
             }
         }
 
@@ -52,7 +52,7 @@
         }
 
         public function logout(){
-            unset($_SESSION['UserId']);
+            unset($_SESSION["UserId"]);
             session_start();
             session_destroy();
 
@@ -60,7 +60,7 @@
         }
 
         public function isLoggedIn(){
-            if(isset($_SESSION['UserId'])){
+            if(isset($_SESSION["UserId"])){
                 return true;
             }else{
                 return false;
