@@ -70,11 +70,5 @@ class Users extends Controller{
         }
     }
 
-    public function isLoggedIn(){
-        if(isset($_SESSION['UserId'])){
-            return true;
-        }else{
-            return false;
-        }
-    }
+    
 }

@@ -11,11 +11,10 @@
         <br>
         <input type="password" name="password" id="password" placeholder="password....">
         <br>
-        <em id="error"><?php if(isset($data)){ echo $data['error']; } ?></em>
+        <em id="error"><?php if(isset($data['error'])){ echo $data['error']; } ?></em>
         <br><br>
         <button type="submit">LOGIN</button>
         <br><br>
-        <a href="<?php echo urlroot; ?>/View/Signing"><button>click me</button></a>
     </form>
     </div>
 <?php require approot.'/View/inc/footer.php'; ?>

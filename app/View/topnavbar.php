@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    // session_start();
     
     echo "
     <style>
@@ -92,12 +92,18 @@
     }
     echo "
     </div>
-    <div class='profile'>
+    ";
+    if(isset($_SESSION["UserId"])){
+        echo "
+        <div class='profile'>
         ".$_SESSION["fname"]." ".$_SESSION["lname"]."
     </div>
     <div class='profilepic'>
         <img src='".urlroot."/img/ezvotelogo.png' alt='profilepic'>
     </div>
+        ";
+    }
+    echo "
     </div>
 </div>
     ";

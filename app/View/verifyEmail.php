@@ -27,5 +27,5 @@
         <input type="text" name="verification_code" class="insert" placeholder="Enter your verification code..." required>
         <br><input type="submit" name="verify" class="verify" value="Verify Email">
     </form>
-        <!-- testing branch -->
+        
 <?php require approot.'/View/inc/footer.php'; ?>
