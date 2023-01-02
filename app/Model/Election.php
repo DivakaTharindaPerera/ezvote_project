@@ -2,7 +2,7 @@
 
 session_start();
 
-class Election{
+class Election extends Controller{
     private $db;
 
     public function __construct(){
@@ -43,14 +43,16 @@ class Election{
 
         try {
             $this->db->execute();
-            return true;
+            $data['id'] = $this->db->lastInsertId();
+            $this->view('Supervisor/addVoters', $data);
             
         } catch (Exception $e) {
-            return false;
-        }
+            echo "Something went wrong";
+        }return false;
 
 
     }
+    
 
 
 }

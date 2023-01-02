@@ -9,6 +9,7 @@
 
 
 class Users extends Controller{
+    private $userModel;
     public function __construct(){
         $this->userModel = $this->model('User');
     }
@@ -23,7 +24,7 @@ class Users extends Controller{
                 'lname' => trim($_POST["lname"]),
                 'email' => trim($_POST["email"]),
                 'password' => trim($_POST["password"]),
-                'vCode' => substr(number_format(time() * rand(), 0, '', ''), 0, 6),
+                'vCode' => substr(number_format(time() * rand() , 0, '', ''), 0, 6),
                 'emailError' => ''
             ];
 

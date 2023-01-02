@@ -1,9 +1,13 @@
 <?php
     class Elections extends Controller{
-
+        private $userModel;
+        private $electionModel;
+        private $voterModel;
+        
         public function __construct(){
             $this->userModel = $this->model('User');
             $this->electionModel = $this->model('Election');
+            $this->voterModel = $this->model('Voter');
         }
 
         public function crteelection(){
@@ -55,17 +59,44 @@
                         $data['stat'] = 1;
                     }
                     //run query
-                    if($this->electionModel->insertIntoElection($data)){
-                        $this->view('/Supervisor/addVoters');
-                    }else{
-                        die("Something went wrong");
-                    }
-
+                    $this->electionModel->insertIntoElection($data);
                 }
 
 
                     
 
+            }
+        }
+
+        public function insertvoters(){
+            if(!$this->isLoggedIn()){
+                $this->view('login');
+            }else{
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                    $electionId = trim($_POST["electionId"]);
+                    $count = trim($_POST["count"]);
+
+                    for($i = 1; $i <= $count; $i++){
+                        $data = [
+                            'electionId' => $electionId,
+                            'name' => trim($_POST[$i."name"]),
+                            'id' => "",
+                            'email' => trim($_POST[$i."email"]),
+                            'value' => trim($_POST[$i."value"])
+
+                        ];
+                        if($this->userModel->findUserByEmail($data['email'])){
+                            $user = $this->userModel->getUserByEmail($data['email']);
+                            $data['id'] = $user->UserId;
+                            $this->voterModel->insertIntoRegVoters($data);
+                        }else{
+                            $this->voterModel->insertIntoUnregVoters($data);
+                        }
+
+                    }
+                }
             }
         }
 
