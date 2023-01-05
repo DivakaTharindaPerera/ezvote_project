@@ -69,6 +69,7 @@
         }
 
         public function insertvoters(){
+            $flag = 1;
             if(!$this->isLoggedIn()){
                 $this->view('login');
             }else{
@@ -90,11 +91,28 @@
                         if($this->userModel->findUserByEmail($data['email'])){
                             $user = $this->userModel->getUserByEmail($data['email']);
                             $data['id'] = $user->UserId;
-                            $this->voterModel->insertIntoRegVoters($data);
+                            if($this->voterModel->insertIntoRegVoters($data)){
+                                continue;
+                            }else{
+                                $flag = 0;
+                                break;
+                            }
                         }else{
-                            $this->voterModel->insertIntoUnregVoters($data);
+                            if($this->voterModel->insertIntoUnregVoters($data)){
+                                continue;
+                            }else{
+                                $flag = 0;
+                                break;
+                            }
                         }
 
+                        
+
+                    }
+                    if($flag == 1){
+                        $this->view('Supervisor/addCandidates', $data);
+                    }else{
+                        echo "Error";
                     }
                 }
             }

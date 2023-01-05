@@ -150,6 +150,15 @@ function delall() {
     count = 0;
     document.getElementById('count').innerHTML = count;
     document.getElementById('voterList').style.display = "none";
+}function find_duplicates(x){
+    var rows = document.getElementById().getElementsByTagName('tr');
+    for (let i = 0; i < rows.length; i++) {
+        var tbrow = rows[i].getElementsByTagName('td');
+        var tdemail = tbrow[1].innerHTML;
+        if (tdemail == x) {
+            return true;
+        }
+    }
 }
 
 function addSingleVoter() {

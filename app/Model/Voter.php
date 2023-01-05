@@ -27,7 +27,8 @@ class Voter extends Controller{
             return true;
         } catch (Exception $e) {
             echo "Something went wrong ".$e->getMessage();
-        }return false;
+            return false;
+        }
     }
 
     public function insertIntoUnregVoters($data){
@@ -48,7 +49,8 @@ class Voter extends Controller{
                 return true;
             } catch (Exception $e) {
                 echo "Something went wrong ".$e->getMessage();
-            }return false;
+                return false;
+            }
 
     }
 }
