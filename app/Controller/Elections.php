@@ -3,11 +3,15 @@
         private $userModel;
         private $electionModel;
         private $voterModel;
+        private $positionModel;
+        private $partyModel;
         
         public function __construct(){
             $this->userModel = $this->model('User');
             $this->electionModel = $this->model('Election');
             $this->voterModel = $this->model('Voter');
+            $this->positionModel = $this->model('electionPositions');
+            $this->partyModel = $this->model('Party');
         }
 
         public function crteelection(){
@@ -110,7 +114,7 @@
 
                     }
                     if($flag == 1){
-                        $this->view('Supervisor/addCandidates', $data);
+                        $this->view('Supervisor/addPositions', $data);
                     }else{
                         echo "Error";
                     }
@@ -118,6 +122,66 @@
             }
         }
 
-    }
+        public function insertPositions(){
+            if(!$this->isLoggedIn()){
+                $this->view('login');
+            }else{
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    // echo "<table border='1'>";
+                    // foreach ($_POST as $key => $value) {
+                    //     echo "<tr>";
+                    //     echo "<td>";
+                    //     echo $key;
+                    //     echo "</td>";
+                    //     echo "<td>";
+                    //     echo $value;
+                    //     echo "</td>";
+                    //     echo "</tr>";
+                    // }
+                    // echo "</table>";
+                    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                    $electionId = trim($_POST["electionId"]);
+                    $count = trim($_POST["count"]);
+                    $positionData = [
+                        "electionId" => $electionId,
+                        "positionName" => [],
+                        "positionId" => []
+                    ];
+                    for($i = 1; $i <= $count; $i++){
+                        $data = [
+                            'electionId' => $electionId,
+                            'position' => trim($_POST[$i."positionName"]),
+                            'description' => trim($_POST[$i."desc"]),
+                            'noOfOptions' => trim($_POST[$i."noOfOptions"]),
+                            'count' => $count
+                        ];   
+                        
+                        if($id = $this->positionModel->insertIntoElectionPositions($data)){
+                            array_push($positionData["positionName"], $data['position']);
+                            array_push($positionData["positionId"], $id);
+                            continue;
+                        }else{
+                            echo "error $i <br>";
+                            $this->view('Supervisor/addPositions', $data);
+                            return;
+                        }
+                    }
+                    $this->view('Supervisor/addCandidates', $positionData);
+                }
+            
+            }
+        }
 
-?>
+        public function insertParty(){
+            if(!$this->isLoggedIN()){
+                $this->view('login');
+            }else{
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                    $electionId = trim($_POST["electionId"]);
+                    
+                }
+            }
+        }
+            
+}

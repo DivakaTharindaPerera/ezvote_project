@@ -1,0 +1,375 @@
+/* body{
+	line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+} */
+*{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 0;
+    /* overflow-x: hidden; */
+    margin:0;
+	padding:0;
+	box-sizing: border-box;
+
+}
+.nav-bar{
+    height: 6vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    /* position: fixed;
+    background-color: white;
+    top: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; */
+
+
+}
+
+.logo{
+    width: 15vw;
+}
+#logo{
+    padding-left: 5vw;
+    height: 6vh;
+}
+
+.links{
+    display: flex;
+    flex-direction: row;
+    margin-left: 4vw;
+    margin-right: 4vw;
+}
+
+a{
+    padding-left: 2vw;
+    padding-right:2vw;
+    padding-top: 1.5vh;
+    color:#112B3C;
+    text-decoration: none;
+
+}
+
+.nav-end{
+    display: flex;
+    margin-right: 2vw;
+    margin-left: 2vw;
+
+}
+
+button{
+    margin-right: 2vw;
+    margin-left: 2vw;
+    margin-bottom: 0.4rem;
+    width:5vw;
+    border-radius: 2rem;
+    background-color:#112B3C;
+    color:white;
+    font-size: medium;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+#trial{
+    width: 7vw;
+}
+
+/* .second-content{
+    display: flex;
+
+} */
+
+.h1-txt {
+    position: absolute;
+    bottom: 250px;
+    left: 150px;
+    color: white;
+    font-size: 50px;
+}
+.learn_more{
+    position: absolute;
+    background-color: rgb(6, 96, 152);
+    color: white;
+    bottom: 150px;
+    left: 120px;
+    width: 180px;
+    height: 50px;
+    font-size: larger;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+.learn_more:hover{
+    background-color: rgb(4, 70, 111);
+}
+.bg-image{
+    flex-basis: 50%;
+    flex-grow: 0;
+    width: 100%;
+
+
+}
+#bg-image{
+    padding: auto;
+    width: 100vw;
+    height: 100vh;
+    filter: brightness(30%);
+}
+
+.bnner{
+    position: relative;
+    
+}
+
+
+/* ******************************************************************** */
+.be_confident{
+    text-align: center;
+    font-size: 30px;
+}
+
+.flex-container {
+    display: flex;
+    background-color: rgb(235, 237, 239);
+    flex-direction: column;
+    /* margin: 20px; */
+  }
+
+  .accessibility{
+    display: flex;
+    background-color: rgb(228, 243, 243);
+    margin: 50px;
+  }
+
+  .column1 {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+
+  .accessibility .column1 p{
+    font-size: 20px;
+    padding: 0 100px;
+  }
+  /* .accessibility:after {
+    content: "";
+    display: table;
+    clear: both;
+  } */
+
+  .img_accessibility{
+    width: 380px;
+    height: 300px;
+  }
+
+  ul li{
+    display:inline;
+  }
+  li{
+    padding-left: 20px;
+  }
+  i{
+    padding-left: 200px;
+
+  }
+
+  /* ************************************************************ */
+  .row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+  
+  .service-col{
+    flex-basis: 20%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-col img{
+    width: 100%;
+    display: block;
+    height: 200px;
+}
+
+.layer{
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+
+}
+
+.layer:hover{
+    background: rgb(8, 49, 86);
+    opacity: 0.8;
+}
+
+.layer h3{
+    width: 100%;
+    font-weight: 500;
+    color: #fff;
+    font-size: 26px;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.layer:hover h3{
+    bottom: 50%;
+    opacity: 1;
+}
+/* ************************************************************************************** */
+.accessibility .column1 h2{
+    text-align: center;
+    color: #09486d;
+}
+.accessibility .column1 .features{
+    text-align: center;
+    font-size: 20px;
+}
+
+.feat{
+    height: 150px;
+    width: 150px;
+    margin-left: 250px;
+    margin-top: 20px;
+    border-radius: 100px;
+}
+/* ************************************************************************************** */
+.flex-container1 {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    /* margin: 20px; */
+  }
+
+  .plans{
+    display: flex;
+    background-color: rgb(248, 248, 248);
+    margin: 50px;
+  }
+.column{
+    margin: 10px 480px;
+    height: 400px;
+    width: 400px;
+    border: 0.5px solid ;
+    box-shadow: 5px 10px #888888;
+    border-radius: 10px;
+}
+.column h2{
+    text-align: center;
+}
+.learn{
+    background-color: rgb(8, 49, 86);
+}
+
+.learn p{
+    color: white;
+    bottom: 100px;
+}
+
+ul.b {
+    list-style-type: square;
+  }
+/* ******************************** footer **************************************** */
+
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #24262b;
+    padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: rgb(6, 96, 152);
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+    padding-left: 20px;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+
+
+.fab{
+    margin-left: -200px;
+}

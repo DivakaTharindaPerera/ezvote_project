@@ -1,4 +1,7 @@
 <?php require approot.'/View/inc/header.php'; ?>
+
+</head>
+<body>
     <?php
         require_once('topnavbar.php');
     ?>
