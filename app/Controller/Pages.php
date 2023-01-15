@@ -1,7 +1,7 @@
 <?php
     session_start();
     class Pages extends Controller{
-
+        private $postModel;
         public function __construct(){
             $this->postModel = $this->model('User');
             
@@ -60,7 +60,7 @@
             if(!isset($_SESSION["UserId"])){
                 redirect('View/login');
             }else{
-                $this->view('createElection');
+                $this->view('Supervisor/createElection');
             }
         }
     }

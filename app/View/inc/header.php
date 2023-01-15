@@ -7,6 +7,5 @@
     <link rel="stylesheet" href="<?php echo urlroot; ?>/css/style.css">
     <link rel="stylesheet" href="<?php echo urlroot; ?>/css/util.css">
     <title>ezVote</title>
-</head>
-<body>
+
     
