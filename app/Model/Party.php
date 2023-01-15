@@ -10,7 +10,7 @@ class Party extends Controller{
     public function insertIntoParty1($data){
         //for the unregistered party supervisor
         $this->db->query(
-                "INSERT INTO Party 
+                "INSERT INTO ElectionParty 
                 ( partyName, 
                 electionId, supName, supEmail) 
                 VALUES(:1,:2,:3,:4)"
@@ -32,7 +32,7 @@ class Party extends Controller{
     public function insertIntoParty2($data){
         //for the registered party supervisor
         $this->db->query(
-                "INSERT INTO Party 
+                "INSERT INTO ElectionParty 
                 ( partyName, 
                 electionId, supName, supEmail, userId) 
                 VALUES(:1,:2,:3,:4,:5)"
