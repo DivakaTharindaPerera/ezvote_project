@@ -22,8 +22,8 @@
 
     <div class="right_nav_bar">
     <br><a href="<?php echo urlroot; ?>/View/Createelection" class='a_nav_btn'><div class="nav_btn">Create new election</div></a><br>
-    <br><a href="viewElections.php" class='a_nav_btn'><div class="nav_btn">View elections</div></a><br>
-    <br><a href='../../../Control/sup_logout.php' class='a_nav_btn'><div class="nav_btn">Logout</div></a>
+    <br><a href="#" class='a_nav_btn'><div class="nav_btn">View elections</div></a><br>
+    <br><a href='#' class='a_nav_btn'><div class="nav_btn">Logout</div></a>
     
     </div>
     </div>

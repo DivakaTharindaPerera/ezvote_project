@@ -52,7 +52,10 @@ class Election extends Controller{
 
 
     }
-    
-
-
+     public function findElectionById($id){
+        $this->db->query("SELECT * FROM Election WHERE ElectionId = :id");
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
+    }
 }
