@@ -15,7 +15,6 @@
     ?>
     
     <form action="<?php echo urlroot ?>/users/verifyEmail" method="POST" >
-        <h2> <?php echo "verification code:". $data['vCode']; ?> </h2>
         <input type="hidden" name="email" value="<?php echo $data['email']; ?>" required>
         <input type="hidden" name="code" value="<?php echo $data['vCode']; ?>" required>
         <br>

@@ -63,4 +63,8 @@
                 $this->view('Supervisor/createElection');
             }
         }
+
+        public function fortests(){
+            $this->view('sendEmail');
+        }
     }

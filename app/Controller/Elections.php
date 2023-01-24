@@ -7,9 +7,11 @@ class Elections extends Controller
     private $positionModel;
     private $partyModel;
     private $candidateModel;
+    private $emailModel;
 
     public function __construct()
     {
+        $this->emailModel = $this->model('Email');
         $this->userModel = $this->model('User');
         $this->electionModel = $this->model('Election');
         $this->voterModel = $this->model('Voter');
@@ -18,6 +20,22 @@ class Elections extends Controller
         $this->candidateModel = $this->model('Candidate');
     }
 
+    public function sendEmail(){
+        echo "landed correctly";
+        if($_SERVER["REQUEST_METHOD"] == 'POST'){
+            $data = [
+                'email' => trim($_POST['email']),
+                'subject' => trim($_POST['subject']),
+                'body' => trim($_POST['body'])
+            ];
+            if($this->emailModel->sendEmail($data)){
+                echo "Email sent";
+            }else{
+                echo "Email not sent";
+            }
+        } 
+    }
+    
     public function crteelection()
     {
         if (!$this->isLoggedIn()) {
@@ -73,6 +91,18 @@ class Elections extends Controller
         }
     }
 
+    //testing function
+    public function findElection(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $data = [
+                'electionId' => trim($_POST["electionId"])
+            ];
+
+            $row = $this->electionModel->findElectionById($data['electionId']);
+            echo $row->Title;
+        }
+    }
+
     public function insertvoters()
     {
         $flag = 1;
@@ -94,10 +124,17 @@ class Elections extends Controller
                         'value' => trim($_POST[$i . "value"])
 
                     ];
+                    $ElectionData = $this->electionModel->findElectionById($data['electionId']);
                     if ($this->userModel->findUserByEmail($data['email'])) {
                         $user = $this->userModel->getUserByEmail($data['email']);
                         $data['id'] = $user->UserId;
                         if ($this->voterModel->insertIntoRegVoters($data)) {
+                            $data1 = [
+                                'email' => $data['email'],
+                                'subject' => "ELECTION REQUEST FROM " . $ElectionData->OrganizationName,
+                                'body' => "You have been invited to participate as a voter in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". Please login to your account see further infromation about the election."
+                            ];
+                            $this->emailModel->sendEmail($data1);
                             continue;
                         } else {
                             $flag = 0;
@@ -105,6 +142,12 @@ class Elections extends Controller
                         }
                     } else {
                         if ($this->voterModel->insertIntoUnregVoters($data)) {
+                            $data1 = [
+                                'email' => $data['email'],
+                                'subject' => "ELECTION REQUEST FROM " . $ElectionData->OrganizationName,
+                                'body' => "You have been invited to participate as a voter in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". Please create an account to place your vote for the election."
+                            ];
+                            $this->emailModel->sendEmail($data1);
                             continue;
                         } else {
                             $flag = 0;
@@ -194,12 +237,18 @@ class Elections extends Controller
                         'supEmail' => trim($_POST["partySupEmail" . $i]),
                         'userId' => ""
                     ];
+                    $ElectionData = $this->electionModel->findElectionById($data['electionId']);
                     if ($this->userModel->findUserByEmail($data['supEmail'])) {
                         $user = $this->userModel->getUserByEmail($data['supEmail']);
                         $data['userId'] = $user->UserId;
+                        
                         if ($partyId = $this->partyModel->insertIntoParty2($data)) {
-                            echo "success" . $partyId . "<br>";
-
+                            $data1 = [
+                                'email' => $data['supEmail'],
+                                'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                                'body' => "You have been added as the party supervisor in the party ".$data['partyname']." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account see further infromation."
+                            ];
+                            $this->emailModel->sendEmail($data1);
                             for ($j = 0; $j < $count; $j++) {
                                 
                                 if (trim($_POST[$j . "party"]) == $data['partyName']) {
@@ -274,8 +323,12 @@ class Elections extends Controller
                         }
                     } else {
                         if ($partyId = $this->partyModel->insertIntoParty1($data)) {
-                            echo "success" . $partyId . "<br>";
-
+                            $data1 = [
+                                'email' => $data['supEmail'],
+                                'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                                'body' => "You have been added as the party supervisor in the party ".$data['partyname']." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please create an account in ezvote.lk to access the party control panel."
+                            ];
+                            $this->emailModel->sendEmail($data1);
                             for ($j = 0; $j < $count; $j++) {
                                 
                                 if (trim($_POST[$j . "party"]) == $data['partyName']) {
@@ -292,7 +345,12 @@ class Elections extends Controller
                                         $user = $this->userModel->getUserByEmail($data1['candidateEmail']);
                                         $data1['userId'] = $user->UserId;
                                         if ($id = $this->candidateModel->insertRegCandidate($data1)) {
-                                            echo "success" . $id . "<br>";
+                                            $data2 = [
+                                                'email' => $data['candidateEmail'],
+                                                'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                                                'body' => "You have been added as a candidate representing the party ".$data['partyName']." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account to access the election candidate panel."
+                                            ];
+                                            $this->emailModel->sendEmail($data2);
                                             continue;
                                         } else {
                                             echo "error $i <br>";
@@ -301,7 +359,12 @@ class Elections extends Controller
                                         }
                                     }else{
                                         if ($id = $this->candidateModel->insertUnregCandidate($data1)) {
-                                            echo "success" . $id . "<br>";
+                                            $data2 = [
+                                                'email' => $data['candidateEmail'],
+                                                'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                                                'body' => "You have been added as a candidate representing the party ".$data['partyName']." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please create an account in ezvote.lk to access the election."
+                                            ];
+                                            $this->emailModel->sendEmail($data2);
                                             continue;
                                         } else {
                                             echo "error $i <br>";
