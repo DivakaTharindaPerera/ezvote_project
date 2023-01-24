@@ -52,7 +52,21 @@ class Election extends Controller{
 
 
     }
-     public function findElectionById($id){
+    public function findElectionById($id){
+        $this->db->query("SELECT * FROM Election WHERE ElectionId = :id");
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
+    }
+    //get all the elections created by the user.
+    public function getElectionsByUserId($id){
+        $this->db->query("SELECT * FROM Election WHERE Supervisor = :id");
+        $this->db->bind(':id', $id);
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
+    public function getElectionByElectionId($id){
         $this->db->query("SELECT * FROM Election WHERE ElectionId = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();

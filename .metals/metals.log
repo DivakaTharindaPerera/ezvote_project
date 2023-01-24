@@ -1,0 +1,6 @@
+2023.01.24 16:56:12 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /opt/lampp/htdocs/ezvote/.metals/lsp.trace.json or /home/divaka/.cache/metals/lsp.trace.json
+2023.01.24 16:56:15 INFO  logging to file /opt/lampp/htdocs/ezvote/.metals/metals.log
+2023.01.24 16:56:15 INFO  Started: Metals version 0.11.9 in workspace '/opt/lampp/htdocs/ezvote' for client Visual Studio Code 1.74.3.
+2023.01.24 16:56:18 INFO  time: initialize in 3.24s
+2023.01.24 16:56:21 WARN  Build server is not auto-connectable.
+2023.01.24 16:56:21 WARN  no build tool detected in workspace '/opt/lampp/htdocs/ezvote'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 

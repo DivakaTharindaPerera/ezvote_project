@@ -2,9 +2,10 @@
     session_start();
     class Pages extends Controller{
         private $postModel;
+        private $electionModel;
         public function __construct(){
             $this->postModel = $this->model('User');
-            
+            $this->electionModel = $this->model('Election');
         }
 
         public function index(){
@@ -66,5 +67,24 @@
 
         public function fortests(){
             $this->view('sendEmail');
+        }
+
+        public function ViewMyElections(){
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
+                $this->view('Supervisor/ViewMyElections',$row);
+            }
+        }
+
+        public function viewMyElection($id){
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                echo $id;
+                // $row = $this->electionModel->getElectionByElectionId($id);
+                // $this->view('Supervisor/viewMyElection',$row);
+            }
         }
     }
