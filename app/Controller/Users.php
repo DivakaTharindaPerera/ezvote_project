@@ -10,8 +10,11 @@
 
 class Users extends Controller{
     private $userModel;
+    private $mail;
+
     public function __construct(){
         $this->userModel = $this->model('User');
+        $this->mail = $this->model('Email');
     }
 
     public function register(){
@@ -39,13 +42,23 @@ class Users extends Controller{
                 $subject = "Email Verification Code";
                 $msg = "Your verification code for the ezVote.lk is: <b> " . $data['vCode']."</b> <br> You can verify the email after the registration and after the login before proceeding to the account.";
                 
+                $emailData = [
+                    'email' => $data['email'],
+                    'subject' => "Verify your email",
+                    'body' => $msg
+                ];
+
+                try {
+                    $this->mail->sendEmail($emailData);
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Please try again later.";
+                }
+
                 if($this->userModel->registerUser($data)){
                     $this->view('verifyEmail',$data);
                 }else{
                     die("Something went wrong");
                 }
-
-                
             }
 
         }

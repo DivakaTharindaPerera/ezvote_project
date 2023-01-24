@@ -26,6 +26,7 @@
         //for login
         public function logged($email, $password, $users){
                 foreach($users as $user){
+                    
                     if($user->Email === $email){
                         if(password_verify($password, $user->Password)){
                             
