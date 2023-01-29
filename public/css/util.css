@@ -1,3 +1,5 @@
+@import "_form.css";
+@import "navbar.css";
 .text-decoration-none {
 	text-decoration: none;
 }
@@ -90,6 +92,10 @@
 	display: flex;
 }
 
+.flex-col{
+	flex-direction: column;
+}
+
 .items-center {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
@@ -102,10 +108,14 @@
 	justify-content: flex-end;
 }
 
+
 .justify-between {
 	-webkit-box-pack: justify;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
+}
+.justify-space-around{
+	justify-content: space-around;
 }
 
 .flex-auto {
@@ -114,6 +124,10 @@
 	flex: 1 1 auto;
 	min-width: 0;
 	min-height: 0;
+}
+
+.gap-1{
+	gap: 1rem;
 }
 
 .hidden {

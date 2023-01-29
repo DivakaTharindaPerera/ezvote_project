@@ -1,0 +1,12 @@
+.popup{
+    background:var(--light);
+    border-radius: 6px;
+    /*transform: translate(-50%,-50%) scale(0.1);*/
+    text-align: center;
+}
+
+.open-popup{
+    visibility: visible;
+    /*top: 50%;*/
+    /*transform: translate(-50%,-50%) scale(1);*/
+}
