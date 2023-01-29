@@ -1,0 +1,13 @@
+input[type="text"]{
+    padding: 0.5rem;
+    outline: none;
+    border-radius: 20px;
+    border: 1px solid var(--dark);
+}
+
+textarea{
+    padding: 0.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--dark);
+    outline: none;
+}

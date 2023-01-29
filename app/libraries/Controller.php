@@ -16,6 +16,9 @@
         }
 
         public function view($view, $data = []){
+            foreach ($data as $key => $value) {
+                $$key = $value;
+            }
             if(file_exists('../app/View/'.$view.'.php')){
                 require_once '../app/View/'.$view.'.php';
             }else{
@@ -66,5 +69,16 @@
                 return false;
             }
         }
+
+        public function IsPost()
+        {
+            if($_SERVER['REQUEST_METHOD']=='POST'){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
 
     }
