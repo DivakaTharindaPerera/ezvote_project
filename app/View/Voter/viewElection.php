@@ -1,0 +1,286 @@
+<?php
+require approot.'/View/inc/VoterHeader.php';
+require approot.'/View/inc/AuthNavbar.php';
+require approot.'/View/inc/Sidebar.php';
+?>
+
+<div class="justify-center bottom-0 max-w-85 absolute right-0 min-w-80 overflow-x bg-secondary" style="justify-content: center; max-height:90.5%;min-height:90.5%">
+    <div id="Election" class="w-95 align-center h-inherit d-flex flex-column p-1">
+        <div class="title">Welfare Organizing Committee Election - 2022 / 2023 </div>
+        <div id="desc-reg" class="w-100 d-flex flex-column px-1 align-items-center">
+            <div class="sub-title">
+                Description & Regulation
+            </div>
+            <div id="rules" class="mt-1">
+                <ol>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                    <li>Lorem ipsum dolor sit amet.</li>
+                </ol>
+            </div>
+        </div>
+<!--        <hr class="w-100 mt-1">-->
+        <div id="scheduled" class="mt-1 d-flex w-80 justify-content-around">
+            <div id="from">
+                From : <span>01/02/2023   18.30 </span>
+            </div>
+            <div id="to">
+                To : <span>01/02/2023   20.30 </span>
+            </div>
+        </div>
+        <div id="data" class="self-baseline mt-1">
+            <div id="self-nomination">Self Nomination :<span> On </span></div>
+            <div id="self-nomination">Multiple Cast of Votes : <span> On </span></div>
+        </div>
+        <div id="candidates" class="d-flex flex-column w-100">
+            <div class="title">
+                Candidates
+            </div>
+            <div id="competitors" class="d-flex flex-column w-100">
+                <div id="positions" class="d-flex w-100 flex-wrap" style="gap: 2rem">
+                    <div id="president" class="d-flex flex-column w-45" style="gap: 0.2rem">
+                        <div class="sub-title">President</div>
+                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                            <div id="can-det" class="d-flex" style="gap: 0.5rem">
+                                <div id="can-ID" class="font-bold">C01</div>
+                                <div id="can-Name">Lorem ipsum dolor.</div>
+                            </div>
+
+                            <div id="btn-panel" class="mr-1">
+                                <button class=" btn btn-primary">Q & A</button>
+                                <button class=" btn btn-primary" onclick="openPopup()">Make Objection</button>
+
+                                <div class="dialog-box-outer" id="popup">
+                                    <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
+                                        <div class="title">Make Objection</div>
+                                        <form action="/ezvote/Voters/submitObjections" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start">
+                                            <div class="d-flex flex-column justify-content-center my-1 w-100">
+                                                <label for="Subject" class="mr-1 text-left text-md">Subject</label>
+                                                <input id="Subject" type="text" class="border-1" style="width:100%" name="Subject">
+                                            </div>
+                                            <div class="d-flex flex-column my-1 w-100">
+                                                <label for="Description" class="mr-1 text-left text-md">Description</label>
+                                                <textarea id="Description" class="border-1" name="Description" style="height: 150px;width: 100%"></textarea>
+                                            </div>
+                                            <div class="d-flex justify-content-between my-1 w-100">
+                                                <div><button class="btn btn-danger px-1" onclick="closePopup()">Cancel</div>
+                                                <div ><button class="btn btn-primary px-1" type="submit">Submit</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button class=" btn btn-primary">View</button>
+                            </div>
+                        </div>
+                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                            <div id="can-det" class="d-flex" style="gap: 0.5rem">
+                                <div id="can-ID" class="font-bold">C01</div>
+                                <div id="can-Name">Lorem ipsum dolor.</div>
+                            </div>
+
+                            <div id="btn-panel" class="mr-1">
+                                <button class=" btn btn-primary">Q & A</button>
+                                <button class=" btn btn-primary" onclick="openPopup()">Make Objection</button>
+
+                                <div class="dialog-box-outer" id="popup">
+                                    <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
+                                        <div class="title">Make Objection</div>
+                                        <form action="/ezvote/Voters/submitObjections" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start">
+                                            <div class="d-flex flex-column justify-content-center my-1 w-100">
+                                                <label for="Subject" class="mr-1 text-left text-md">Subject</label>
+                                                <input id="Subject" type="text" class="border-1" style="width:100%" name="Subject">
+                                            </div>
+                                            <div class="d-flex flex-column my-1 w-100">
+                                                <label for="Description" class="mr-1 text-left text-md">Description</label>
+                                                <textarea id="Description" class="border-1" name="Description" style="height: 150px;width: 100%"></textarea>
+                                            </div>
+                                            <div class="d-flex justify-content-between my-1 w-100">
+                                                <div><button class="btn btn-danger px-1" onclick="closePopup()">Cancel</div>
+                                                <div ><button class="btn btn-primary px-1" type="submit">Submit</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button class=" btn btn-primary">View</button>
+                            </div>
+                        </div>
+                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                            <div id="can-det" class="d-flex" style="gap: 0.5rem">
+                                <div id="can-ID" class="font-bold">C01</div>
+                                <div id="can-Name">Lorem ipsum dolor.</div>
+                            </div>
+
+                            <div id="btn-panel" class="mr-1">
+                                <button class=" btn btn-primary">Q & A</button>
+                                <button class=" btn btn-primary" onclick="openPopup()">Make Objection</button>
+
+                                <div class="dialog-box-outer" id="popup">
+                                    <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
+                                        <div class="title">Make Objection</div>
+                                        <form action="/ezvote/Voters/submitObjections" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start">
+                                            <div class="d-flex flex-column justify-content-center my-1 w-100">
+                                                <label for="Subject" class="mr-1 text-left text-md">Subject</label>
+                                                <input id="Subject" type="text" class="border-1" style="width:100%" name="Subject">
+                                            </div>
+                                            <div class="d-flex flex-column my-1 w-100">
+                                                <label for="Description" class="mr-1 text-left text-md">Description</label>
+                                                <textarea id="Description" class="border-1" name="Description" style="height: 150px;width: 100%"></textarea>
+                                            </div>
+                                            <div class="d-flex justify-content-between my-1 w-100">
+                                                <div><button class="btn btn-danger px-1" onclick="closePopup()">Cancel</div>
+                                                <div ><button class="btn btn-primary px-1" type="submit">Submit</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button class=" btn btn-primary">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="president" class="d-flex flex-column w-45" style="gap: 0.2rem">
+                        <div class="sub-title">Secretary</div>
+                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                            <div id="can-det" class="d-flex" style="gap: 0.5rem">
+                                <div id="can-ID" class="font-bold">C01</div>
+                                <div id="can-Name">Lorem ipsum dolor.</div>
+                            </div>
+
+                            <div id="btn-panel" class="mr-1">
+                                <button class=" btn btn-primary">Q & A</button>
+                                <button class=" btn btn-primary" onclick="openPopup()">Make Objection</button>
+
+                                <div class="dialog-box-outer" id="popup">
+                                    <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
+                                        <div class="title">Make Objection</div>
+                                        <form action="/ezvote/Voters/submitObjections" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start">
+                                            <div class="d-flex flex-column justify-content-center my-1 w-100">
+                                                <label for="Subject" class="mr-1 text-left text-md">Subject</label>
+                                                <input id="Subject" type="text" class="border-1" style="width:100%" name="Subject">
+                                            </div>
+                                            <div class="d-flex flex-column my-1 w-100">
+                                                <label for="Description" class="mr-1 text-left text-md">Description</label>
+                                                <textarea id="Description" class="border-1" name="Description" style="height: 150px;width: 100%"></textarea>
+                                            </div>
+                                            <div class="d-flex justify-content-between my-1 w-100">
+                                                <div><button class="btn btn-danger px-1" onclick="closePopup()">Cancel</div>
+                                                <div ><button class="btn btn-primary px-1" type="submit">Submit</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button class=" btn btn-primary">View</button>
+                            </div>
+                        </div>
+                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                            <div id="can-det" class="d-flex" style="gap: 0.5rem">
+                                <div id="can-ID" class="font-bold">C01</div>
+                                <div id="can-Name">Lorem ipsum dolor.</div>
+                            </div>
+
+                            <div id="btn-panel" class="mr-1">
+                                <button class=" btn btn-primary">Q & A</button>
+                                <button class=" btn btn-primary" onclick="openPopup()">Make Objection</button>
+
+                                <div class="dialog-box-outer" id="popup">
+                                    <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
+                                        <div class="title">Make Objection</div>
+                                        <form action="/ezvote/Voters/submitObjections" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start">
+                                            <div class="d-flex flex-column justify-content-center my-1 w-100">
+                                                <label for="Subject" class="mr-1 text-left text-md">Subject</label>
+                                                <input id="Subject" type="text" class="border-1" style="width:100%" name="Subject">
+                                            </div>
+                                            <div class="d-flex flex-column my-1 w-100">
+                                                <label for="Description" class="mr-1 text-left text-md">Description</label>
+                                                <textarea id="Description" class="border-1" name="Description" style="height: 150px;width: 100%"></textarea>
+                                            </div>
+                                            <div class="d-flex justify-content-between my-1 w-100">
+                                                <div><button class="btn btn-danger px-1" onclick="closePopup()">Cancel</div>
+                                                <div ><button class="btn btn-primary px-1" type="submit">Submit</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button class=" btn btn-primary">View</button>
+                            </div>
+                        </div>
+                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                            <div id="can-det" class="d-flex" style="gap: 0.5rem">
+                                <div id="can-ID" class="font-bold">C01</div>
+                                <div id="can-Name">Lorem ipsum dolor.</div>
+                            </div>
+
+                            <div id="btn-panel" class="mr-1">
+                                <button class=" btn btn-primary">Q & A</button>
+                                <button class=" btn btn-primary" onclick="openPopup()">Make Objection</button>
+
+                                <div class="dialog-box-outer" id="popup">
+                                    <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
+                                        <div class="title">Make Objection</div>
+                                        <form action="/ezvote/Voters/submitObjections" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start">
+                                            <div class="d-flex flex-column justify-content-center my-1 w-100">
+                                                <label for="Subject" class="mr-1 text-left text-md">Subject</label>
+                                                <input id="Subject" type="text" class="border-1" style="width:100%" name="Subject">
+                                            </div>
+                                            <div class="d-flex flex-column my-1 w-100">
+                                                <label for="Description" class="mr-1 text-left text-md">Description</label>
+                                                <textarea id="Description" class="border-1" name="Description" style="height: 150px;width: 100%"></textarea>
+                                            </div>
+                                            <div class="d-flex justify-content-between my-1 w-100">
+                                                <div><button class="btn btn-danger px-1" onclick="closePopup()">Cancel</div>
+                                                <div ><button class="btn btn-primary px-1" type="submit">Submit</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button class=" btn btn-primary">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="president" class="d-flex flex-column w-45" style="gap: 0.2rem">
+                        <div class="sub-title">Treasurer</div>
+                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                            <div id="can-det" class="d-flex" style="gap: 0.5rem">
+                                <div id="can-ID" class="font-bold">C01</div>
+                                <div id="can-Name">Lorem ipsum dolor.</div>
+                            </div>
+                            <div id="btn-panel" class="mr-1">
+                                <button class=" btn btn-primary">Q & A</button>
+                                <button class=" btn btn-primary">Make Objection</button>
+                                <button class=" btn btn-primary">View</button>
+                            </div>
+                        </div>
+                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                            <div id="can-det" class="d-flex" style="gap: 0.5rem">
+                                <div id="can-ID" class="font-bold">C01</div>
+                                <div id="can-Name">Lorem ipsum dolor.</div>
+                            </div>
+
+                            <div id="btn-panel" class="mr-1">
+                                <button class=" btn btn-primary">Q & A</button>
+                                <button class=" btn btn-primary">Make Objection</button>
+                                <button class=" btn btn-primary">View</button>
+                            </div>
+                        </div>
+                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                            <div id="can-det" class="d-flex" style="gap: 0.5rem">
+                                <div id="can-ID" class="font-bold" >C01</div>
+                                <div id="can-Name" >Lorem ipsum dolor.</div>
+                            </div>
+
+                            <div id="btn-panel" class="mr-1">
+                                <button class=" btn btn-primary">Q & A</button>
+                                <button class=" btn btn-primary">Make Objection</button>
+                                <button class=" btn btn-primary">View</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<?php
+require approot.'/View/inc/footer.php';?>

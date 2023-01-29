@@ -1,3 +1,3 @@
-    <script src="<?php echo urlroot; ?>/js/main.js"></script>
+    <script src="/ezvote/public/js/main.js"></script>
 </body>
 </html>

@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/css/style.css">
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/css/util.css">
-    <title>ezVote</title>
+    <link rel="stylesheet" href="/ezvote/public/css/style.css">
+    <link rel="stylesheet" href="/ezvote/public/css/util.css">
 
-    
+    <title>ezVote</title>
+</head>
+<body>
