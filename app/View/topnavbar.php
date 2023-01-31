@@ -3,7 +3,11 @@
     
     echo "
     <style>
-        .logo, .homelink, .authlink, .profile, .profilepic{
+        h4{
+            margin: 0;
+            padding: 0;
+        }
+        .logo, .homelink, .authlink, .profilepic{
             display: inline-block;
             margin: 0 10px;
         }
@@ -55,7 +59,7 @@
             height: 50px;
         }
         .profile{
-            margin-left: 10px;
+            text-align: right;
             float: right;
             font-weight: bold;
         }
@@ -63,12 +67,18 @@
             float: right;
             margin-left: auto;
             font-weight: bold;
+            text-align: right;
         }
         .authlink a{
             color: blue;
         }
         .homelink a{
             color: blue;
+        }
+        .logout a{
+            color: blue;
+            text-decoration: none;
+            font-size: 20px;
         }
         
     </style>
@@ -86,18 +96,28 @@
     <div class='authlink'>";
 
     if(!isset($_SESSION["UserId"])){
-        echo "<a href='".urlroot."/View/Login'>Login</a> <a href='".urlroot."/View/Register'>Signup</a>";
+        echo "
+        <div class= 'login'>
+        <a href='".urlroot."/View/Login'>Login</a> <a href='".urlroot."/View/Register'>Signup</a>
+        </div>
+        ";
     }else{
-        echo "<a href='".urlroot."/View/Logout'>Logout</a>";
+        echo "
+        
+        
+        <div class='profile'>
+            <h4>".$_SESSION["fname"]." ".$_SESSION["lname"]."</h4>
+        </div>
+        <div class='logout'>
+        <a href='".urlroot."/View/Logout'>Logout</a>
+        </div>
+        ";
     }
     echo "
     </div>
     ";
     if(isset($_SESSION["UserId"])){
         echo "
-        <div class='profile'>
-        ".$_SESSION["fname"]." ".$_SESSION["lname"]."
-    </div>
     <div class='profilepic'>
         <img src='".urlroot."/img/ezvotelogo.png' alt='profilepic'>
     </div>

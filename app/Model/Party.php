@@ -51,5 +51,14 @@ class Party extends Controller{
             return false;
         }
     }
+
+    public function getPartiesByElectionId($id){
+        $this->db->query(
+            "SELECT * FROM ElectionParty WHERE electionId = :id"
+        );
+        $this->db->bind(':id', $id);
+        $result = $this->db->resultSet();
+        return $result;
+    }
 }
 

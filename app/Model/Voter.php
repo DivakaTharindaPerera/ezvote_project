@@ -53,4 +53,38 @@ class Voter extends Controller{
             }
 
     }
+
+    public function getRegVotersByElectionId($id){
+        $this->db->query(
+            "SELECT * FROM registered_voter
+            WHERE ElectionId = :1"
+        );
+
+        $this->db->bind(':1', $id);
+
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
+
+    public function getUnregVotersByElectionId($id){
+        $this->db->query(
+            "SELECT * FROM unregistered_voter
+            WHERE ElectionId = :1"
+        );
+
+        $this->db->bind(':1', $id);
+
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
 }
