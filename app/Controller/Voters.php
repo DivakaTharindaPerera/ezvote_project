@@ -40,7 +40,7 @@ class Voters extends Controller
             if(empty($data['Subject_err']) && empty($data['Description_err'])){
                 //validated
                 if($this->objModel->AddObjection($data)){
-                    flash('register_success','You have successfully submitted your objection');
+//                    flash('register_success','You have successfully submitted your objection');
                     redirect('voters/viewElection');}
                 else{
                     die('Something went wrong');
@@ -60,10 +60,6 @@ class Voters extends Controller
 
         }
     }
-    public function viewObjections(){
-        $r=$this->objModel->RetrieveAll();
-        $this->view('Voter/viewObjections',['r'=>$r]);
-    }
 
     public function dashboard()
     {
@@ -75,4 +71,13 @@ class Voters extends Controller
         $this->view('Voter/viewElection');
     }
 
+    public function viewObjections(){
+        $r=$this->objModel->RetrieveAll();
+        $this->view('Voter/viewObjections',['r'=>$r]);
+    }
+
+    public function vote()
+    {
+        $this->view('Voter/votingBallot');
+    }
 }
