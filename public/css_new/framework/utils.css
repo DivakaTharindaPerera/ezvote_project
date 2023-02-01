@@ -1,3 +1,4 @@
+@import "util/fonts.css";
 @import "util/variables.css";
 @import "util/position.css";
 @import "util/margin.css";
@@ -35,7 +36,7 @@
 @import "components/form/form.css";
 
 /*Fonts*/
-@import url('/public/fonts/Poppins/Poppins-Black.ttf');
+@import url('/public/css_new/framework/util/fonts/Poppins/Poppins-Black.ttf');
 *{
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -53,6 +54,12 @@
 }
 .overflow-x{
     overflow-x: auto;
+}
+.overflow-y{
+    overflow-y: auto;
+}
+.overflow-scroll{
+    overflow: scroll;
 }
 /*::-webkit-scrollbar{*/
 /*    width: 2rem;*/
@@ -198,6 +205,9 @@
 }
 .max-w-50{
     max-width: 50%;
+}
+.max-w-10{
+    max-width: 10%;
 }
 .max-w-55{
     max-width: 55%;

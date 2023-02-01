@@ -1,4 +1,3 @@
-
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 
