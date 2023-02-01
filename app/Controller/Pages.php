@@ -18,17 +18,17 @@
         }
 
         public function index(){
-//            if($this->isLoggedIn()){
-//                $this->view('../View/home.php');
-            echo "home";
-//            }else{
-//                $data = [
-//                    'title' => 'Welcome',
-//                    // 'posts' => $posts
-//                ];
-//                $this->view('index', $data);
-//            }
-            // $posts = $this->postModel->getPosts();
+            if($this->isLoggedIn()){
+                $this->view('../View/home.php');
+
+            }else{
+                $data = [
+                    'title' => 'Welcome',
+                    // 'posts' => $posts
+                ];
+                $this->view('index', $data);
+            }
+             $posts = $this->postModel->getPosts();
             
         }
 

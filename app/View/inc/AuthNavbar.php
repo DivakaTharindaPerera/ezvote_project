@@ -1,7 +1,7 @@
 <header class="bg-white text-black">
     <nav>
         <div class="logo">
-            <img src="/ezvote/public/img/ezvotelogo.png" width="120rem" alt="">
+            <img src="<?php echo urlroot;?>public/img/ezvotelogo.png" width="120rem" alt="">
             <span></span>
         </div>
         <ul class="navList d-flex px-1">
