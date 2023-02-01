@@ -19,7 +19,8 @@
 
         public function index(){
             if($this->isLoggedIn()){
-                $this->view('dashboard');
+                $this->view('../View/home.php');
+
             }else{
                 $data = [
                     'title' => 'Welcome',
@@ -27,7 +28,7 @@
                 ];
                 $this->view('index', $data);
             }
-            // $posts = $this->postModel->getPosts();
+             $posts = $this->postModel->getPosts();
             
         }
 
