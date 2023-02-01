@@ -97,9 +97,6 @@
     <div class="nonHumansDiv" id="nonHumansDiv" style="display: none;">
         non humans
     </div><br>
-
-    
-
 </div>
 <script src="<?php echo urlroot; ?>/js/addCandidates.js"></script>
 <?php require approot . '/View/inc/footer.php'; ?>

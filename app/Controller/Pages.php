@@ -2,9 +2,19 @@
     session_start();
     class Pages extends Controller{
         private $postModel;
+        private $electionModel;
+        private $candidateModel;
+        private $positionModel;
+        private $partyModel;
+        private $voterModel;
+
         public function __construct(){
             $this->postModel = $this->model('User');
-            
+            $this->electionModel = $this->model('Election');
+            $this->candidateModel = $this->model('Candidate');
+            $this->positionModel = $this->model('electionPositions');
+            $this->partyModel = $this->model('Party');
+            $this->voterModel = $this->model('Voter');
         }
 
         public function index(){
@@ -66,5 +76,39 @@
 
         public function fortests(){
             $this->view('sendEmail');
+        }
+
+        public function ViewMyElections(){
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
+                $this->view('Supervisor/ViewMyElections',$row);
+            }
+        }
+
+        public function viewMyElection($id){
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                $data = [];
+
+                $electionRow = $this->electionModel->getElectionByElectionId($id);
+                $electionRow = $this->electionModel->getElectionByElectionId($id);
+                $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
+                $regVoterRow = $this->voterModel->getRegVotersByElectionId($id);
+                $unregVoterRow = $this->voterModel->getUnregVotersByElectionId($id);
+                $positionRow = $this->positionModel->getElectionPositionByElectionId($id);
+                $partyRow = $this->partyModel->getPartiesByElectionId($id);
+                
+                $data['electionRow'] = $electionRow;
+                $data['candidateRow'] = $candidateRow;
+                $data['regVoterRow'] = $regVoterRow;
+                $data['unregVoterRow'] = $unregVoterRow;
+                $data['positionRow'] = $positionRow;
+                $data['partyRow'] = $partyRow;
+                
+                $this->view('Supervisor/viewMyElection',$data);
+            }
         }
     }

@@ -1,0 +1,40 @@
+.electionsContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.electionCard{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 20%;
+    margin: 10px;
+    background-color: rgb(230, 230, 230);
+    padding: 10px;
+}
+
+.h4, h5{
+    font-size: auto;
+}
+
+.electionCard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.electionCardContainer {
+    padding: 2px 16px;
+}
+
+.electionCardContainer a{
+    display: block;
+    width: 30%;
+    text-decoration: none;
+    color: white;
+}
+
+.viewBtn{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    background-color: black;
+    border-radius: 5px;
+}

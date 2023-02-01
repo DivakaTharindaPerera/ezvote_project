@@ -22,7 +22,7 @@
 
     <div class="right_nav_bar">
     <br><a href="<?php echo urlroot; ?>/View/Createelection" class='a_nav_btn'><div class="nav_btn">Create new election</div></a><br>
-    <br><a href="#" class='a_nav_btn'><div class="nav_btn">View elections</div></a><br>
+    <br><a href="<?php echo urlroot; ?>/View/ViewMyElections" class='a_nav_btn'><div class="nav_btn">View my elections</div></a><br>
     <br><a href='#' class='a_nav_btn'><div class="nav_btn">Logout</div></a>
     
     </div>

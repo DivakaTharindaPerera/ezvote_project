@@ -8,13 +8,13 @@ class electionPositions{
     }
 
     public function getElectionPositions(){
-        $this->db->query("SELECT * FROM ElectionPositions;");
+        $this->db->query("SELECT * FROM ElectionPosition;");
 
         return $this->db->resultSet();
     }
 
     public function getElectionPositionById($id){
-        $this->db->query("SELECT * FROM ElectionPositions WHERE id = :id");
+        $this->db->query("SELECT * FROM ElectionPosition WHERE id = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
 
@@ -22,7 +22,7 @@ class electionPositions{
     }
 
     public function getElectionPositionByElectionId($id){
-        $this->db->query("SELECT * FROM ElectionPositions WHERE ElectionID = :id");
+        $this->db->query("SELECT * FROM ElectionPosition WHERE ElectionID = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->resultSet();
 

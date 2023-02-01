@@ -54,4 +54,18 @@ class Candidate extends Controller{
             return false;
         }
     }
+    public function getCandidatesByElectionId($id){
+        $this->db->query(
+            "SELECT * FROM Candidate
+            WHERE electionid = :1
+            "
+        );
+        $this->db->bind(':1', $id);
+        try {
+            $this->db->execute();
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+    }
 }
