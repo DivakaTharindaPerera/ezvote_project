@@ -87,6 +87,16 @@
             }
         }
 
+        public function sortByTitle(){
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $row = $this->electionModel->getElectionsByUserIdSorted($_SESSION["UserId"],trim($_POST['sortMethod']));               
+                $this->view('Supervisor/ViewMyElections',$row);
+            }
+        }
+
         public function viewMyElection($id){
             if(!isset($_SESSION["UserId"])){
                 redirect('View/login');
