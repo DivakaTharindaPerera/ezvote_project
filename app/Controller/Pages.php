@@ -124,4 +124,8 @@
                 }
             }
         }
+
+        public function subscriptionPlans(){
+            $this->view('Supervisor/subscriptionPlans');
+        }
     }
