@@ -101,24 +101,27 @@
             if(!isset($_SESSION["UserId"])){
                 redirect('View/login');
             }else{
-                $data = [];
-
                 $electionRow = $this->electionModel->getElectionByElectionId($id);
-                $electionRow = $this->electionModel->getElectionByElectionId($id);
-                $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
-                $regVoterRow = $this->voterModel->getRegVotersByElectionId($id);
-                $unregVoterRow = $this->voterModel->getUnregVotersByElectionId($id);
-                $positionRow = $this->positionModel->getElectionPositionByElectionId($id);
-                $partyRow = $this->partyModel->getPartiesByElectionId($id);
-                
-                $data['electionRow'] = $electionRow;
-                $data['candidateRow'] = $candidateRow;
-                $data['regVoterRow'] = $regVoterRow;
-                $data['unregVoterRow'] = $unregVoterRow;
-                $data['positionRow'] = $positionRow;
-                $data['partyRow'] = $partyRow;
-                
-                $this->view('Supervisor/viewMyElection',$data);
+                if($electionRow->Supervisor == $_SESSION["UserId"]){
+                    $data = [];
+                    
+                    $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
+                    $regVoterRow = $this->voterModel->getRegVotersByElectionId($id);
+                    $unregVoterRow = $this->voterModel->getUnregVotersByElectionId($id);
+                    $positionRow = $this->positionModel->getElectionPositionByElectionId($id);
+                    $partyRow = $this->partyModel->getPartiesByElectionId($id);
+                    
+                    $data['electionRow'] = $electionRow;
+                    $data['candidateRow'] = $candidateRow;
+                    $data['regVoterRow'] = $regVoterRow;
+                    $data['unregVoterRow'] = $unregVoterRow;
+                    $data['positionRow'] = $positionRow;
+                    $data['partyRow'] = $partyRow;
+                    
+                    $this->view('Supervisor/viewMyElection',$data);
+                }else{
+                    echo " Forbidden Access";
+                }
             }
         }
     }
