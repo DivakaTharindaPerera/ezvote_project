@@ -1,5 +1,5 @@
 <?php
-    session_start();
+//    session_start();
     class Controller{
 
 
@@ -63,7 +63,8 @@
             redirect('View/login');
         }
 
-        public function isLoggedIn(){
+        public function isLoggedIn(): bool
+        {
             if(isset($_SESSION["UserId"])){
                 return true;
             }else{
