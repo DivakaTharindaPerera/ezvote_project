@@ -1,14 +1,14 @@
-<?php require approot . '/View/inc/header.php'; ?>
-<div class="wholePage">
-</head>
-<body>
-    <div class="top_nav_bar">
-            <?php
-                require_once(approot."/View/topnavbar.php");
-            ?>
-    </div>
-    <div class="pagecontent">
-        
+<?php require approot . '/View/inc/VoterHeader.php'; ?>
+<?php require approot . '/View/inc/AuthNavbar.php'; ?>
+<?php require approot.'/View/inc/sidebar.php';?>
+
+
+<!--    <div class="top_nav_bar">-->
+<!--            --><?php
+//                require_once(approot."/View/topnavbar.php");
+//            ?>
+<!--    </div>-->
+    <div class="">
         <?php
         echo $data['electionRow']->ElectionId."<br>".$data['electionRow']->Title."<br>";
 
@@ -24,9 +24,7 @@
                     echo "$i. ".$row1->candidateName."<br>"; 
                 } 
             }
-            echo "<br>";
         }
         ?>
     </div>
-</div>
 <?php require approot . '/View/inc/footer.php'; ?>

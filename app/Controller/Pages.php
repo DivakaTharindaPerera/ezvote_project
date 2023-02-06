@@ -1,5 +1,5 @@
 <?php
-    session_start();
+//    session_start();
     class Pages extends Controller{
         private $postModel;
         private $electionModel;
@@ -68,30 +68,33 @@
         }
 
         public function createelection(){
-            if(!isset($_SESSION["UserId"])){
-                redirect('View/login');
-            }else{
+//            if(!isset($_SESSION["UserId"])){
+//                redirect('View/login');
+//            }else{
                 $this->view('Supervisor/createElection');
             }
-        }
+//        }
 
         public function fortests(){
             $this->view('sendEmail');
         }
 
         public function ViewMyElections(){
-            if(!isset($_SESSION["UserId"])){
-                redirect('View/login');
-            }else{
-                $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
+//            if(!isset($_SESSION["UserId"])){
+//                redirect('View/login');
+//            }else{
+            $id=48;
+//            $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId");
+
+                $row = $this->electionModel->getElectionsByUserId($id);
                 $this->view('Supervisor/ViewMyElections',$row);
             }
-        }
+//        }
 
         public function viewMyElection($id){
-            if(!isset($_SESSION["UserId"])){
-                redirect('View/login');
-            }else{
+//            if(!isset($_SESSION["UserId"])){
+//                redirect('View/login');
+//            }else{
                 $data = [];
 
                 $electionRow = $this->electionModel->getElectionByElectionId($id);
@@ -111,5 +114,5 @@
                 
                 $this->view('Supervisor/viewMyElection',$data);
             }
-        }
+//        }
     }

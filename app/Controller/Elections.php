@@ -88,6 +88,7 @@ class Elections extends Controller
                 //run query
                 $this->electionModel->insertIntoElection($data);
             }
+
         }
     }
 
