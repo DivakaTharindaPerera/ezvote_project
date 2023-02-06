@@ -1,5 +1,4 @@
 <?php require approot . '/View/inc/header.php'; ?>
-<div class="wholePage">
 </head>
 <body>
     <div class="top_nav_bar">
@@ -8,25 +7,21 @@
             ?>
     </div>
     <div class="pagecontent">
-        
-        <?php
-        echo $data['electionRow']->ElectionId."<br>".$data['electionRow']->Title."<br>";
-
-        foreach($data['positionRow'] as $row){
-            echo $row->positionName."<br>";
-            echo $row->description."<br>";
-            echo $row->NoofOptions."-".$row->ID."<br>";
-            echo $row->ElectionID."<br><br>"."Candidates: "."<br>";
-            $i = 0;
-            foreach($data['candidateRow'] as $row1){
-                $i++;
-                if($row->ID == $row1->positionId){
-                    echo "$i. ".$row1->candidateName."<br>"; 
-                } 
-            }
-            echo "<br>";
-        }
-        ?>
+        <div>
+            <?php 
+                require_once(approot."/View/inc/Sidebar.php");
+            ?>
+        </div>
+        <div>
+            <a href="<?php echo urlroot; ?>/Pages/electionCandidates/<?php echo $data['electionRow']->ElectionId; ?>">
+                <div> Candidates </div>
+            </a>
+            <a href="<?php echo urlroot; ?>/Pages/electionNominations/<?php echo $data['electionRow']->ElectionId; ?>">
+                <div> Nominations </div>
+            </a>
+            <?php
+                echo $data['electionRow']->ElectionId."<br>".$data['electionRow']->Title."<br>";
+            ?>
+        </div>
     </div>
-</div>
 <?php require approot . '/View/inc/footer.php'; ?>
