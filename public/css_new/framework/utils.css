@@ -35,6 +35,12 @@
 /*Import Forms*/
 @import "components/form/form.css";
 
+@import "components/side_bar/side_bar.css";
+
+@import "components/background/bg_img.css";
+
+@import "components/hover/hover.css";
+
 /*Fonts*/
 @import url('/public/css_new/framework/util/fonts/Poppins/Poppins-Black.ttf');
 *{

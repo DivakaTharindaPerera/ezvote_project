@@ -1,0 +1,14 @@
+.hover-effect {
+
+    background-color: white;
+    transition: background-color 0.5s ease;
+  }
+  
+  .hover-effect:hover {
+    background-color: rgb(5, 68, 104);
+    /* cursor: pointer; */
+   color: white;
+   transition: all 400ms ease-in-out;
+   transform: translateY(-20px);
+
+  }

@@ -112,4 +112,12 @@
                 $this->view('Supervisor/viewMyElection',$data);
             }
         }
+    
+    public function aboutUs(){
+        $this->view('about_us');
     }
+
+    public function contactUs(){
+        $this->view('contact_us');
+    }
+}
