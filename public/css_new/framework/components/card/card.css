@@ -14,7 +14,10 @@
     text-align: center;
     justify-content: center;
 }
-
+.card-hover:hover{
+    transform: scale(1.1);
+    background-color: var(--cyan-2);
+}
 .nav-card:hover{
     box-shadow: 0 1px 0 rgba(9,30,66,.25), 0 0 60px rgba(0,0,0,.08);
     transform: scale(1.05) translate(0, -5px);
