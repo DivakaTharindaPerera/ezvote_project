@@ -5,9 +5,9 @@ function openPopup(){
 function closePopup()
 {
     // console.log("close");
-    // let popup=document.getElementById("popup");
-    // popup.classList.remove("open-popup");
-    window.location.href = "/Voters/election";
+    let popup=document.getElementById("popup");
+    popup.classList.remove("open-popup");
+    // window.location.href = "/Voters/election";
 }
 
 function vote(){

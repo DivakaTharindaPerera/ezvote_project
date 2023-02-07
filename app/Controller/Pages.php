@@ -1,5 +1,5 @@
 <?php
-    session_start();
+//    session_start();
     class Pages extends Controller{
         private $postModel;
         private $electionModel;
