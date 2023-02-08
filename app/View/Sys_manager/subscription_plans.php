@@ -12,12 +12,13 @@ require approot.'/View/sysmanager_topnavbar.php';
     <meta name="viewport" content="width=device-width , initial-scale=1.0">
     <title>subscription plan</title>
     <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/subscription_plans.css">
+    <script src="../public/js/search.js"></script>
 </head>
 
 <body>
 
 <div class="plan">
-    <h2>Subscription plans</h2>
+    <h2>Subscription Plans</h2>
     <a href="create_subscription">
         <button type="button">
             Create new plan
@@ -34,7 +35,7 @@ require approot.'/View/sysmanager_topnavbar.php';
     <p>
     <div class="search">
         <img src="<?php echo urlroot; ?>/public/img/search.png">
-        <input type="text" id="searchElection" placeholder="Search Election......">
+        <input type="text" id="searchPlan" onkeyup="myFunction()" placeholder="Search Plan......">
         <a href="#">
             <button>SEARCH</button>
             <label>FILTER</label>
@@ -92,9 +93,10 @@ require approot.'/View/sysmanager_topnavbar.php';
                                     </label>
                                     <span id="myDIV-'.$i.'" class="enabled"> Enabled</span>
                                 </td>
-                                <td class="td-3"><a href="edit_subscription?id='.$data[0][$x]->PlanID.'"> 
+                                <td class="td-3"><a href="edit_subscription/'.$data[0][$x]->PlanID.'"> 
+
+                                    <button class="delete" style="background: #C30000">Delete</button>
                                     <button>Details</button>
-                                    
                                     </td></a>
                             </tr>
                             

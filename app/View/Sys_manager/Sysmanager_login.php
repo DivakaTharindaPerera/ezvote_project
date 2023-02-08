@@ -27,7 +27,7 @@ require approot.'/View/sysmanager_topnavbar.php';
 
 <div class="container">
     <div class="enter">
-        <h2>System manager login</h2>
+        <h2>System manager login here</h2>
         <h3>Enter email and password to login</h3>
     </div>
 

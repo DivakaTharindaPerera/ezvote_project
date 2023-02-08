@@ -1,9 +1,9 @@
 .text-box1{
     margin: auto;
     padding-top: 5px;
-    margin-top: 10vh;
+    margin-top: 8vh;
     width: 70%;
-    height: 95%;
+    height: 96%;
     border-radius: 16px;
 
     background: #D6EBFF;
@@ -283,7 +283,7 @@ input::placeholder{
     height: 58px;
     margin-left: 600px;
     margin-top: 40px;
-    margin-bottom: 15px;
+    margin-bottom: 3%;
 
     background: #000000;
     border-radius: 24px;
@@ -307,7 +307,7 @@ input::placeholder{
     height: 58px;
     left: 800px;
     margin-top: 40px;
-    margin-bottom: 15px;
+    margin-bottom: 3%;
 
 
     background: #000000;

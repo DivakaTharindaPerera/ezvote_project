@@ -1,9 +1,13 @@
 <?php require approot.'/View/inc/header.php'; ?>
 <?php
 require approot.'/View/sysmanager_topnavbar.php';
-$id = $_GET["id"];
+
 ?>
 
+
+<script>
+    
+</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,17 +16,17 @@ $id = $_GET["id"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>edit subscription</title>
     <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/edit_subscription.css">
-    <script src="../public/js/disableInput.js"></script>
+    <script src="../../public/js/disableInput.js"></script>
 </head>
 
 <body>
 <div class="text-box1" id="text-box1">
-    <form class="sub-form" action="./update_process/<?php echo $id;?>" method="POST">
+    <form class="sub-form" action="./update_process/<?php echo $data[0]->PlanID;?>" method="POST">
         <label for="name">Name</label><br>
-        <input class="text" type="text" id="name" name="name" placeholder="Name of the subscription plan"><br><br>
+        <input class="text" type="text" id="name" name="name" placeholder="<?php echo $data[0]->PlanName;?>"><br><br>
 
         <label for="description">Description</label><br>
-        <input class="des-text" type="text" id="description" name="description" placeholder="Description of the subscription plan"><br><br>
+        <input class="des-text" type="text" id="description" name="description" placeholder="<?php echo $data[0]->Description;?>"><br><br>
 
         <div class="free-div">
             <input type="radio" id="free" name="duration" onclick="javascript:yesnoCheck();">
@@ -66,28 +70,28 @@ $id = $_GET["id"];
             <div id="div-access">
                 <input type="checkbox" id="candidate" name="cand_limit"  onclick="javascript:disableInput1();">
                 <label id="label-4" for="cand_limit">Limit No of Candidates per election</label>
-                <input type="text" id="box-1" name="box-1" placeholder="enter limit....." disabled>
+                <input type="text" id="box-1" name="box-1" placeholder="<?php echo $data[0]->CandidateLimit;?>" disabled>
                 <br><br>
                 <hr>
                 <br>
 
                 <input type="checkbox" id="voter" name="voter_limit" onclick="javascript:disableInput2();">
                 <label id="label-5" for="voter_limit">Limit No of voters per election</label>
-                <input type="text" id="box-2" name="box-2" placeholder="enter limit....." disabled>
+                <input type="text" id="box-2" name="box-2" placeholder="<?php echo $data[0]->VotersLimit;?>." disabled>
                 <br><br>
                 <hr>
                 <br>
 
                 <input type="checkbox" id="election" name="election_limit"  onclick="javascript:disableInput3();">
                 <label id="label-6" for="election_limit">Limit No of active elections</label>
-                <input type="text" id="box-3" name="box-3" placeholder="enter limit....." disabled>
+                <input type="text" id="box-3" name="box-3" placeholder="<?php echo $data[0]->ElectionLimit;?>" disabled>
                 <br><br>
             </div>
 
         </div>
 
 
-        <div class="down" id="down">
+        <div class="down">
             <button type="submit" class="save-btn">Save</button>
 
             <a href="/ezvote/System_manager/dashboard">

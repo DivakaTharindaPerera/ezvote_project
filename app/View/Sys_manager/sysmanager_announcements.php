@@ -91,6 +91,7 @@ require approot.'/View/sysmanager_topnavbar.php';
         <label for="plan4" style="word-wrap: break-word;">Monthly Plan</label>
     </div>
 
+    <form action="" method="POST">
     <a href="/ezvote/System_manager/announcements">
         <div>
             <button type="button" class="send" id="send">SEND</button>
@@ -99,6 +100,7 @@ require approot.'/View/sysmanager_topnavbar.php';
     <a href="/ezvote/System_manager/dashboard">
         <button type="button" class="cancel" id="cancel" >Cancel</button>
     </a>
+    </form>
 </div>
 </body>
 </html

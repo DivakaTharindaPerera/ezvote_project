@@ -87,7 +87,7 @@ require approot.'/View/sysmanager_topnavbar.php';
         </div>
 
 
-        <div id="down">
+        <div class="down">
             <button type="submit" class="create-btn">Create</button>
 
             <a href="../System_manager/dashboard">

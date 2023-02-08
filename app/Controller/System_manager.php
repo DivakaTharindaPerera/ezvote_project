@@ -2,6 +2,8 @@
 session_start();
 class System_manager extends Controller
 {
+    private $ManagerModel;
+    
     public function __construct(){
         $this->ManagerModel = $this->model('Manager');
     }
@@ -40,7 +42,7 @@ class System_manager extends Controller
                 $sub_plans = $this->ManagerModel->getSubscriptionPlan($_SESSION['manager_ID']);
                 $_SESSION['UserId'] = $_SESSION['manager_ID'];
                 $man_name = $this->ManagerModel->getManagerName($_SESSION['manager_ID']);
-            $_SESSION['name'] = $man_name[0]->name;
+                $_SESSION['name'] = $man_name[0]->name;
                 $data = [$sub_plans];
                 $this->view('sys_manager/sysmanager_dashboard', $data);
             } else {
@@ -52,9 +54,11 @@ class System_manager extends Controller
 
     public function announcements(){
         if (!isset($_SESSION["UserId"])) {
-            redirect('View/login');
+            redirect('System_manager/login');
         } else {
             $this->view('sys_manager/sysmanager_announcements');
+            // redirect('');
+
         }
     }
 
@@ -64,10 +68,6 @@ class System_manager extends Controller
         session_destroy();
         redirect('System_manager/login');
     }
-
-    
-
-
 }
 
 ?>

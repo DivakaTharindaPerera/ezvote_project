@@ -2,6 +2,8 @@
 session_start();
 class Subscription_plan extends Controller
 {
+    private $SubscriptionModel;
+
     public function __construct(){
         $this->SubscriptionModel = $this->model('Subscription');
     }
@@ -11,7 +13,6 @@ class Subscription_plan extends Controller
     // }
     public function index()
     {
-
 
         if (!isset($_SESSION["UserId"])) {
             redirect('sys_manager/sysmanager_login');
@@ -144,11 +145,13 @@ class Subscription_plan extends Controller
         }
     }
 
-    public function edit_subscription(){
+    public function edit_subscription($plan){
         if (!isset($_SESSION["UserId"])) {
             redirect('System_manager/login');
         } else {
-            $this->view('sys_manager/edit_subscription');
+            $data = $this->SubscriptionModel ->viewSubscriptionPlan($plan);
+            $this->view('sys_manager/edit_subscription',$data );
+            
         }
     }
 

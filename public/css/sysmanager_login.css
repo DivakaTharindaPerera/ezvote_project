@@ -73,10 +73,10 @@
 
 .enter h2{
     position: absolute;
-    width: 442px;
-    height: 48px;
-    left: 497px;
-    top: 215px;
+    width: 570px;
+    height: 60px;
+    left: 445px;
+    top: 235px;
 
     font-family: 'Inter';
     font-style: normal;
@@ -93,7 +93,7 @@
     width: 333px;
     height: 24px;
     left: 554px;
-    top: 318px;
+    top: 315px;
 
     font-family: 'Inter';
     font-style: normal;
@@ -176,9 +176,9 @@
 
 .login-btn{
     position: absolute;
-    width: 219px;
-    height: 70px;
-    left: 614px;
+    width: 170px;
+    height: 50px;
+    left: 640px;
     top: 580px;
 
     font-family: 'Inter';
@@ -190,5 +190,5 @@
     color: #FFFFFF;
     cursor: pointer;
     background: #102179;
-    border-radius: 44px;
+    border-radius: 30px;
 }

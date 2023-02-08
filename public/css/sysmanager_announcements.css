@@ -7,13 +7,21 @@
 
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 32px;
     line-height: 39px;
     text-align: center;
     text-decoration-line: underline;
 
     color: #000000;
+}
+
+a{
+    padding-left: 0vw;
+    padding-right: 1vw;
+    padding-top: 1.5vh;
+    color: #112B3C;
+    text-decoration: none;
 }
 
 .head h3 {
@@ -148,47 +156,6 @@
     color: #000000;
 }
 
-#send{
-    width: 170px;
-    height: 50px;
-    margin-left: 10%;
-    margin-top: 4%;
-    margin-bottom: 3%;
-    cursor: pointer;
-
-    color: #ffffff;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 34px;
-    text-align: center;
-
-    background: #102179;
-    border-radius: 25px;
-}
-
-#cancel {
-    width: 170px;
-    height: 50px;
-    margin-left: 0%;
-    margin-top: 0%;
-    margin-bottom: 3%;
-
-    cursor: pointer;
-
-    color: #ffffff;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 34px;
-    text-align: center;
-
-    background: #102179;
-    border-radius: 25px;
-}
-
 .user h3 {
     position: absolute;
     top: 610px;
@@ -255,7 +222,48 @@ input[name="user3"]{
 .body-div3{
     display: flex;
     flex-direction: column;
-    margin-top: 40%;
+    margin-top: 39.5%;
     margin-left: 30%;
 
+}
+
+#send{
+    width: 170px;
+    height: 50px;
+    margin-left: 4.5%;
+    margin-top: 2.5%;
+    margin-bottom: 3%;
+    cursor: pointer;
+
+    color: #ffffff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+
+    background: #102179;
+    border-radius: 25px;
+}
+
+#cancel {
+    width: 170px;
+    height: 50px;
+    margin-left: 0%;
+    margin-top: 0%;
+    margin-bottom: 3%;
+
+    cursor: pointer;
+
+    color: #ffffff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+
+    background: #102179;
+    border-radius: 25px;
 }

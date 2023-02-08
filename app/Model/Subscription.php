@@ -38,6 +38,16 @@ class Subscription{
         }
     }
 
+    public function viewSubscriptionPlan($plan){
+        $this->db->query('SELECT * FROM subscription_plan WHERE PlanID = :PlanID');
+
+        $this->db->bind(':PlanID', $plan);
+
+        return $this->db->resultSet();
+        
+            
+    }
+
     public function updateSubscriptionplan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
         $this->db->query('UPDATE subscription_plan SET PlanName=:PlanName,Description= :Description,Date= :Date,DurationDate= :DurationDate,DurationMonth= :DurationMonth,DurationYear= :DurationYear,Price= :Price,FullAccess= :FullAccess,VotersLimit= :VotersLimit,CandidateLimit= :CandidateLimit,ElectionLimit= :ElectionLimit,ManagerID= :ManagerID WHERE PlanID = :PlanID');
 

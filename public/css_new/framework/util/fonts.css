@@ -3,4 +3,9 @@
     src: url('./fonts/OpenSans-VariableFont_wdth,wght.ttf');
     font-weight: 100;
     font-style: normal;
+
+    font-family: 'Inter';
+    src: url('./fonts/Inter-VariableFont_slnt\,wght.ttf');
+    font-weight: 100;
+    font-style: normal;
 }
