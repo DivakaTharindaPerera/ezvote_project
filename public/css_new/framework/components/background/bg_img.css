@@ -1,0 +1,40 @@
+.bg_about_us {
+    background-image: url(/ezvote/public/img/welcome/about_us.jpg);
+    background-size: cover;
+    height: 600px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; 
+    /* background-image: rgba(206, 189, 189, 0.621); */
+    /* height: 500px; */
+  }
+
+  .bg_contact_us {
+    background-image: url(/ezvote/public/img/welcome/bg3.jpg);
+    background-size: cover;
+    height: 600px;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 94rem;
+
+    /* height: 500px; */
+  }
+
+  .bg_pricing {
+    background-image: url(/ezvote/public/img/welcome/pricing.jpg);
+    background-size: cover;
+    height: 600px;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 94rem;
+    /* height: 500px; */
+  }
+
+  .bg_conference {
+    background-image: url(/ezvote/public/img/welcome/conference.avif);
+    background-size: cover;
+    height: 800px;
+    width: 100%;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; 
+    /* height: 500px; */
+  }

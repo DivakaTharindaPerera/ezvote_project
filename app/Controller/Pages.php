@@ -184,4 +184,16 @@
                 }
             }
         }
+    
+    public function aboutUs(){
+        $this->view('about_us');
     }
+
+    public function contactUs(){
+        $this->view('contact_us');
+    }
+
+    public function pricing(){
+        $this->view('pricing');
+    }
+}

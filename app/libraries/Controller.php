@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    // session_start();
     class Controller{
 
 
@@ -81,5 +81,18 @@
             }
         }
 
+        
 
+        
+        
+        
+        //     public function index() {
+        //         $students = $this->model->getNominationDetails();
+        
+        //         include approot.'/view/Candidate/candidateProfile.php';
+            
+        // }
     }
+
+
+    
