@@ -1,6 +1,8 @@
 <?php
 
+
 //session_start();
+
 
 class Voter extends Controller{
     private $db;

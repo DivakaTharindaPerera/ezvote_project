@@ -1,13 +1,16 @@
+
 <?php require approot.'/View/inc/VoterHeader.php';?>
 <?php require approot.'/View/inc/AuthNavBar.php';?>
 <?php require approot.'/View/inc/sideBar-new.php'?>
 <?php
+
             $data = [
                     'names' => ['basic', 'premium', 'enterprise','basic', 'premium', 'enterprise','basic', 'premium', 'enterprise'],
                     'prices' => [100, 200, 300,100, 200, 300,100, 200, 300],
                     'desc' => ['This is the basic plan', 'This is the premium plan', 'This is the enterprise plan','This is the basic plan', 'This is the premium plan', 'This is the enterprise plan','This is the basic plan', 'This is the premium plan', 'This is the enterprise plan']
             
             ];
+
             ?>
 
         
@@ -17,11 +20,13 @@
             <div class="d-flex flex-column my-1">
                 <div>
                     <?php
+
                     if(isset($_SESSION['plan'])) {
                         echo '<h3 class="text-center">You are currently subscribed to '.$_SESSION['plan'].' plan</h3>';
                     } else {
                         echo '<h3 class="text-center text-danger">You are currently not subscribed to any plan</h3>';
                     }
+
                     ?>
                 </div>
 
@@ -41,15 +46,18 @@
                                     '.$data['desc'][$key].'
                                 </div>
                                 <div class="d-flex justify-content-center m-1">
+
                                     <a href="#" class="btn btn-primary">Subscribe</a>
                                 </div>
                             </div>';
                     }
                 ?>
             </div>
+
 <!--            <div class="d-flex justify-content-center align-items-center">-->
 <!--                <a href="#" class="btn btn-radius-2 btn-info w-20">Cancel</a>-->
 <!--            </div>-->
 
 <?php require approot . '/View/inc/footer.php'; ?>
+
 

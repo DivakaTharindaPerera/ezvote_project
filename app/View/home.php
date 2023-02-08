@@ -16,10 +16,10 @@
         <div class="links">
             <a href="#">Home</a>
             <a href="#">Services</a>
-            <a href="#">Pricing</a>
+            <a href="/ezvote/Pages/pricing">Pricing</a>
             <a href="#">Target users</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact</a>
+            <a href="/ezvote/Pages/aboutUs">About Us</a>
+            <a href="/ezvote/Pages/contactUs">Contact</a>
         </div>
         <div class="nav-end">
             <a href="<?php echo urlroot; ?>/View/Login"><button type="button" style="background: rgb(6, 96, 152);border: none">Login</button></a>
@@ -30,9 +30,10 @@
     <div class="bg-image">
         <img src="<?php echo urlroot; ?>/img/welcome/bg.jpg" alt="" id="bg-image">
            
-        <h1 class="h1-txt">Simple and Easy <br> online voting platform</h1>
-        <button type="submit" class="learn_more">Learn More</button>
-    </div>
+
+              <h1 class="h1-txt">Simple and convenient <br> online voting platform</h1>
+            <button type="submit" class="learn_more">Learn More</button>
+        </div>
             </div>
         </div>
     </div>
