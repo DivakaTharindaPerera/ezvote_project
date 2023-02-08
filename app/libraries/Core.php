@@ -1,7 +1,7 @@
 <?php
 
     //URL format : /controller/method/params
-
+    session_start();
     class Core{
 
         protected $currentController = 'Pages';

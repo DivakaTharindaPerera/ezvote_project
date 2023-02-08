@@ -1,5 +1,5 @@
 <?php
-    session_start();
+//    session_start();
     class Pages extends Controller{
         private $postModel;
         private $electionModel;
@@ -19,7 +19,7 @@
 
         public function index(){
             if($this->isLoggedIn()){
-                $this->view('../View/home.php');
+                $this->view('Voter/viewAllElection');
 
             }else{
                 $data = [
@@ -35,7 +35,10 @@
         public function about(){
            
         }  
-        
+
+        public function dashboard(){
+            $this->view('dashboard');
+        }
         public function register(){
             $data =[];
             $this->view('register', $data);

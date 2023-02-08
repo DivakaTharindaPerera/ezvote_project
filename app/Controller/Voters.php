@@ -41,7 +41,7 @@ class Voters extends Controller
                 //validated
                 if($this->objModel->AddObjection($data)){
 //                    flash('register_success','You have successfully submitted your objection');
-                    redirect('voters/viewElection');}
+                    redirect('voters/election');}
                 else{
                     die('Something went wrong');
                 }

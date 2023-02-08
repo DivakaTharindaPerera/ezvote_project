@@ -1,6 +1,7 @@
 <?php 
 
-// session_start();
+//session_start();
+
 
 class Election extends Controller{
     private $db;
