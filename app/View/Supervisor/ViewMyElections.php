@@ -1,51 +1,50 @@
-<?php require approot . '/View/inc/header.php'; ?>
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/css/myElections.css">
-</head>
-<body>
-<div class="wholePage">
-    <div class="top_nav_bar">
-            <?php
-                require_once(approot."/View/topnavbar.php");
-            ?>
-    </div>
-    <div class="pagecontent">
+<?php require approot.'/View/inc/VoterHeader.php';?>
+<?php require approot.'/View/inc/AuthNavBar.php';?>
+<?php require approot.'/View/inc/sideBar-new.php'?>
 
-    <div id="search" class="searchbar">
-        <input type="text" id="searchInput" placeholder="Search for elections" onkeyup="searchElection()">
-    </div>
+<div class="main-container">
+    <div class="d-flex">
+        <div id="search" class="d-flex justify-content-end w-45 mx-1">
+            <input type="text" id="searchInput" placeholder="Search for elections" onkeyup="searchElection()">
+        </div>
 
-    <div id="sort" class="sortElections">
-        <div class="sortContainer">
-            Sort Elections
-            <div>
-                <form action="<?php echo urlroot; ?>/Pages/sortByTitle" method="post">
-                    <select name="sortMethod">
-                        <option value="asc">A-Z</option>
-                        <option value="desc">Z-A</option>
-                        <option value="Dasc">Date Ascending</option>
-                        <option value="Ddesc">Date Descending</option>
-                    </select>
-                    <input type="submit" value="Sort">
-                </form>
+        <div id="sort" class="d-flex mx-1 ">
+            <div class="d-flex">
+<!--                Sort Elections-->
+                <div class="d-flex">
+                    <form action="<?php echo urlroot; ?>/Pages/sortByTitle" method="post">
+                        <div>
+                            <select name="sortMethod">
+                                <option value="asc">A-Z</option>
+                                <option value="desc">Z-A</option>
+                                <option value="Dasc">Date Ascending</option>
+                                <option value="Ddesc">Date Descending</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+                <div>
+                    <button type="submit" value="Sort" class="btn btn-primary w-100">
+                </div>
             </div>
         </div>
     </div>
-    
-    <div id="elections" class="electionsContainer">
+    <div id="elections" class="d-flex">
     <?php
         foreach($data as $row){
             
-            echo "<div class='electionCard' id='".$row->ElectionId."' >";
+            echo "<div class='card' id='".$row->ElectionId."' >";
             echo "<div class='electionCardContainer'>";
             echo "<h4>".$row->Title."</h4><h5>by ".$row->OrganizationName."<h5>";
             echo "from: ".$row->StartDate." to: ".$row->EndDate;
-            echo "<br><br><a href='".urlroot."/Pages/ViewMyElection/".$row->ElectionId."'><div class='viewBtn'>View</div></a>";
+            echo "<br><br><a href='".urlroot."/Pages/ViewMyElection/".$row->ElectionId."'><div class='btn btn-primary'>View</div></a>";
             echo "</div></div>";
         }
     ?>
     </div>
-    </div>
 </div>
+
 
 <script>
     function searchElection(){

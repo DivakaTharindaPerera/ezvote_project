@@ -83,13 +83,13 @@
         }
 
         public function ViewMyElections(){
-            if(!isset($_SESSION["UserId"])){
-                redirect('View/login');
-            }else{
+//            if(!isset($_SESSION["UserId"])){
+//                redirect('View/login');
+//            }else{
                 $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
                 $this->view('Supervisor/ViewMyElections',$row);
             }
-        }
+//        }
 
         public function sortByTitle(){
             if(!isset($_SESSION["UserId"])){
