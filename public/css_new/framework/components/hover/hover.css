@@ -12,3 +12,18 @@
    transform: translateY(-20px);
 
   }
+
+  .hover-effect-org{
+    background-color: white;
+    transition: background-color 0.5s ease;
+  }
+
+  .hover-effect-org:hover {
+    background-color: rgb(59, 75, 85);
+    /* cursor: pointer; */
+   color: white;
+   /* transition: width 2s; */
+   transition-timing-function: ease;
+   /* transform: translateY(-20px); */
+
+  }

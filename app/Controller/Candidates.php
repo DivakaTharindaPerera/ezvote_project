@@ -175,6 +175,11 @@ $validatedData = [
         $this->view('Candidate/viewAllElections');
     }
 
+    public function conferences()
+    {
+        $this->view('Candidate/conferences');
+    }
+
 
 
     // public function view() {

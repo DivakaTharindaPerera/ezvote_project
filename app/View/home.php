@@ -15,7 +15,7 @@
         <div class="links">
             <a href="#">Home</a>
             <a href="#">Services</a>
-            <a href="#">Pricing</a>
+            <a href="/ezvote/Pages/pricing">Pricing</a>
             <a href="#">Target users</a>
             <a href="/ezvote/Pages/aboutUs">About Us</a>
             <a href="/ezvote/Pages/contactUs">Contact</a>

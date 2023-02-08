@@ -120,4 +120,8 @@
     public function contactUs(){
         $this->view('contact_us');
     }
+
+    public function pricing(){
+        $this->view('pricing');
+    }
 }

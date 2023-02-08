@@ -260,4 +260,13 @@ class Nomination extends Model
     {
         return 'nomination';
     }
+
+
+    public function getNominationDetails() {
+        $query = "SELECT * FROM nomination";
+        $result = $this->db->query($query);
+
+        return $result->fetchAll();
+    }
+    
 }

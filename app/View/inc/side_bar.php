@@ -69,7 +69,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<?php echo urlroot; ?>/Candidates/conferences">
                         <span class="icon"><i class="fa-sharp fa-solid fa-people-group"></i></span>
                         <span class="item">Conferences</span>
                     </a>
