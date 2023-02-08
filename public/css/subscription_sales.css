@@ -1,0 +1,248 @@
+.back-to{
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    left: 10px;
+    top: 145px;
+}
+
+.select input{
+    position: absolute;
+    width: 524px;
+    height: 38px;
+    margin-left: 266px;
+    padding-left: 25px;
+    margin-top: 80px;
+    border-radius: 14px;
+    font-size: 20px;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+}
+
+.select button{
+    width: 98px;
+    height: 33px;
+    margin-left: 704px;
+    margin-top: 84px;
+    position: absolute;
+    background: #000000;
+    border-radius: 16px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.select img{
+    position: absolute;
+    width: 32px;
+    height: 37px;
+    margin-left: 930px;
+    margin-top: 84px;
+}
+
+.select p{
+    position: absolute;
+    margin-top: 88px;
+    margin-left: 840px;
+    font-family: 'Inter';
+    width: 90px;
+    height: 21px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #000000;
+
+}
+
+.select input::placeholder{
+    margin-top: 5px;
+    position: absolute;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: rgba(0, 0, 0, 0.5);
+    width: 299px;
+    height: 30px;
+
+}
+
+#prices{
+    position: absolute;
+    width: 135px;
+    height: 38px;
+    margin-left: 970px;
+    margin-top: 84px;
+    padding-left: 10px;
+    font-size: 20px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
+
+#prices .input{
+    position: absolute;
+    width: 65px;
+    height: 18px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #000000;
+}
+
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    top: 265px;
+    left: 265px;
+    width: 830px;
+    height: 35px;
+    background-color: #D6EBFF;
+}
+
+.dropdown label{
+    position: absolute;
+    width: 215px;
+    height: 24px;
+    top: 15px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #000000;
+}
+
+.dropdown-content {
+    display: none;
+    width: 845px;
+    height: 140px;
+    position: absolute;
+    background-color: #b6d5f2;
+    z-index: 1;
+}
+
+.dropdown-content label{
+    position: absolute;
+    margin-top: 5px;
+    width: 308px;
+    height: 24px;
+    left: 20px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #000000;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.plan-box {
+    position: absolute;
+    top: 130px;
+    left: 210px;
+    width: 115px;
+    height: 35px;
+    background-color: #D6EBFF;
+    /* background-color: white; */
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid gray;
+    padding: 5px;
+    text-align: center;
+}
+
+.promote button{
+    position: absolute;
+    width: 170px;
+    height: 50px;
+    top: 85px;
+    left: 10px;
+
+    background: #1F1E6B;
+    border-radius: 16px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+}
+
+.email-verify button{
+    position: absolute;
+    width: 170px;
+    height: 50px;
+    top: 85px;
+    left: 190px;
+
+    background: #1F1E6B;
+    border-radius: 16px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+}
+
+.box{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 271px;
+    height: 140px;
+    left: 500px;
+    top: 5px;
+
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
+
+.box button{
+    position: absolute;
+    width: 60px;
+    height: 35px;
+    left: 100px;
+    top: 95px;
+    border-radius: 10px;
+    background: #000000;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+
+    color: #ffffff;
+}
+
+
+

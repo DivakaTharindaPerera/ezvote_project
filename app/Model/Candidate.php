@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 
 class Candidate extends Controller{
     private $db;
