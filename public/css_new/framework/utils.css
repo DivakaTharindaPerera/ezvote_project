@@ -6,11 +6,16 @@
 @import "util/typography.css";
 @import "util/colors/base.css";
 @import "util/border/border.css";
+@import "util/animation.css";
 
 /*Titles*/
 @import "components/title/title.css";
 
 /*Components*/
+/*main container*/
+@import "components/main-container/container.css";
+/*New Sidebar*/
+@import "components/sidebar-new/sidebar.css";
 /*Sidebar*/
 @import "components/sidebar/sidebar.css";
 /*Top-bar*/
@@ -35,10 +40,16 @@
 /*Import Forms*/
 @import "components/form/form.css";
 
+@import "components/side_bar/side_bar.css";
+
+@import "components/background/bg_img.css";
+
+@import "components/hover/hover.css";
+
 /*Fonts*/
-@import url('/public/css_new/framework/util/fonts/Poppins/Poppins-Black.ttf');
+/*@import url('/public/css_new/framework/util/fonts/static/OpenSans/OpenSans-Medium.ttf');*/
 *{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'OpenSans', sans-serif;
     margin: 0;
     padding: 0;
     text-decoration: none;
@@ -79,6 +90,9 @@
 }
 .justify-content-end{
     justify-content: flex-end;
+}
+.justify-content-start{
+    justify-content: start;
 }
 .align-items-center{
     align-items: center;
@@ -121,6 +135,9 @@
 }
 .w-10{
     width: 10%;
+}
+.w-20{
+    width: 20%;
 }
 .h-inherit{
     height: inherit;
@@ -270,5 +287,7 @@
 .min-h-90{
     min-height: 90%;
 }
-
+.min-h-100{
+    min-height: 100%;
+}
 

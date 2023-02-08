@@ -1,5 +1,5 @@
 <?php
-    session_start();
+//    session_start();
     class Pages extends Controller{
         private $postModel;
         private $electionModel;
@@ -19,7 +19,7 @@
 
         public function index(){
             if($this->isLoggedIn()){
-                $this->view('../View/home.php');
+                $this->view('Voter/viewAllElection');
 
             }else{
                 $data = [
@@ -35,7 +35,10 @@
         public function about(){
            
         }  
-        
+
+        public function dashboard(){
+            $this->view('dashboard');
+        }
         public function register(){
             $data =[];
             $this->view('register', $data);
@@ -88,28 +91,112 @@
             }
         }
 
+        public function sortByTitle(){
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $row = $this->electionModel->getElectionsByUserIdSorted($_SESSION["UserId"],trim($_POST['sortMethod']));               
+                $this->view('Supervisor/ViewMyElections',$row);
+            }
+        }
+
         public function viewMyElection($id){
             if(!isset($_SESSION["UserId"])){
                 redirect('View/login');
             }else{
-                $data = [];
-
                 $electionRow = $this->electionModel->getElectionByElectionId($id);
-                $electionRow = $this->electionModel->getElectionByElectionId($id);
-                $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
-                $regVoterRow = $this->voterModel->getRegVotersByElectionId($id);
-                $unregVoterRow = $this->voterModel->getUnregVotersByElectionId($id);
-                $positionRow = $this->positionModel->getElectionPositionByElectionId($id);
-                $partyRow = $this->partyModel->getPartiesByElectionId($id);
-                
-                $data['electionRow'] = $electionRow;
-                $data['candidateRow'] = $candidateRow;
-                $data['regVoterRow'] = $regVoterRow;
-                $data['unregVoterRow'] = $unregVoterRow;
-                $data['positionRow'] = $positionRow;
-                $data['partyRow'] = $partyRow;
-                
-                $this->view('Supervisor/viewMyElection',$data);
+                if($electionRow->Supervisor == $_SESSION["UserId"]){
+                    $data = [];
+                    
+                    $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
+                    $regVoterRow = $this->voterModel->getRegVotersByElectionId($id);
+                    $unregVoterRow = $this->voterModel->getUnregVotersByElectionId($id);
+                    $positionRow = $this->positionModel->getElectionPositionByElectionId($id);
+                    $partyRow = $this->partyModel->getPartiesByElectionId($id);
+                    
+                    $data['electionRow'] = $electionRow;
+                    $data['candidateRow'] = $candidateRow;
+                    $data['regVoterRow'] = $regVoterRow;
+                    $data['unregVoterRow'] = $unregVoterRow;
+                    $data['positionRow'] = $positionRow;
+                    $data['partyRow'] = $partyRow;
+                    
+                    $this->view('Supervisor/viewMyElection',$data);
+                }else{
+                    echo " Forbidden Access";
+                }
             }
         }
+
+        public function subscriptionPlans(){
+            $this->view('Supervisor/subscriptionPlans');
+        }
+
+        public function electionCandidates($id){
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                $electionRow = $this->electionModel->getElectionByElectionId($id);
+                if($electionRow->Supervisor == $_SESSION["UserId"]){
+                    $data = [];
+
+                    $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
+                    $positionRow = $this->positionModel->getElectionPositionByElectionId($id);
+                    $partyRow = $this->partyModel->getPartiesByElectionId($id);
+
+                    $data['electionRow'] = $electionRow;
+                    $data['candidateRow'] = $candidateRow;
+                    $data['positionRow'] = $positionRow;
+                    $data['partyRow'] = $partyRow;
+                    
+                    $this->view('Supervisor/electionCandidates',$data);
+                }else{
+                    echo "Forbidden Access";
+                }
+            }
+        }
+
+        public function electionNominations($id){
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                $electionRow = $this->electionModel->getElectionByElectionId($id);
+                if($electionRow->Supervisor == $_SESSION["UserId"]){
+                    $data = [];
+
+                    //dummy data
+                    $nominationRow = array(
+                        array(1,"John Doe",21,"Party1"),
+                        array(2,"Jane Pow",22,"Party2"),
+                        array(3,"John DoW",21,"Party3"),
+                        array(4,"Jane Now",22,"Party4"),
+                        array(5,"John Mow",23,"Party5"),
+                    );
+
+                    $positionRow = array(
+                        array(21,"President"),
+                        array(22,"Vice President"),
+                        array(23,"Secretary"),
+                        array(24,"Treasurer"),
+                    );
+
+                    $this->view('Supervisor/electionNominations',$data);
+                }else{
+                    echo "Forbidden Access";
+                }
+            }
+        }
+    
+    public function aboutUs(){
+        $this->view('about_us');
     }
+
+    public function contactUs(){
+        $this->view('contact_us');
+    }
+
+    public function pricing(){
+        $this->view('pricing');
+    }
+}

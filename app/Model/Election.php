@@ -1,6 +1,9 @@
 <?php 
 
 
+//session_start();
+
+
 
 class Election extends Controller{
     private $db;
@@ -72,4 +75,38 @@ class Election extends Controller{
         $row = $this->db->single();
         return $row;
     }
+
+    public function getElectionsByUserIdSorted($id, $method){
+        
+        if($method == "asc"){
+            
+            $this->db->query("SELECT * FROM Election WHERE Supervisor = :id ORDER BY Title ASC");
+            $this->db->bind(':id', $id);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+        if($method == "desc"){
+            
+            $this->db->query("SELECT * FROM Election WHERE Supervisor = :id ORDER BY Title DESC");
+            $this->db->bind(':id', $id);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+        if($method == "Dasc"){
+            
+            $this->db->query("SELECT * FROM Election WHERE Supervisor = :id ORDER BY StartDate ASC");
+            $this->db->bind(':id', $id);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+        if($method == "Ddesc"){
+            
+            $this->db->query("SELECT * FROM Election WHERE Supervisor = :id ORDER BY StartDate DESC");
+            $this->db->bind(':id', $id);
+            $row = $this->db->resultSet();
+            return $row;
+        }
+        
+    }
+        
 }

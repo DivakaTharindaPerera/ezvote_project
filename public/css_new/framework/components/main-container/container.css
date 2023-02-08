@@ -1,0 +1,16 @@
+.main-container{
+    /*d-flex justify-center bottom-0 max-w-85 absolute right-0 min-w-85 overflow-x bg-secondary*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    max-width: 85%;
+    position:absolute;
+    right: 0;
+    min-width: 85%;
+    min-height: 92%;
+    max-height: 92%;
+    overflow-x: auto;
+    background-color: var(--secondary);
+}
