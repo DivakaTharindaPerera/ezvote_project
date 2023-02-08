@@ -1,6 +1,6 @@
 <?php require approot.'/View/inc/VoterHeader.php';?>
 <?php require approot.'/View/inc/AuthNavBar.php';?>
-<?php require approot.'/View/inc/SideBar.php'?>
+<?php require approot.'/View/inc/sideBar-new.php'?>
 <?php
             $data = [
                     'names' => ['basic', 'premium', 'enterprise','basic', 'premium', 'enterprise','basic', 'premium', 'enterprise'],
@@ -12,7 +12,7 @@
 
         
             
-<div class=" d-flex flex-column justify-content-center bottom-0 max-w-85 absolute right-0 min-w-85 overflow-x bg-secondary" style="max-height:90.5%;min-height:90.5%"">
+<div class="main-container">
 <!--        <div class="text-center">-->
             <div class="d-flex flex-column my-1">
                 <div>

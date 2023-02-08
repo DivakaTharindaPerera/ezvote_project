@@ -1,6 +1,6 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
-<?php require approot.'/View/inc/sidebar.php';?>
+<?php require approot.'/View/inc/sidebar-new.php';?>
 
 
 <!--    <div class="top_nav_bar">-->
@@ -8,7 +8,7 @@
 //                require_once(approot."/View/topnavbar.php");
 //            ?>
 <!--    </div>-->
-    <div class="">
+    <div class="main-container">
         <?php
         echo $data['electionRow']->ElectionId."<br>".$data['electionRow']->Title."<br>";
 

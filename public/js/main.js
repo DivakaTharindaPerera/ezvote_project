@@ -15,8 +15,11 @@ function vote(){
     window.location.href="/ezvote/Voters/vote";
 }
 
-function marked(){
-    document.getElementById("card").disable();
+function marked(id){
+    const elem = document.getElementById(id);
+    const div = document.getElementById('card-' + id);
+    // div.classList.toggle('hidden');
+    // document.getElementById("card").disable();
 }
 
 function accepted(){

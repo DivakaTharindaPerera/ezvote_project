@@ -12,6 +12,10 @@
 @import "components/title/title.css";
 
 /*Components*/
+/*main container*/
+@import "components/main-container/container.css";
+/*New Sidebar*/
+@import "components/sidebar-new/sidebar.css";
 /*Sidebar*/
 @import "components/sidebar/sidebar.css";
 /*Top-bar*/

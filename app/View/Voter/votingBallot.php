@@ -1,15 +1,15 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
-<?php require approot . '/View/inc/sidebar.php'; ?>
+<?php require approot . '/View/inc/sidebar-new.php'; ?>
 
-<div class="d-flex flex-column justify-content-center bottom-0 max-w-85 absolute right-0 min-w-85 overflow-y bg-secondary" style="max-height:90.5%;min-height:90.5%">
+<div class="main-container">
     <div class="title justify-content-center mt-1">Welfare Organizing Committee Election</div>
         <div class="d-flex flex-column min-h-80">
 <!--            <div class="title">Candidates</div>-->
             <div class="">
                 <div class="title">Presidents</div>
                 <div class="d-flex justify-content-center">
-                    <div class="card" id="card">
+                    <div class="card" id="card-1">
                         <div class="d-flex flex-column">
                             <div class="sub-title">Sandun Jayasanka</div>
                             <div><img src="/ezvote/public/img/profile.jpg" style="max-height:50px;max-width: 50px" alt="profile photo"></div>
@@ -18,10 +18,10 @@
                             <div class="text-lg">BraveIo</div>
                         </div>
                         <div class="d-flex justify-content-center mb-1">
-                            <button class="btn btn-primary min-w-50" onclick="marked()">Vote</button>
+                            <button class="btn btn-primary min-w-50" id="1" onclick="marked(this.id)">Vote</button>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card" id="card-2">
                         <div class="d-flex flex-column">
                             <div class="sub-title">Sandun Jayasanka</div>
                             <div><img src="/ezvote/public/img/profile.jpg" style="max-height:50px;max-width: 50px" alt="profile photo"></div>
@@ -30,10 +30,10 @@
                             <div class="text-lg">BraveIo</div>
                         </div>
                         <div class="d-flex justify-content-center mb-1">
-                            <button class="btn btn-primary min-w-50">Vote</button>
+                            <button class="btn btn-primary min-w-50" id="2">Vote</button>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card" id="card-3">
                         <div class="d-flex flex-column">
                             <div class="sub-title">Sandun Jayasanka</div>
                             <div><img src="/ezvote/public/img/profile.jpg" style="max-height:50px;max-width: 50px" alt="profile photo"></div>
@@ -42,7 +42,7 @@
                             <div class="text-lg">BraveIo</div>
                         </div>
                         <div class="d-flex justify-content-center mb-1">
-                            <button class="btn btn-primary min-w-50">Vote</button>
+                            <button class="btn btn-primary min-w-50" id="3">Vote</button>
                         </div>
                     </div>
                 </div>

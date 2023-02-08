@@ -42,8 +42,8 @@
                             $_SESSION["fname"] = $user->Fname;
                             $_SESSION["lname"] = $user->Lname;
                             $_SESSION["email"] = $user->Email;
-                            
-                            $this->view('dashboard');
+
+                            header('location: '.urlroot.'/Pages/dashboard');
                         }else{
                             $data = [
                                 'error' => "invalid password",

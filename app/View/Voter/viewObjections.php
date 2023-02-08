@@ -1,8 +1,8 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
-<?php require approot . '/View/inc/Sidebar.php'; ?>
+<?php require approot . '/View/inc/sidebar-new.php'; ?>
 
-<div class=" d-flex flex-column justify-content-center bottom-0 max-w-85 absolute right-0 min-w-85 overflow-x bg-secondary" style="max-height:90.5%;min-height:90.5%"">
+<div class="main-container">
     <div class="d-flex flex-column align-items-center min-h-100">
         <?php if(empty($r)){ ?>
             <div class="d-flex justify-content-center">

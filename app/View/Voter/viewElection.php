@@ -1,10 +1,10 @@
 <?php
 require approot.'/View/inc/VoterHeader.php';
 require approot.'/View/inc/AuthNavbar.php';
-require approot.'/View/inc/Sidebar.php';
+require approot.'/View/inc/sidebar-new.php';
 ?>
 
-<div class="justify-center align-items-center bottom-0 max-w-85 absolute right-0 min-w-85 overflow-x bg-secondary " style="max-height:90.5%;min-height:90.5%">
+<div class="main-container">
     <div id="Election" class="w-95 align-center h-inherit d-flex flex-column p-1">
         <div class="d-flex flex-column w-75 justify-content-start align-items-center">
             <div class="title">Welfare Organizing Committee Election - 2022 / 2023 </div>
