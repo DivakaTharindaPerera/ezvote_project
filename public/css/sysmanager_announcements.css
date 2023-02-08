@@ -1,0 +1,269 @@
+.sysmanager h2 {
+    position: absolute;
+    width: 252px;
+    height: 34px;
+    left: 584px;
+    top: 128px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    text-align: center;
+    text-decoration-line: underline;
+
+    color: #000000;
+}
+
+a{
+    padding-left: 0vw;
+    padding-right: 1vw;
+    padding-top: 1.5vh;
+    color: #112B3C;
+    text-decoration: none;
+}
+
+.head h3 {
+    position: absolute;
+    width: 67px;
+    height: 29px;
+    left: 392px;
+    top: 190px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #000000;
+}
+
+.head input {
+    position: absolute;
+    width: 521px;
+    height: 50px;
+    left: 392px;
+    top: 240px;
+
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 20px;
+    padding-left: 30px;
+
+    background: #D6EBFF;
+    border-radius: 5px;
+}
+
+::placeholder {
+    position: absolute;
+    top: 18px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.body-div {
+    position: absolute;
+    height: 15px;
+    line-height: 22px;
+    top: 550px;
+    left: 375px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #000000;
+
+}
+
+.body h3 {
+    position: absolute;
+    width: 64px;
+    height: 29px;
+    left: 392px;
+    top: 309px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #000000;
+}
+
+#bodytext input{
+    padding-top: 0px;
+}
+
+.body input {
+    position: absolute;
+    width: 521px;
+    height: 110px;
+    left: 392px;
+    top: 360px;
+
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 20px;
+    padding-left: 30px;
+
+    background: #D6EBFF;
+    border-radius: 5px;
+}
+
+#add img{
+    position: absolute;
+    top: 485px;
+    left: 535px;
+}
+
+.attachment label{
+    position: absolute;
+    width: 191px;
+    height: 40px;
+    left: 731px;
+    top: 495px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #000000;
+}
+
+.send h3 {
+    position: absolute;
+    width: 85px;
+    height: 29px;
+    left: 392px;
+    top: 500px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    color: #000000;
+}
+
+.user h3 {
+    position: absolute;
+    top: 610px;
+    left: 460px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration-line: underline;
+
+    color: #000000;
+}
+
+.body-div2 {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 200px;
+    height: 15px;
+    line-height: 22px;
+    left: 387px;
+    top: 85%;
+    color: #000000;
+}
+
+input[name="user1"]{
+    margin-left: 81px;
+    margin-top: 50px;
+}
+
+/* #user1 label{
+    position: absolute;
+    top: 30px;
+    left: 18px;
+} */
+
+input[name="user2"]{
+    margin-left: 135px;
+    margin-top: 50px;
+}
+
+input[name="user3"]{
+    margin-left: 104px;
+    margin-top: 50px;
+}
+
+.subscription label {
+    position: absolute;
+    top: 694px;
+    left: 460px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration-line: underline;
+
+    color: #000000;
+}
+
+.body-div3{
+    display: flex;
+    flex-direction: column;
+    margin-top: 39.5%;
+    margin-left: 30%;
+
+}
+
+#send{
+    width: 170px;
+    height: 50px;
+    margin-left: 4.5%;
+    margin-top: 2.5%;
+    margin-bottom: 3%;
+    cursor: pointer;
+
+    color: #ffffff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+
+    background: #102179;
+    border-radius: 25px;
+}
+
+#cancel {
+    width: 170px;
+    height: 50px;
+    margin-left: 0%;
+    margin-top: 0%;
+    margin-bottom: 3%;
+
+    cursor: pointer;
+
+    color: #ffffff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+
+    background: #102179;
+    border-radius: 25px;
+}
