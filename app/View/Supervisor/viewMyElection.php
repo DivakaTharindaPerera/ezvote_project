@@ -1,6 +1,6 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
-<?php require approot.'/View/inc/sidebar.php';?>
+<?php require approot.'/View/inc/Sidebar.php';?>
 
 
 <!--    <div class="top_nav_bar">-->
@@ -25,6 +25,7 @@
                 } 
             }
         }
+        
         ?>
     </div>
 <?php require approot . '/View/inc/footer.php'; ?>

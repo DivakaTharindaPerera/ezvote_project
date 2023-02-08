@@ -19,7 +19,7 @@
 
         public function index(){
             if($this->isLoggedIn()){
-                $this->view('../View/home.php');
+                $this->view('Voter/viewAllElection');
 
             }else{
                 $data = [
