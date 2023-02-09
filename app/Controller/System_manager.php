@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 class System_manager extends Controller
 {
     private $ManagerModel;

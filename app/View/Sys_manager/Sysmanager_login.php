@@ -1,47 +1,38 @@
-<?php require approot.'/View/inc/header.php'; ?>
-<?php
-require approot.'/View/sysmanager_topnavbar.php';
-?>
+<?php require approot.'/View/inc/VoterHeader.php'; ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sysmanager login</title>
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/sysmanager_login.css">
-</head>
-
-<body>
-<!-- <div class="navbar">
-    <img src="../IMAGES/ezvotelogo.png" />
-    <a href="#">
-        <div class="about link">ABOUT</div>
-    </a>
-    <a href="sysmanager_register.php">
-        <button type="button" class="register-btn">REGISTER</button>
-    </a>
-</div> -->
-
-<div class="container">
-    <div class="enter">
-        <h2>System manager login here</h2>
-        <h3>Enter email and password to login</h3>
-    </div>
-
-    <form action="./dashboard" method="POST">
-        <input type="email" class="email-box" placeholder="Email" name="email" required>
-        <input type="password" class="password-box" placeholder="Password" name="pwd" required>
-        <button type="submit" class="login-btn">LOGIN</button>
-    </form>
-
-    <div class="forgot">
-            <h3>Forgotten password</h3>
-        </a>
+<div class="d-flex border-radius-3 min-w-60 min-h-85 border-4 border-primary">
+    <div class="d-flex w-50 bg-primary justify-content-center align-items-center">
+        <img src="<?php echo urlroot;?>/public/img/login.jpeg" alt="" style="min-height: 200px; max-width:400px;" > </div>
+    <div class="d-flex flex-column w-50">
+        <div class="d-flex justify-content-center"> <img src="<?php echo urlroot;?>/public/img/ezvotelogo.png" alt="" style="min-height: 80px; max-width:200px;"></div>
+        <div class="title ">Welcome Back</div>
+        <div class="d-flex flex-column justify-content-center mx-2 bg-secondary mb-1 border-radius-1">
+            <form action='<?php echo urlroot; ?>/System_manager/dashboard' method='POST' class="d-flex flex-column" >
+                <div class="d-flex flex-column my-1 mx-1">
+                    <div><label for="email">Email</label></div>
+                    <div><input type="email" name="email" id="email" value="<?= htmlspecialchars($_POST["email"] ?? "") ?>" placeholder="Email...." onclick="clickToclear()"></div>
+                </div>
+                <div class="d-flex flex-column my-1 mx-1">
+                    <div><label for="email">Password</label></div>
+                    <div>
+                        <input type="password" name="pwd" id="password" placeholder="password....">
+                        <em id="error"><?php if(isset($data['error'])){ echo $data['error']; } ?></em>
+                    </div>
+                </div>
+                <div class="text-s mx-1">
+                    <a href="">Forgotten Password?</a>
+                </div>
+                <div class="d-flex justify-content-center mt-1 px-1">
+                    <button type="submit" class="btn btn-primary" style="min-width: 250px">SIGN IN</button>
+                </div>
+                <!-- <div class="d-flex justify-content-center mt-1 px-1">
+                    <button type="submit" class="btn bg-white text-center" style="min-width: 250px">
+                        <img src="<?php echo urlroot;?>/public/img/google.png" alt="" style="max-width: 30px; max-height: 25px" class="mx-1">SIGN IN WITH GOOGLE</button>
+                </div> -->
+        </form>
+        </div>
     </div>
 </div>
-</body>
 
-</html>
+
+<?php require approot.'/View/inc/footer.php'; ?>
