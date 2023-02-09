@@ -214,4 +214,8 @@
 
         $this->view('home');
     }
+
+    public function objectionView(){
+        $this->view('Supervisor/viewObjections');
+    }
 }

@@ -28,6 +28,7 @@
         // }
         ?>
     <form action="" method="post" style="max-height: 80vh;">
+        
         <div id="information" class="card-pane d-flex flex-column">
             Title: <input type='text' name="title" value="<?php echo $data['electionRow']->Title ?>" disabled>
             Organization: <input type="text" name="org" value="<?php echo $data['electionRow']->OrganizationName; ?>" disabled>

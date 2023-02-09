@@ -1,6 +1,6 @@
 <?php require approot.'/View/inc/VoterHeader.php';?>
-<?php require approot.'/View/inc/AuthNavBar.php';?>
-<?php require approot.'/View/inc/sideBar-new.php'?>
+<?php require approot.'/View/inc/AuthNavbar.php';?>
+<?php require approot.'/View/inc/sidebar-new.php'?>
 
 <div class="main-container">
     <div class="d-flex justify-content-center align-items-center title">Created Elections</div>
