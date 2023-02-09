@@ -139,6 +139,9 @@
 .w-20{
     width: 20%;
 }
+.w-5{
+    width: 5%;
+}
 .h-inherit{
     height: inherit;
 }
@@ -156,6 +159,9 @@
 }
 .h-10{
     height: 10%;
+}
+.h-5{
+    height: 5%;  
 }
 .max-w-8{
     max-width: 8rem !important;
