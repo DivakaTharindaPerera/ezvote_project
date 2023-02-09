@@ -214,4 +214,7 @@
 
         $this->view('home');
     }
+    public function Sysmanager(){
+        $this->view('Sys_manager/Sysmanager_login');
+    }
 }
