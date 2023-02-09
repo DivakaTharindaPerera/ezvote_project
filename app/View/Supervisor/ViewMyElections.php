@@ -1,6 +1,6 @@
 <?php require approot.'/View/inc/VoterHeader.php';?>
-<?php require approot.'/View/inc/AuthNavBar.php';?>
-<?php require approot.'/View/inc/sideBar-new.php'?>
+<?php require approot.'/View/inc/AuthNavbar.php';?>
+<?php require approot.'/View/inc/sidebar-new.php'?>
 
 <div class="main-container">
     <div class="d-flex justify-content-center align-items-center title">Created Elections</div>
@@ -34,10 +34,10 @@
     <?php
         foreach($data as $row):
         ?>
-            <div class='card' id='<?=$row->ElectionId?>' >
+            <div class='card electionCard' id='<?=$row->ElectionId?>' >
             <div class='d-flex flex-column'>
-                <div class="sub-title"><?=$row->Title?></div>
-                <div class="text-xl">by <?=$row->OrganizationName?></div>
+                <div class="sub-title"><h4><?=$row->Title?><h4></div>
+                <div class="text-xl">by <h5><?=$row->OrganizationName?><h5></div>
                 <div> from: <?=$row->StartDate?> to: <?=$row->EndDate?></div>
                 <a href='<?=urlroot?>/Pages/ViewMyElection/<?=$row->ElectionId?>'>
                     <span class='btn btn-primary'>View</span></a>
