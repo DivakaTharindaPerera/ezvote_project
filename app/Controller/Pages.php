@@ -37,7 +37,7 @@
         }  
 
         public function dashboard(){
-            $this->view('dashboard');
+            $this->view('Voter/viewAllElection');
         }
         public function register(){
             $data =[];
@@ -48,7 +48,7 @@
         
         public function login(){
             if($this->isLoggedIn()){
-                $this->view('dashboard');
+                $this->view('Voter/viewAllElection');
             }else{
                 $data =[];
                 $this->view('login', $data);
@@ -58,7 +58,7 @@
         //for login
         public function signing($email = '', $password = ''){
             if($this->isLoggedIn()){
-                $this->view('dashboard');
+                $this->view('Voter/viewAllElection');
             }else{
                 if($_SERVER['REQUEST_METHOD'] === "POST"){
                     $email = $_POST['email'];
@@ -83,13 +83,14 @@
         }
 
         public function ViewMyElections(){
-            if(!isset($_SESSION["UserId"])){
-                redirect('View/login');
-            }else{
-                $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
+//            if(!isset($_SESSION["UserId"])){
+//                redirect('View/login');
+//            }else{
+//                $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
+                $row = $this->electionModel->getElectionsByUserId('48');
                 $this->view('Supervisor/ViewMyElections',$row);
             }
-        }
+//        }
 
         public function sortByTitle(){
             if(!isset($_SESSION["UserId"])){
@@ -102,11 +103,11 @@
         }
 
         public function viewMyElection($id){
-            if(!isset($_SESSION["UserId"])){
-                redirect('View/login');
-            }else{
+//            if(!isset($_SESSION["UserId"])){
+//                redirect('View/login');
+//            }else{
                 $electionRow = $this->electionModel->getElectionByElectionId($id);
-                if($electionRow->Supervisor == $_SESSION["UserId"]){
+//                if($electionRow->Supervisor == $_SESSION["UserId"]){
                     $data = [];
                     
                     $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
@@ -123,10 +124,10 @@
                     $data['partyRow'] = $partyRow;
                     
                     $this->view('Supervisor/viewMyElection',$data);
-                }else{
-                    echo " Forbidden Access";
-                }
-            }
+//                }else{
+//                    echo " Forbidden Access";
+//                }
+//            }
         }
 
         public function subscriptionPlans(){
@@ -198,5 +199,15 @@
 
     public function pricing(){
         $this->view('pricing');
+    }
+
+
+    public function gohome(){
+        $this->view('home');
+    }
+
+    public function home(){
+
+        $this->view('home');
     }
 }

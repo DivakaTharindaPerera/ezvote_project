@@ -1,6 +1,6 @@
 <?php require approot.'/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
-<?php require approot.'/View/inc/sidebar.php';?>
+<?php require approot.'/View/inc/sidebar-new.php';?>
 
 <div class="d-flex flex-column bottom-0 absolute right-0 min-w-85 overflow-x bg-secondary align-items-center" style="max-height:90.5vh">
     <div class="d-flex flex-column bg-white mt-2 min-w-60 border-3 border-radius-2 border-primary mb-2">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="justify-content-start mb-1">
                         Time: <input type="time" id="EendTime" name="EendTime" class="time" onchange="timeCheck()" required>
-<!--                        <em id="out" style="color:red;"></em>-->
+                       <em id="out" style="color:red;"></em>
                     </div>&emsp14;
                 </div>
             </div>
