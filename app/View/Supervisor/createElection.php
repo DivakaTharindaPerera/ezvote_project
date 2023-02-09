@@ -2,7 +2,7 @@
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot.'/View/inc/sidebar-new.php';?>
 
-<div class="d-flex flex-column bottom-0 absolute right-0 min-w-85 overflow-x bg-secondary align-items-center" style="max-height:90.5vh">
+<div class="main-container">
     <div class="d-flex flex-column bg-white mt-2 min-w-60 border-3 border-radius-2 border-primary mb-2">
         <div class="title">Create New Election</div>
         <form method="POST" action='<?php echo urlroot; ?>/Elections/crteelection' class="d-flex flex-column justify-content-center mx-1 mb-1">
