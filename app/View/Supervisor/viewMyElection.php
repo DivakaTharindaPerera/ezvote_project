@@ -27,6 +27,12 @@
         // }
         ?>
     <form action="" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2 overflow-y">
+        <div id="btn panel" class="d-flex text-center">
+            <a href="#" class="btn btn-primary m-3"> <div>Candidates</div> </a>
+            <a href="#" class="btn btn-primary m-3"> <div>Voters</div> </a>
+            <a href="<?php echo urlroot;?>/Pages/viewObjections" class="btn btn-primary m-3"> <div>Objections</div> </a>
+
+        </div>
         <div id="information" class="card-pane d-flex flex-column">
             <div class="primary-title text-primary"><?php echo $data['electionRow']->Title ?></div>
             <div class="sub-title text-center">By</div>
