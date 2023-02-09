@@ -13,7 +13,7 @@
     align-content: center;
     text-align: center;
     justify-content: center;
-    box-shadow: 5px 10px var(--primary);
+    box-shadow: 5px 5px var(--primary);
 }
 .card-hover:hover{
     transform: scale(1.1);
