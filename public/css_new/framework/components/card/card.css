@@ -2,7 +2,8 @@
     background-color: rgba(255,255,255,0.7);
     border: 2px solid #10558d;
     border-radius: 50px;
-    /*box-shadow: 5px 5px rgba(9,30,66,.3);*/
+    box-shadow: 5px 5px var(--primary);
+
     padding: 8px;
     position: relative;
     width: 200px;

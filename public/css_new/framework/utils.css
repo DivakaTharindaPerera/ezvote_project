@@ -46,6 +46,12 @@
 
 @import "components/hover/hover.css";
 
+@import "components/home_footer/home_footer.css";
+
+@import "components/box-shadow/box-shadow.css";
+
+
+
 /*Fonts*/
 /*@import url('/public/css_new/framework/util/fonts/static/OpenSans/OpenSans-Medium.ttf');*/
 *{

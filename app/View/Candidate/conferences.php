@@ -7,10 +7,10 @@
 
 <h3 class="text-center">Ongoing meetings</h3>
 <div class="d-flex">
-<div class="bg-light p-2 border-2 border-radius-3 m-1 hover-effect" style="box-shadow: 5px 10px;">
-<h3>Jan <br>24</h3>
+<div class="bg-light p-2 border-2 border-radius-3 m-1 hover-effect" style="box-shadow: 5px 5px #888888">
+<h3>Feb <br>10</h3>
 </div>
-<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org text-1xl" style="box-shadow: 5px 10px;">
+<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org text-1xl" style="box-shadow: 5px 5px #888888">
 Welfare Bord Election 2023 - meeting - (2hrs 30mins left)
 <button type="submit" class="btn bg-primary text-white" style="margin:10px">JOIN</button>
 </div>
@@ -19,32 +19,32 @@ Welfare Bord Election 2023 - meeting - (2hrs 30mins left)
 <br><br>
 <h3 class="text-center">Upcoming meetings</h3>
 <div class="d-flex">
-<div class="bg-light p-2 border-2 border-radius-3 m-1 hover-effect " style="box-shadow: 5px 10px;">
+<div class="bg-light p-2 border-2 border-radius-3 m-1 hover-effect" style="box-shadow: 5px 5px #888888" >
 <h3>Sep <br>25</h3>
 </div>
-<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org" style="box-shadow: 5px 10px;">
+<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org" style="box-shadow: 5px 5px #888888">
 UCSC Union Election 2023 - meeting
 <br>
 <button type="submit" class="btn bg-primary text-white" style="margin:10px" onclick="openPopup()">DETAILS</button>
 
 </div>
 
-<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org" style="box-shadow: 5px 10px;">
+<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org" style="box-shadow: 5px 5px #888888">
 Welfare Community Election - meeting
 <button type="submit" class="btn bg-primary text-white" style="margin:10px" onclick="openPopup()">DETAILS</button>
 </div>
 </div>
 
 <div class="d-flex">
-<div class="bg-light p-2 border-2 border-radius-3 m-1 hover-effect " style="box-shadow: 5px 10px;">
+<div class="bg-light p-2 border-2 border-radius-3 m-1 hover-effect" style="box-shadow: 5px 5px #888888">
 <h3>Nov<br>05</h3>
 </div>
-<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org" style="box-shadow: 5px 10px;">
+<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org" style="box-shadow: 5px 5px #888888">
 Humane Society Election - meeting
 <br>
 <button type="submit" class="btn bg-primary text-white" style="margin:10px" onclick="openPopup()">DETAILS</button>
 </div>
-<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org" style="box-shadow: 5px 10px;">
+<div class="w-100 bg-light p-2 border-2 border-radius-3 m-1 hover-effect-org" style="box-shadow: 5px 5px #888888">
 Child Care Services Election - meeting
 <br>
 <button type="submit" class="btn bg-primary text-white" style="margin:10px" onclick="openPopup()">DETAILS</button>
