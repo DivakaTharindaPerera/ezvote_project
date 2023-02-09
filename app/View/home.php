@@ -23,8 +23,14 @@
             <a href="/ezvote/Pages/contactUs">Contact</a>
         </div>
         <div class="nav-end">
-            <a href="<?php echo urlroot; ?>/View/Login"><button type="button" style="background: rgb(6, 96, 152);border: none">Login</button></a>
-            <a href="<?php echo urlroot; ?>/View/Register"><button id="trial" style="background: rgb(6, 96, 152); border: none">Register</button></a>
+  <div class="dropdown">
+  <button class="dropbtn">Login</button>
+  <div class="dropdown-content">
+  <a href="#">Administrator</a>
+  <a href="<?php echo urlroot; ?>/View/Login">Other Users</a>
+  </div>
+</div>
+    <a href="<?php echo urlroot; ?>/View/Register"><button class="dropbtn" style="margin-top: -6px;">Register</button></a>
         </div>
     </div>
 

@@ -14,9 +14,9 @@ require approot.'/View/inc/side_bar.php';
 
         <div class="">
 
-        <!-- <div class="pic1">       
-        <img src="./uploads/<?php echo $field6name; ?>" alt="Profile image" class="picture"  />
-        </div>  -->
+        <div class="" style="padding-left:350px;">       
+        <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" alt="" class="w-10 h-10" style="border-radius:10px;"  />
+        </div> 
 
         <!-- <div class="pic2">     -->
         <!-- <p><button class="can_no">Candidate No: CN<?php echo $field1name ?></button></p> -->
