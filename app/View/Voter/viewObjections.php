@@ -32,7 +32,10 @@
                             </div>
                         </div>
                     </div>
-                    <div><button class="btn btn-info px-1 mt-1" type="submit">Remove</div>
+                        <form action="" method="post">
+                            <input name="id" value="<?=$value->ObjectionID?>" hidden>
+                            <input class="btn btn-info px-1 mt-1"  type="submit" value="Remove"/>
+                        </form>
                 </div>
         <?php }?>
         </div>

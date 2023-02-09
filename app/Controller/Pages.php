@@ -188,7 +188,11 @@
                 }
             }
         }
-    
+
+    public function viewObjections()
+    {
+        $this->view('Supervisor/viewObjections');
+        }
     public function aboutUs(){
         $this->view('about_us');
     }

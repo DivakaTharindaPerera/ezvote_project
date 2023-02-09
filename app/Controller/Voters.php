@@ -68,11 +68,29 @@ class Voters extends Controller
 
     public function election()
     {
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            $data=[
+                'objectionID'=>uniqid('obj',true),
+                'Subject'=>$_POST['Subject'],
+                'Description'=>$_POST['Description'],
+                'Respond'=>'',
+                'Action'=>'',
+                'ElectionID'=>1251,
+                'CandidateID'=>'can01',
+                'VoterID'=>48,
+            ];
+            $this->objModel->AddObjection($data);
+        }
         $this->view('Voter/viewElection');
     }
 
     public function viewObjections(){
         $r=$this->objModel->RetrieveAll();
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            $id=$_POST['id'];
+            $this->objModel->DeleteObjection($id);
+            $this->view('Voter/viewObjections',['r'=>$r]);
+        }
         $this->view('Voter/viewObjections',['r'=>$r]);
     }
 
