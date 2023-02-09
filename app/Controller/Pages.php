@@ -125,6 +125,10 @@
         $this->view('pricing');
     }
 
+    public function gohome(){
+        $this->view('home');
+    }
+
     public function home(){
         $this->view('home');
     }
