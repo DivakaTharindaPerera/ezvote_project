@@ -31,17 +31,35 @@
 
             <ul>
                 <li>
-                    <a href="#" class="active">
+                    <a href="<?php echo urlroot; ?>/Pages/goHome" class="active">
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span class="item">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?php echo urlroot; ?>/Pages/dashboard">
                         <span class="icon"><i class="fas fa-desktop"></i></span>
                         <span class="item">My Dashboard</span>
                     </a>
                 </li> 
+
+                <!-- create election -->
+                <li>
+                    <a href="<?php echo urlroot; ?>/View/Createelection">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">Create Election</span>
+                    </a>
+                </li>
+
+                <!-- view elections -->
+
+                <li>
+                    <a href="<?php echo urlroot; ?>/View/ViewMyElections">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">View My Elections</span>
+                    </a>
+                </li>
+
                 <li>
                     <a href="#">
                         <span class="icon"><i class="fas fa-user-friends"></i></span>
@@ -49,11 +67,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?php echo urlroot;?>/Pages/Objections">
                         <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
                         <span class="item">Objections</span>
                     </a>
                 </li>
+
+                <!-- subscription plans -->
+                <li>
+                    <a href="<?php echo urlroot; ?>/View/subscriptionPlans">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Subscription Plans</span>
+                    </a>
                 <li>
                     <a href="#">
                         <span class="icon"><i class="fas fa-cog"></i></span>

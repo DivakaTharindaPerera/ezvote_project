@@ -37,7 +37,7 @@
         }  
 
         public function dashboard(){
-            $this->view('dashboard');
+            $this->view('Voter/viewAllElection');
         }
         public function register(){
             $data =[];
@@ -48,7 +48,7 @@
         
         public function login(){
             if($this->isLoggedIn()){
-                $this->view('dashboard');
+                $this->view('Voter/viewAllElection');
             }else{
                 $data =[];
                 $this->view('login', $data);
@@ -58,7 +58,7 @@
         //for login
         public function signing($email = '', $password = ''){
             if($this->isLoggedIn()){
-                $this->view('dashboard');
+                $this->view('Voter/viewAllElection');
             }else{
                 if($_SERVER['REQUEST_METHOD'] === "POST"){
                     $email = $_POST['email'];
@@ -198,5 +198,9 @@
 
     public function pricing(){
         $this->view('pricing');
+    }
+
+    public function goHome(){
+        $this->view('home');
     }
 }

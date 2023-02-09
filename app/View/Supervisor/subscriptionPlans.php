@@ -1,7 +1,7 @@
 
 <?php require approot.'/View/inc/VoterHeader.php';?>
-<?php require approot.'/View/inc/AuthNavBar.php';?>
-<?php require approot.'/View/inc/sideBar-new.php'?>
+<?php require approot.'/View/inc/AuthNavbar.php';?>
+<?php require approot.'/View/inc/sidebar-new.php'?>
 <?php
 
             $data = [
