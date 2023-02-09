@@ -218,4 +218,8 @@
     public function objectionView(){
         $this->view('Supervisor/viewObjections');
     }
+
+    public function Sysmanager(){
+        $this->view('Sys_manager/Sysmanager_login');
+    }
 }
