@@ -1,0 +1,8 @@
+@keyframes animate {
+    50%{
+        opacity: 0;
+    }
+}
+.blink{
+    animation: animate 1s linear infinite;
+}

@@ -1,0 +1,36 @@
+@import "button-colors.css";
+.btn{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.btn-radius-1{
+    border-radius: 1rem !important;
+}
+.btn-radius-2{
+    border-radius: 2rem !important;
+}
+.btn-radius-3{
+    border-radius: 3rem !important;
+}
+.btn-radius-4{
+    border-radius: 4rem !important;
+}
+.btn:hover{
+    background-blend-mode: lighten;
+    text-decoration: none;
+}

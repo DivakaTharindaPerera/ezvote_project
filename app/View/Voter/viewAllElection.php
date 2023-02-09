@@ -1,7 +1,7 @@
 <?php
 require approot.'/View/inc/VoterHeader.php';
 require approot.'/View/inc/AuthNavbar.php';
-require approot.'/View/inc/Sidebar.php';
+require approot.'/View/inc/sidebar-new.php';
 ?>
 <!--<style>-->
 <!--    #bg{-->
@@ -14,7 +14,7 @@ require approot.'/View/inc/Sidebar.php';
 <!---->
 <!--    }-->
 <!--</style>-->
-<div class="d-flex justify-center bottom-0 max-w-85 absolute right-0 min-w-85 overflow-x bg-secondary " style="justify-content: center;min-height:90.5%">
+<div class="main-container">
     <div id="Elections" class="w-95 d-flex flex-column" style="z-index: 2">
         <div id="ongoingElections" class="d-flex " style="justify-content: center;align-items: center">
             <div class="sub-title dark-title max-w-8">Ongoing Elections</div>
@@ -22,15 +22,15 @@ require approot.'/View/inc/Sidebar.php';
                 <div class="d-flex flex-column bg-secondary p-1 border-radius-3 card" style="align-items: center">
                     <div id="election-title" class="title">Welfare Board Election</div>
                     <div class="d-flex flex-column justify-center align-center">
-                        <div id="time" class="mr-1">2hr 30min</div>
-                        <a class="btn btn-primary">Vote</a>
+                        <div id="time" class="mx-1 text-info text-lg blink">2hr 30min</div>
+                        <button class="btn btn-primary" onclick="vote()">Vote</button>
                     </div>
                 </div>
                 <div class="d-flex bg-secondary min-w-20 p-1 border-radius-3 mt-1 card" style="align-items: center">
                     <div id="" class="title">Welfare Board Election</div>
                     <div class="d-flex flex-column justify-center align-center">
-                        <div id="time" class="mr-1">2hr 30min</div>
-                        <a class="btn btn-primary">Vote</a>
+                        <div id="time" class="mx-1 text-info text-lg blink">2hr 30min</div>
+                        <button class="btn btn-primary" onclick="vote()">Vote</button>
                     </div>
                 </div>
             </div>
@@ -42,15 +42,15 @@ require approot.'/View/inc/Sidebar.php';
                 <div class="d-flex bg-secondary min-w-20 p-1 border-radius-3 card" style="align-items: center">
                     <div id="election-title" class="title">Welfare Board Election</div>
                     <div class="d-flex flex-column justify-center align-center">
-                        <div id="time" class="mr-1">2hr 30min</div>
-                        <a class="btn btn-primary">Vote</a>
+                        <div id="time" class="mx-1 text-info">2hr 30min</div>
+                        <a class="btn btn-primary">View</a>
                     </div>
                 </div>
                 <div class="d-flex bg-secondary min-w-20 p-1 border-radius-3 mt-1 card" style="align-items: center">
                     <div id="election-title" class="title">Welfare Board Election</div>
                     <div class="d-flex flex-column justify-center align-center">
-                        <div id="time" class="mr-1">2hr 30min</div>
-                        <a class="btn btn-primary">Vote</a>
+                        <div id="time" class="mx-1 text-info">2hr 30min</div>
+                        <a class="btn btn-primary">View</a>
                     </div>
                 </div>
             </div>
@@ -61,19 +61,19 @@ require approot.'/View/inc/Sidebar.php';
                 <div class="d-flex bg-secondary min-w-20 p-1 border-radius-3 card" style="align-items: center">
                     <div id="election-title" class="title">Welfare Board Election</div>
                     <div class="d-flex flex-column justify-center align-center">
-                        <div id="time" class="mr-1">2hr 30min</div>
-                        <a class="btn btn-primary">Vote</a>
+                        <div id="time" class="mx-1 text-info">2hr 30min</div>
+                        <a class="btn btn-primary">View</a>
                     </div>
                 </div>
                 <div class="d-flex bg-secondary min-w-20 p-1 border-radius-3 mt-1 card" style="align-items: center">
                     <div id="election-title" class="title">Welfare Board Election</div>
                     <div class="d-flex flex-column justify-center align-center">
-                        <div id="time" class="mr-1">2hr 30min</div>
-                        <a class="btn btn-primary">Vote</a>
+                        <div id="time" class="mx-1 text-info">2hr 30min</div>
+                        <a class="btn btn-primary">View</a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+<?php require approot.'/View/inc/footer.php';?>

@@ -1,3 +1,4 @@
+<?php //require approot.'/View/inc/VoterHeader.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,20 +23,22 @@
             <a href="/ezvote/Pages/contactUs">Contact</a>
         </div>
         <div class="nav-end">
-            <a href="<?php echo urlroot; ?>/View/Login"><button type="button">Login</button></a>
-            <a href="<?php echo urlroot; ?>/View/Register"><button id="trial">Register</button></a>
+            <a href="<?php echo urlroot; ?>/View/Login"><button type="button" style="background: rgb(6, 96, 152);border: none">Login</button></a>
+            <a href="<?php echo urlroot; ?>/View/Register"><button id="trial" style="background: rgb(6, 96, 152); border: none">Register</button></a>
         </div>
     </div>
 
-        <div class="bg-image">
-            <img src="<?php echo urlroot; ?>/img/welcome/4.jpeg" alt="" id="bg-image">
+    <div class="bg-image">
+        <img src="<?php echo urlroot; ?>/img/welcome/bg.jpg" alt="" id="bg-image">
            
+
               <h1 class="h1-txt">Simple and convenient <br> online voting platform</h1>
             <button type="submit" class="learn_more">Learn More</button>
         </div>
             </div>
         </div>
     </div>
+
     <!-- <svg id="opt_1" data-name="opt 1" xmlns="http://www.w3.org/2000/svg" width="1366" height="128" viewBox="0 0 1366 128" preserveAspectRatio="none">…</svg> -->
 
     <div class="flex-container">
