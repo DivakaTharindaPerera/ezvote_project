@@ -124,4 +124,8 @@
     public function pricing(){
         $this->view('pricing');
     }
+
+    public function home(){
+        $this->view('home');
+    }
 }
