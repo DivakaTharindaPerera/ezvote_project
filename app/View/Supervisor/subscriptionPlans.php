@@ -39,7 +39,7 @@
                                 <div class="sub-title">
                                     '.$name.'
                                 </div>
-                                <div class="text-xl text-danger ">
+                                <div class="text-xl text-info ">
                                     $'.$data['prices'][$key].'
                                 </div>
                                 <div class="text-md ">
