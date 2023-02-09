@@ -16,7 +16,7 @@ class System_manager extends Controller
             redirect('./dashboard');
         }else{
             $data =[];
-            $this->view('Sys_manager/sysmanager_login', $data);
+            $this->view('Sys_manager/Sysmanager_login', $data);
         }
     }
 
@@ -28,7 +28,7 @@ class System_manager extends Controller
             
             $sub_plans = $this->ManagerModel->getSubscriptionPlan($_SESSION['manager_ID']);
             $data = [$sub_plans];
-            $this->view('sys_manager/sysmanager_dashboard', $data);
+            $this->view('Sys_manager/sysmanager_dashboard', $data);
 
         } else {
             // print_r('no-login');
@@ -44,7 +44,7 @@ class System_manager extends Controller
                 $man_name = $this->ManagerModel->getManagerName($_SESSION['manager_ID']);
                 $_SESSION['name'] = $man_name[0]->name;
                 $data = [$sub_plans];
-                $this->view('sys_manager/sysmanager_dashboard', $data);
+                $this->view('Sys_manager/sysmanager_dashboard', $data);
             } else {
                 header("Location: ./login");
             }
@@ -56,7 +56,7 @@ class System_manager extends Controller
         if (!isset($_SESSION["UserId"])) {
             redirect('System_manager/login');
         } else {
-            $this->view('sys_manager/sysmanager_announcements');
+            $this->view('Sys_manager/sysmanager_announcements');
             // redirect('');
 
         }
