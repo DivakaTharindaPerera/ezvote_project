@@ -103,7 +103,9 @@ function edit(){
     for (var i = 0; i < inputs.length; i++) {
         inputs[i].disabled = false;
     }
+    inputs[0].focus();
     var btn = document.getElementById("editBtn");
+    btn.setAttribute("type","submit");
     btn.setAttribute("class", "btn btn-primary w-25");
     btn.setAttribute("onclick", "save()");
     btn.innerHTML = "<b>Save Changes</b>";

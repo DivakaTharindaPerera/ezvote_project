@@ -34,11 +34,9 @@
 
         </div>
         <div id="information" class="card-pane d-flex flex-column">
-            <div class="primary-title text-primary"><?php echo $data['electionRow']->Title ?></div>
-            <div class="sub-title text-center">By</div>
-            <div class="sub-title text-center"><?php echo $data['electionRow']->OrganizationName; ?></div>
-<!--            <input type='text' name="title" value="--><?php //echo $data['electionRow']->Title ?><!--" disabled>-->
-<!--            Organization: <input type="text" name="org" value="--><?php //echo $data['electionRow']->OrganizationName; ?><!--" disabled>-->
+            <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
+            Title: <input type='text' name="title" value="<?php echo $data['electionRow']->Title ?>" disabled>
+            Organization: <input type="text" name="org" value="<?php echo $data['electionRow']->OrganizationName; ?>" disabled>
             <div>
                 <div class="text-lg mb-1">Description</div>
                 <textarea name="desc" id="" cols="30" rows="10" class="border-1 w-100 border-radius-1" readonly style="resize: none">
@@ -76,14 +74,12 @@
             <div id="checks" class="d-flex flex-column card-pane justify-content-center align-items-center">
                 <div id="stat">
                     Status Visibality
-                    <img src="<?php echo urlroot;?>/public/img/tik.png" alt="" style="height: 30px;width: 30px">
-<!--                    <input type="checkbox" name="stat" id="" value="1" --><?php //if($data['electionRow']->StatVisibality == 1) echo "checked"; ?><!-- disabled > -->
+                    <input type="checkbox" name="stat" id="" value="1"<?php if($data['electionRow']->StatVisibality == 1) echo "checked"; ?> disabled >
                 </div>
                 <div id="nomi">
                     Self Nomination
-                    <img src="<?php echo urlroot;?>/public/img/tik.png" alt="" style="height: 30px;width: 30px">
-
-<!--                    <input type="checkbox" name="nomi" id="" value="1" --><?php //if($data['electionRow']->SelfNomination == 1) echo "checked"; ?><!-- disabled >-->
+                    
+                   <input type="checkbox" name="nomi" id="" value="1" <?php if($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled >
                     <?php 
                         if($data['electionRow']->SelfNomination == 1){
                             echo "
@@ -96,8 +92,7 @@
                 </div>
                 <div id="obj">
                     Objection Status
-                    <img src="<?php echo urlroot;?>/public/img/tik.png" alt="" style="height: 30px;width: 30px">
-<!--                    <input type="checkbox" name="stat" id="" value="1" --><?php //if($data['electionRow']->ObjectionStatus == 1) echo "checked"; ?><!-- disabled >-->
+                    <input type="checkbox" name="ostat" id="" value="1" <?php if($data['electionRow']->ObjectionStatus == 1) echo "checked"; ?> disabled >
                 </div>
             </div>
             
@@ -113,20 +108,20 @@
                             <div> <img src='".urlroot."/public/img/start.png' alt='' style='max-height: 40px;max-width:40px'></div>
                             <div class='justify-content-center text-lg mb-1'>Begin</div>
                             <div class='justify-content-start mb-1'>
-                                Date: <input type='date' id='EstartDate' name='EstartDate' class='date' value='".$data['electionRow']->ObjectionStartDate."' onchange='dateCheck()' required disabled>
+                                Date: <input type='date' id='EstartDate' name='OstartDate' class='date' value='".$data['electionRow']->ObjectionStartDate."' onchange='dateCheck()' required disabled>
                             </div>
                             <div class='justify-content-start mb-1'>
-                                &emsp14;Time: <input type='time' id='EstartTime' name='EstartTime' value='".$data['electionRow']->ObjectionStartTime."' class='time' onchange='timeCheck()' required disabled>
+                                &emsp14;Time: <input type='time' id='EstartTime' name='OstartTime' value='".$data['electionRow']->ObjectionStartTime."' class='time' onchange='timeCheck()' required disabled>
                             </div>
                     </div>
                     <div class='card'>
                             <div class='mt-1'> <img src='".urlroot."/public/img/end.png' alt='' style='max-height: 40px;max-width:40px'></div>
                             <div class='justify-content-center text-lg mb-1'>End</div>
                             <div class='justify-content-start mb-1'>
-                                Date: <input type='date' id='EendDate' name='EendDate' class='date' value='".$data['electionRow']->ObjectionEndDate."' onchange='dateCheck()' required disabled>
+                                Date: <input type='date' id='EendDate' name='OendDate' class='date' value='".$data['electionRow']->ObjectionEndDate."' onchange='dateCheck()' required disabled>
                             </div>
                             <div class='justify-content-start mb-1'>
-                                Time: <input type='time' id='EendTime' name='EendTime' class='time' value='".$data['electionRow']->ObjectionEndTime."' onchange='timeCheck()' required disabled>
+                                Time: <input type='time' id='EendTime' name='OendTime' class='time' value='".$data['electionRow']->ObjectionEndTime."' onchange='timeCheck()' required disabled>
                             <em id='out' style='color:red;'></em>
                             </div>&emsp14;
                     </div> 

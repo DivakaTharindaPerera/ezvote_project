@@ -386,4 +386,35 @@ class Elections extends Controller
             }
         }
     }
+
+    public function updateElection(){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $data=[
+            "id"=>trim($_POST['id']),
+            "title"=>trim($_POST['title']),
+            "org"=>trim($_POST['org']),
+            "desc"=>trim($_POST['desc']),
+
+            "esdate"=>trim($_POST['EstartDate']),
+            "eedate"=>trim($_POST['EendDate']),
+            "estime"=>trim($_POST['EstartTime']),
+            "eetime"=>trim($_POST['EendTime']),
+
+            "osdate"=>trim($_POST['OstartDate']),
+            "oedate"=>trim($_POST['OendDate']),
+            "ostime"=>trim($_POST['OstartTime']),
+            "oetime"=>trim($_POST['OendTime']),
+
+            "status"=>trim($_POST['stat']),
+
+            "nomi"=>trim($_POST['nomi']),
+            "nomidesc"=>trim($_POST['nomiDesc']),
+
+            "ostat"=>trim($_POST['ostat'])
+        ];
+
+        if($this->electionModel->updateElection($data)){
+            redirect('Pages/')
+        }
+    }
 }

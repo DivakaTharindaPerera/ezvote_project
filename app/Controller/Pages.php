@@ -103,12 +103,14 @@
         }
 
         public function viewMyElection($id){
-//            if(!isset($_SESSION["UserId"])){
-//                redirect('View/login');
-//            }else{
+           if(!isset($_SESSION["UserId"])){
+               redirect('View/login');
+           }else{
                 $electionRow = $this->electionModel->getElectionByElectionId($id);
-//                if($electionRow->Supervisor == $_SESSION["UserId"]){
-                    $data = [];
+               if($electionRow->Supervisor == $_SESSION["UserId"]){
+                    $data = [
+                        "ID" => $id,
+                    ];
                     
                     $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
                     $regVoterRow = $this->voterModel->getRegVotersByElectionId($id);
@@ -124,10 +126,10 @@
                     $data['partyRow'] = $partyRow;
                     
                     $this->view('Supervisor/viewMyElection',$data);
-//                }else{
-//                    echo " Forbidden Access";
-//                }
-//            }
+               }else{
+                   echo " Forbidden Access";
+               }
+           }
         }
 
         public function subscriptionPlans(){
