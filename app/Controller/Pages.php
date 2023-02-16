@@ -148,6 +148,7 @@
                     $positionRow = $this->positionModel->getElectionPositionByElectionId($id);
                     $partyRow = $this->partyModel->getPartiesByElectionId($id);
 
+                    $data['ID'] = $id;
                     $data['electionRow'] = $electionRow;
                     $data['candidateRow'] = $candidateRow;
                     $data['positionRow'] = $positionRow;
@@ -220,4 +221,5 @@
     public function Sysmanager(){
         $this->view('Sys_manager/Sysmanager_login');
     }
+
 }

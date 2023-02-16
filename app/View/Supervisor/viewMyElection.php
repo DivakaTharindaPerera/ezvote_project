@@ -26,10 +26,10 @@
         //     }
         // }
         ?>
-    <form action="" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2 overflow-y">
+    <form action="<?php echo urlroot; ?>/Elections/updateElection" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2 overflow-y" id="updateForm">
         <div id="btn panel" class="d-flex text-center">
-            <a href="#" class="btn btn-primary m-3"> <div>Candidates</div> </a>
             <a href="#" class="btn btn-primary m-3"> <div>Voters</div> </a>
+            <a href="<?php echo urlroot;?>/Pages/electionCandidates/<?php echo $data['ID']?>" class="btn btn-primary m-3"> <div>Candidates</div> </a>
             <a href="<?php echo urlroot;?>/Pages/viewObjections" class="btn btn-primary m-3"> <div>Objections</div> </a>
 
         </div>
@@ -131,11 +131,11 @@
                 }
             ?>
         </div>
-        <div class="text-center d-flex justify-content-end mb-1 mr-1" id="buttonContainer">
-        <button type="button" onclick="edit()" class="btn btn-primary w-20 py-1" id="editBtn">EDIT
-        </button>
-        </div>
+        
     </form>
+    <div class="text-center d-flex justify-content-end mb-1 mr-1" id="buttonContainer">
+        <button type="button" onclick="edit()" class="btn btn-primary w-30 py-1" id="editBtn">EDIT</button>
+    </div>
     </div>
 <script src="<?php echo urlroot; ?>/js/createElection.js"></script>
 <?php require approot . '/View/inc/footer.php'; ?>

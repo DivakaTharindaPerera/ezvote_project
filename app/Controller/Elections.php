@@ -414,7 +414,10 @@ class Elections extends Controller
         ];
 
         if($this->electionModel->updateElection($data)){
-            redirect('Pages/')
+            redirect('Pages/viewMyElection/'.$data['id']);
+        }else{
+            die('Something went wrong');
         }
     }
+
 }

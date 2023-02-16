@@ -150,7 +150,7 @@ class Election extends Controller{
                 ObjectionEndDate = :12,
                 ObjectionStartTime = :13,
                 ObjectionEndTime = :14,
-                NominationDescription = :15,
+                NominationDescription = :15
                 WHERE ElectionId = :16"
             );
 
@@ -173,11 +173,11 @@ class Election extends Controller{
 
         try {
             $this->db->execute();
-            $id = $this->db->lastInsertId();
-            return $id;
+            
+            return true;
             
         } catch (Exception $e) {
-            echo "Something went wrong";
+            echo $e;
             return false;
         }
     }
