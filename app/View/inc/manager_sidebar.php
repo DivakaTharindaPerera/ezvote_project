@@ -22,7 +22,7 @@
                <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
            <div class="profile">
-               <img src="boy.jpg" alt="profile_picture">
+               <img src="<?php echo urlroot; ?>/public/img/profile.png" alt="profile_picture">
                <h3><?php echo $_SESSION["name"];?></h3>
                <p>Blogger</p>
            </div>
@@ -37,25 +37,25 @@
                    </a>
                </li>
                <li>
-                   <a href="./../System_manager/dashboard">
+                   <a href="<?php echo urlroot; ?>/System_manager/dashboard">
                        <span class="icon"><i class="fas fa-desktop"></i></span>
                        <span class="item">My Dashboard</span>
                    </a>
                </li> 
                <li>
-                   <a href="./../subscription_plan/index">
+                   <a href="<?php echo urlroot; ?>/subscription_plan/index">
                        <span class="icon"><i class="fas fa-plan"></i></span>
                        <span class="item">Subscription Plans</span>
                    </a>
                </li>
                <li>
-                   <a href="./../subscription_plan/sales_subscription">
+                   <a href="<?php echo urlroot; ?>/subscription_plan/sales_subscription">
                        <span class="icon"><i class="fas fa-sale"></i></span>
                        <span class="item">Subscription Sales</span>
                    </a>
                </li>
                <li>
-                   <a href="./../System_manager/announcements">
+                   <a href="<?php echo urlroot; ?>/System_manager/announcements">
                        <span class="icon"><i class="fas fa-announcement"></i></span>
                        <span class="item">Announcements</span>
                    </a>
