@@ -1,3 +1,4 @@
+<?php //require approot.'/View/inc/VoterHeader.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="<?php echo urlroot; ?>/css/home.css">
+    <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>
 
     <title>ezVote</title>
 </head>
@@ -13,29 +15,95 @@
     <div class="nav-bar">
         <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
         <div class="links">
-            <a href="#">Home</a>
+            <a href="/ezvote/Pages/home">Home</a>
             <a href="#">Services</a>
-            <a href="#">Pricing</a>
+            <a href="/ezvote/Pages/pricing">Pricing</a>
             <a href="#">Target users</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact</a>
+            <a href="/ezvote/Pages/aboutUs">About Us</a>
+            <a href="/ezvote/Pages/contactUs">Contact</a>
         </div>
         <div class="nav-end">
-            <a href="<?php echo urlroot; ?>/View/Login"><button type="button">Login</button></a>
-            <a href="<?php echo urlroot; ?>/View/Register"><button id="trial">Register</button></a>
+  <div class="dropdown">
+  <button class="dropbtn">Login</button>
+  <div class="dropdown-content">
+  <a href="<?php echo urlroot; ?>/Pages/Sysmanager">Administrator</a>
+  <a href="<?php echo urlroot; ?>/View/Login">Other Users</a>
+  </div>
+</div>
+    <a href="<?php echo urlroot; ?>/View/Register"><button class="dropbtn" style="margin-top: -6px;">Register</button></a>
         </div>
     </div>
 
-        <div class="bg-image">
-            <img src="<?php echo urlroot; ?>/img/welcome/4.jpeg" alt="" id="bg-image">
+    <div class="bg-image">
+        <img src="<?php echo urlroot; ?>/img/welcome/bg.jpg" alt="" id="bg-image">
            
-              <h1 class="h1-txt">Simple and secure <br> online voting platform</h1>
+
+              <h1 class="h1-txt">Simple and convenient <br> online voting platform</h1>
             <button type="submit" class="learn_more">Learn More</button>
         </div>
             </div>
         </div>
     </div>
+
+    <!-- <svg id="opt_1" data-name="opt 1" xmlns="http://www.w3.org/2000/svg" width="1366" height="128" viewBox="0 0 1366 128" preserveAspectRatio="none">…</svg> -->
+
+    <div class="flex-container">
+    <br>
+    <h1 class="be_confident">We ensure that,</h1>
+<br>
+<div>
+</div>
+<div class="accessibility">
+    <div class="column1">
+    <h2>Voter Anonymity</h2>
+    <br>
     
+    <p>In our ezVote platform we ensure that your valuable vote is highly secure Without revealing to anyone. 
+        It helps to prevent speculation and misinformation from unofficial sources while counting is underway, 
+        and before official results are announced.</p>
+</div>
+
+<div class="column1">
+    <img src="<?php echo urlroot; ?>/img/welcome/anonymity.jpg" alt="accessibility" class="img_accessibility">
+</div>
+
+</div>
+
+<!-- ****************************************************************** -->
+<div class="accessibility">
+    <br>
+
+    <div class="column1">
+        <img src="<?php echo urlroot; ?>/img/welcome/impersonation1.jpg" alt="accessibility" class="img_accessibility">
+    </div>
+    
+
+    <div class="column1">
+        <h2>No Voter Impersonation</h2>
+        <br>
+    <p>Voter Impersonation or In-person voter fraud, is a form of electoral fraud in which a person who 
+        is eligible to vote in an election votes more than once, or a person who is not eligible to vote does 
+        so by voting under the name of an eligible voter. In our ezVote platform we completely ensure the No 
+        Voter Impersonation is included in your elections.</p>
+</div>
+</div>
+
+<!-- ****************************************************************** -->
+<div class="accessibility">
+    
+
+    <div class="column1">
+        <h2>Verification of Recorded Vote</h2>
+        <br>
+        <p>Voters and election organizers are able to verify the accuracy of online voting and check that 
+        the election ran smoothly in our ezVote Online voting Syste.</p>
+    </div>
+    <div class="column1">
+        <img src="<?php echo urlroot; ?>/img/welcome/impersonation.jpg" alt="accessibility" class="img_accessibility">
+    </div>
+</div>
+</div>
+
 <div class="flex-container">
     <br>
     <h1 class="be_confident">Be confident when you cast your ballots and throughout elections.</h1>
@@ -172,8 +240,8 @@
     <div class="column1">
     <h2>Key electronic voting features</h2>
     <br>
-    <p class="features">Never again worry about people voting twice or other forms of vote 
-        manipulation. Get results instantly. Dive deeper into vote statistics.</p>
+    <p class="features">Never again worry about vote 
+        manipulation.Get results instantly. Dive deeper into vote statistics.</p>
         <img src="<?php echo urlroot; ?>/img/welcome/key.jpg" alt="accessibility" class="feat">
 
 </div>
@@ -181,8 +249,8 @@
 <div class="column1">
     <h2>A reliable online voting tool for your group</h2>
     <br>
-    <p class="features">Run online elections among your group for a single important event. 
-        Or manage consistent, recurring votes.</p>
+    <p class="features">Run online elections among your group for important event. 
+        Or manage recurring votes.</p>
         <img src="<?php echo urlroot; ?>/img/welcome/reliability.webp" alt="accessibility" class="feat">
 
 </div>
@@ -229,7 +297,7 @@
             <div class="footer-col">
                 <h4>About</h4>
                 <ul>
-                    <li><a href="#">about us</a></li>
+                    <li><a href="/ezvote/Pages/aboutUs">about us</a></li>
                     <li><a href="#">our services</a></li>
                     <li><a href="#">privacy policy</a></li>
                 </ul>
@@ -239,11 +307,6 @@
                 <ul>
                     <li><a href="#">Login</a></li>
                     <li><a href="#">Support</a></li>
-                    <!-- <li><a href="#">FAQ</a></li>
-                    <li><a href="#">shipping</a></li>
-                    <li><a href="#">returns</a></li>
-                    <li><a href="#">order status</a></li>
-                    <li><a href="#">payment options</a></li> -->
                 </ul>
             </div>
             <div class="footer-col">
@@ -251,18 +314,18 @@
                 <ul>
                     <li><a href="#">Meetings</a></li>
                     <li><a href="#">Support</a></li>
-                    <!-- <li><a href="#">shoes</a></li>
-                    <li><a href="#">dress</a></li> -->
                 </ul>
-            </div>"fab fa-linkedin-in"></i></a>
-                </div>
+            </div>
+                
             <div class="footer-col">
                 <h4>follow us</h4>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
+            </div>
             </div>
     </div>
 

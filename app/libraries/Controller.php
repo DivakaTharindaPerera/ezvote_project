@@ -1,5 +1,8 @@
 <?php
-    session_start();
+
+
+//    session_start();
+
     class Controller{
 
 
@@ -42,8 +45,8 @@
                             $_SESSION["fname"] = $user->Fname;
                             $_SESSION["lname"] = $user->Lname;
                             $_SESSION["email"] = $user->Email;
-                            
-                            $this->view('dashboard');
+
+                            header('location: '.urlroot.'/Pages/dashboard');
                         }else{
                             $data = [
                                 'error' => "invalid password",
@@ -63,7 +66,8 @@
             redirect('View/login');
         }
 
-        public function isLoggedIn(){
+        public function isLoggedIn(): bool
+        {
             if(isset($_SESSION["UserId"])){
                 return true;
             }else{
@@ -81,5 +85,18 @@
             }
         }
 
+        
 
+        
+        
+        
+        //     public function index() {
+        //         $students = $this->model->getNominationDetails();
+        
+        //         include approot.'/view/Candidate/candidateProfile.php';
+            
+        // }
     }
+
+
+    

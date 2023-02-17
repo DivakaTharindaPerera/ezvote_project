@@ -1,0 +1,39 @@
+.bg_about_us {
+    background-image: url(/ezvote/public/img/welcome/about_us.jpg);
+    background-size: cover;
+    height: 600px;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 94rem;
+    margin-top: 0px;
+
+  }
+
+  .bg_contact_us {
+    background-image: url(/ezvote/public/img/welcome/bg3.jpg);
+    background-size: cover;
+    height: 600px;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 94rem;
+  }
+
+  .bg_pricing {
+    background-image: url(/ezvote/public/img/welcome/pricing.jpg);
+    background-size: cover;
+    height: 600px;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 94rem;
+  }
+
+  .bg_home {
+    background-image: url(/ezvote/public/img/welcome/about.jpg);
+    background-size: cover;
+    height: 600px;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 94rem;
+  }
+
+
