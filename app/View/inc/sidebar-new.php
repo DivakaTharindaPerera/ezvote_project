@@ -22,9 +22,9 @@
                 <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
             <div class="profile">
-                <img src="boy.jpg" alt="profile_picture">
-                <h3>John Doe</h3>
-                <p>Blogger</p>
+                <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" alt="profile_picture">
+<!--                <h3>John Doe</h3>-->
+<!--                <p>Blogger</p>-->
             </div>
 
 
@@ -46,7 +46,7 @@
                 <!-- create election -->
                 <li>
                     <a href="<?php echo urlroot; ?>/View/Createelection">
-                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="icon"><i class="fas fa-vote-yea"></i></span>
                         <span class="item">Create Election</span>
                     </a>
                 </li>
@@ -55,7 +55,7 @@
 
                 <li>
                     <a href="<?php echo urlroot; ?>/View/ViewMyElections">
-                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="icon"><i class="fas fa-clipboard"></i></span>
                         <span class="item">View My Elections</span>
                     </a>
                 </li>
@@ -76,7 +76,7 @@
                 <!-- subscription plans -->
                 <li>
                     <a href="<?php echo urlroot; ?>/View/subscriptionPlans">
-                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="icon"><i class="fas fa-dollar-sign"></i></span>
                         <span class="item">Subscription Plans</span>
                     </a>
                 <li>

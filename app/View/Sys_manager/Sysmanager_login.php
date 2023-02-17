@@ -22,7 +22,7 @@
                 <div class="text-s mx-1">
                     <a href="">Forgotten Password?</a>
                 </div>
-                <div class="d-flex justify-content-center mt-1 px-1">
+                <div class="d-flex justify-content-center mt-1 px-1 mb-1">
                     <button type="submit" class="btn btn-primary" style="min-width: 250px">SIGN IN</button>
                 </div>
                 <!-- <div class="d-flex justify-content-center mt-1 px-1">
