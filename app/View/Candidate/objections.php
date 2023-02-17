@@ -6,14 +6,14 @@
 
 <div class="border-2 border-dark border-radius-5 w-45 p-3 bg-light" style="margin-left:200px; ">
 
-<div class="card w-100" style="box-shadow: 5px 10px ">
+<div class="card w-100" style="box-shadow: 5px 5px #888888">
 <h3 class="" style="margin-top:20px;">Lack of experience or qualifications</h3>
 <p class="">Some voters may object to a candidate's lack of experience, education, or expertise in the area they are running for.</p>
 <button class="btn bg-primary text-white text-1xl w-25 " style="margin-left:200px; "  onclick="openPopup()">Respond</button>
 
 </div>
 
-<div class="card w-100" style="box-shadow: 5px 10px">
+<div class="card w-100" style="box-shadow: 5px 5px #888888">
 <h3 class="" style="margin-top:20px;">Personal behavior and reputation</h3>
 <p class="">Some voters may object to a candidate's personal behavior or reputation, such as allegations of unethical or criminal behavior.</p>
 <button class="btn bg-primary text-white text-1xl w-25" style="margin-left:200px;"  onclick="openPopup()">Respond</button>
@@ -22,7 +22,7 @@
 <div class="dialog-box-outer" id="popup">
                                     <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
                                         <div class="title">My respond</div>
-                                        <form action="/ezvote/Voters/submitObjections" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start">
+                                        <form action="#" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start">
                                            
                                             <div class="d-flex flex-column my-1 w-100">
                                                 <label for="Description" class="mr-1 text-left text-md">Description</label>

@@ -4,7 +4,7 @@
 
         <h2 class="" style="margin-left:200px; margin-top:30px;">Discussion Forum</h2>
 
-        <div class="border-2 border-dark border-radius-5 m-1 p-1 bg-light" style="width:800px; margin-left:250px; box-shadow: 5px 10px #888888">
+        <div class="border-2 border-dark border-radius-5 m-1 p-1 bg-light" style="width:800px; margin-left:250px; box-shadow: 5px 5px #888888">
         
         <div class="d-flex">
         <img src="<?php echo urlroot; ?>/img/welcome/boy2.jfif" alt="Profile image" class="border-radius-13" style="width:100px; height:100px;"/>
@@ -19,7 +19,7 @@
         
         </div>
 
-        <div class="border-2 border-dark border-radius-5 m-1 p-1 bg-light" style="width:800px; margin-left:250px; box-shadow: 5px 10px #888888">
+        <div class="border-2 border-dark border-radius-5 m-1 p-1 bg-light" style="width:800px; margin-left:250px; box-shadow: 5px 5px #888888">
         
         <div class="d-flex">
         <img src="<?php echo urlroot; ?>/img/welcome/girl.jpg" alt="Profile image" class="w-10 h-50 border-radius-13" style="width:100px; height:100px;"/>
@@ -34,7 +34,7 @@
         
         </div>
 
-        <div class="border-2 border-dark border-radius-5 m-1 p-1 bg-light" style="width:800px; margin-left:250px; box-shadow: 5px 10px #888888">
+        <div class="border-2 border-dark border-radius-5 m-1 p-1 bg-light" style="width:800px; margin-left:250px; box-shadow: 5px 5px #888888">
         
         <div class="d-flex">
         <img src="<?php echo urlroot; ?>/img/welcome/girl2.jpg" alt="Profile image" class="w-10 h-50 border-radius-13" style="width:100px; height:100px;"/>

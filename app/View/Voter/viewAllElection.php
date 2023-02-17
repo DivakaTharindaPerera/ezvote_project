@@ -73,7 +73,6 @@ require approot.'/View/inc/sidebar-new.php';
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

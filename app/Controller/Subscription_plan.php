@@ -70,6 +70,7 @@ class Subscription_plan extends Controller
             }
             else{
                 header("Location: /ezvote/Subscription_plan/create_process");
+
             }
 
         }
@@ -127,7 +128,9 @@ class Subscription_plan extends Controller
                 header("Location: /ezvote/System_manager/dashboard");
             }
             else{
+
                 header("Location: /ezvote/System_manager/dashboard");
+
             }
 
         }

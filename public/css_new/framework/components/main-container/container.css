@@ -12,5 +12,6 @@
     min-height: 92%;
     max-height: 92%;
     overflow-x: auto;
+    overflow-y: auto;
     background-color: var(--secondary);
 }

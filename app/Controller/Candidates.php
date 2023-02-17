@@ -180,8 +180,16 @@ $validatedData = [
         $this->view('Candidate/conferences');
     }
 
+    public function my_party()
+    {
+        $this->view('Candidate/my_parties');
+    }
 
 
+    public function election_results()
+    {
+        $this->view('Candidate/election_results');
+    }
     // public function view() {
     //     // Load the data for the viewElection.php page
     //     $data = $this->loadData();
