@@ -35,7 +35,6 @@ class System_manager extends Controller
             $email = $_POST['email'];
             $pwd = $_POST['pwd'];
             
-
             $hashed = $this->ManagerModel->verifyLogin($email, $pwd);
 
             if (password_verify($pwd, $hashed)) {

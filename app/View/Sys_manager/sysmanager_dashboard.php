@@ -10,7 +10,7 @@
 <div class="main-container">
     <div class="title">Activities</div>
     <div class="w-80">
-        <table class="table border border-radius-2 border-primary w-95 mt-1">
+        <table class="table border-2 border-radius-2 border-primary w-95 mt-1">
             <tbody>
                 <?php
                 $arrlength = count($data, COUNT_RECURSIVE);
@@ -19,9 +19,9 @@
                     echo '<tr>
                         <td class="td-1">'.$data[0][$x]-> Description.'</td>
                         <td class="td-2">'.$data[0][$x]-> Date .'</td>
-                        <td class="td-3">
+                        <td class="td-3"><a href="/ezvote/subscription_plan/edit_subscription/'.$data[0][$x]->PlanID.'">
                             <button class="btn btn-info">Details</button>
-                        </td>
+                        </td></a>
                     </tr>';
                 }
                 // foreach($data as $row){

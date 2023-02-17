@@ -43,7 +43,7 @@ require approot.'/View/inc/sidebar-new.php';
                     <div id="election-title" class="title">Welfare Board Election</div>
                     <div class="d-flex flex-column justify-center align-center">
                         <div id="time" class="mx-1 text-info">2hr 30min</div>
-                        <a class="btn btn-primary">View</a>
+                        <a class="btn btn-primary" href="<?php echo urlroot; ?>/Voters/election">View</a>
                     </div>
                 </div>
                 <div class="d-flex bg-secondary min-w-20 p-1 border-radius-3 mt-1 card" style="align-items: center">

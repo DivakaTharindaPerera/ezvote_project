@@ -100,7 +100,7 @@ require approot.'/View/inc/sidebar-new.php';
                                             </form>
                                         </div>
                                     </div>
-                                    <button class=" btn btn-primary">View</button>
+                                    <a href="<?php echo urlroot;?>/Voters/viewObjections" class="btn btn-primary">View</a>
                                 </div>
                             </div>
                             <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">

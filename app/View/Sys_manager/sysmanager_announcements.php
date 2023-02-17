@@ -17,7 +17,7 @@
 <!-- <body> -->
 
 <div class="main-container" >
-    <div class="d-flex flex-column w-75 ">
+    <div class="d-flex flex-column w-75 mb-2">
 
 <div class="sysmanager">
     <h2 class="title">Announcements</h2>
@@ -111,7 +111,7 @@
 <div class="d-flex justify-content-evenly">
     <form action="#" method="POST" class="d-flex w-100 justify-content-evenly">
         <div class="d-flex justify-content-start">
-        <a href="/ezvote/System_manager/announcements">
+        <a href="/ezvote/System_manager/dashboard">
             <button class="btn btn-primary" type="button" class="button" id="send">SEND</button>
         </a>
         </div>

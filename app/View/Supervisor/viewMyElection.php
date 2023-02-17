@@ -39,7 +39,7 @@
             Organization: <input type="text" name="org" value="<?php echo $data['electionRow']->OrganizationName; ?>" disabled>
             <div>
                 <div class="text-lg mb-1">Description</div>
-                <textarea name="desc" id="" cols="30" rows="10" class="border-1 w-100 border-radius-1" readonly style="resize: none">
+                <textarea name="desc" id="" cols="30" rows="10" class="border-1 w-100 border-radius-1">
                 <?php echo $data['electionRow']->Description; ?>
                 </textarea>
             </div>
@@ -74,12 +74,14 @@
             <div id="checks" class="d-flex flex-column card-pane justify-content-center align-items-center">
                 <div id="stat">
                     Status Visibality
+
                     <input type="checkbox" name="stat" id="" value="1"<?php if($data['electionRow']->StatVisibality == 1) echo "checked"; ?> disabled >
                 </div>
                 <div id="nomi">
                     Self Nomination
                     
                    <input type="checkbox" name="nomi" id="" value="1" <?php if($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled >
+
                     <?php 
                         if($data['electionRow']->SelfNomination == 1){
                             echo "
@@ -92,7 +94,9 @@
                 </div>
                 <div id="obj">
                     Objection Status
+
                     <input type="checkbox" name="ostat" id="" value="1" <?php if($data['electionRow']->ObjectionStatus == 1) echo "checked"; ?> disabled >
+
                 </div>
             </div>
             

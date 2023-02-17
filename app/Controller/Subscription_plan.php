@@ -8,9 +8,6 @@ class Subscription_plan extends Controller
         $this->SubscriptionModel = $this->model('Subscription');
     }
 
-    // public function getSubscriptionPlan(){
-    //     $this->model('Subscription')->getSubscriptionPlan();
-    // }
     public function index()
     {
 
@@ -70,10 +67,11 @@ class Subscription_plan extends Controller
             $res = $this->SubscriptionModel->insertSubscriptionPlan($name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID);
 
             if($res){
-                header("Location: /ezvote/system_manager/dashboard");
+                header("Location: /ezvote/System_manager/dashboard");
             }
             else{
-                header("Location: /ezvote/Subscription_plan/");
+                header("Location: /ezvote/Subscription_plan/create_process");
+
             }
 
         }
@@ -128,10 +126,12 @@ class Subscription_plan extends Controller
 
 
             if($res){
-                header("Location: /ezvote/system_manager/dashboard");
+                header("Location: /ezvote/System_manager/dashboard");
             }
             else{
-                header("Location: ../View/Sys_manager/create_subscription.php");
+
+                header("Location: /ezvote/System_manager/dashboard");
+
             }
 
         }
@@ -150,7 +150,18 @@ class Subscription_plan extends Controller
             redirect('System_manager/login');
         } else {
             $data = $this->SubscriptionModel ->viewSubscriptionPlan($plan);
+            
             $this->view('Sys_manager/edit_subscription',$data );
+            
+        }
+    }
+
+    public function delete_subscription($plan){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $data = $this->SubscriptionModel ->deleteSubscriptionPlan($plan);
+            redirect('Subscription_plan/index');
             
         }
     }

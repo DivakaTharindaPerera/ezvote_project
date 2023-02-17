@@ -8,7 +8,7 @@ table{
     border: 2rem;
 }
 th{
-    background-color: var(--red-8);
+    background-color: var(--black);
     color: var(--white);
 }
 tr{

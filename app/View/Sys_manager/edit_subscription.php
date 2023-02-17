@@ -17,12 +17,12 @@
 <div class="main-container" id="text-box1">
 <div class="title text-center">Edit subscription Plan</div>
 <div class="min-w-85 min-h-85">
-    <form class="d-flex flex-column min-h-85 min-w-95 py-1 mb-1 " action="./create_process" method="POST">
+    <form class="d-flex flex-column min-h-85 min-w-95 py-1 mb-1 " action="../update_process/<?php echo $data[0]->PlanID ;?>" method="POST">
         <label for="name">Name</label><br>
-        <input class="h-100 border border-primary" type="text" id="name" name="name" placeholder="Name of the subscription plan"><br><br>
+        <input class="h-100 border border-primary" type="text" id="name" name="name" value="<?php echo $data[0]->PlanName; ?>" placeholder="<?php echo $data[0]->PlanName ?>"><br><br>
 
         <label for="description">Description</label><br>
-        <input class="h-100 border border-primary" type="description" id="description" name="description" placeholder="Description of the subscription plan"><br><br>
+        <input class="h-100 border border-primary" type="description" id="description" value="<?php echo $data[0]->Description; ?>" name="description" placeholder="<?php echo $data[0]->Description ?>"><br><br>
 
         <div class="free-div">
             <input type="radio" id="free" name="duration" onclick="javascript:yesnoCheck();">
@@ -32,7 +32,7 @@
             <input type="radio" id="free-2" name="duration" onclick="javascript:yesnoCheck();" checked>
             <label id="lable-2" for="price">Price ($)</label>
             <div class="w-10">
-            <input class="w-5 h-5 border border-primary" type="text" id="price" name="price">
+            <input class="w-5 h-5 border border-primary" type="text" id="price" value="<?php echo $data[0]->Price ?>" name="price" placeholder="<?php echo $data[0]->Price ?>">
             </div>
 
 
@@ -56,17 +56,17 @@
 
         <label id="text-3" for="day">days</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" id="day" name="day">
+        <input class="w-100 bg-primary" type="number" id="day" value="<?php echo $data[0]->DurationDate ?>" name="day" placeholder="<?php echo $data[0]->DurationDate ?>">
         </div>
 
         <label id="text-4" for="month">months</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" id="month" name="month">
+        <input class="w-100 bg-primary" type="number" id="month" value="<?php echo $data[0]->DurationMonth ?>" name="month" placeholder="<?php echo $data[0]->DurationMonth ?>">
         </div>
 
         <label id="text-5" for="year">years</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" id="year" name="year">
+        <input class="w-100 bg-primary" type="number" id="year" value="<?php echo $data[0]->DurationYear ?>" name="year" placeholder="<?php echo $data[0]->DurationYear ?>">
         </div>
 
         <br>
@@ -81,7 +81,7 @@
             
                 <label id="label-4" for="cand_limit">Limit No of Candidates per election</label>
                 <div class="w-25 border border-primary">
-                <input type="text" id="box-1" name="box-1" placeholder="enter limit....." disabled>
+                <input type="text" id="box-1" value="<?php echo $data[0]->CandidateLimit ?>" name="box-1" placeholder="<?php echo $data[0]->CandidateLimit ?>" disabled>
                 </div>
                 <br><br>
                 <hr>
@@ -90,7 +90,7 @@
                 <input type="checkbox" id="voter" name="voter_limit" onclick="javascript:disableInput2();">
                 <label id="label-5" for="voter_limit">Limit No of voters per election</label>
                 <div class="w-25 border border-primary">
-                <input type="text" id="box-2" name="box-2" placeholder="enter limit....." disabled>
+                <input type="text" id="box-2" value="<?php echo $data[0]->VotersLimit ?>" name="box-2" placeholder="<?php echo $data[0]->VotersLimit ?>" disabled>
                 </div>
                 <br><br>
                 <hr>
@@ -99,7 +99,7 @@
                 <input type="checkbox" id="election" name="election_limit"  onclick="javascript:disableInput3();">
                 <label id="label-6" for="election_limit">Limit No of active elections</label>
                 <div class="w-25 border border-primary">
-                <input type="text" id="box-3" name="box-3" placeholder="enter limit....." disabled>
+                <input type="text" id="box-3" value="<?php echo $data[0]->ElectionLimit ?>" name="box-3" placeholder= "<?php echo $data[0]->ElectionLimit ?>" disabled>
                 </div>
                 <br><br>
             </div>
@@ -120,7 +120,7 @@
 </form>
 </div>
 </div>
-<script src="../public/js/disableInput.js"></script>
+<script src="../../public/js/disableInput.js"></script>
 <?php require approot . '/View/inc/footer.php'; ?>
 <!-- 
 </body>

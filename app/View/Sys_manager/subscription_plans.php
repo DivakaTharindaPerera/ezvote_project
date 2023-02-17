@@ -15,13 +15,13 @@
 
 <body> -->
 
-<div class="main-container">
+<div class="main-container max-h-85">
     <div class="w-75 justify-content-center align-items-center">
-    <div class="d-flex flex-column min-h-85 min-w-95"> 
-    <h2 class="title">Subscription Plans</h2>
+    <div class="d-flex flex-column min-w-95"> 
+    <h2 class="title text-center">Subscription Plans</h2>
     <div class="d-flex justify-content-center align-items-center my-1">
-    <a href="create_subscription">
-        <button class="btn btn-primary my-1" type="button">
+    <a href="/ezvote/subscription_plan/create_subscription">
+        <button class="btn btn-primary justify-content-center align-items-center" type="button">
             Create new plan
         </button>
     </a>
@@ -42,7 +42,7 @@
         <div class="my-3 d-flex mr-5">
         <a href="#">
             <button class="btn btn-primary">SEARCH</button></a>
-            <div class="d-flex text-center align-items-center text-md ml-2">FILTER
+            <div class="d-flex text-center align-items-center text-md ml-3">FILTER
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
     </div> -->
 
     <div>
-        <table class="table border border-radius-2 border-primary w-95">
+        <table class="table border border-radius-2 border-primary w-95 h-75">
             <!-- <div class="my-1"> -->
                 <tbody>
 
@@ -78,9 +78,9 @@
 
                                     <button class="btn btn-info ml-5">Details</button>
                                     </td></a>
-                                    <td class="td-4">
-                                    <button class="btn btn-danger mr-1" ">Delete</button>
-                                    </td>
+                                    <td class="td-4"><a href="delete_subscription/'.$data[0][$x]->PlanID.'">
+                                    <button class="btn btn-danger mr-1">Delete</button>
+                                    </td></a>
                             </tr>
                             
                             <script>
