@@ -36,6 +36,4 @@
         </div>
     </div>
 </div>
-
-
 <?php require approot.'/View/inc/footer.php'; ?>

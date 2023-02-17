@@ -10,7 +10,7 @@
 <div class="main-container">
     <div class="title">Activities</div>
     <div class="w-80">
-        <table class="table border border-radius-2 border-primary w-95 mt-1">
+        <table class="table border-2 border-radius-2 border-primary w-95 mt-1">
             <tbody>
                 <?php
                 $arrlength = count($data, COUNT_RECURSIVE);

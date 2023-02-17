@@ -22,9 +22,9 @@
                <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
            <div class="profile">
-               <img src="boy.jpg" alt="profile_picture">
-               <h3><?php echo $_SESSION["name"];?></h3>
-               <p>Blogger</p>
+               <img src="<?php echo urlroot; ?>/img/sys_manager.png" alt="profile_picture">
+<!--               <h3>--><?php //echo $_SESSION["name"];?><!--</h3>-->
+<!--               <p>Blogger</p>-->
            </div>
 
 
@@ -44,19 +44,19 @@
                </li> 
                <li>
                    <a href="./../subscription_plan/index">
-                       <span class="icon"><i class="fas fa-plan"></i></span>
+                       <span class="icon"><i class="fas fa-dollar-sign"></i></span>
                        <span class="item">Subscription Plans</span>
                    </a>
                </li>
                <li>
                    <a href="./../subscription_plan/sales_subscription">
-                       <span class="icon"><i class="fas fa-sale"></i></span>
+                       <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
                        <span class="item">Subscription Sales</span>
                    </a>
                </li>
                <li>
                    <a href="./../System_manager/announcements">
-                       <span class="icon"><i class="fas fa-announcement"></i></span>
+                       <span class="icon"><i class="fas fa-bullhorn"></i></i></span>
                        <span class="item">Announcements</span>
                    </a>
                </li>
