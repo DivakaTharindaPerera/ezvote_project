@@ -420,4 +420,51 @@ class Elections extends Controller
         }
     }
 
+    public function addSingleCandidate(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $data = [
+                    'electionId' => trim($_POST['id']),
+                    'candidateName' => trim($_POST['candidateName']),
+                    'candidateEmail' => trim($_POST['candidateEmail']),
+                    'positionId' => trim($_POST['positionId']),
+                    'partyId' => trim($_POST['party'])
+                ];
+                 
+                $ElectionData = $this->electionModel->findElectionById($data['electionId']);
+                $PartyData = $this->partyModel->getPartyById($data['partyId']);
+
+                if ($this->userModel->findUserByEmail($data['candidateEmail'])) {
+                    $user = $this->userModel->getUserByEmail($data['candidateEmail']);
+                    $data['userId'] = $user->UserId;
+                    if ($id = $this->candidateModel->insertRegCandidate($data)) {
+                        $data2 = [
+                            'email' => $data['candidateEmail'],
+                            'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                            'body' => "You have been added as a candidate representing the party ".$PartyData->partyName." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account to access the election candidate panel."
+                        ];
+                        $this->emailModel->sendEmail($data2);
+
+                        redirect('Pages/electionCandidates/'.$data['electionId']);
+                    } 
+                }else{
+                    if ($id = $this->candidateModel->insertUnregCandidate($data)) {
+                        $data2 = [
+                            'email' => $data['candidateEmail'],
+                            'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                            'body' => "You have been added as a candidate representing the party ".$PartyData->partyName." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please create an account in ezvote.lk to access the election."
+                        ];
+                        $this->emailModel->sendEmail($data2);
+
+                        redirect('Pages/electionCandidates/'.$data['electionId']);
+                    } 
+                }
+            }
+        }
+        
+    }
+
 }
