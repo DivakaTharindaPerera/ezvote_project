@@ -210,4 +210,9 @@
 
         $this->view('home');
     }
+
+    public function targetUsers(){
+        $this->view('target_users');
+    }
+
 }
