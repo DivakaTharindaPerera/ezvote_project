@@ -26,7 +26,7 @@
   <div class="dropdown">
   <button class="dropbtn">Login</button>
   <div class="dropdown-content">
-  <a href="#">Administrator</a>
+  <a href="<?php echo urlroot; ?>/Pages/Sysmanager">Administrator</a>
   <a href="<?php echo urlroot; ?>/View/Login">Other Users</a>
   </div>
 </div>

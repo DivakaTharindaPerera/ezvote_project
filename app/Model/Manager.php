@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class Manager{
     private $db;
 
@@ -16,7 +16,7 @@ class Manager{
         $row = $this->db->single();
         $hashed = ($row-> Password);
         $_SESSION['manager_ID'] = $row->ManagerID;
-        // print_r($_SESSION['manager_ID']);
+        // print_r($_SESSION['manager_ID']);die();
         $_SESSION['fname'] = $row->Name;
         return $hashed;
 

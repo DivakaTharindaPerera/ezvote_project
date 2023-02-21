@@ -39,6 +39,12 @@ class Objection extends Model
 //        }
 //        $this->db->execute();
 //    }
+    public function DeleteObjection($id)
+    {
+        $this->db->query('DELETE FROM objection WHERE ObjectionID=:ObjectionID');
+        $this->db->bind(':ObjectionID',$id);
+        $this->db->execute();
+}
 
     /**
      * @return mixed
