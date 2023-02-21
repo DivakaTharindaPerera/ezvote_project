@@ -35,5 +35,29 @@
     background-repeat: no-repeat; 
     width: 94rem;
   }
+  
+  .bg_target_users {
+    background-image: url(/ezvote/public/img/welcome/target_users.jpg);
+    background-size: cover;
+    height: 600px;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 94rem;
+    padding-top:-100px;
+    filter: brightness(70%);
+  }
 
+  .bg_imgs {
+    /* background-image: url(/ezvote/public/img/welcome/pricing.jpg); */
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    filter: brightness(70%);
+    /* display: block; */
 
+    }
+
+    /* .bg_imgs:hover{
+       background-color: white;
+    transition: background-color 0.5s ease;
+    } */

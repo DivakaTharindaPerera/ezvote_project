@@ -218,6 +218,12 @@
         $this->view('home');
     }
 
+
+    public function targetUsers(){
+        $this->view('target_users');
+    
+    }
+    
     public function Sysmanager(){
         $this->view('Sys_manager/Sysmanager_login');
     }
