@@ -8,7 +8,7 @@
 //                require_once(approot."/View/topnavbar.php");
 //            ?>
 <!--    </div>-->
-    <div class="main-container">
+    <div class="main-container h-100">
         <?php
         // echo $data['electionRow']->ElectionId."<br>".$data['electionRow']->Title."<br>";
 
@@ -26,10 +26,10 @@
         //     }
         // }
         ?>
-    <form action="<?php echo urlroot; ?>/Elections/updateElection" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2 overflow-y" id="updateForm">
+    <form action="<?php echo urlroot; ?>/Elections/updateElection" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2 w-100 overflow-y" id="updateForm">
         <div id="btn panel" class="d-flex text-center">
             <a href="#" class="btn btn-primary m-3"> <div>Voters</div> </a>
-            <a href="<?php echo urlroot;?>/Pages/electionCandidates/<?php echo $data['ID']?>" class="btn btn-primary m-3"> <div>Candidates</div> </a>
+            <a href="<?php echo urlroot;?>/Pages/electionCandidates/<?php echo $data['ID']?>" class="btn btn-primary m-3"> <div>Candidates & Positions</div> </a>
             <a href="<?php echo urlroot;?>/Pages/viewObjections" class="btn btn-primary m-3"> <div>Objections</div> </a>
 
         </div>

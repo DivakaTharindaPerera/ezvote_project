@@ -463,8 +463,19 @@ class Elections extends Controller
                     } 
                 }
             }
-        }
-        
+        }   
     }
 
+    public function removeCandidate($id,$eid){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($this->candidateModel->deleteCandidate($id)){
+                redirect('Pages/electionCandidates/'.$eid);
+            }else{
+                die('<h1>Something went wrong<h1>');
+            }
+        }
+
+    }
 }

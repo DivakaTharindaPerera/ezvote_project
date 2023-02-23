@@ -70,4 +70,20 @@ class Candidate extends Controller{
             echo "Something went wrong :".$e->getMessage();
         }
     }
+
+    public function deleteCandidate($id){
+        $this->db->query(
+            "DELETE FROM Candidate
+            WHERE candidateId = :1
+            "
+        );
+        $this->db->bind(':1', $id);
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+            return false;
+        }
+    }
 }
