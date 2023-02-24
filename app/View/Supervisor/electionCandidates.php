@@ -36,18 +36,31 @@
                 </form>
             </div>
             <div id="popup-d" class="bg-secondary h-50 w-50 text-center" >
-                
-                <div class="d-flex flex-column">
-                    <div class="d-flex fle m-1 p-1">
-                     <input type="text" name="cName" id="cEditName">
+                <form action="<?php echo urlroot ?>/Elections/updateCandidate" method="post">
+                    <div class="d-flex flex-column">
+                        <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
+                        <input type="hidden" name="cId" id="cEditId">
+                        <div class="d-flex fle m-1 p-1">
+                        <label for="cName" class="text-xl">Name: </label><input type="text" name="cName" id="cEditName">
+                        </div>
+                        <div class="d-flex m-1 p-1">
+                        <label for="cEmail" class="text-xl">Email: </label> <input type="text" name="cEmail" id="cEditEmail">
+                        </div>
+                        <div class="m-1">
+                        Party:  
+                        <select name="cParty" id="cEditPartyList" class="bg-secondary border border-1 border-radius-1 w-25 text-right px-1">
+                            <?php
+                                foreach($data['partyRow'] as $party){
+                                    echo "<option value='".$party->partyId."'>".$party->partyName."</option>";
+                                }
+                            ?>
+                        </select>
+                        </div>
                     </div>
-                    <div class="d-flex m-1 p-1">
-                     <input type="text" name="cEmail" id="cEditEmail">
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Update</b></button>               
-                <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
+                    
+                    <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Update</b></button>               
+                    <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
+                </form>
             </div>
             <div class="m-3 d-flex flex-column p-1 bg-blue-10 border-radius-2">
             <?php 
@@ -71,15 +84,16 @@
                                 
                                 if($candidate->positionId == $position->ID){
                                     $i++;
-                                    echo "<div class='d-flex bg-orange-10 m-1 p-1 border-radius-2'>
-                                        <a href='".urlroot."/Elections/removeCandidate/".$candidate->candidateId."/".$data['ID']."'><span class='icon mr-1'><i class='fa-sharp fa-solid fa-trash'></i></span></a>
-                                        <a href='#' id='edit-btn'><span class='icon mr-1'><i class='fa-sharp fa-solid fa-pen'></i></span></a>
-                                        <h4 class='mr-auto'>".$candidate->candidateName." - 
-                                        ".$candidate->description."
-                                        image</h4>
+                                    echo "<div class='d-flex bg-orange-10 m-1 p-1 border-radius-2' id='$candidate->candidateId'>
+                                        <input type='hidden' value='".$candidate->candidateId."'>
+                                        <input type='hidden' value='".$candidate->candidateEmail."'>
+                                        <a href='".urlroot."/Elections/removeCandidate/".$candidate->candidateId."/".$data['ID']."' class='btn btn-danger'><i class='fa-sharp fa-solid fa-trash'></i></a>
+                                        <button class='btn btn-primary ml-1 mr-1' id='".$candidate->candidateId."' onclick='popupfunc(this.id)'><i class='fa-sharp fa-solid fa-pen'></i></button>
+                                        <h4 class='mr-auto '>".$candidate->candidateName."</h4>
                                         <h4 class='ml-auto'>";
                                         foreach($data['partyRow'] as $party){
                                             if($party->partyId == $candidate->partyId){
+                                                echo "<input type='hidden' value='".$candidate->partyId."'>";
                                                 echo $party->partyName;
                                             }
                                         }
@@ -109,14 +123,22 @@
         document.getElementById('formForCandidate').style.display = "none";
     }
 
-    function popupfunc(){
-        document.getElementById('popup_window').className = "open-popup";
+    function popupfunc(id){
+        var d = document.getElementById(id);
+        var cId = d.getElementsByTagName("input")[0].value;
+        var cName = d.getElementsByTagName("h4")[0].innerHTML;
+        var cEmail = d.getElementsByTagName("input")[1].value;
+        var cParty = d.getElementsByTagName("input")[2].value;
+
+        document.getElementById('cEditId').value = cId;
+        document.getElementById('cEditName').value = cName;
+        document.getElementById('cEditEmail').value = cEmail;
+
+        document.getElementById('cEditPartyList').value = cParty;
+
+        document.getElementById('popup-d').style.display = "block";
     }
 
-    document.getElementById('edit-btn').addEventListener('click', (e)=>{
-        e.preventDefault();
-        document.getElementById('popup-d').style.display = "block";
-    });
 
     function popupClose(){
         document.getElementById('popup-d').style.display = "none";

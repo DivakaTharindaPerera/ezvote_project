@@ -478,4 +478,23 @@ class Elections extends Controller
         }
 
     }
+
+    public function updateCandidate(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                "id" => trim($_POST['id']),
+                "cid" => trim($_POST['cId']),
+                "cname" => trim($_POST['cName']),
+                "cemail" => trim($_POST['cEmail']),
+                "cparty" => trim($_POST['cParty']),
+            ];
+
+            if($this->userModel->findUserByEmail($data['cemail'])){
+                $user = $this->userModel->getUserByEmail($data['cemail']);
+
+                //tobecontinued...............
+            }
+        }
+    }
 }
