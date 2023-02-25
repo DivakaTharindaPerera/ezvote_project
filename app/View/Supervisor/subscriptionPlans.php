@@ -1,7 +1,7 @@
 
 <?php require approot.'/View/inc/VoterHeader.php';?>
-<?php require approot.'/View/inc/AuthNavBar.php';?>
-<?php require approot.'/View/inc/sideBar-new.php'?>
+<?php require approot.'/View/inc/AuthNavbar.php';?>
+<?php require approot.'/View/inc/sidebar-new.php'?>
 <?php
 
             $data = [
@@ -39,7 +39,7 @@
                                 <div class="sub-title">
                                     '.$name.'
                                 </div>
-                                <div class="text-xl text-danger ">
+                                <div class="text-xl text-info ">
                                     $'.$data['prices'][$key].'
                                 </div>
                                 <div class="text-md ">

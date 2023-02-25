@@ -54,19 +54,19 @@
                         <span class="item">Objections</span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="#">
                         <span class="icon"><i class="fa-solid fa-republican"></i></span>
                         <span class="item">Elections</span>
                     </a>
-                </li>
+                </li> -->
 
-                <li>
+                <!-- <li>
                     <a href="#">
                         <span class="icon"><i class="fa-sharp fa-solid fa-check-to-slot"></i></span>
                         <span class="item">My Elections</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li>
                     <a href="<?php echo urlroot; ?>/Candidates/conferences">

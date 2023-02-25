@@ -1,12 +1,49 @@
 
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
-<?php require approot . '/View/inc/AuthNavbar.php'; ?>
 
-<div class="overflow-y">
- <!-- <h1> ABOUT US </h1><br> -->
-<div class="bg_about_us">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="<?php echo urlroot; ?>/css/home.css">
+
+    <title>ezVote</title>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
+        <div class="links">
+            <a href="/ezvote/Pages/home">Home</a>
+            <a href="#">Services</a>
+            <a href="/ezvote/Pages/pricing">Pricing</a>
+            <a href="#">Target users</a>
+            <a href="/ezvote/Pages/aboutUs">About Us</a>
+            <a href="/ezvote/Pages/contactUs">Contact</a>
+        </div>
+        <div class="nav-end">
+            <!-- <a href="<?php echo urlroot; ?>/View/Login"><button type="button">Login</button></a>
+            <a href="<?php echo urlroot; ?>/View/Register"><button id="trial">Register</button></a> -->
+            <div class="dropdown">
+  <button class="dropbtn">Login</button>
+  <div class="dropdown-content">
+  <a href="#">Administrator</a>
+  <a href="<?php echo urlroot; ?>/View/Login">Other Users</a>
+  </div>
+</div>
+    <a href="<?php echo urlroot; ?>/View/Register"><button class="dropbtn" style="margin-top: -6px;">Register</button></a>
+
+        </div>
+    </div>
+
+<div class="overflow-y" style="overflow-x:hidden;">
+<div class="bg_home">
      <div class="p-1 m-2">
-        <h1 class="text-center text-6xl widest text-white font-extrabold" style="padding-top:10rem;">A B O U T U S</h1>
+        <h1 class="text-center text-white " style="padding-top:10rem; font-size:150px;">A B O U T U S</h1>
   
 
          <!-- <img src="<?php echo urlroot; ?>/img/welcome/bg.jpg" alt="reply" class="w-50" />  -->
@@ -45,9 +82,55 @@
                      </div>
                   </div>
               </div>
-         </div>
+         
 
+<!-- 
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#">about us</a></li>
+                    <li><a href="#">our services</a></li>
+                    <li><a href="#">privacy policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>My Account</h4>
+                <ul>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products & Features</h4>
+                <ul>
+                    <li><a href="#">Meetings</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+                
+            <div class="footer-col">
+                <h4>follow us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            </div>
+    </div>
+
+</div> -->
+
+</div>
+</body>
+</html>
          
 
 
-<?php require approot.'/View/inc/footer.php';?>
+<?php 
+require approot.'/View/inc/footer.php';
+?>

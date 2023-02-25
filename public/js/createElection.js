@@ -98,3 +98,37 @@ function timeCheckO(){
         document.getElementById("sbmit").disabled = false;
     }
 }
+function edit(){
+    var inputs = document.getElementById('information').getElementsByTagName( 'input' );
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].disabled = false;
+    }
+    var btn = document.getElementById("editBtn");
+    btn.setAttribute("class", "btn btn-primary w-25");
+    btn.setAttribute("onclick", "save()");
+    btn.innerHTML = "<b>Save Changes</b>";
+
+    var cncl = document.createElement("button");
+    cncl.innerHTML = "<b>Cancel</b>";
+    cncl.setAttribute("class", "btn btn-danger ml-2 w-25");
+    cncl.setAttribute("type", "button");
+    cncl.setAttribute("onclick", "cancel()");
+
+    var div = document.getElementById('buttonContainer');
+    div.appendChild(cncl);
+}
+
+function cancel(){
+    var inputs = document.getElementById('information').getElementsByTagName( 'input' );
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].disabled = true;
+    }
+    var btn = document.getElementById("editBtn");
+    btn.setAttribute("class", "btn btn-primary w-20");
+    btn.setAttribute("onclick", "edit()");
+    btn.innerHTML = "<b>Edit</b>";
+
+    var div = document.getElementById('buttonContainer');
+    div.removeChild(div.lastChild);
+}
+
