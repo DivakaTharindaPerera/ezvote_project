@@ -498,7 +498,7 @@ class Elections extends Controller
 
             if($this->userModel->findUserByEmail($data['cemail'])){
                 $user = $this->userModel->getUserByEmail($data['cemail']);
-                $data['userId'] = $user->UserId;
+                $data['cuser'] = $user->UserId;
 
                 if($this->candidateModel->updateCandidateWithUser($data)){
                     redirect('Pages/electionCandidates/'.$data['id']);

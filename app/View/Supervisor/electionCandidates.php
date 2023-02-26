@@ -10,9 +10,9 @@
             </div>
 
             <!-- alert of successful position insertion -->
-            <div id="positionAddingSuccess" class="popup-window bg-secondary h-50 w-50 text-center">
+            <div id="positionAddingSuccess" class="popup-window bg-secondary h-50 w-50 text-center border-1">
                 <div class="m-3">
-                    <h3 class="text-success">Position Added Successfully</h3>
+                    <h3 class="text-success"></h3>
                     <button class="btn btn-primary" id="<?php echo $data['ID']?>" onclick="funcDone(this.id)">OK</button>
                 </div>
             </div>
@@ -75,10 +75,10 @@
                     <div class="d-flex flex-column">
                         <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
                         <input type="hidden" name="cId" id="cEditId">
-                        <div class="d-flex fle m-1 p-1">
+                        <div class="d-flex flex-column m-1 p-1 text-left">
                         <label for="cName" class="text-xl">Name: </label><input type="text" name="cName" id="cEditName">
                         </div>
-                        <div class="d-flex m-1 p-1">
+                        <div class="d-flex flex-column m-1 p-1 text-left">
                         <label for="cEmail" class="text-xl">Email: </label> <input type="text" name="cEmail" id="cEditEmail">
                         </div>
                         <div class="m-1">
@@ -98,7 +98,27 @@
                 </form>
             </div>
             
-            
+            <!-- to update position -->
+            <div id="popup-update-position" class="popup-window bg-secondary h-50 w-50 text-center border-1" >
+                <form action="" method="post">
+                    <div class="d-flex flex-column">
+                        <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
+                        <input type="hidden" name="pId" id="pEditId" >
+                        <div class="d-flex flex-column  m-1 text-left">
+                        <label for="cName" class="text-xl">Position Name: </label><input type="text" name="cName" id="pEditName">
+                        </div>
+                        <div class="d-flex flex-column m-1 text-left">
+                        <label for="cEmail" class="text-xl">Position Description: </label> <textarea name="" id="" cols="20" rows="5" class="border-1"></textarea>
+                        </div>
+                        <div class="d-flex m-1 text-left">
+                        <label for="noOfOptions">No of options: </label><input type="number" class="border-1 p-2" name="noOfOptions" placeholder="No of Options..." min="1">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1" id="updatePositionBtn" ><b>Update</b></button>               
+                    <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
+                </form>
+            </div>
 
             <div id="popup-delete-position" class="popup-window bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
                 <form action="<?php echo urlroot;?>/Elections/deletePosition" method="post">
@@ -126,6 +146,9 @@
                 </form>
             </div>
 
+            <!-- to update position -->
+            
+
             <div class="m-3 d-flex flex-column p-1 border-radius-2">
             <?php 
                 foreach($data['positionRow'] as $position){
@@ -135,6 +158,8 @@
                             <div class='d-flex text-center'>
                                 <input type='hidden' value='".$position->ID."'>
                                 <input type='hidden' value='".$position->positionName."'>
+                                <input type='hidden' value='".$position->description."'>
+                                <input type='hidden' value='".$position->NoofOptions."'>
                                 
                                 
                                 <button class='btn btn-danger m-1 ml-auto h-10' id='".$position->ID."' onclick='deletePosition(this.id)'><i class='fa-sharp fa-solid fa-trash'></i></button>
@@ -232,6 +257,7 @@
         document.getElementById('popup-delete-position').style.display = "none";
         document.getElementById('positionAddingSuccess').style.display = "none";
         document.getElementById('popup-delete-candidate').style.display = "none";
+        document.getElementById('popup-update-position').style.display = "none";
 
     }
 
@@ -253,7 +279,7 @@
 
         var electionId = form.getElementsByTagName('input')[0].value;
         var positionName = form.getElementsByTagName('input')[1].value;
-        var positionDesc = form.getElementsByTagName('textarea')[0].innerHTML;
+        var positionDesc = form.getElementsByTagName('textarea')[0].value;
         var noOfOptions = form.getElementsByTagName('input')[2].value;
 
         fetch('<?php echo urlroot;?>/Elections/addSinglePosition',{
@@ -277,9 +303,13 @@
         .then(data => {
             var msg = data.msg;
             console.log(msg);
-            form.getElementsByTagName('span')[0].innerHTML = msg;
+            
             if(msg == "success"){
+                document.getElementById('positionAddingSuccess').getElementsByTagName('h3')[0].innerHTML = "Position Added Successfully";
                 document.getElementById('positionAddingSuccess').style.display = "block";
+            }else{
+                form.getElementsByTagName('input')[1].focus();
+                form.getElementsByTagName('span')[0].innerHTML = msg;
             }
         })
         .catch(error => {
@@ -297,6 +327,27 @@
     function funcDone(id){
         location.reload();
     }
+
+    function editPosition(id){
+        var d = document.getElementById(id).parentNode;
+        var pId = d.getElementsByTagName("input")[0].value;
+        var pName = d.getElementsByTagName("input")[1].value;
+        var pDesc = d.getElementsByTagName("input")[2].value;
+        var pNoOfOptions = d.getElementsByTagName("input")[3].value;
+
+        var popupwindow = document.getElementById('popup-update-position');
+        popupwindow.getElementsByTagName('input')[1].value = pId;
+        popupwindow.getElementsByTagName('input')[2].value = pName;
+        popupwindow.getElementsByTagName('textarea')[0].value = pDesc;
+        popupwindow.getElementsByTagName('input')[3].value = pNoOfOptions;
+
+        popupwindow.style.display = "block";
+    }
+
+    document.getElementById('updatePositionBtn').addEventListener('click', (e)=>{
+        e.preventDefault();
+        
+    })
 </script>
 
 <?php require approot . '/View/inc/footer.php'; ?>
