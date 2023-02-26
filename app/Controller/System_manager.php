@@ -1,5 +1,9 @@
 <?php
 
+
+// use Email;
+
+
 class System_manager extends Controller
 {
     private $ManagerModel;
@@ -56,10 +60,15 @@ class System_manager extends Controller
             redirect('System_manager/login');
         } else {
             $this->view('Sys_manager/sysmanager_announcements');
-            // redirect('');
+            
 
         }
     }
+
+    // public function sendMail(){
+    //     $mail_obj = new Email;
+
+    // }
 
     public function logout(){
         unset($_SESSION['UserId']);

@@ -72,6 +72,14 @@ class Subscription{
         }
     }
 
+    public function saleSubscriptionPlan(){
+        $this->db->query('SELECT * FROM sale_subscription ');
+
+        
+
+        return $this->db->resultSet();
+    }
+
     public function deleteSubscriptionPlan($plan){
         $this->db->query('DELETE FROM subscription_plan WHERE PlanID = :PlanID');
 

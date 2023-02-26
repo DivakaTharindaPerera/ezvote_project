@@ -20,7 +20,7 @@
     <div class="d-flex flex-column min-w-95"> 
     <h2 class="title text-center">Subscription Plans</h2>
     <div class="d-flex justify-content-center align-items-center my-1">
-    <a href="/ezvote/subscription_plan/create_subscription">
+    <a href="/ezvote/Subscription_plan/create_subscription">
         <button class="btn btn-primary justify-content-center align-items-center" type="button">
             Create new plan
         </button>
@@ -28,16 +28,12 @@
     </div>
 
 
-<!-- <a href="/ezvote/System_manager/dashboard">
-    <div class="back-to">
-        <img src="<?php echo urlroot; ?>/public/img/button.png" style="width: 50px; height: 50px; margin-left: 0px; margin-top: 0px;" />
-    </div>
-</a> -->
+
 <div class="w-100">
     <div class="d-flex flex-column">
     <div class="d-flex justify-content-evenly ">
         <div class="justify-content-center border border-primary my-3 mr-1 min-w-50">
-        <input type="text" id="searchPlan" style="height:100%;" onkeyup="myFunction()" placeholder="Search Plan......" class="w-100 h-100">
+        <input type="text" id="searchInput" onchange="myFunction(this.value)" placeholder="Search Plan......" class="w-100 h-100">
         </div>
         <div class="my-3 d-flex mr-5">
         <a href="#">
@@ -49,12 +45,8 @@
     </div>
     
 
-    <!-- <div class="filter-img">
-        <img src="<?php echo urlroot; ?>/public/img/filter.png" />
-    </div> -->
-
-    <div>
-        <table class="table border border-radius-2 border-primary w-95 h-75">
+    <div class="w-100 h-50" style="overflow:auto; height:50vh;">
+        <table id="myTable" class="table border border-primary w-100 h-35">
             <!-- <div class="my-1"> -->
                 <tbody>
 
@@ -116,9 +108,8 @@
 </div>
 </div>
 </div>
-</div>
 
-<script src="../public/js/search.js"></script>
+</script><script src="/ezvote/public/js/search.js"></script>
 <?php require approot . '/View/inc/footer.php'; ?>
 
 <!-- </body>
