@@ -100,11 +100,25 @@
             
             
 
-            <div id="popup-delete-position" class="popup-window bg-secondary min-h-20 min-w-30 text-center border-1 border-radius-2">
+            <div id="popup-delete-position" class="popup-window bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
                 <form action="<?php echo urlroot;?>/Elections/deletePosition" method="post">
                     <input type="hidden" name="id" value="">
+                    <input type="hidden" name="eid" value="<?php echo $data['ID'] ?>">
                     <Span>
                         <h3 class="mt-1"> Confirm Delete?</h3>
+                        <h3 class="text-danger ml-1 mr-1 mt-1"> You cannot undo this action after clicking 'Confirm'</h3>
+                    </Span>
+                    <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Confirm</b></button>               
+                    <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
+                </form>
+            </div>
+
+            <div id="popup-delete-candidate" class="popup-window bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
+                <form action="<?php echo urlroot;?>/Elections/removeCandidate" method="post">
+                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="eid" value="<?php echo $data['ID']?>">
+                    <Span>
+                        <h3 class="mt-1"> Confirm Deleting Candidate?</h3>
                         <h3 class="text-danger ml-1 mr-1 mt-1"> You cannot undo this action after clicking 'Confirm'</h3>
                     </Span>
                     <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Confirm</b></button>               
@@ -161,12 +175,15 @@
                                         }
                                     echo "</div>
                                         <div class='d-flex text-center'>
-                                        <a href='".urlroot."/Elections/removeCandidate/".$candidate->candidateId."/".$data['ID']."' class='btn btn-danger m-1 ml-auto'><i class='fa-sharp fa-solid fa-trash'></i></a>
+                                        <button class='btn btn-danger m-1 ml-auto' id='".$candidate->candidateId."' onclick='deleteCandidate(this.id)'><i class='fa-sharp fa-solid fa-trash'></i></button>
                                         <button class='btn btn-primary m-1 mr-auto' id='".$candidate->candidateId."' onclick='popupfunc(this.id)'><i class='fa-sharp fa-solid fa-pen'></i></button>
     
                                         </div>
                                         </div>";
                                 }
+                            }
+                            if($i == 0){
+                                echo "<div class='text-center text-danger text-2xl m-1'>No Candidates</div>";
                             }
                         
                       echo "</div>
@@ -207,7 +224,6 @@
         document.getElementById('popup-d').style.display = "block";
         document.getElementById('popup-d').style.filter = "none";
 
-        document.getElementsByClassName('main-container')[0].style.filter = "blur(5px)";
     }
 
 
@@ -215,12 +231,19 @@
         document.getElementById('popup-d').style.display = "none";
         document.getElementById('popup-delete-position').style.display = "none";
         document.getElementById('positionAddingSuccess').style.display = "none";
-        document.getElementsByClassName('main-container')[0].style.filter = "none";
+        document.getElementById('popup-delete-candidate').style.display = "none";
+
     }
 
     function deletePosition(id){
         document.getElementById('popup-delete-position').getElementsByTagName('input')[0].value = id;
         document.getElementById('popup-delete-position').style.display = "block";
+    }
+    
+    function deleteCandidate(id){
+        document.getElementById('popup-delete-candidate').getElementsByTagName('input')[0].value = id;
+        document.getElementById('popup-delete-candidate').style.display = "block";
+
     }
 
     document.getElementById('addPositionBtn').addEventListener('click',(e)=>{
@@ -273,7 +296,6 @@
 
     function funcDone(id){
         location.reload();
-        // window.location.href = '<?php echo urlroot; ?>/Pages/electionCandidates/'+id;
     }
 </script>
 

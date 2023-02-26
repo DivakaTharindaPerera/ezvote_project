@@ -466,15 +466,21 @@ class Elections extends Controller
         }   
     }
 
-    public function removeCandidate($id,$eid){
+    public function removeCandidate(){
         if(!$this->isLoggedIn()){
             $this->view('login');
         }else{
-            if($this->candidateModel->deleteCandidate($id)){
-                redirect('Pages/electionCandidates/'.$eid);
-            }else{
-                die('<h1>Something went wrong<h1>');
+            if($_SERVER['REQUEST_METHOD'] == 'POST' ){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $id = trim($_POST['id']);
+                $eid = trim($_POST['eid']);
+                if($this->candidateModel->deleteCandidate($id)){
+                    redirect('Pages/electionCandidates/'.$eid);
+                }else{
+                    die('<h1>Something went wrong<h1>');
+                }
             }
+            
         }
 
     }
@@ -492,8 +498,19 @@ class Elections extends Controller
 
             if($this->userModel->findUserByEmail($data['cemail'])){
                 $user = $this->userModel->getUserByEmail($data['cemail']);
+                $data['userId'] = $user->UserId;
 
-                //tobecontinued...............
+                if($this->candidateModel->updateCandidateWithUser($data)){
+                    redirect('Pages/electionCandidates/'.$data['id']);
+                }else{
+                    die('Something went wrong');
+                }
+            }else{
+                if($this->candidateModel->updateCandidate($data)){
+                    redirect('Pages/electionCandidates/'.$data['id']);
+                }else{
+                    die('Something went wrong');
+                }
             }
         }
     }
@@ -549,6 +566,26 @@ class Elections extends Controller
             }
 
             
+        }
+    }
+
+    public function deletePosition(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $data = [
+                    'id' => trim($_POST['id']),
+                    'eid' => trim($_POST['eid'])
+                ];
+
+                if($this->positionModel->deletePosition($data['id'])){
+                    redirect('Pages/electionCandidates/'.$data['eid']);
+                }else{
+                    die('Something went wrong');
+                }
+            }
         }
     }
 }

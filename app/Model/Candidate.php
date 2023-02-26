@@ -107,6 +107,22 @@ class Candidate extends Controller{
     }
 
     public function updateCandidateWithUser($data){
+        $this->db->query(
+            "UPDATE Candidate
+            SET candidateName = :1, candidateEmail = :2, partyId = :3, userId = :4
+            WHERE candidateId = :5"
+        );
+        $this->db->bind(':1', $data['cname']);
+        $this->db->bind(':2', $data['cemail']);
+        $this->db->bind(':3', $data['cparty']);
+        $this->db->bind(':4', $data['cuser']);
+        $this->db->bind(':5', $data['cid']);
 
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
     }
 }
