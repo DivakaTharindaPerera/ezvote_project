@@ -56,4 +56,15 @@ class electionPositions{
         }
 
     }
+    public function deletePosition($id){
+        $this->db->query("DELETE FROM ElectionPosition WHERE id = :id");
+        $this->db->bind(':id', $id);
+        try{
+            $this->db->execute();
+            return true;
+        }catch(Exception $e){
+            echo "Something went wrong :".$e->getMessage();
+            return false;
+        }
+    }
 }

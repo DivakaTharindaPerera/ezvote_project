@@ -463,8 +463,129 @@ class Elections extends Controller
                     } 
                 }
             }
-        }
-        
+        }   
     }
 
+    public function removeCandidate(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($_SERVER['REQUEST_METHOD'] == 'POST' ){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $id = trim($_POST['id']);
+                $eid = trim($_POST['eid']);
+                if($this->candidateModel->deleteCandidate($id)){
+                    redirect('Pages/electionCandidates/'.$eid);
+                }else{
+                    die('<h1>Something went wrong<h1>');
+                }
+            }
+            
+        }
+
+    }
+
+    public function updateCandidate(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                "id" => trim($_POST['id']),
+                "cid" => trim($_POST['cId']),
+                "cname" => trim($_POST['cName']),
+                "cemail" => trim($_POST['cEmail']),
+                "cparty" => trim($_POST['cParty']),
+            ];
+
+            if($this->userModel->findUserByEmail($data['cemail'])){
+                $user = $this->userModel->getUserByEmail($data['cemail']);
+                $data['cuser'] = $user->UserId;
+
+                if($this->candidateModel->updateCandidateWithUser($data)){
+                    redirect('Pages/electionCandidates/'.$data['id']);
+                }else{
+                    die('Something went wrong');
+                }
+            }else{
+                if($this->candidateModel->updateCandidate($data)){
+                    redirect('Pages/electionCandidates/'.$data['id']);
+                }else{
+                    die('Something went wrong');
+                }
+            }
+        }
+    }
+
+    public function addSinglePosition(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                // $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                // $data = [
+                //     'id' => trim($_POST['electionId']),
+                //     'name' => trim($_POST['positionName']),
+                //     'desc' => trim($_POST['positionDesc']),
+                // ];
+                try {
+                    $dataset = json_decode(file_get_contents('php://input'), true);
+                    $data = [
+                        'msg' => 'success',
+                        'id' => $dataset['electionId'],
+                        'name' => $dataset['positionName'],
+                        'desc' => $dataset['positionDesc'],
+                        'count' => $dataset['noOfOptions'],
+                        'position' => $dataset['positionName'],
+                        'description' => $dataset['positionDesc'],
+                        'electionId' => $dataset['electionId'],
+                        'noOfOptions' => $dataset['noOfOptions'],
+                    ];
+
+                    $positionList = $this->positionModel->getElectionPositionByElectionId($data['id']);
+
+                    foreach($positionList as $position){
+                        if($position->positionName == $data['name']){
+                            $data['msg'] = 'Position Already exists';
+                            echo json_encode($data);
+                            return;
+                        }
+                    }
+
+                    if($this->positionModel->insertIntoElectionPositions($data)){
+                        echo json_encode($data);
+                    }else{
+                        $data['msg'] = 'Error occured. Try again later...';
+                        echo json_encode($data);
+                    }
+
+                    
+
+                } catch (Exception $e) {
+                    echo json_encode(array('msg' => 'error occured.. '.$e ));
+                }
+            
+            }
+
+            
+        }
+    }
+
+    public function deletePosition(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $data = [
+                    'id' => trim($_POST['id']),
+                    'eid' => trim($_POST['eid'])
+                ];
+
+                if($this->positionModel->deletePosition($data['id'])){
+                    redirect('Pages/electionCandidates/'.$data['eid']);
+                }else{
+                    die('Something went wrong');
+                }
+            }
+        }
+    }
 }

@@ -24,7 +24,7 @@
                             </select>
                         </div>
                         <div>
-                            <button type="submit" value="Sort" class="btn btn-primary">Filter</button>
+                            <button type="submit" value="Sort" class="btn btn-primary">Sort</button>
                         </div>
                     </form>
                 </div>
