@@ -12,7 +12,7 @@ class Subscription_plan extends Controller
     {
 
         if (!isset($_SESSION["UserId"])) {
-            redirect('Sys_manager/Sysmanager_login');
+            redirect('Sys_manager/login');
         } else {
             $data[0] = $this->SubscriptionModel ->getSubscriptionPlan($_SESSION['UserId']);
             
@@ -137,13 +137,13 @@ class Subscription_plan extends Controller
         }
     }
 
-    public function sales_subscription(){
-        if (!isset($_SESSION["UserId"])) {
-            redirect('Sysmanager/Sysmanager_login');
-        } else {
-            $this->view('Sys_manager/subscription_sales');
-        }
-    }
+    // public function sales_subscription(){
+    //     if (!isset($_SESSION["UserId"])) {
+    //         redirect('Sysmanager/login');
+    //     } else {
+    //         $this->view('Sys_manager/subscription_sales');
+    //     }
+    // }
 
     public function edit_subscription($plan){
         if (!isset($_SESSION["UserId"])) {
@@ -163,6 +163,16 @@ class Subscription_plan extends Controller
             $data = $this->SubscriptionModel ->deleteSubscriptionPlan($plan);
             redirect('Subscription_plan/index');
             
+        }
+    }
+
+    public function sales_subscription(){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $data = $this->SubscriptionModel ->saleSubscriptionPlan();
+            
+            $this->view('Sys_manager/subscription_sales',$data);    
         }
     }
 
