@@ -9,10 +9,12 @@
 
 <div class="main-container max-h-85">
     <div class="title">Activities</div>
+
     <div class="border border-primary w-90 h-50 mt-1">
     <div class="w-100 h-50" style="overflow:auto; height:50vh;">
    
         <table class="table w-100 ">
+
             <tbody>
                 <?php
                 $arrlength = count($data, COUNT_RECURSIVE);

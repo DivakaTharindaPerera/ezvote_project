@@ -3,7 +3,7 @@
 <?php require approot.'/View/inc/sidebar-new.php';?>
 
 <div class="main-container">
-    <div class="d-flex flex-column bg-white mt-2 min-w-60 border-3 border-radius-2 border-primary mb-2">
+    <div class="d-flex flex-column bg-white mt-2 min-w-60 border-3 border-radius-2 border-primary mb-2 overflow-y">
         <div class="title">Create New Election</div>
         <form method="POST" action='<?php echo urlroot; ?>/Elections/crteelection' class="d-flex flex-column justify-content-center mx-1 mb-1">
             <div class="d-flex flex-column my-1">
