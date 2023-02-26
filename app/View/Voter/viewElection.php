@@ -1,3 +1,6 @@
+<?php //print_r($data);
+//exit();?>
+
 <?php
 require approot.'/View/inc/VoterHeader.php';
 require approot.'/View/inc/AuthNavbar.php';
@@ -7,18 +10,17 @@ require approot.'/View/inc/sidebar-new.php';
 <div class="main-container">
     <div id="Election" class="w-95 align-center d-flex flex-column p-1 " style="min-height: 92%">
         <div class="d-flex flex-column w-75 justify-content-start align-items-center">
-            <div class="title">Welfare Organizing Committee Election - 2022 / 2023 </div>
+            <div class="title"><?= $data->Title?></div>
             <div id="desc-reg" class="w-50 d-flex flex-column px-1 align-items-center bg-white border-radius-2">
                 <div class="sub-title">
                     Description & Regulation
                 </div>
                 <div id="regulations" class="mt-1">
-                    <ol>
-                        <li>Lorem ipsum dolor sit amet.</li>
-                        <li>Lorem ipsum dolor sit amet.</li>
-                        <li>Lorem ipsum dolor sit amet.</li>
-                        <li>Lorem ipsum dolor sit amet.</li>
-                    </ol>
+                    <?= $data->Description?>
+<!--                    <ol>-->
+<!--                        --><?php //foreach ($data->Description as $row){?>
+<!--                        <li>--><?php //= $row?><!--</li>-->
+<!--                    </ol>-->
                 </div>
                 <div class="d-flex mt-1">
                     <div><input type="checkbox" onchange="accepted()" id="rules"></div>
@@ -34,10 +36,10 @@ require approot.'/View/inc/sidebar-new.php';
                 <div id="from" class="card">
                     <div class="justify-content-center sub-title mb-1">Commencing</div>
                     <div class="mb-1">
-                        Date:2023/03/03
+                        <?= $data->StartDate?>
                     </div>
                     <div class="justify-content-start mb-1">
-                        &emsp14;Time: 10 A.M.
+                        &emsp14;Time:<?= $data->StartTime?>
                     </div>
                     <!--                From : <span>01/02/2023   18.30 </span>-->
                 </div>
@@ -45,10 +47,10 @@ require approot.'/View/inc/sidebar-new.php';
                 <div id="to" class="card">
                     <div class="justify-content-center sub-title mb-1">Ending</div>
                     <div class=" mb-1">
-                        Date:2023/03/03
+                        Date:<?= $data->EndDate?>
                     </div>
                     <div class="justify-content-start mb-1">
-                        &emsp14;Time: 12 P.M.
+                        &emsp14;Time:<?= $data->EndTime?>
                     </div>
                     <!--                To : <span>01/02/2023   20.30 </span>-->
                 </div>
@@ -56,7 +58,14 @@ require approot.'/View/inc/sidebar-new.php';
             <div id="data" class="d-flex flex-column justify-content-center align-items-center mt-1 border-primary border-2 border-radius-1 mx-5">
                 <div id="self-nomination" class="d-flex text-lg text-center">
                     <div class="text-center">Self Nomination :</div>
-                    <div class=""><img src="<?php echo urlroot;?>/public/img/on.png" alt="" style="max-width: 40px;max-height: 40px"></div>
+                    <div class="">
+                        <?php if($data->SelfNomination==1) {?>
+                        <img src="<?php echo urlroot;?>/public/img/on.png" alt="" style="max-width: 40px;max-height: 40px">
+                        <?php }
+                        else{?>
+                        <img src="<?php echo urlroot;?>/public/img/off.png" alt="" style="max-width: 40px;max-height: 40px">
+                        <?php }?>
+                    </div>
                 </div>
                 <div id="self-nomination" class="d-flex text-lg ">
                     <div class="text-center">Multiple Cast of Votes : </div>
@@ -100,7 +109,7 @@ require approot.'/View/inc/sidebar-new.php';
                                             </form>
                                         </div>
                                     </div>
-                                    <a href="<?php echo urlroot;?>/Voters/viewObjections" class="btn btn-primary">View</a>
+                                    <button class="btn btn-primary" onclick="viewObjections(<?=$data->CandidateID?>)">View</button>
                                 </div>
                             </div>
                             <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">

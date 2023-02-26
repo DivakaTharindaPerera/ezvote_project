@@ -5,6 +5,7 @@ class Voters extends Controller
     public function __construct()
     {
         $this->objModel = $this->model('Objection');
+        $this->elecModel=$this->model('Election');
     }
     public function submitObjections(){
 //        if(!$this->isLoggedIn()){
@@ -61,13 +62,8 @@ class Voters extends Controller
         }
     }
 
-    public function dashboard()
-    {
-        $this->view('Voter/viewAllElection');
-    }
-
-    public function election()
-    {
+    public function election($id){
+        $data=$this->elecModel->getElectionByElectionId($id);
         if($_SERVER['REQUEST_METHOD']==='POST'){
             $data=[
                 'objectionID'=>uniqid('obj',true),
@@ -81,10 +77,12 @@ class Voters extends Controller
             ];
             $this->objModel->AddObjection($data);
         }
-        $this->view('Voter/viewElection');
+        $this->view('Voter/viewElection',[
+            'data'=>$data
+        ]);
     }
 
-    public function viewObjections(){
+    public function viewObjections($candidate_id){
         $r=$this->objModel->RetrieveAll();
         if($_SERVER['REQUEST_METHOD']==='POST'){
             $id=$_POST['id'];
@@ -94,8 +92,25 @@ class Voters extends Controller
         $this->view('Voter/viewObjections',['r'=>$r]);
     }
 
-    public function vote()
+    public function vote($id)
     {
-        $this->view('Voter/votingBallot');
+
+        $data=$this->elecModel->getElectionByElectionId($id);
+//        $data_2=$this->elecModel->getPositionsByElectionId($id);
+//        print_r($data_2);
+//        exit();
+        $this->view('Voter/votingBallot',[
+            'data'=>$data
+//            'positions'=>$data_2
+        ]);
     }
+
+    public function summary($id)
+    {
+        $data=$this->elecModel->getElectionByElectionId($id);
+       $this->view('Voter/electionSummary',[
+              'data'=>$data
+       ]);
+    }
+
 }

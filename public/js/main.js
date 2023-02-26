@@ -11,9 +11,24 @@ function closePopup()
 }
 
 
-function vote(){
+function vote($election_id){
+    const election_id=$election_id;
+    window.location.href="/ezvote/Voters/vote/"+election_id;
+}
+
+function viewElection($election_id){
+    const election_id=$election_id;
+    window.location.href="/ezvote/Voters/election/"+election_id;
+}
+
+function viewObjections($candiate_id){
+    const candidate_id=$candiate_id;
+    window.location.href="/ezvote/Voters/viewObjections/"+candidate_id;
+}
+function viewSummary($election_id){
+    const election_id=$election_id;
     // document.location.href="/ezvote/app/View/Voter/votingBallot.php";
-    window.location.href="/ezvote/Voters/vote";
+    window.location.href="/ezvote/Voters/summary/"+election_id;
 }
 
 function marked(id){
@@ -54,7 +69,7 @@ function cancelBallot(){
     window.location.href="/ezvote/Voters/vote";
 }
 function confirmBallot(){
-    window.location.href="/ezvote/Voters/election";
+    window.location.href="/ezvote/Voters/dashboard";
 }
 
 document.getElementById("continue").addEventListener("click", function(){

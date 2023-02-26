@@ -1,7 +1,7 @@
 function ObjStatus(){
     if(document.getElementById("objStatus").checked){
-        document.getElementById("objstart").style.display = "block";
-        document.getElementById("objend").style.display = "block";
+        document.getElementById("objstart").style.display = "flex";
+        document.getElementById("objend").style.display = "flex";
 
         
         document.getElementById("OstartDate").disabled = false;

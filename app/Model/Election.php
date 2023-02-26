@@ -108,5 +108,65 @@ class Election extends Controller{
         }
         
     }
-        
+
+    public function getOngoingElections()
+    {
+        date_default_timezone_set("Asia/Colombo");
+        $dates=date("Y-m-d");
+        $times=date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM election WHERE StartDate<='".$dates."' && StartTime<='".$times."' && EndDate>='".$dates."' && EndTime>='".$times."'"
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
+
+    public function getUpcomingElections()
+    {
+        $dates=date("Y-m-d");
+        $times=date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM election WHERE (StartDate='".$dates."' && StartTime>'".$times."') ||(StartDate>'".$dates."' && StartTime>='".$times."')|| (StartDate>'".$dates."' && StartTime<'".$times."') "
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+
+        }
+    }
+    public function getCompletedElections()
+    {
+        $dates = date("Y-m-d");
+        $times = date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM election WHERE (EndDate='" . $dates . "' && EndTime<'" . $times . "') ||(EndDate<'" . $dates . "' && EndTime>='" . $times . "') || (EndDate<'" . $dates . "' && EndTime<'" . $times . "')"
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong " . $e->getMessage();
+            return false;
+
+        }
+    }
+
+    public function getPositionsByElectionId($id){
+        $election_Id=$id;
+        $this->db->query("SELECT DISTINCT positionName FROM electionposition WHERE ElectionID ='" .$election_Id. "'" );
+        $this->db->bind(':id', $id);
+        $row = $this->db->resultSet();
+//        print_r($row);
+//        exit();
+        return $row;
+    }
+
 }

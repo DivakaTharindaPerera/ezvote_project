@@ -90,4 +90,6 @@ class Voter extends Controller{
             return false;
         }
     }
+
+
 }

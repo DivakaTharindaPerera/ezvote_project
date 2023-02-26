@@ -386,4 +386,5 @@ class Elections extends Controller
             }
         }
     }
+
 }

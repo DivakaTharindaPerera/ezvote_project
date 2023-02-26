@@ -3,7 +3,7 @@
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
 <div class="main-container">
-    <div class="title justify-content-center mt-1">Welfare Organizing Committee Election</div>
+    <div class="title justify-content-center mt-1"><?php echo $data->Title?><br><?php echo $data->OrganizationName?></div>
         <div class="d-flex flex-column min-h-80">
 <!--            <div class="title">Candidates</div>-->
             <div class="">

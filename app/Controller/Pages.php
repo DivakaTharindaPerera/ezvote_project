@@ -37,15 +37,21 @@
         }  
 
         public function dashboard(){
-            $this->view('Voter/viewAllElection');
+            $r_ongoing=$this->electionModel->getOngoingElections();
+            $r_upcoming=$this->electionModel->getUpcomingElections();
+            $r_completed=$this->electionModel->getCompletedElections();
+            $this->view('Voter/viewAllElection',[
+                'data1'=>$r_ongoing,
+                'data2'=>$r_upcoming,
+                'data3'=>$r_completed
+            ]);
         }
+
         public function register(){
             $data =[];
             $this->view('register', $data);
         }
 
-        
-        
         public function login(){
             if($this->isLoggedIn()){
                 $this->view('Voter/viewAllElection');

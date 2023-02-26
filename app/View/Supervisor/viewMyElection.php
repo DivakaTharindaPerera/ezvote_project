@@ -26,7 +26,7 @@
         //     }
         // }
         ?>
-    <form action="" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2 overflow-y">
+    <form action="" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2">
         <div id="btn panel" class="d-flex text-center">
             <a href="#" class="btn btn-primary m-3"> <div>Candidates</div> </a>
             <a href="#" class="btn btn-primary m-3"> <div>Voters</div> </a>
@@ -82,7 +82,6 @@
                 <div id="nomi">
                     Self Nomination
 <!--                    <img src="--><?php //echo urlroot;?><!--/public/img/tik.png" alt="" style="height: 30px;width: 30px">-->
-
                     <input type="checkbox" name="nomi" id="" value="1" <?php if($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled >
                     <?php 
                         if($data['electionRow']->SelfNomination == 1){
@@ -101,7 +100,7 @@
                 </div>
             </div>
             
-            <?php 
+            <?php
                 if($data['electionRow']->ObjectionStatus == 1){
                     echo "
                     <div id='objDateAndTime' class='d-flex flex-column'>
