@@ -138,6 +138,8 @@ function cancel(){
 
     var div = document.getElementById('buttonContainer');
     div.removeChild(div.lastChild);
+
+    location.reload();
 }
 
 function update(){

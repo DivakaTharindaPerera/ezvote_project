@@ -569,6 +569,43 @@ class Elections extends Controller
         }
     }
 
+    public function updatePosition(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            try {
+                $dataset = json_decode(file_get_contents('php://input'), true);
+                $data = [
+                    'msg' => 'success',
+                    'eid' => $dataset['eId'],
+                    'id' => $dataset['pId'],
+                    'name' => $dataset['pName'],
+                    'desc' => $dataset['pDesc'],
+                    'noOfOptions' => $dataset['pNoOfOptions']
+                ];
+
+                $positionList = $this->positionModel->getElectionPositionByElectionId($data['eid']);
+                foreach($positionList as $position){
+                    if($position->positionName == $data['name']){
+                        $data['msg'] = 'A position with the same name already exists. Try a different name.';
+                        echo json_encode($data);
+                        return;
+                    }
+                }
+                if($this->positionModel->updatePosition($data)){
+                    echo json_encode($data);
+                }else{
+                    $data['msg'] = 'Error occured. Try again later...';
+                    echo json_encode($data);
+                }
+                    
+            } catch (Exception $e) {
+                echo json_encode(array('msg' => 'error occured.. '.$e ));
+                return;
+            }
+        }
+    }
+
     public function deletePosition(){
         if(!$this->isLoggedIn()){
             $this->view('login');

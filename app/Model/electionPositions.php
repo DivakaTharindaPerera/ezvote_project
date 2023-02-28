@@ -67,4 +67,26 @@ class electionPositions{
             return false;
         }
     }
+
+    public function updatePosition($data){
+        $this->db->query(
+            "UPDATE ElectionPosition SET
+            positionName = :1,
+            description = :2,
+            NoofOptions = :3
+            WHERE id = :4"
+        );
+        $this->db->bind(':1', $data['name']);
+        $this->db->bind(':2', $data['desc']);
+        $this->db->bind(':3', $data['noOfOptions']);
+        $this->db->bind(':4', $data['id']);
+
+        try{
+            $this->db->execute();
+            return true;
+        }catch(Exception $e){
+            echo "Something went wrong :".$e->getMessage();
+            return false;
+        }
+    }
 }
