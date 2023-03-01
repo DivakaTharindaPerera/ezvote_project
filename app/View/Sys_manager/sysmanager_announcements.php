@@ -16,6 +16,17 @@
 
 <!-- <body> -->
 
+<script>
+
+window.onload = function(){
+    var element = document.getElementById("home");
+    element.classList.remove("active");
+
+    var element = document.getElementById("announcement");
+    element.classList.add("active");
+}
+</script>
+
 <div class="main-container" >
     <div class="d-flex flex-column w-75 mb-2">
 

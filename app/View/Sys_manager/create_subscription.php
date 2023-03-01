@@ -14,6 +14,18 @@
 </head> -->
 
 <!-- <body> -->
+<script>
+
+window.onload = function(){
+    var element = document.getElementById("home");
+    element.classList.remove("active");
+
+    var element = document.getElementById("plan");
+    element.classList.add("active");
+}
+</script>
+
+
 <div class="main-container" id="text-box1">
     <div class="title text-center">Create subscription Plan</div>
     <div class="min-w-85 min-h-85">

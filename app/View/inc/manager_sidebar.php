@@ -23,40 +23,40 @@
 
            <div class="profile">
                <img src="<?php echo urlroot; ?>/public/img/profile.png" alt="profile_picture">
-               <h3><?php echo $_SESSION["name"];?></h3>
-               <p>Blogger</p>
+               <!-- <h3><?php //echo $_SESSION["name"];?></h3>
+               <p>Blogger</p> -->
            </div>
 
 
 
            <ul>
                <li>
-                   <a href="#" class="active">
+                   <a href="#" id="home" class="active">
                        <span class="icon"><i class="fas fa-home"></i></span>
                        <span class="item">Home</span>
                    </a>
                </li>
                <li>
-                   <a href="<?php echo urlroot; ?>/System_manager/dashboard">
+                   <a id="dashboard" href="<?php echo urlroot; ?>/System_manager/dashboard">
                        <span class="icon"><i class="fas fa-desktop"></i></span>
                        <span class="item">My Dashboard</span>
                    </a>
                </li> 
                <li>
-                   <a href="<?php echo urlroot; ?>/subscription_plan/index">
-                       <span class="icon"><i class="fas fa-plan"></i></span>
+                   <a id="plan" href="<?php echo urlroot; ?>/subscription_plan/index">
+                       <span class="icon"><i class="fas fa-dollar-sign"></i></span>
                        <span class="item">Subscription Plans</span>
                    </a>
                </li>
                <li>
-                   <a href="<?php echo urlroot; ?>/subscription_plan/sales_subscription">
-                       <span class="icon"><i class="fas fa-sale"></i></span>
+                   <a id="sale" href="<?php echo urlroot; ?>/subscription_plan/sales_subscription">
+                       <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
                        <span class="item">Subscription Sales</span>
                    </a>
                </li>
                <li>
-                   <a href="<?php echo urlroot; ?>/System_manager/announcements">
-                       <span class="icon"><i class="fas fa-announcement"></i></span>
+                   <a  id="announcement" href="<?php echo urlroot; ?>/System_manager/announcements">
+                       <span class="icon"><i class="fas fa-bullhorn"></i></span>
                        <span class="item">Announcements</span>
                    </a>
                </li>
