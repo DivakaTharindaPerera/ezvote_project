@@ -600,7 +600,8 @@ class Elections extends Controller
                 }
                     
             } catch (Exception $e) {
-                echo json_encode(array('msg' => 'error occured.. '.$e ));
+                $data['msg'] = 'Error occured. Try again later...'.$e;
+                echo json_encode($data);
                 return;
             }
         }
@@ -622,6 +623,63 @@ class Elections extends Controller
                 }else{
                     die('Something went wrong');
                 }
+            }
+        }
+    }
+
+    public function addSingleVoter(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            try {
+                $dataset = json_decode(file_get_contents('php://input'), true);
+                $data = [
+                    'msg' => 'success',
+                    'electionId' => $dataset['id'],
+                    'name' => $dataset['name'],
+                    'email' => $dataset['email'],
+                    'value' => $dataset['value'],
+                ];
+
+                if($this->userModel->findUserByEmail($data['email'])){
+                    $uid = $this->userModel->getUserByEmail($data['email'])->UserId;
+                    $data['id'] = $uid;
+                    if($this->voterModel->findRegVoterByUserIdAndElectionId($uid, $data['electionId'])){
+                        $data['msg'] = 'A voter with this email already registered for this election';
+                        echo json_encode($data);
+                        return;
+
+                    }else{
+                        if($this->voterModel->insertIntoRegVoters($data)){
+                            echo json_encode($data);
+                            return;
+                        }else{
+                            $data['msg'] = "Something went wrong. Try again later...";
+                            echo json_encode($data);
+                            return;
+                        }
+                    }
+                }else{
+                    if($this->voterModel->findUnRegVoterByEmailAndElectionId($data['email'], $data['electionId'])){
+                        $data['msg'] = 'A voter with this email already registered for this election';
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        if($this->voterModel->insertIntoUnRegVoters($data)){
+                            echo json_encode($data);
+                            return;
+                        }else{
+                            $data['msg'] = "Something went wrong. Try again later...";
+                            echo json_encode($data);
+                            return;
+                        }
+                    }
+                }
+
+            } catch (Exception $e) {
+                $data['msg'] = 'Error occured. Try again later...'.$e;
+                echo json_encode($data);
+                return;
             }
         }
     }
