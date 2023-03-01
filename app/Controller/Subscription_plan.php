@@ -1,5 +1,4 @@
 <?php
-session_start();
 class Subscription_plan extends Controller
 {
     private $SubscriptionModel;
@@ -59,7 +58,7 @@ class Subscription_plan extends Controller
                 $election_limit = $_POST['box-3'];
             }
             else{
-                $election_limit = 'NULL';
+                $election_limit = NULL;
             }
             $cur_Date = date("Y-m-d");
             $manager_ID = $_SESSION['manager_ID'];
@@ -116,24 +115,38 @@ class Subscription_plan extends Controller
                 $election_limit = $_POST['box-3'];
             }
             else{
-                $election_limit = 'NULL';
+                $election_limit = NULL;
             }
             $cur_Date = date("Y-m-d");
             $manager_ID = $_SESSION['manager_ID'];
 
             $res = $this->SubscriptionModel->updateSubscriptionPlan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID);
 
-
-
             if($res){
                 header("Location: /ezvote/System_manager/dashboard");
             }
             else{
-
-                header("Location: /ezvote/System_manager/dashboard");
-
+                header("Location: /ezvote/Subscription_plan/update_process");
             }
 
+        }
+    }
+
+    public function edit_process($plan){
+        if(!$this->isLoggedIn()){
+            $this->view('Sys_manager/Sysmanager_login');
+        }else{
+            
+            $discount = $_POST['Discount'];
+
+            $res = $this->SubscriptionModel->editSubscriptionDiscount($plan,$discount);
+
+            if($res){
+                header("Location: /ezvote/Subscription_plan/sales_subscription");
+            }
+            else{
+                header("Location: /ezvote/Subscription_plan/edit_process");
+            }
         }
     }
 
@@ -173,7 +186,7 @@ class Subscription_plan extends Controller
             $data = $this->SubscriptionModel ->saleSubscriptionPlan();
             
             $this->view('Sys_manager/subscription_sales',$data);    
-        }
+        } 
     }
 
     public function create_subscription(){

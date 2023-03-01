@@ -14,6 +14,16 @@
 </head>
 
 <body> -->
+<script>
+
+window.onload = function(){
+    var element = document.getElementById("home");
+    element.classList.remove("active");
+
+    var element = document.getElementById("plan");
+    element.classList.add("active");
+}
+</script>
 
 <div class="main-container max-h-85">
     <div class="w-75 justify-content-center align-items-center">
