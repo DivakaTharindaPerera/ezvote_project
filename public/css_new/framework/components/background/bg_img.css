@@ -2,10 +2,11 @@
     background-image: url(/ezvote/public/img/welcome/about_us.jpg);
     background-size: cover;
     height: 600px;
-    background-position: center; /* Center the image */
+    background-position: center; 
     background-repeat: no-repeat; 
-    /* background-image: rgba(206, 189, 189, 0.621); */
-    /* height: 500px; */
+    width: 94rem;
+    margin-top: 0px;
+
   }
 
   .bg_contact_us {
@@ -15,8 +16,6 @@
     background-position: center; 
     background-repeat: no-repeat; 
     width: 94rem;
-
-    /* height: 500px; */
   }
 
   .bg_pricing {
@@ -26,15 +25,39 @@
     background-position: center; 
     background-repeat: no-repeat; 
     width: 94rem;
-    /* height: 500px; */
   }
 
-  .bg_conference {
-    background-image: url(/ezvote/public/img/welcome/conference.avif);
+  .bg_home {
+    background-image: url(/ezvote/public/img/welcome/about.jpg);
     background-size: cover;
-    height: 800px;
-    width: 100%;
-    background-position: center; /* Center the image */
+    height: 600px;
+    background-position: center; 
     background-repeat: no-repeat; 
-    /* height: 500px; */
+    width: 94rem;
   }
+  
+  .bg_target_users {
+    background-image: url(/ezvote/public/img/welcome/target_users.jpg);
+    background-size: cover;
+    height: 600px;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 94rem;
+    padding-top:-100px;
+    filter: brightness(70%);
+  }
+
+  .bg_imgs {
+    /* background-image: url(/ezvote/public/img/welcome/pricing.jpg); */
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    filter: brightness(70%);
+    /* display: block; */
+
+    }
+
+    /* .bg_imgs:hover{
+       background-color: white;
+    transition: background-color 0.5s ease;
+    } */

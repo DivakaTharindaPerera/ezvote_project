@@ -25,17 +25,15 @@
                 <div class="d-flex justify-content-center mt-1 px-1">
                     <button type="submit" class="btn btn-primary" style="min-width: 250px">SIGN IN</button>
                 </div>
-                <div class="d-flex justify-content-center mt-1 px-1">
-                    <button type="submit" class="btn bg-white text-center" style="min-width: 250px">
-                        <img src="<?php echo urlroot;?>/public/img/google.png" alt="" style="max-width: 30px; max-height: 30px" class="mx-1">SIGN IN WITH GOOGLE</button>
-                </div>
+<!--                <div class="d-flex justify-content-center mt-1 px-1">-->
+<!--                    <button type="submit" class="btn bg-white text-center" style="min-width: 250px">-->
+<!--                        <img src="--><?php //echo urlroot;?><!--/public/img/google.png" alt="" style="max-width: 30px; max-height: 30px" class="mx-1">SIGN IN WITH GOOGLE</button>-->
+<!--                </div>-->
                 <div class="justify-content-center my-1">
-                    <p class="text-center">Don't have an account? <a href="" class="nav-link-text">SignUp</a>
+                    <p class="text-center">Don't have an account? <a href="ezvote/pages/register" class="nav-link-text">SignUp</a>
                 </div>
         </form>
         </div>
     </div>
 </div>
-
-
 <?php require approot.'/View/inc/footer.php'; ?>

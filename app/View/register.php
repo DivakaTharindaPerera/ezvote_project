@@ -37,7 +37,7 @@
                     </div>
                 </form>
                 <div class="justify-content-center my-1">
-                    <p class="text-center">Already have an account? <a href="" class="nav-link-text">LogIn</a>
+                    <p class="text-center">Already have an account? <a href="ezvote/pages/login" class="nav-link-text">LogIn</a>
                 </div>
             </div>
 

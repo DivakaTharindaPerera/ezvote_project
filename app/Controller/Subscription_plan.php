@@ -1,4 +1,5 @@
 <?php
+session_start();
 class Subscription_plan extends Controller
 {
     private $SubscriptionModel;
@@ -70,6 +71,7 @@ class Subscription_plan extends Controller
             }
             else{
                 header("Location: /ezvote/Subscription_plan/create_process");
+
             }
 
         }

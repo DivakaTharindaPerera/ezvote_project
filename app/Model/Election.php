@@ -108,5 +108,78 @@ class Election extends Controller{
         }
         
     }
+
+    public function updateElection($data){
+        // $data=[
+        //     "id"=>trim($_POST['id']),
+        //     "title"=>trim($_POST['title']),
+        //     "org"=>trim($_POST['org']),
+        //     "desc"=>trim($_POST['desc']),
+
+        //     "esdate"=>trim($_POST['EstartDate']),
+        //     "eedate"=>trim($_POST['EendDate']),
+        //     "estime"=>trim($_POST['EstartTime']),
+        //     "eetime"=>trim($_POST['EendTime']),
+
+        //     "osdate"=>trim($_POST['OstartDate']),
+        //     "oedate"=>trim($_POST['OendDate']),
+        //     "ostime"=>trim($_POST['OstartTime']),
+        //     "oetime"=>trim($_POST['OendTime']),
+
+        //     "status"=>trim($_POST['stat']),
+
+        //     "nomi"=>trim($_POST['nomi']),
+        //     "nomidesc"=>trim($_POST['nomiDesc']),
+
+        //     "ostat"=>trim($_POST['ostat'])
+        // ];
+
+        $this->db->query(
+                "UPDATE Election SET 
+                OrganizationName = :1,
+                Title = :2,
+                StartDate = :3,
+                EndDate = :4,
+                Description = :5,
+                StatVisibality = :6,
+                SelfNomination = :7,
+                StartTime = :8,
+                EndTime = :9,
+                ObjectionStatus = :10,
+                ObjectionStartDate = :11,
+                ObjectionEndDate = :12,
+                ObjectionStartTime = :13,
+                ObjectionEndTime = :14,
+                NominationDescription = :15
+                WHERE ElectionId = :16"
+            );
+
+        $this->db->bind(':1', $data['org']);
+        $this->db->bind(':2', $data['title']);
+        $this->db->bind(':3', $data['esdate']);
+        $this->db->bind(':4', $data['eedate']);
+        $this->db->bind(':5', $data['desc']);
+        $this->db->bind(':6', $data['status']);
+        $this->db->bind(':7', $data['nomi']);
+        $this->db->bind(':8', $data['estime']);
+        $this->db->bind(':9', $data['eetime']);
+        $this->db->bind(':10', $data['ostat']);
+        $this->db->bind(':11', $data['osdate']);
+        $this->db->bind(':12', $data['oedate']);
+        $this->db->bind(':13', $data['ostime']);
+        $this->db->bind(':14', $data['oetime']);
+        $this->db->bind(':15', $data['nomidesc']);
+        $this->db->bind(':16', $data['id']);
+
+        try {
+            $this->db->execute();
+            
+            return true;
+            
+        } catch (Exception $e) {
+            echo $e;
+            return false;
+        }
+    }
         
 }

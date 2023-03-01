@@ -5,7 +5,7 @@ require approot.'/View/inc/sidebar-new.php';
 ?>
 
 <div class="main-container">
-    <div id="Election" class="w-95 align-center h-inherit d-flex flex-column p-1">
+    <div id="Election" class="w-95 align-center d-flex flex-column p-1 " style="min-height: 92%">
         <div class="d-flex flex-column w-75 justify-content-start align-items-center">
             <div class="title">Welfare Organizing Committee Election - 2022 / 2023 </div>
             <div id="desc-reg" class="w-50 d-flex flex-column px-1 align-items-center bg-white border-radius-2">
@@ -29,15 +29,15 @@ require approot.'/View/inc/sidebar-new.php';
             </div>
         </div>
 <!--        <hr class="w-100 mt-1">-->
-        <div style="display: none" id="content" class="flex-column w-80 ">
+        <div id="content" class="flex-column w-80 ">
             <div id="scheduled" class="mt-1 d-flex justify-content-evenly">
                 <div id="from" class="card">
                     <div class="justify-content-center sub-title mb-1">Commencing</div>
                     <div class="mb-1">
-                        Date:<?php getdate()?>
+                        Date:2023/03/03
                     </div>
                     <div class="justify-content-start mb-1">
-                        &emsp14;Time:<?php gettimeofday()?>
+                        &emsp14;Time: 10 A.M.
                     </div>
                     <!--                From : <span>01/02/2023   18.30 </span>-->
                 </div>
@@ -45,10 +45,10 @@ require approot.'/View/inc/sidebar-new.php';
                 <div id="to" class="card">
                     <div class="justify-content-center sub-title mb-1">Ending</div>
                     <div class=" mb-1">
-                        Date:<?php getdate()?>
+                        Date:2023/03/03
                     </div>
                     <div class="justify-content-start mb-1">
-                        &emsp14;Time:<?php gettimeofday()?>
+                        &emsp14;Time: 12 P.M.
                     </div>
                     <!--                To : <span>01/02/2023   20.30 </span>-->
                 </div>
@@ -68,7 +68,7 @@ require approot.'/View/inc/sidebar-new.php';
                     Candidates
                 </div>
                 <div id="competitors" class="d-flex flex-column w-100">
-                    <div id="positions" class="d-flex w-100 flex-wrap" style="gap: 2rem">
+                    <div id="positions" class="d-flex w-100 flex-wrap mb-2" style="gap: 2rem">
                         <div id="president" class="d-flex flex-column w-45" style="gap: 0.2rem">
                             <div class="sub-title">President</div>
                             <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
@@ -100,7 +100,7 @@ require approot.'/View/inc/sidebar-new.php';
                                             </form>
                                         </div>
                                     </div>
-                                    <button class=" btn btn-primary">View</button>
+                                    <a href="<?php echo urlroot;?>/Voters/viewObjections" class="btn btn-primary">View</a>
                                 </div>
                             </div>
                             <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">

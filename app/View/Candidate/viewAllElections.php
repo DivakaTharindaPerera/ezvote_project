@@ -43,7 +43,7 @@
         </div>
 
         <div class="px-5">
-            <form action="#" method="post">
+            <form action="" method="post">
                 <div class="m-5"></div>
             <button type="submit" class="btn bg-primary text-white m-1 text-lg w-100">Elections</button><br><br>
             <button type="submit" class="btn bg-primary text-white m-1 text-lg w-100">My Elections</button><br><br>

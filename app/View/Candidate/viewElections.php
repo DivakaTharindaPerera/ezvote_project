@@ -7,16 +7,16 @@
     <!-- Ongoing, upcoming and recent elections -->
     <div class="px-5" style="margin-left:200px;">
             <h2>Ongoing Elections</h2>
-            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5 " style="box-shadow: 5px 10px;" >
+            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5 " style="box-shadow: 5px 5px;" >
                 <p class="px-1" style="width:500px;">Welfare board election 2022 
-                <button type="submit" class="btn bg-primary text-white w-5 " style="margin:10px">Vote</button>
+                <button type="submit" class="btn bg-primary text-white" style="margin-bottom:10px; margin-left:500px;">Vote</button>
                 </p>
             </div>
 
             <h2>Upcoming Elections</h2>
-            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 10px;">
+            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 5px;">
                 <p class="px-1" >UCSC Union election 2022
-                <button type="submit" class="btn bg-primary text-white " style="margin:10px" onclick="openPopup()">Details</button>
+                <button type="submit" class="btn bg-primary text-white " style="margin:10px;  margin-left:300px;" onclick="openPopup()">Details</button>
                 </p>
                 <div class="dialog-box-outer" id="popup">
                                     <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
@@ -44,25 +44,25 @@ We expect the meeting will last about 2.5 hours.
                                     </div>
                                 </div>
             </div>
-            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 10px;">
+            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 5px;">
                 <p class="px-1">Monthly stock preferences 2022
-                <button type="submit" class="btn bg-primary text-white" style="margin:10px" onclick="openPopup()">Details</button>
+                <button type="submit" class="btn bg-primary text-white" style="margin:10px; margin-left:265px;" onclick="openPopup()">Details</button>
                 </p>
             </div>
 
             <h2>Recent Elections</h2>
-            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 10px;">
+            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 5px;">
                 <p class="px-1">UCSC Union election 2021
-                    <button type="submit" class="btn bg-primary text-white" style="margin:10px">Results</button></p>
+                    <button type="submit" class="btn bg-primary text-white" style="margin:10px; margin-left:300px;">Results</button></p>
             </div>
-            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 10px;">
+            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 5px;">
                 <p class="px-1">Welfare board election 2021
-                <button type="submit" class="btn bg-primary text-white" style="margin:10px">Results</button>
+                <button type="submit" class="btn bg-primary text-white" style="margin:10px; margin-left:295px;">Results</button>
                 </p>
             </div>
-            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 10px;">
+            <div class="m-1 text-dark w-100 border-1 border-dark border-radius-5" style="box-shadow: 5px 5px;">
                 <p class="px-1">Welfare board election 2021
-                <button type="submit" class="btn bg-primary text-white" style="margin:10px">Results</button>
+                <button type="submit" class="btn bg-primary text-white" style="margin:10px; margin-left:295px;">Results</button>
                 </p>
             </div>
         </div>

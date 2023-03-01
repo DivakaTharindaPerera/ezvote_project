@@ -1,51 +1,54 @@
-<?php require approot . '/View/inc/header.php'; ?>
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/css/myElections.css">
-</head>
-<body>
-<div class="wholePage">
-    <div class="top_nav_bar">
-            <?php
-                require_once(approot."/View/topnavbar.php");
-            ?>
-    </div>
-    <div class="pagecontent">
+<?php require approot.'/View/inc/VoterHeader.php';?>
+<?php require approot.'/View/inc/AuthNavbar.php';?>
+<?php require approot.'/View/inc/sidebar-new.php'?>
 
-    <div id="search" class="searchbar">
-        <input type="text" id="searchInput" placeholder="Search for elections" onkeyup="searchElection()">
-    </div>
+<div class="main-container">
+    <div class="d-flex justify-content-center align-items-center title">Created Elections</div>
+    <div class="d-flex mt-1 justify-content-end  ">
+        <div id="search" class="d-flex justify-content-end mx-1 justify-content-end">
+            <input type="text" id="searchInput" placeholder="Search for elections" onkeyup="searchElection()">
+        </div>
 
-    <div id="sort" class="sortElections">
-        <div class="sortContainer">
-            Sort Elections
-            <div>
-                <form action="<?php echo urlroot; ?>/Pages/sortByTitle" method="post">
-                    <select name="sortMethod">
-                        <option value="asc">A-Z</option>
-                        <option value="desc">Z-A</option>
-                        <option value="Dasc">Date Ascending</option>
-                        <option value="Ddesc">Date Descending</option>
-                    </select>
-                    <input type="submit" value="Sort">
-                </form>
-            </div>
+        <div id="sort" class="d-flex mx-1 ">
+
+<!--                Sort Elections-->
+                <div class="d-flex justify-content-center">
+                    <form action="<?php echo urlroot; ?>/Pages/sortByTitle" method="post" class="d-flex justify-content-evenly">
+                        <div>
+                            <label for="sortMethod">Sortings:</label>
+                            <select name="sortMethod" class="bg-secondary border border-1 border-radius-1 w-25 text-center">
+                                <option value="asc">A-Z</option>
+                                <option value="desc">Z-A</option>
+                                <option value="Dasc">Date Ascending</option>
+                                <option value="Ddesc">Date Descending</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" value="Sort" class="btn btn-primary">Filter</button>
+                        </div>
+                    </form>
+                </div>
         </div>
     </div>
-    
-    <div id="elections" class="electionsContainer">
+    <div id="elections" class="d-flex flex-wrap mr-1 ml-3 my-1 min-h-100">
     <?php
-        foreach($data as $row){
-            
-            echo "<div class='electionCard' id='".$row->ElectionId."' >";
-            echo "<div class='electionCardContainer'>";
-            echo "<h4>".$row->Title."</h4><h5>by ".$row->OrganizationName."<h5>";
-            echo "from: ".$row->StartDate." to: ".$row->EndDate;
-            echo "<br><br><a href='".urlroot."/Pages/ViewMyElection/".$row->ElectionId."'><div class='viewBtn'>View</div></a>";
-            echo "</div></div>";
-        }
+        foreach($data as $row):
+        ?>
+            <div class='card electionCard' id='<?=$row->ElectionId?>' >
+            <div class='d-flex flex-column'>
+                <div class="sub-title"><h4><?=$row->Title?></h4></div>
+                <div class="text-xl"><h5> <?=$row->OrganizationName?></h5></div>
+                <div> from: <?=$row->StartDate?> to: <?=$row->EndDate?></div>
+                <a href='<?=urlroot?>/Pages/ViewMyElection/<?=$row->ElectionId?>'>
+                    <span class='btn btn-primary'>View</span></a>
+            </div>
+            </div>
+        <?php
+        endforeach;
     ?>
     </div>
-    </div>
 </div>
+
 
 <script>
     function searchElection(){

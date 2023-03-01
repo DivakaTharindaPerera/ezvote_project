@@ -6,8 +6,8 @@
 <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 <!--    <link rel="stylesheet" href="/ezvote/public/css-new/framework/components/sidebar-new/sidebar.css">-->
 <!--    <title>Discussion</title>-->
-<!--<!--    <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>-->-->
-<!--<!--    <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>-->-->
+<!--    <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>-->
+<!--    <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>-->
 <!--</head>-->
 <!--<body>-->
 
@@ -22,26 +22,44 @@
                 <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
             <div class="profile">
-                <img src="boy.jpg" alt="profile_picture">
-                <h3>John Doe</h3>
-                <p>Blogger</p>
+                <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" alt="profile_picture">
+<!--                <h3>John Doe</h3>-->
+<!--                <p>Blogger</p>-->
             </div>
 
 
 
             <ul>
                 <li>
-                    <a href="#" class="active">
+                    <a href="<?php echo urlroot; ?>/Pages/goHome" class="active">
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span class="item">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?php echo urlroot; ?>/Pages/dashboard">
                         <span class="icon"><i class="fas fa-desktop"></i></span>
                         <span class="item">My Dashboard</span>
                     </a>
                 </li> 
+
+                <!-- create election -->
+                <li>
+                    <a href="<?php echo urlroot; ?>/View/Createelection">
+                        <span class="icon"><i class="fas fa-vote-yea"></i></span>
+                        <span class="item">Create Election</span>
+                    </a>
+                </li>
+
+                <!-- view elections -->
+
+                <li>
+                    <a href="<?php echo urlroot; ?>/View/ViewMyElections">
+                        <span class="icon"><i class="fas fa-clipboard"></i></span>
+                        <span class="item">View My Elections</span>
+                    </a>
+                </li>
+
                 <li>
                     <a href="#">
                         <span class="icon"><i class="fas fa-user-friends"></i></span>
@@ -49,11 +67,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?php echo urlroot;?>/Pages/Objections">
                         <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
                         <span class="item">Objections</span>
                     </a>
                 </li>
+
+                <!-- subscription plans -->
+                <li>
+                    <a href="<?php echo urlroot; ?>/View/subscriptionPlans">
+                        <span class="icon"><i class="fas fa-dollar-sign"></i></span>
+                        <span class="item">Subscription Plans</span>
+                    </a>
                 <li>
                     <a href="#">
                         <span class="icon"><i class="fas fa-cog"></i></span>
