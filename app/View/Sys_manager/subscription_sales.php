@@ -39,19 +39,8 @@ window.onload = function(){
     </div>
     </div>
 
-<!-- <div class="d-flex">
-    <input class="border-primary max-w-50" type="text" placeholder="Search plan......"> -->
-    <!-- <div class="ml-2 mt-1">
-    <p>Sort by</p>
-    </div> -->
-    <!-- <button class="btn btn-primary ml-3">Search</button>
-    </div> -->
-    <!-- <img src="<?php echo urlroot; ?>/public/img/sort.png" /> -->
-<!-- </div> -->
-
-
-<table class="table border border-primary w-95">
-    <tbody>
+<div class="w-100 h-50" style="overflow:auto; height:50vh;">
+<table id= "myTable" class="table border border-primary w-100 h-50">
             <tr class="min-w-75">
             <thead>
             <tr>
@@ -61,17 +50,6 @@ window.onload = function(){
                 <th>Plan Income ($)</th>
                 <th>Discount Details</th>
                 </tr>
-            </thead>
-
-    <tbody>
-
-        <?php
-
-            $arrlength = count($data);
-
-            for($x = 0; $x < $arrlength; $x++) {
-            echo '<tr>
-                <td class="td-1 w-25">'.$data[$x]->planName.'</td>
             </thead>
 
     <tbody>
@@ -104,8 +82,15 @@ window.onload = function(){
                         <label>Discount (%) :</label>
                     <input name="Discount" id="discount-input" class="px-1 border border-black bg-primary w-25" style="border:1px solid black; margin-left:1rem; padding-left: 1rem;" type="number" id="discount" value="">
                     </div>
+                    </div>          
+                    <div class="d-flex flex-row mx-5 my-3">
+                    <div class="justify-content-start">
+                        <button type="submit" class="btn btn-primary ml-5">Save</button>
                     </div>
-                    </div>
+                    <div class="justify-content-end">
+                        <div  onclick="closePopup()" class="btn btn-primary mx-5">cancel</div>
+                    </div></div>
+                    </form>
                     </div>
                     </div>
                     </div>
@@ -120,9 +105,6 @@ window.onload = function(){
 </div>
 </div>
 </div>
-
-<script src="/ezvote/public/js/main.js"></script>
-<script src="/ezvote/public/js/search.js"></script>
 
 <script src="/ezvote/public/js/main.js"></script>
 <script src="/ezvote/public/js/search.js"></script>

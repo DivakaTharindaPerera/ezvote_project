@@ -1,5 +1,4 @@
 <?php
-session_start();
 class Subscription_plan extends Controller
 {
     private $SubscriptionModel;
