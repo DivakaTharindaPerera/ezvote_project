@@ -62,17 +62,17 @@
     <div id="popup-edit-voter-unreg" class="popup-window bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
         <input type="hidden" name="eid" value="<?php echo $data['ID']?>">
         <div class="m-1">
-            <input type="text" name="" id="" value="">
+        Email: <input type="text" name="" id="" value="" class="border-1 w-50">
         </div>
         <div class="m-1">
-            <input type="text" name="" id="" value="">
+        Name: <input type="text" name="" id="" value="" class="border-1 w-50">
         </div>
         <div class="m-1">
-            <input type="number" name="" id="" min="1" value="">
+            Value: <input type="number" name="" id="" min="1" value="" class="border-1 w-20 px-1">
         </div>
         <div class="m-1">
             <button class="btn btn-primary">Save</button>
-            <button class="btn btn-danger ml-1">Cancel</button>
+            <button class="btn btn-danger ml-1" onclick="closeDiv()">Cancel</button>
         </div>
     </div>
 
@@ -95,11 +95,11 @@
                 </div>
                 <div class="buttons mb-1">
                     <!-- for the action butttons -->
-                    <input type="hidden" name="" value="<?php $row->name;?>">
-                    <input type="hidden" name="" value="<?php $row->Email;?>">
-                    <input type="hidden" name="" value="<?php $row->value;?>">
+                    <input type="hidden" name="" value="<?php echo  $row->name;?>">
+                    <input type="hidden" name="" value="<?php echo  $row->Email;?>">
+                    <input type="hidden" name="" value="<?php echo  $row->value;?>">
                     <button class="btn btn-danger mr-1" id="<?php echo $row->Email;?>" onclick="deleteUnregVoter(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
-                    <button class="btn btn-primary" onclick="editVoter()"><i class='fa-sharp fa-solid fa-pen'></i></button>
+                    <button class="btn btn-primary" id="<?php echo $row->Email;?>" onclick="editVoter(this.id)"><i class='fa-sharp fa-solid fa-pen'></i></button>
                 </div>
                 <div>
                     <label class="text-danger">Not yet registered</label>
@@ -128,7 +128,7 @@
                 <div class="buttons mb-1">
                     <!-- for the action butttons -->
                     <button class="btn btn-danger mr-1" id="<?php echo $voter->UserId;?>" onclick="deleteRegVoter(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
-                    <button class="btn btn-primary"><i class='fa-sharp fa-solid fa-pen'></i></button>
+                    <button class="btn btn-primary" id="" onclick="editVoterReg()"><i class='fa-sharp fa-solid fa-pen'></i></button>
                 </div>
             </div>
         <?php
@@ -225,6 +225,7 @@
 
         document.getElementById("popup-delete-voter-unreg").style.display = "none";
         document.getElementById("popup-delete-voter-reg").style.display = "none";
+        document.getElementById("popup-edit-voter-unreg").style.display = "none";
     }
 
     function deleteUnregVoter(email){
@@ -239,6 +240,23 @@
         confirmDiv.getElementsByTagName('input')[1].value = uid;
 
         confirmDiv.style.display = "block";
+    }
+
+    function editVoter(id){
+        var parentDiv = document.getElementById(id).parentElement;
+        var name = parentDiv.getElementsByTagName("input")[0].value;
+        var email = parentDiv.getElementsByTagName("input")[1].value;
+        var value = parentDiv.getElementsByTagName("input")[2].value;
+
+        console.log(name);
+
+        var formDiv = document.getElementById("popup-edit-voter-unreg");
+
+        formDiv.getElementsByTagName("input")[1].value = email;
+        formDiv.getElementsByTagName("input")[2].value = name;
+        formDiv.getElementsByTagName("input")[3].value = value;
+
+        formDiv.style.display = "block";
     }
 </script>
 
