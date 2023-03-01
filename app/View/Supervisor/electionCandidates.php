@@ -99,23 +99,24 @@
             </div>
             
             <!-- to update position -->
-            <div id="popup-update-position" class="popup-window bg-secondary h-50 w-50 text-center border-1" >
+            <div id="popup-update-position" class="popup-window bg-primary min-h-50 w-50 text-center text-light border-1 p-1 overflow-scroll border-radius-2" >
                 <form action="" method="post">
                     <div class="d-flex flex-column">
                         <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
                         <input type="hidden" name="pId" id="pEditId" >
-                        <div class="d-flex flex-column  m-1 text-left">
-                        <label for="cName" class="text-xl">Position Name: </label><input type="text" name="cName" id="pEditName">
+                        <div class="d-flex flex-column mt-1  text-left">
+                        <span class="text-danger text-center text-xl mb-1"></span>
+                        <label for="cName" class="text-xl">Position Name: </label><input type="text" name="cName" id="pEditName" class="text-light border-black">
                         </div>
-                        <div class="d-flex flex-column m-1 text-left">
-                        <label for="cEmail" class="text-xl">Position Description: </label> <textarea name="" id="" cols="20" rows="5" class="border-1"></textarea>
+                        <div class="d-flex flex-column mt-1 text-left">
+                        <label for="cEmail" class="text-xl">Position Description: </label> <textarea name="" id="" cols="20" rows="5" class="border-1 border-radius-1"></textarea>
                         </div>
-                        <div class="d-flex m-1 text-left">
-                        <label for="noOfOptions">No of options: </label><input type="number" class="border-1 p-2" name="noOfOptions" placeholder="No of Options..." min="1">
+                        <div class="d-flex mt-1 text-left">
+                        <label for="noOfOptions">No of options: </label><div class="ml-1"><input type="number" class="border-1 border-radius-1 text-light" name="noOfOptions" placeholder="No of Options..." min="1"></div>
                         </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1" id="updatePositionBtn" ><b>Update</b></button>               
+                    <button type="submit" class="btn btn-light w-15 h-10 m-1 p-1" id="updatePositionBtn" ><b>Update</b></button>               
                     <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
                 </form>
             </div>
@@ -258,6 +259,7 @@
         document.getElementById('positionAddingSuccess').style.display = "none";
         document.getElementById('popup-delete-candidate').style.display = "none";
         document.getElementById('popup-update-position').style.display = "none";
+        document.getElementById('popup-update-position').getElementsByTagName('span')[0].innerHTML = "";
 
     }
 
@@ -346,8 +348,51 @@
 
     document.getElementById('updatePositionBtn').addEventListener('click', (e)=>{
         e.preventDefault();
+        var dataDiv = document.getElementById('popup-update-position');
         
-    })
+        var eId = dataDiv.getElementsByTagName('input')[0].value;
+        var pId = dataDiv.getElementsByTagName('input')[1].value;
+        var pName = dataDiv.getElementsByTagName('input')[2].value;
+        var pDesc = dataDiv.getElementsByTagName('textarea')[0].value;
+        var pNoOfOptions = dataDiv.getElementsByTagName('input')[3].value;
+
+        fetch('<?php  echo urlroot;?>/Elections/updatePosition',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                eId: eId,
+                pId: pId,
+                pName: pName,
+                pDesc: pDesc,
+                pNoOfOptions: pNoOfOptions
+            })
+            
+        })
+            .then(response => {
+                if(response.ok){
+                    return response.json();
+                }else{
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => {
+                var msg = data.msg;
+                console.log(msg);
+
+                if(msg == "success"){
+                    location.reload();
+                }else{
+                    dataDiv.getElementsByTagName('span')[0].innerHTML = msg;
+                    dataDiv.getElementsByTagName('input')[2].focus();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                console.log(error.message);
+            });
+    });
 </script>
 
 <?php require approot . '/View/inc/footer.php'; ?>

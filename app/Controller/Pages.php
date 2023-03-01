@@ -161,6 +161,33 @@
             }
         }
 
+        public function electionVoters($id){
+            if(!$this->isLoggedIn()){
+                redirect('View/login');
+            }else{
+                $electionRow = $this->electionModel->getElectionByElectionId($id);
+                if($electionRow->Supervisor == $_SESSION["UserId"]){
+                    
+
+                    $regVoterRow = $this->voterModel->getRegVotersByElectionId($id);
+                    $unregVoterRow = $this->voterModel->getUnregVotersByElectionId($id);
+                    $users = $this->postModel->getUsers();
+
+                    $data = [
+                        "ID" => $id,
+                        "electionRow" => $electionRow,
+                        "regVoterRow" => $regVoterRow,
+                        "unregVoterRow" => $unregVoterRow,
+                        "users" => $users,
+                    ];
+
+                    $this->view('Supervisor/electionVoters',$data);
+                }else{
+                    echo "<h1 class='text-danger'>Forbidden Access</h1>";
+                }
+            }
+        }
+
         public function electionNominations($id){
             if(!isset($_SESSION["UserId"])){
                 redirect('View/login');
