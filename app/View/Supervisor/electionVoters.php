@@ -32,12 +32,56 @@
             </div>
         </div>
     </div>
+
+    <div id="popup-delete-voter-unreg" class="popup-window bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
+        <form action="<?php echo urlroot;?>/Elections/removeVoter" method="post">
+        <input type="hidden" name="eid" value="<?php echo $data['ID']?>">
+        <input type="hidden" name="email" value="">
+        <Span>
+            <h3 class="mt-1"> Confirm Deleting Voter?</h3>
+            <h3 class="text-danger ml-1 mr-1 mt-1"> You cannot undo this action after clicking 'Confirm'</h3>
+        </Span>
+        <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Confirm</b></button>               
+        <button type="button" onclick="closeDiv()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
+        </form>
+    </div>
+
+    <div id="popup-delete-voter-reg" class="popup-window bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
+        <form action="<?php echo urlroot;?>/Elections/removeVoterReg" method="post">
+        <input type="hidden" name="eid" value="<?php echo $data['ID']?>">
+        <input type="hidden" name="uid" value="">
+        <Span>
+            <h3 class="mt-1"> Confirm Deleting Voter?</h3>
+            <h3 class="text-danger ml-1 mr-1 mt-1"> You cannot undo this action after clicking 'Confirm'</h3>
+        </Span>
+        <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Confirm</b></button>               
+        <button type="button" onclick="closeDiv()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
+        </form>
+    </div>
+
+    <div id="popup-edit-voter-unreg" class="popup-window bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
+        <input type="hidden" name="eid" value="<?php echo $data['ID']?>">
+        <div class="m-1">
+            <input type="text" name="" id="" value="">
+        </div>
+        <div class="m-1">
+            <input type="text" name="" id="" value="">
+        </div>
+        <div class="m-1">
+            <input type="number" name="" id="" min="1" value="">
+        </div>
+        <div class="m-1">
+            <button class="btn btn-primary">Save</button>
+            <button class="btn btn-danger ml-1">Cancel</button>
+        </div>
+    </div>
+
     <div id="votersArea" class="p-1 h-80 overflow-scroll w-100 d-flex flex-wrap align-center justify-content-center mt-1 mb-1">
         <?php 
             foreach($data['unregVoterRow'] as $row){
         ?>
             <div class="card text-center">
-                <div class="mb-1">
+                <div >
                     <h4><?php echo $row->name?></h4>
                 </div>
                 <div class="max-w-95 mb-1">
@@ -49,8 +93,13 @@
                 <div>
 
                 </div>
-                <div class="buttons">
+                <div class="buttons mb-1">
                     <!-- for the action butttons -->
+                    <input type="hidden" name="" value="<?php $row->name;?>">
+                    <input type="hidden" name="" value="<?php $row->Email;?>">
+                    <input type="hidden" name="" value="<?php $row->value;?>">
+                    <button class="btn btn-danger mr-1" id="<?php echo $row->Email;?>" onclick="deleteUnregVoter(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
+                    <button class="btn btn-primary" onclick="editVoter()"><i class='fa-sharp fa-solid fa-pen'></i></button>
                 </div>
                 <div>
                     <label class="text-danger">Not yet registered</label>
@@ -64,7 +113,7 @@
         ?>
 
             <div class="card text-center">
-                <div class="mb-1">
+                <div>
                     <h4><?php echo $user->Fname." ".$user->Lname ?></h4>
                 </div>
                 <div class="max-w-95 mb-1">
@@ -76,8 +125,10 @@
                 <div>
 
                 </div>
-                <div class="buttons">
-                    
+                <div class="buttons mb-1">
+                    <!-- for the action butttons -->
+                    <button class="btn btn-danger mr-1" id="<?php echo $voter->UserId;?>" onclick="deleteRegVoter(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
+                    <button class="btn btn-primary"><i class='fa-sharp fa-solid fa-pen'></i></button>
                 </div>
             </div>
         <?php
@@ -89,6 +140,9 @@
 </div>
 
 <script>
+    //electionId
+    var electionId = document.getElementById("electionId").value;
+
     // to set the variable font size according to the container width...
     var texts = document.getElementsByClassName("Email");
     for(var i = 0; i < texts.length; i++){
@@ -112,6 +166,24 @@
         var email = document.getElementById("insertNewVoter").getElementsByTagName("input")[0].value;
         var name = document.getElementById("insertNewVoter").getElementsByTagName("input")[1].value;
         var value = document.getElementById("insertNewVoter").getElementsByTagName("input")[2].value;
+
+        if(email == ""){
+            document.getElementById("insertNewVoter").getElementsByTagName("span")[0].innerHTML = "Email is required";
+            document.getElementById("insertNewVoter").getElementsByTagName("input")[0].focus();
+            return;
+        }
+
+        if(name == ""){
+            document.getElementById("insertNewVoter").getElementsByTagName("span")[0].innerHTML = "Name is required";
+            document.getElementById("insertNewVoter").getElementsByTagName("input")[1].focus();
+            return;
+        }
+
+        if(value == ""){
+            document.getElementById("insertNewVoter").getElementsByTagName("span")[0].innerHTML = "Value is required";
+            document.getElementById("insertNewVoter").getElementsByTagName("input")[2].focus();
+            return;
+        }
 
         fetch('<?php echo urlroot; ?>/Elections/addSingleVoter',{
             method: 'POST',
@@ -150,7 +222,23 @@
         inputs[inputs.length - 1].value = 1;
         
         document.getElementById("insertNewVoter").style.display = "none";
-        
+
+        document.getElementById("popup-delete-voter-unreg").style.display = "none";
+        document.getElementById("popup-delete-voter-reg").style.display = "none";
+    }
+
+    function deleteUnregVoter(email){
+        var confirmDiv = document.getElementById("popup-delete-voter-unreg");
+        confirmDiv.getElementsByTagName('input')[1].value = email;
+
+        confirmDiv.style.display = "block";
+    }
+
+    function deleteRegVoter(uid){
+        var confirmDiv = document.getElementById("popup-delete-voter-reg");
+        confirmDiv.getElementsByTagName('input')[1].value = uid;
+
+        confirmDiv.style.display = "block";
     }
 </script>
 

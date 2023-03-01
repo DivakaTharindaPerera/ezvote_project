@@ -153,4 +153,40 @@ class Voter extends Controller{
             die();
         }
     }
+
+    public function deleteUnregVoterByEmailAndElectionId($email,$eid){
+        $this->db->query(
+            "DELETE FROM unregistered_voter
+            WHERE ElectionId = :1 AND Email = :2"
+        );
+
+        $this->db->bind(':1', $eid);
+        $this->db->bind(':2', $email);
+
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
+
+    public function deleteRegVoterByUserIdAndElectionId($uid,$eid){
+        $this->db->query(
+            "DELETE FROM registered_voter
+            WHERE ElectionId = :1 AND UserId = :2"
+        );
+
+        $this->db->bind(':1', $eid);
+        $this->db->bind(':2', $uid);
+
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
 }

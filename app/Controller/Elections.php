@@ -651,6 +651,18 @@ class Elections extends Controller
 
                     }else{
                         if($this->voterModel->insertIntoRegVoters($data)){
+                            // $ElectionData = $this->electionModel->getElectionById($data['electionId']);
+                            // //email service
+                            // $data1 = [
+                            //     'email' => $data['email'],
+                            //     'subject' => "ELECTION REQUEST FROM " . $ElectionData->OrganizationName,
+                            //     'body' => "You have been invited to participate as a voter in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". Please login to your account see further infromation about the election."
+                            // ];
+                            // if($this->emailService->sendEmail($data1)){
+                            //     echo json_encode($data);
+                            //     return;
+                            // }
+
                             echo json_encode($data);
                             return;
                         }else{
@@ -680,6 +692,46 @@ class Elections extends Controller
                 $data['msg'] = 'Error occured. Try again later...'.$e;
                 echo json_encode($data);
                 return;
+            }
+        }
+    }
+    
+    public function removeVoter(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $data = [
+                    'eid' => trim($_POST['eid']),
+                    'email' => trim($_POST['email'])
+                ];
+
+                if($this->voterModel->deleteUnregVoterByEmailAndElectionId($data['email'], $data['eid'])){
+                    redirect('Pages/electionVoters/'.$data['eid']);
+                }else{
+                    die('Something went wrong');
+                }
+            }
+        }
+    }
+
+    public function removeVoterReg(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $data = [
+                    'eid' => trim($_POST['eid']),
+                    'uid' => trim($_POST['uid'])
+                ];
+
+                if($this->voterModel->deleteRegVoterByUserIdAndElectionId($data['uid'], $data['eid'])){
+                    redirect('Pages/electionVoters/'.$data['eid']);
+                }else{
+                    die('Something went wrong');
+                }
             }
         }
     }
