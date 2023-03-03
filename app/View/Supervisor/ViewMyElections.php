@@ -41,8 +41,32 @@
                 <div class="sub-title"><h4><?=$row->Title?></h4></div>
                 <div class="text-xl"><h5> <?=$row->OrganizationName?></h5></div>
                 <div> from <br> <?=$row->StartDate." ".$row->StartTime ?> to <br> <?=$row->EndDate." ".$row->EndTime?></div>
-                <a href='<?=urlroot?>/Pages/ViewMyElection/<?=$row->ElectionId?>'>
-                    <span class='btn btn-primary'>View</span></a>
+                
+                <?php 
+                    $end = $row->EndDate." ".$row->EndTime;
+                    $start = $row->StartDate." ".$row->StartTime;
+
+                    $end = strtotime($end);
+                    $start = strtotime($start);
+                    $timenow = strtotime($currentDate);
+                
+                    if($end <= $timenow){
+                        echo "
+                        <div class='text-danger'>Election Ended</div>
+                        <div><a href='".urlroot."/Pages/ViewMyElectionResults/$row->ElectionId'> <span class='btn btn-primary'>Results</span> </a></div>
+                        ";
+                    }else if($end > $timenow && $start < $timenow){
+                        echo "
+                        <div class='text-warning'>Ongoing Election</div>
+                        <div><a href='".urlroot."/Pages/ViewMyElection/$row->ElectionId'> <span class='btn btn-primary'>View</span> </a></div>
+                        ";
+                    }else{
+                        echo "
+                        <div><a href='".urlroot."/Pages/ViewMyElection/$row->ElectionId'> <span class='btn btn-primary'>View</span> </a></div>
+                        ";
+                    }
+                
+                ?>
             </div>
             </div>
         <?php

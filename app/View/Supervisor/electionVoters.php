@@ -6,6 +6,7 @@
     <div id="taskbar" class="d-flex w-90 " >
         <div id="buttons" class="m-1 mr-auto">
             <button class="btn btn-primary" id="addVoterBtn"><b>ADD VOTER</b></button>
+            <a href="<?php echo urlroot?>/Pages/ViewMyElection/<?php echo $data['ID'] ?>"><span class="btn btn-danger">Back</span></a>
         </div>
         <div id="searchBar" class="m-1">
             <input type="text" name="" id="searchInput" placeholder="search for voters...." class="border-1" style="border-radius: 20px;" onkeyup="searchVoter()">
