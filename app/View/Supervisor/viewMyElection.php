@@ -28,7 +28,7 @@
         ?>
     <form action="<?php echo urlroot; ?>/Elections/updateElection" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2 w-100 overflow-y" id="updateForm">
         <div id="btn panel" class="d-flex text-center">
-            <a href="#" class="btn btn-primary m-3"> <div>Voters</div> </a>
+            <a href="<?php echo urlroot;?>/Pages/electionVoters/<?php echo $data['ID']?>" class="btn btn-primary m-3"> <div>Voters</div> </a>
             <a href="<?php echo urlroot;?>/Pages/electionCandidates/<?php echo $data['ID']?>" class="btn btn-primary m-3"> <div>Candidates & Positions</div> </a>
             <a href="<?php echo urlroot;?>/Pages/viewObjections" class="btn btn-primary m-3"> <div>Objections</div> </a>
 
@@ -39,7 +39,7 @@
             Organization: <input type="text" name="org" value="<?php echo $data['electionRow']->OrganizationName; ?>" disabled>
             <div>
                 <div class="text-lg mb-1">Description</div>
-                <textarea name="desc" id="" cols="30" rows="10" class="border-1 w-100 border-radius-1">
+                <textarea name="desc" id="" cols="30" rows="10" class="border-1 w-100 border-radius-1" disabled>
                 <?php echo $data['electionRow']->Description; ?>
                 </textarea>
             </div>

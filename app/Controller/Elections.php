@@ -569,6 +569,44 @@ class Elections extends Controller
         }
     }
 
+    public function updatePosition(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            try {
+                $dataset = json_decode(file_get_contents('php://input'), true);
+                $data = [
+                    'msg' => 'success',
+                    'eid' => $dataset['eId'],
+                    'id' => $dataset['pId'],
+                    'name' => $dataset['pName'],
+                    'desc' => $dataset['pDesc'],
+                    'noOfOptions' => $dataset['pNoOfOptions']
+                ];
+
+                $positionList = $this->positionModel->getElectionPositionByElectionId($data['eid']);
+                foreach($positionList as $position){
+                    if($position->positionName == $data['name']){
+                        $data['msg'] = 'A position with the same name already exists. Try a different name.';
+                        echo json_encode($data);
+                        return;
+                    }
+                }
+                if($this->positionModel->updatePosition($data)){
+                    echo json_encode($data);
+                }else{
+                    $data['msg'] = 'Error occured. Try again later...';
+                    echo json_encode($data);
+                }
+                    
+            } catch (Exception $e) {
+                $data['msg'] = 'Error occured. Try again later...'.$e;
+                echo json_encode($data);
+                return;
+            }
+        }
+    }
+
     public function deletePosition(){
         if(!$this->isLoggedIn()){
             $this->view('login');
@@ -585,6 +623,141 @@ class Elections extends Controller
                 }else{
                     die('Something went wrong');
                 }
+            }
+        }
+    }
+
+    public function addSingleVoter(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            try {
+                $dataset = json_decode(file_get_contents('php://input'), true);
+                $data = [
+                    'msg' => 'success',
+                    'electionId' => $dataset['id'],
+                    'name' => $dataset['name'],
+                    'email' => $dataset['email'],
+                    'value' => $dataset['value'],
+                ];
+
+                if($this->userModel->findUserByEmail($data['email'])){
+                    $uid = $this->userModel->getUserByEmail($data['email'])->UserId;
+                    $data['id'] = $uid;
+                    if($this->voterModel->findRegVoterByUserIdAndElectionId($uid, $data['electionId'])){
+                        $data['msg'] = 'A voter with this email already registered for this election';
+                        echo json_encode($data);
+                        return;
+
+                    }else{
+                        if($this->voterModel->insertIntoRegVoters($data)){
+                            // $ElectionData = $this->electionModel->getElectionById($data['electionId']);
+                            // //email service
+                            // $data1 = [
+                            //     'email' => $data['email'],
+                            //     'subject' => "ELECTION REQUEST FROM " . $ElectionData->OrganizationName,
+                            //     'body' => "You have been invited to participate as a voter in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". Please login to your account see further infromation about the election."
+                            // ];
+                            // if($this->emailService->sendEmail($data1)){
+                            //     echo json_encode($data);
+                            //     return;
+                            // }
+
+                            echo json_encode($data);
+                            return;
+                        }else{
+                            $data['msg'] = "Something went wrong. Try again later...";
+                            echo json_encode($data);
+                            return;
+                        }
+                    }
+                }else{
+                    if($this->voterModel->findUnRegVoterByEmailAndElectionId($data['email'], $data['electionId'])){
+                        $data['msg'] = 'A voter with this email already registered for this election';
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        if($this->voterModel->insertIntoUnRegVoters($data)){
+                            echo json_encode($data);
+                            return;
+                        }else{
+                            $data['msg'] = "Something went wrong. Try again later...";
+                            echo json_encode($data);
+                            return;
+                        }
+                    }
+                }
+
+            } catch (Exception $e) {
+                $data['msg'] = 'Error occured. Try again later...'.$e;
+                echo json_encode($data);
+                return;
+            }
+        }
+    }
+    
+    public function removeVoter(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $data = [
+                    'eid' => trim($_POST['eid']),
+                    'email' => trim($_POST['email'])
+                ];
+
+                if($this->voterModel->deleteUnregVoterByEmailAndElectionId($data['email'], $data['eid'])){
+                    redirect('Pages/electionVoters/'.$data['eid']);
+                }else{
+                    die('Something went wrong');
+                }
+            }
+        }
+    }
+
+    public function removeVoterReg(){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $data = [
+                    'eid' => trim($_POST['eid']),
+                    'uid' => trim($_POST['uid'])
+                ];
+
+                if($this->voterModel->deleteRegVoterByUserIdAndElectionId($data['uid'], $data['eid'])){
+                    redirect('Pages/electionVoters/'.$data['eid']);
+                }else{
+                    die('Something went wrong');
+                }
+            }
+        }
+    }
+    public function editUnregVoter(){
+        $dataset = json_decode(file_get_contents('php://input'), true);
+        $data = [
+            'msg' => 'success',
+            'eid' => $dataset['eid'],
+            'oldEmail' => $dataset['oldEmail'],
+            'name' => $dataset['name'],
+            'email' => $dataset['email'],
+            'value' => $dataset['value'],
+        ];
+
+        if( $data['oldEmail'] != $data['email'] && $this->voterModel->findUnRegVoterByEmailAndElectionId($data['email'], $data['eid'])){
+            $data['msg'] = 'A voter with this email already registered for this election';
+            echo json_encode($data);
+            return;
+        }else{
+            if($this->voterModel->editUnregVoter($data)){
+                echo json_encode($data);
+                return;
+            }else{
+                $data['msg'] = "Something went wrong. Try again later...";
+                echo json_encode($data);
+                return;
             }
         }
     }

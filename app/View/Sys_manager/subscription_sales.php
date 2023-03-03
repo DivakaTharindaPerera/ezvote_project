@@ -2,6 +2,17 @@
 <?php require approot . '/View/inc/ManagerNavbar.php'; ?>
 <?php require approot . '/View/inc/manager_sidebar.php'; ?>
 
+<script>
+
+window.onload = function(){
+    var element = document.getElementById("home");
+    element.classList.remove("active");
+
+    var element = document.getElementById("sale");
+    element.classList.add("active");
+}
+</script>
+
     <div class="main-container max-h-85">
     <div class="d-flex flex-column justify-content-center align-items-center ">
         <div class="subscription">
@@ -27,16 +38,6 @@
         </div>
     </div>
     </div>
-
-<!-- <div class="d-flex">
-    <input class="border-primary max-w-50" type="text" placeholder="Search plan......"> -->
-    <!-- <div class="ml-2 mt-1">
-    <p>Sort by</p>
-    </div> -->
-    <!-- <button class="btn btn-primary ml-3">Search</button>
-    </div> -->
-    <!-- <img src="<?php echo urlroot; ?>/public/img/sort.png" /> -->
-<!-- </div> -->
 
 <div class="w-100 h-50" style="overflow:auto; height:50vh;">
 <table id= "myTable" class="table border border-primary w-100 h-50">
@@ -66,69 +67,39 @@
                 <td class="td-4">'.$data[$x]->Price * $data[$x]->userCount.'</td>
                 </div>
                 <td class="td-5"><div class="d-flex flex-column">
-                    <div class="d-flex flex-row text-black">
+                    <div class="d-flex flex-row text-info">
                          Discount: '.$data[$x]->Discount.'%
-                    </div>
-                    <button class="btn btn-info my-1" onclick="openPopup()">EDIT</button>
+                    </div> '; ?>
+
+                    <button class="btn btn-info my-1" onclick="document.getElementById('discount-input').value = '<?php echo $data[$x]->Discount ?>';document.getElementById('update').action='./edit_process/<?php echo $data[$x]->planID; ?>';  openPopup();">EDIT</button>
                     <div class="dialog-box-outer" id="popup">
                     <div class="popup mx-1 my-1 px-1 py-1 min-w-20 min-h-25">
+                    <div class="title text-center">Edit Discount</div>
+
+                    <form id="update" action="./edit_process/" method="POST">
                     <div class="my-4 w-100 d-flex flex-row justify-content-center align-items-center">
                         <div class="text-black w-50">
                         <label>Discount (%) :</label>
-                        </div>
-                    <div class="mr-2 text-black w-40 h-50 border border-primary">
-                    <input class="px-1 bg-primary w-50" type="number" id="discount">
+                    <input name="Discount" id="discount-input" class="px-1 border border-black bg-primary w-25" style="border:1px solid black; margin-left:1rem; padding-left: 1rem;" type="number" id="discount" value="">
                     </div>
                     </div>          
-                    <div class="d-flex flex-row mx-5 my-3" onclick="closePopup()">
+                    <div class="d-flex flex-row mx-5 my-3">
                     <div class="justify-content-start">
-                        <div class="btn btn-primary ">Save</div>
+                        <button type="submit" class="btn btn-primary ml-5">Save</button>
                     </div>
                     <div class="justify-content-end">
-                        <div class="btn btn-primary mx-5">cancel</div>
+                        <div  onclick="closePopup()" class="btn btn-primary mx-5">cancel</div>
                     </div></div>
+                    </form>
                     </div>
                     </div>
                     </div>
                 </td>
-            </tr>';
+            </tr>
+            <?php 
             }
         ?>
 
-       <!-- <tr class="min-w-75">
-       <td class="td-1 w-25">Starter Plan</td>
-                <div class="d-flex flex-column">
-                <td class="td-2">49</td>  
-                <td class="td-3">40</td>
-                <td class="td-4">1960</td>
-                </div>
-                <td class="td-5"><div class="d-flex flex-column">
-                    <div class="d-flex flex-row text-black">
-                         Discount: 20%
-                    </div>
-                    <button class="btn btn-info my-1" onclick="openPopup()">EDIT</button>
-                    <div class="dialog-box-outer" id="popup">
-                    <div class="popup mx-1 my-1 px-1 py-1 min-w-20 min-h-25">
-                    <div class="my-4 w-100 d-flex flex-row justify-content-center align-items-center">
-                        <div class="text-black w-50">
-                        <label>Discount (%) :</label>
-                        </div>
-                    <div class="mr-3 text-black w-40 h-50 border border-primary">
-                    <input class="px-1 bg-primary w-50" type="number" id="discount">
-                    </div>
-                    </div>          
-                    <div class="d-flex flex-row mx-5 my-3" onclick="closePopup()">
-                    <div class="justify-content-center align-items-center">
-                        <div class="btn btn-primary ">Save</div>
-                    </div>
-                    <div class="justify-content-center align-items-center">
-                        <div class="btn btn-primary mx-5" style="margin-left: 150px;">cancel</div>
-                    </div></div>
-                    </div>
-                    </div>
-                    </div>
-                    </td>
-                </tr> -->
     </tbody>
 </table>
 </div>
