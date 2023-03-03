@@ -8,7 +8,7 @@
             <button class="btn btn-primary" id="addVoterBtn"><b>ADD VOTER</b></button>
         </div>
         <div id="searchBar" class="m-1">
-            <input type="text" name="" id="searchInput" placeholder="search for voters...." class="border-1" style="border-radius: 20px;">
+            <input type="text" name="" id="searchInput" placeholder="search for voters...." class="border-1" style="border-radius: 20px;" onkeyup="searchVoter()">
         </div>
     </div>
     <div>
@@ -341,6 +341,25 @@
                 }
             })
             .catch(error => console.log(error));
+    }
+
+    function searchVoter(){
+        var input = document.getElementById("searchInput").value;
+        var filter = input.toUpperCase();
+
+        var voters = document.getElementById("votersArea").getElementsByClassName("card");
+
+        for(var i =0; i<voters.length; i++){
+            var name = voters[i].getElementsByTagName("h4")[0].innerText;
+            var email = voters[i].getElementsByTagName("label")[0].innerText;
+
+            if(name.toUpperCase().indexOf(filter) > -1 || email.toUpperCase().indexOf(filter) > -1){
+                voters[i].style.display = "";
+            }else{
+                voters[i].style.display = "none";
+            }
+        }
+
     }
 </script>
 
