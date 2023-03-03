@@ -33,14 +33,40 @@
     <div id="elections" class="d-flex flex-wrap mr-1 ml-3 my-1 min-h-100">
     <?php
         foreach($data as $row):
+            date_default_timezone_set('Asia/Colombo');
+            $currentDate = date('Y-m-d H:i:s');
         ?>
             <div class='card electionCard' id='<?=$row->ElectionId?>' >
             <div class='d-flex flex-column'>
                 <div class="sub-title"><h4><?=$row->Title?></h4></div>
                 <div class="text-xl"><h5> <?=$row->OrganizationName?></h5></div>
-                <div> from: <?=$row->StartDate?> to: <?=$row->EndDate?></div>
-                <a href='<?=urlroot?>/Pages/ViewMyElection/<?=$row->ElectionId?>'>
-                    <span class='btn btn-primary'>View</span></a>
+                <div> from <br> <?=$row->StartDate." ".$row->StartTime ?> to <br> <?=$row->EndDate." ".$row->EndTime?></div>
+                
+                <?php 
+                    $end = $row->EndDate." ".$row->EndTime;
+                    $start = $row->StartDate." ".$row->StartTime;
+
+                    $end = strtotime($end);
+                    $start = strtotime($start);
+                    $timenow = strtotime($currentDate);
+                
+                    if($end <= $timenow){
+                        echo "
+                        <div class='text-danger'>Election Ended</div>
+                        <div><a href='".urlroot."/Pages/ViewMyElectionResults/$row->ElectionId'> <span class='btn btn-primary'>Results</span> </a></div>
+                        ";
+                    }else if($end > $timenow && $start < $timenow){
+                        echo "
+                        <div class='text-warning'>Ongoing Election</div>
+                        <div><a href='".urlroot."/Pages/ViewMyElection/$row->ElectionId'> <span class='btn btn-primary'>View</span> </a></div>
+                        ";
+                    }else{
+                        echo "
+                        <div><a href='".urlroot."/Pages/ViewMyElection/$row->ElectionId'> <span class='btn btn-primary'>View</span> </a></div>
+                        ";
+                    }
+                
+                ?>
             </div>
             </div>
         <?php
@@ -54,12 +80,12 @@
     function searchElection(){
         var input = document.getElementById("searchInput").value;
         var filter = input.toUpperCase();
-        console.log(filter);
+        // console.log(filter);
         var elections = document.getElementById("elections");
         var electionCards = elections.getElementsByClassName("electionCard");
         for(var i =0; i < electionCards.length; i++){
             var electionCard = electionCards[i];
-            console.log(electionCard);
+            // console.log(electionCard);
             var electionTitle = electionCard.getElementsByTagName("h4")[0];
             var electionOrg = electionCard.getElementsByTagName("h5")[0];
 

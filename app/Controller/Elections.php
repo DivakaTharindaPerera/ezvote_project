@@ -735,4 +735,30 @@ class Elections extends Controller
             }
         }
     }
+    public function editUnregVoter(){
+        $dataset = json_decode(file_get_contents('php://input'), true);
+        $data = [
+            'msg' => 'success',
+            'eid' => $dataset['eid'],
+            'oldEmail' => $dataset['oldEmail'],
+            'name' => $dataset['name'],
+            'email' => $dataset['email'],
+            'value' => $dataset['value'],
+        ];
+
+        if( $data['oldEmail'] != $data['email'] && $this->voterModel->findUnRegVoterByEmailAndElectionId($data['email'], $data['eid'])){
+            $data['msg'] = 'A voter with this email already registered for this election';
+            echo json_encode($data);
+            return;
+        }else{
+            if($this->voterModel->editUnregVoter($data)){
+                echo json_encode($data);
+                return;
+            }else{
+                $data['msg'] = "Something went wrong. Try again later...";
+                echo json_encode($data);
+                return;
+            }
+        }
+    }
 }
