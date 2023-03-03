@@ -189,4 +189,26 @@ class Voter extends Controller{
             return false;
         }
     }
+
+    public function editUnregVoter($data){
+        $this->db->query(
+            "UPDATE unregistered_voter
+            SET name = :1, value = :2, Email = :5
+            WHERE ElectionId = :3 AND Email = :4"
+        );
+
+        $this->db->bind(':1', $data['name']);
+        $this->db->bind(':2', $data['value']);
+        $this->db->bind(':3', $data['eid']);
+        $this->db->bind(':4', $data['oldEmail']);
+        $this->db->bind(':5', $data['email']);
+
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
 }
