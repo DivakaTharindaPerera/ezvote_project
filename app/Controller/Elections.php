@@ -21,18 +21,26 @@ class Elections extends Controller
     }
 
     public function sendEmail(){
-        echo "landed correctly";
         if($_SERVER["REQUEST_METHOD"] == 'POST'){
             $data = [
                 'email' => trim($_POST['email']),
                 'subject' => trim($_POST['subject']),
                 'body' => trim($_POST['body'])
             ];
-            if($this->emailModel->sendEmail($data)){
-                echo "Email sent";
-            }else{
-                echo "Email not sent";
+            echo "sending emails... Please sit tight....";
+
+            ob_flush();
+            flush();
+
+            for ($i=0; $i < 10 ; $i++) { 
+                if($this->emailModel->sendEmail($data)){
+                    continue;
+                }else{
+                    echo "Email not sent $i";
+                }
             }
+
+            echo "<br>Emails sent successfully";
         } 
     }
     
