@@ -8,17 +8,19 @@ class sendEmails extends Controller{
     }
 
     public function sendEmailNow(){
-        echo "landed correctly";
         if($_SERVER["REQUEST_METHOD"] == 'POST'){
             $data = [
                 'email' => trim($_POST['email']),
                 'subject' => trim($_POST['subject']),
                 'body' => trim($_POST['body'])
             ];
-            if($this->mailModel->sendEmail($data)){
-                echo "Email sent";
-            }else{
-                echo "Email not sent";
+            
+            for ($i=0; $i < 10 ; $i++) { 
+                if($this->mailModel->sendEmail($data)){
+                    echo "Email sent $i+1";
+                }else{
+                    echo "Email not sent $i+1";
+                }
             }
         } 
     }
