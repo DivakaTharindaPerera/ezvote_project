@@ -769,4 +769,18 @@ class Elections extends Controller
             }
         }
     }
+
+    public function removeElection($id){
+        if(!$this->isLoggedIn()){
+            $this->view('login');
+        }else{
+            
+            $electionRow = $this->electionModel->getElectionByElectionId($id);
+            if($electionRow->Supervisor == $_SESSION['UserId']){
+                if($this->electionModel->deleteElection($id)){
+                    redirect('Pages/ViewMyElections');
+                }
+            }
+        }
+    }
 }
