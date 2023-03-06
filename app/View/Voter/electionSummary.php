@@ -3,39 +3,33 @@
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 <div class="main-container">
     <div class="title my-1">
-        <?= $data->Title ?><br>
-        <?= $data->OrganizationName ?>
+        <?= $data['election']->Title ?><br>
+        <?= $data['election']->OrganizationName ?>
     </div>
     <div class="d-flex border-primary border-1 border-radius-2 my-1 text-lg px-2 py-1">
-        Held on <?= $data->EndDate?> at <?= $data->EndTime?>
+        Held on <?= $data['election']->EndDate?> at <?= $data['election']->EndTime?>
     </div>
     <div class="d-flex flex-column my-1">
-        <div class="sub-title ">Elected Candiadtes for positions</div>
+        <div class="sub-title ">Elected Candidates for positions</div>
         <div>
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Position</th>
                     <th scope="col">Candidate</th>
+                    <th scope="col">Position</th>
                     <th scope="col">Votes</th>
                     <th scope="col">Party</th>
                 </tr>
                 </thead>
                 <tbody>
-<!--                --><?php //foreach ($data->positions as $position) { ?>
+                <?php foreach ($data['winners'] as $winner) { ?>
                     <tr>
                         <td>Sandun</td>
                         <td>Secretary</td>
-                        <td>100</td>
+                        <td><?= $winner->NoOfVotes?></td>
                         <td>Heros</td>
                     </tr>
-<tr>
-    <td>Sandun</td>
-    <td>Secretary</td>
-    <td>100</td>
-    <td>Heros</td>
-</tr>
-<!--                --><?php //} ?>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -62,7 +56,8 @@
             datasets: [{
                 label: '# of Votes',
                 data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
+                borderWidth: 1,
+                backgroundColor:'#10558d'
             }]
         },
         options: {
@@ -82,7 +77,8 @@
             datasets: [{
                 label: '# of Votes',
                 data: [12, 19],
-                borderWidth: 1
+                borderWidth: 1,
+                backgroundColor:['#10558d','#ec8a93']
             }]
         },
         options: {

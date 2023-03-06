@@ -6,5 +6,5 @@
     
 
     define('approot', dirname(dirname(__FILE__)));
-    define('urlroot', 'https://localhost/ezvote');
+    define('urlroot', 'http://localhost/ezvote');
     define('siteroot', 'EzVote');

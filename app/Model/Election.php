@@ -161,11 +161,35 @@ class Election extends Controller{
 
     public function getPositionsByElectionId($id){
         $election_Id=$id;
-        $this->db->query("SELECT DISTINCT positionName FROM electionposition WHERE ElectionID ='" .$election_Id. "'" );
-        $this->db->bind(':id', $id);
+        $this->db->query("SELECT DISTINCT ID,positionName FROM electionposition WHERE ElectionID ='" .$election_Id. "'" );
         $row = $this->db->resultSet();
-//        print_r($row);
-//        exit();
+        return $row;
+    }
+
+    public function getCandidatesByElectionId($id)
+    {
+        $election_Id = $id;
+        $this->db->query("SELECT * FROM candidate WHERE electionid ='" . $election_Id . "' order by positionid");
+        $row = $this->db->resultSet();
+        return $row;
+
+    }
+
+    public function getWinnersDetails($id)
+    {
+        $election_Id=1281;
+        $this->db->query("SELECT * FROM votes WHERE electionid ='" . $election_Id ."' order by NoOfVotes Desc" );
+        $row=$this->db->resultSet();
+        return $row;
+    }
+
+    public function getWinnerNames($id)
+    {
+        $candidate_Id=$id;
+        $this->db->query("SELECT candidate.candidateName,electionparty.partyName FROM candidate where candidateId='" .$candidate_Id. "' inner join electionparty on candidate.partyId=electionparty.partyId ");
+        $row=$this->db->resultSet();
+        print_r($row);
+        exit();
         return $row;
     }
 

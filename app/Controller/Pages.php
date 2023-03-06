@@ -145,7 +145,7 @@
                 redirect('View/login');
             }else{
                 $electionRow = $this->electionModel->getElectionByElectionId($id);
-                if($electionRow->Supervisor == $_SESSION["UserId"]){
+//                if($electionRow->Supervisor == $_SESSION["UserId"]){
                     $data = [];
 
                     $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
@@ -158,9 +158,9 @@
                     $data['partyRow'] = $partyRow;
                     
                     $this->view('Supervisor/electionCandidates',$data);
-                }else{
-                    echo "Forbidden Access";
-                }
+//                }else{
+//                    echo "Forbidden Access";
+//                }
             }
         }
 

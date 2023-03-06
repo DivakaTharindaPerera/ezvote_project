@@ -8,6 +8,7 @@ class Objection extends Model
     protected $Respond;
 
     public function AddObjection($data){
+
         $this->db->query('INSERT INTO objection (ObjectionID,Subject,Description,Respond,Action,ElectionID,CandidateID,VoterID) VALUES (:ObjectID,:Subject,:Description,:Respond,:Action,:ElectionID,:CandidateID,:VoterID)');
         //bind values
         $this->db->bind(':ObjectID',$data['objectionID']);
@@ -19,10 +20,18 @@ class Objection extends Model
         $this->db->bind(':CandidateID',$data['CandidateID']);
         $this->db->bind(':VoterID',$data['VoterID']);
         //execute
-        if($this->db->execute()){
-            return true;
-        }else{
-            return false;
+//        if($this->db->execute()){
+//            return true;
+//        }else{
+//
+//            return false;
+//        }
+        try {
+            $this->db->execute();
+//            var_dump('success');
+        } catch (Exception $e) {
+//            return false;
+            throw $e;
         }
     }
 //    {
@@ -44,7 +53,24 @@ class Objection extends Model
         $this->db->query('DELETE FROM objection WHERE ObjectionID=:ObjectionID');
         $this->db->bind(':ObjectionID',$id);
         $this->db->execute();
-}
+    }
+
+    public function showObjectionsByElectionAndCandidateId($electionId,$candidateId)
+    {
+        $this->db->query('SELECT * FROM objection WHERE ElectionID=:ElectionID AND CandidateID=:CandidateID');
+        $this->db->bind(':ElectionID',$electionId);
+        $this->db->bind(':CandidateID',$candidateId);
+        $results=$this->db->resultSet();
+        return $results;
+    }
+
+    public function getCandidateName($id)
+    {
+        $this->db->query('SELECT candidateName FROM candidate WHERE CandidateID=:CandidateID');
+        $this->db->bind(':CandidateID',$id);
+        $row=$this->db->single();
+        return $row;
+    }
 
     /**
      * @return mixed

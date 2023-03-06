@@ -1,10 +1,11 @@
-<?php require approot . '/View/inc/VoterHeader.php'; ?>
+<?php
+require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
 <div class="main-container">
     <div class="d-flex flex-column align-items-center min-h-100">
-        <?php if(empty($r)){ ?>
+        <?php if(empty($data['objections'])){ ?>
             <div class="d-flex justify-content-center">
                 <div class="title">No Objections made by you</div>
             </div>
@@ -12,9 +13,9 @@
         else{?>
             <div class="title">Objections made by you</div>
         <div class="d-flex">
-        <?php foreach ($r as $value){?>
+        <?php foreach ($data['objections'] as $value){?>
             <div class="card" style="min-width: 250px;min-height: 250px">
-                    <div class="text-md"><?php echo $value->CandidateID?></div>
+                    <div class="text-md"><?php echo $data['CandidateName']?></div>
                     <div class=""><img src="/ezvote/public/img/profile.jpg" style="max-height: 100px;max-width: 100px" alt="" id="profile-pic"></div>
                     <div class="d-flex flex-column">
                         <div class="d-flex flex-column">
