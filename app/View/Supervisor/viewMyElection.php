@@ -138,7 +138,8 @@
         
     </form>
     <div class="text-center d-flex justify-content-end mb-1 mr-1" id="buttonContainer">
-        <button type="button" onclick="edit()" class="btn btn-primary w-30 py-1" id="editBtn">EDIT</button>
+        <button type="button" onclick="edit()" class="btn btn-primary w-30 py-1" id="editBtn"><b>EDIT</b></button>
+        <a href="<?php echo urlroot; ?>/Elections/removeElection/<?php echo $data['ID'];?>" class="btn btn-danger ml-1"><b>Delete Election</b></a>
     </div>
     </div>
 <script src="<?php echo urlroot; ?>/js/createElection.js"></script>
