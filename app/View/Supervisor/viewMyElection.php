@@ -15,7 +15,7 @@
             <a href="<?php echo urlroot; ?>/Pages/electionCandidates/<?php echo $data['ID'] ?>" class="btn btn-primary m-3">
                 <div>Candidates & Positions</div>
             </a>
-            <a href="<?php echo urlroot; ?>/Pages/viewObjections" class="btn btn-primary m-3">
+            <a href="<?php echo urlroot; ?>/Pages/viewObjections/<?php echo $data['ID'] ?>" class="btn btn-primary m-3">
                 <div>Objections</div>
             </a>
 

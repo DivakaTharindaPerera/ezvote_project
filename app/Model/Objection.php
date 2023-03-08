@@ -197,4 +197,11 @@ class Objection extends Model
     {
         return 'objection';
     }
+
+    public function getObjectionsByElectionId($id){
+        $this->db->query('SELECT * FROM objection WHERE ElectionID=:ElectionID');
+        $this->db->bind(':ElectionID',$id);
+        $results=$this->db->resultSet();
+        return $results;
+    }
 }

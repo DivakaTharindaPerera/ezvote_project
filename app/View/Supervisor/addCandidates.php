@@ -14,11 +14,8 @@
 <body>
 
 <div class="candidate">
-    <label for="type">This election is for: </label>
-    <input type="radio" name="type" id="humanRadio" onclick="displayDiv()"><label for="humanRadio">Humans</label>
-    <input type="radio" name="type" id="nonHumanRadio" onclick="displayDiv()"><label for="nonHumanRadio">Non-Humans</label>
-
-    <div class="humansDiv" id="humansDiv" style="display: none;">
+    
+    <div class="humansDiv" id="humansDiv">
         humans <br>
         
         <button onclick="createParty()">Create Party</button><br>
@@ -93,10 +90,7 @@
             <input type="hidden" name="electionId" value="<?php echo $data['electionId'];?>">
             <button type="submit">SUBMIT</button>
         </form>
-    </div><br>
-    <div class="nonHumansDiv" id="nonHumansDiv" style="display: none;">
-        non humans
-    </div><br>
+    </div>
 </div>
 <script src="<?php echo urlroot; ?>/js/addCandidates.js"></script>
 <?php require approot . '/View/inc/footer.php'; ?>
