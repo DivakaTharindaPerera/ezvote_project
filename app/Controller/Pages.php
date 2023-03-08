@@ -231,7 +231,7 @@
         $data = [
             'ID' => $id,
             'objectionRow' => $objectionRow,
-            'CandidateRow' => $CandidateRow,
+            'candidateRow' => $CandidateRow,
             'voterRow' => $voterRow,
             'users' => $users,
         ];
