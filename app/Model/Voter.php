@@ -14,16 +14,23 @@ class Voter extends Controller{
 
     public function insertIntoRegVoters($data){
 
-
         $this->db->query(
-            "INSERT INTO registered_voter
-            (ElectionId, UserId, value)
-            VALUES(:1,:2,:3)"
+            "INSERT INTO Voter(Email, Name, electionId, value, userId)
+            VALUES(:1,:2,:3,:4,:5)"
         );
 
-        $this->db->bind(':1', $data['electionId']);
-        $this->db->bind(':2', $data['id']);
-        $this->db->bind(':3', $data['value']);
+        // $this->db->query(
+        //     "INSERT INTO registered_voter
+        //     (ElectionId, UserId, value)
+        //     VALUES(:1,:2,:3)"
+        // );
+
+        $this->db->bind(':1', $data['email']);
+        $this->db->bind(':2', $data['name']);
+        $this->db->bind(':3', $data['electionId']);
+        $this->db->bind(':4', $data['value']);
+        $this->db->bind(':5', $data['id']);
+        
 
         try {
             $this->db->execute();
@@ -37,14 +44,19 @@ class Voter extends Controller{
     public function insertIntoUnregVoters($data){
             
             $this->db->query(
-                "INSERT INTO unregistered_voter
-                (ElectionId, Email, name, value)
+                "INSERT INTO Voter(Email, Name, electionId, value)
                 VALUES(:1,:2,:3,:4)"
             );
+
+            // $this->db->query(
+            //     "INSERT INTO unregistered_voter
+            //     (ElectionId, Email, name, value)
+            //     VALUES(:1,:2,:3,:4)"
+            // );
     
-            $this->db->bind(':1', $data['electionId']);
-            $this->db->bind(':2', $data['email']);
-            $this->db->bind(':3', $data['name']);
+            $this->db->bind(':1', $data['email']);
+            $this->db->bind(':2', $data['name']);
+            $this->db->bind(':3', $data['electionId']);
             $this->db->bind(':4', $data['value']);
     
             try {

@@ -7,6 +7,7 @@
         private $positionModel;
         private $partyModel;
         private $voterModel;
+        private $objectionModel;
 
         public function __construct(){
             $this->postModel = $this->model('User');
@@ -15,6 +16,7 @@
             $this->positionModel = $this->model('electionPositions');
             $this->partyModel = $this->model('Party');
             $this->voterModel = $this->model('Voter');
+            $this->objectionModel = $this->model('Objection');
         }
 
         public function index(){
@@ -225,10 +227,23 @@
             }
         }
 
-    public function viewObjections()
-    {
-        $this->view('Supervisor/viewObjections');
-        }
+    public function viewObjections($id){
+
+        $objectionRow = $this->objectionModel->getObjectionsByElectionId($id);
+        $CandidateRow = $this->candidateModel->getCandidatesByElectionId($id);
+        $voterRow = $this->voterModel->getRegVotersByElectionId($id);
+        $users = $this->postModel->getUsers();
+
+        $data = [
+            'ID' => $id,
+            'objectionRow' => $objectionRow,
+            'candidateRow' => $CandidateRow,
+            'voterRow' => $voterRow,
+            'users' => $users,
+        ];
+
+        $this->view('Supervisor/viewObjections',$data);
+    }
     public function aboutUs(){
         $this->view('about_us');
     }

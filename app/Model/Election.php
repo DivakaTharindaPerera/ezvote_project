@@ -245,4 +245,16 @@ class Election extends Controller{
             return false;
         }
     }
+
+    public function deleteElection($id){
+        $this->db->query("DELETE FROM Election WHERE ElectionId = :id");
+        $this->db->bind(':id', $id);
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }      
+
 }

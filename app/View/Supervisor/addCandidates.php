@@ -38,6 +38,7 @@
                 <button onclick="addParty()">Add Party</button>
                 <button onclick="cancelAddParty()">Cancel</button>
                 </div>
+
             </div>
 
             <div id="partyList" class="table mx-1 my-1" style="visibility: hidden";>
@@ -100,9 +101,11 @@
                 </form>
             </div>
         </div>
-        <div class="nonHumansDiv text-center text-xl" id="nonHumansDiv" style="display: none;">
-            Non humans
-        </div>
+        <form action="<?php echo urlroot; ?>/Elections/insertParty" id="submissionForm" method="POST">
+            <input type="hidden" name="electionId" value="<?php echo $data['electionId'];?>">
+            <button type="submit">SUBMIT</button>
+        </form>
+
     </div>
 </div>
 
