@@ -112,65 +112,69 @@ class Elections extends Controller
         }
     }
 
-    public function insertvoters()
-    {
-        $flag = 1;
-        if (!$this->isLoggedIn()) {
-            $this->view('login');
-        } else {
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // public function insertvoters()
+    // {
+    //     $flag = 1;
+    //     if (!$this->isLoggedIn()) {
+    //         $this->view('login');
+    //     } else {
+    //         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $electionId = trim($_POST["electionId"]);
-                $count = trim($_POST["count"]);
+    //             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    //             $electionId = trim($_POST["electionId"]);
+    //             $count = trim($_POST["count"]);
 
-                for ($i = 1; $i <= $count; $i++) {
-                    $data = [
-                        'electionId' => $electionId,
-                        'name' => trim($_POST[$i . "name"]),
-                        'id' => "",
-                        'email' => trim($_POST[$i . "email"]),
-                        'value' => trim($_POST[$i . "value"])
+    //             for ($i = 1; $i <= $count; $i++) {
+    //                 $data = [
+    //                     'electionId' => $electionId,
+    //                     'name' => trim($_POST[$i . "name"]),
+    //                     'id' => "",
+    //                     'email' => trim($_POST[$i . "email"]),
+    //                     'value' => trim($_POST[$i . "value"])
 
-                    ];
-                    $ElectionData = $this->electionModel->findElectionById($data['electionId']);
-                    if ($this->userModel->findUserByEmail($data['email'])) {
-                        $user = $this->userModel->getUserByEmail($data['email']);
-                        $data['id'] = $user->UserId;
-                        if ($this->voterModel->insertIntoRegVoters($data)) {
-                            $data1 = [
-                                'email' => $data['email'],
-                                'subject' => "ELECTION REQUEST FROM " . $ElectionData->OrganizationName,
-                                'body' => "You have been invited to participate as a voter in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". Please login to your account see further infromation about the election."
-                            ];
-                            $this->emailModel->sendEmail($data1);
-                            continue;
-                        } else {
-                            $flag = 0;
-                            break;
-                        }
-                    } else {
-                        if ($this->voterModel->insertIntoUnregVoters($data)) {
-                            $data1 = [
-                                'email' => $data['email'],
-                                'subject' => "ELECTION REQUEST FROM " . $ElectionData->OrganizationName,
-                                'body' => "You have been invited to participate as a voter in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". Please create an account to place your vote for the election."
-                            ];
-                            $this->emailModel->sendEmail($data1);
-                            continue;
-                        } else {
-                            $flag = 0;
-                            break;
-                        }
-                    }
-                }
-                if ($flag == 1) {
-                    $this->view('Supervisor/addPositions', $data);
-                } else {
-                    echo "Error";
-                }
-            }
-        }
+    //                 ];
+    //                 $ElectionData = $this->electionModel->findElectionById($data['electionId']);
+    //                 if ($this->userModel->findUserByEmail($data['email'])) {
+    //                     $user = $this->userModel->getUserByEmail($data['email']);
+    //                     $data['id'] = $user->UserId;
+    //                     if ($this->voterModel->insertIntoRegVoters($data)) {
+    //                         $data1 = [
+    //                             'email' => $data['email'],
+    //                             'subject' => "ELECTION REQUEST FROM " . $ElectionData->OrganizationName,
+    //                             'body' => "You have been invited to participate as a voter in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". Please login to your account see further infromation about the election."
+    //                         ];
+    //                         $this->emailModel->sendEmail($data1);
+    //                         continue;
+    //                     } else {
+    //                         $flag = 0;
+    //                         break;
+    //                     }
+    //                 } else {
+    //                     if ($this->voterModel->insertIntoUnregVoters($data)) {
+    //                         $data1 = [
+    //                             'email' => $data['email'],
+    //                             'subject' => "ELECTION REQUEST FROM " . $ElectionData->OrganizationName,
+    //                             'body' => "You have been invited to participate as a voter in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". Please create an account to place your vote for the election."
+    //                         ];
+    //                         $this->emailModel->sendEmail($data1);
+    //                         continue;
+    //                     } else {
+    //                         $flag = 0;
+    //                         break;
+    //                     }
+    //                 }
+    //             }
+    //             if ($flag == 1) {
+    //                 $this->view('Supervisor/addPositions', $data);
+    //             } else {
+    //                 echo "Error";
+    //             }
+    //         }
+    //     }
+    // }
+
+    public function insertVoters(){
+        
     }
 
     public function insertPositions()
