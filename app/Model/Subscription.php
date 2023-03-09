@@ -72,6 +72,27 @@ class Subscription{
         }
     }
 
+    public function editSubscriptionDiscount($plan,$discount){
+        $this->db->query('UPDATE sale_subscription SET Discount=:Discount WHERE planID = :planID');
+
+        $this->db->bind(':Discount',$discount);
+        $this->db->bind(':planID', $plan);
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function saleSubscriptionPlan(){
+        $this->db->query('SELECT * FROM sale_subscription ');
+
+        
+
+        return $this->db->resultSet();
+    }
+
     public function deleteSubscriptionPlan($plan){
         $this->db->query('DELETE FROM subscription_plan WHERE PlanID = :PlanID');
 

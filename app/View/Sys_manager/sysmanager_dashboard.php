@@ -6,11 +6,23 @@
 <html lang="en"> -->
 
 <!-- <body> -->
+    <script>
 
-<div class="main-container">
+    window.onload = function(){
+        var element = document.getElementById("home");
+        element.classList.remove("active");
+
+        var element = document.getElementById("dashboard");
+        element.classList.add("active");
+    }
+    </script>
+
+<div class="main-container max-h-85">
     <div class="title">Activities</div>
-    <div class="w-80">
-        <table class="table border-2 border-radius-2 border-primary w-95 mt-1">
+    <div class="border border-primary w-90 h-50 mt-1">
+    <div class="w-100 h-50" style="overflow:auto; height:50vh;">
+   
+        <table class="table w-100 ">
             <tbody>
                 <?php
                 $arrlength = count($data, COUNT_RECURSIVE);
@@ -36,6 +48,7 @@
                 // } ?>
                 </tbody>
                 </table>
+                </div>
             </div>
     </div>
     <!-- <div class="navbar2"></div> -->

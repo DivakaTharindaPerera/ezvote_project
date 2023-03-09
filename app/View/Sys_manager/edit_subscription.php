@@ -14,6 +14,18 @@
 </head> -->
 
 <!-- <body> -->
+<script>
+
+window.onload = function(){
+    var element = document.getElementById("home");
+    element.classList.remove("active");
+
+    var element = document.getElementById("plan");
+    element.classList.add("active");
+}
+</script>
+
+
 <div class="main-container" id="text-box1">
 <div class="title text-center">Edit subscription Plan</div>
 <div class="min-w-85 min-h-85">
@@ -109,7 +121,6 @@
         <div class="d-flex gap-4 justify-content-evenly">
             <div class="d-flex">
             <button type="submit" class="btn btn-primary">Save</button>
-
             </div>
             <div class="d-flex">
             <a href="../System_manager/dashboard">

@@ -109,6 +109,7 @@ class Election extends Controller{
         
     }
 
+
     public function getOngoingElections()
     {
         date_default_timezone_set("Asia/Colombo");
@@ -193,4 +194,55 @@ class Election extends Controller{
         return $row;
     }
 
+
+    public function updateElection($data){
+              
+
+        $this->db->query(
+                "UPDATE Election SET 
+                OrganizationName = :1,
+                Title = :2,
+                StartDate = :3,
+                EndDate = :4,
+                Description = :5,
+                StatVisibality = :6,
+                SelfNomination = :7,
+                StartTime = :8,
+                EndTime = :9,
+                ObjectionStatus = :10,
+                ObjectionStartDate = :11,
+                ObjectionEndDate = :12,
+                ObjectionStartTime = :13,
+                ObjectionEndTime = :14,
+                NominationDescription = :15
+                WHERE ElectionId = :16"
+            );
+
+        $this->db->bind(':1', $data['org']);
+        $this->db->bind(':2', $data['title']);
+        $this->db->bind(':3', $data['esdate']);
+        $this->db->bind(':4', $data['eedate']);
+        $this->db->bind(':5', $data['desc']);
+        $this->db->bind(':6', $data['status']);
+        $this->db->bind(':7', $data['nomi']);
+        $this->db->bind(':8', $data['estime']);
+        $this->db->bind(':9', $data['eetime']);
+        $this->db->bind(':10', $data['ostat']);
+        $this->db->bind(':11', $data['osdate']);
+        $this->db->bind(':12', $data['oedate']);
+        $this->db->bind(':13', $data['ostime']);
+        $this->db->bind(':14', $data['oetime']);
+        $this->db->bind(':15', $data['nomidesc']);
+        $this->db->bind(':16', $data['id']);
+
+        try {
+            $this->db->execute();
+            
+            return true;
+            
+        } catch (Exception $e) {
+            echo $e;
+            return false;
+        }
+    }
 }

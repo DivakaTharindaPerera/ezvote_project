@@ -100,17 +100,25 @@ function timeCheckO(){
 }
 function edit(){
     var inputs = document.getElementById('information').getElementsByTagName( 'input' );
+    var areas = document.getElementById('information').getElementsByTagName( 'textarea' );
+
+    for (var i = 0; i < areas.length; i++) {
+        areas[i].disabled = false;
+    }
+
     for (var i = 0; i < inputs.length; i++) {
         inputs[i].disabled = false;
     }
+    inputs[0].focus();
     var btn = document.getElementById("editBtn");
-    btn.setAttribute("class", "btn btn-primary w-25");
-    btn.setAttribute("onclick", "save()");
+    btn.setAttribute("type","submit");
+    btn.setAttribute("class", "btn btn-primary w-30");
+    btn.setAttribute("onclick", "update()");
     btn.innerHTML = "<b>Save Changes</b>";
 
     var cncl = document.createElement("button");
     cncl.innerHTML = "<b>Cancel</b>";
-    cncl.setAttribute("class", "btn btn-danger ml-2 w-25");
+    cncl.setAttribute("class", "btn btn-danger ml-2 w-30");
     cncl.setAttribute("type", "button");
     cncl.setAttribute("onclick", "cancel()");
 
@@ -124,11 +132,19 @@ function cancel(){
         inputs[i].disabled = true;
     }
     var btn = document.getElementById("editBtn");
-    btn.setAttribute("class", "btn btn-primary w-20");
+    btn.setAttribute("class", "btn btn-primary w-30");
     btn.setAttribute("onclick", "edit()");
     btn.innerHTML = "<b>Edit</b>";
 
     var div = document.getElementById('buttonContainer');
     div.removeChild(div.lastChild);
+
+    location.reload();
+}
+
+function update(){
+    var form = document.getElementById("updateForm");
+
+    form.submit();
 }
 

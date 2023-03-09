@@ -109,12 +109,14 @@
         }
 
         public function viewMyElection($id){
-//            if(!isset($_SESSION["UserId"])){
-//                redirect('View/login');
-//            }else{
+           if(!isset($_SESSION["UserId"])){
+               redirect('View/login');
+           }else{
                 $electionRow = $this->electionModel->getElectionByElectionId($id);
-//                if($electionRow->Supervisor == $_SESSION["UserId"]){
-                    $data = [];
+               if($electionRow->Supervisor == $_SESSION["UserId"]){
+                    $data = [
+                        "ID" => $id,
+                    ];
                     
                     $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
                     $regVoterRow = $this->voterModel->getRegVotersByElectionId($id);
@@ -130,10 +132,10 @@
                     $data['partyRow'] = $partyRow;
                     
                     $this->view('Supervisor/viewMyElection',$data);
-//                }else{
-//                    echo " Forbidden Access";
-//                }
-//            }
+               }else{
+                   echo " Forbidden Access";
+               }
+           }
         }
 
         public function subscriptionPlans(){
@@ -152,6 +154,7 @@
                     $positionRow = $this->positionModel->getElectionPositionByElectionId($id);
                     $partyRow = $this->partyModel->getPartiesByElectionId($id);
 
+                    $data['ID'] = $id;
                     $data['electionRow'] = $electionRow;
                     $data['candidateRow'] = $candidateRow;
                     $data['positionRow'] = $positionRow;
@@ -161,6 +164,33 @@
 //                }else{
 //                    echo "Forbidden Access";
 //                }
+            }
+        }
+
+        public function electionVoters($id){
+            if(!$this->isLoggedIn()){
+                redirect('View/login');
+            }else{
+                $electionRow = $this->electionModel->getElectionByElectionId($id);
+                if($electionRow->Supervisor == $_SESSION["UserId"]){
+                    
+
+                    $regVoterRow = $this->voterModel->getRegVotersByElectionId($id);
+                    $unregVoterRow = $this->voterModel->getUnregVotersByElectionId($id);
+                    $users = $this->postModel->getUsers();
+
+                    $data = [
+                        "ID" => $id,
+                        "electionRow" => $electionRow,
+                        "regVoterRow" => $regVoterRow,
+                        "unregVoterRow" => $unregVoterRow,
+                        "users" => $users,
+                    ];
+
+                    $this->view('Supervisor/electionVoters',$data);
+                }else{
+                    echo "<h1 class='text-danger'>Forbidden Access</h1>";
+                }
             }
         }
 
@@ -221,7 +251,14 @@
         $this->view('home');
     }
 
+
+    public function targetUsers(){
+        $this->view('target_users');
+    
+    }
+    
     public function Sysmanager(){
         $this->view('Sys_manager/Sysmanager_login');
     }
+
 }

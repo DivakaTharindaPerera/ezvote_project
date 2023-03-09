@@ -8,26 +8,27 @@
     require 'PHPMailer/src/PHPMailer.php';
     require 'PHPMailer/src/SMTP.php';
     class Email{
+        private $mail;
         public function __construct(){
-            
+            $this->mail = new PHPMailer(true);
+            $this->mail->isSMTP();
+            $this->mail->Host = 'smtp.gmail.com';
+            $this->mail->SMTPAuth = true;
+            $this->mail->Username = 'ezvoteservice@gmail.com';
+            $this->mail->Password = 'avdvagetvbboufca';
+            $this->mail->SMTPSecure = 'ssl';
+            $this->mail->Port = 465;
+            $this->mail->SMTPKeepAlive = true;
         }
         public function sendEmail($data){
-            $mail = new PHPMailer(true);
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'ezvoteservice@gmail.com';
-            $mail->Password = 'avdvagetvbboufca';
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;
-            $mail->setFrom('ezvoteservice@gmail.com');
-            $mail->addAddress($data['email']);
-            $mail->isHTML(true);
-            $mail->Subject = $data['subject'];
-            $mail->Body = $data['body'];
+            $this->mail->setFrom('ezvoteservice@gmail.com');
+            $this->mail->addAddress($data['email']);
+            $this->mail->isHTML(true);
+            $this->mail->Subject = $data['subject'];
+            $this->mail->Body = $data['body'];
             
             try {
-                $mail->send();
+                $this->mail->send();
                 return true;
             } catch (Exception $e) {
                 echo "Something went wrong :".$e->getMessage();
