@@ -28,7 +28,6 @@ class Objection extends Model
 //        }
         try {
             $this->db->execute();
-//            var_dump('success');
         } catch (Exception $e) {
 //            return false;
             throw $e;
