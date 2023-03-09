@@ -22,7 +22,7 @@
                 <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
             <div class="profile">
-                <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" alt="profile_picture">
+                <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" style="object-fit: cover" alt="profile_picture">
 <!--                <h3>John Doe</h3>-->
 <!--                <p>Blogger</p>-->
             </div>
@@ -30,12 +30,12 @@
 
 
             <ul>
-                <li>
-                    <a href="<?php echo urlroot; ?>/Pages/goHome" class="active">
-                        <span class="icon"><i class="fas fa-home"></i></span>
-                        <span class="item">Home</span>
-                    </a>
-                </li>
+<!--                <li>-->
+<!--                    <a href="--><?php //echo urlroot; ?><!--/Pages/goHome" class="active">-->
+<!--                        <span class="icon"><i class="fas fa-home"></i></span>-->
+<!--                        <span class="item">Home</span>-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li>
                     <a href="<?php echo urlroot; ?>/Pages/dashboard">
                         <span class="icon"><i class="fas fa-desktop"></i></span>
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo urlroot;?>/Pages/Objections">
+                    <a href="<?php echo urlroot;?>/Pages/viewObjections">
                         <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
                         <span class="item">Objections</span>
                     </a>
@@ -80,7 +80,7 @@
                         <span class="item">Subscription Plans</span>
                     </a>
                 <li>
-                    <a href="#">
+                    <a href="<?php echo urlroot; ?>/Candidates/candidateProfile">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Edit profile</span>
                     </a>

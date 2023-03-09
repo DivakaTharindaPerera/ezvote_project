@@ -1,6 +1,6 @@
 <?php require approot.'/View/inc/VoterHeader.php'; ?>
 
-<div class="d-flex border-radius-3 min-w-60 min-h-85 border-4 border-primary">
+<div class="d-flex border-radius-3 min-w-60 min-h-85 border-4 border-primary ">
     <div class="d-flex w-50 bg-primary justify-content-center align-items-center">
         <img src="<?php echo urlroot;?>/public/img/signin.jpg" alt="" style="min-height: 300px; max-width:400px;" > </div>
     <div class="d-flex flex-column w-50">

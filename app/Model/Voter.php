@@ -90,6 +90,7 @@ class Voter extends Controller{
             return false;
         }
     }
+
     public function getRegVoterByUserId($id){
         $this->db->query(
             "SELECT * FROM registered_voter

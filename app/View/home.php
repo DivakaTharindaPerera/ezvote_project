@@ -27,7 +27,7 @@
   <button class="dropbtn">Login</button>
   <div class="dropdown-content">
   <a href="<?php echo urlroot; ?>/Pages/Sysmanager">Administrator</a>
-  <a href="<?php echo urlroot; ?>/View/Login">Other Users</a>
+  <a href="<?php echo urlroot; ?>/pages/Login">Other Users</a>
   </div>
 </div>
     <a href="<?php echo urlroot; ?>/View/Register"><button class="dropbtn" style="margin-top: -6px;">Register</button></a>

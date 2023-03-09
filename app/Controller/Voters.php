@@ -5,6 +5,7 @@ class Voters extends Controller
     public function __construct()
     {
         $this->objModel = $this->model('Objection');
+        $this->elecModel=$this->model('Election');
     }
     public function submitObjections(){
 //        if(!$this->isLoggedIn()){
@@ -57,45 +58,82 @@ class Voters extends Controller
                 'Description' => ''
             ];
             $this->view('voters/submitObjections', $data);
-
         }
     }
 
-    public function dashboard()
-    {
-        $this->view('Voter/viewAllElection');
-    }
-
-    public function election()
-    {
+    public function election($election_id,$candidate_id=null){
+        $data_1=$this->elecModel->getElectionByElectionId($election_id);
+        $data_2=$this->elecModel->getPositionsByElectionId($election_id);
+        $data_3=$this->elecModel->getCandidatesByElectionId($election_id);
         if($_SERVER['REQUEST_METHOD']==='POST'){
+            $candidate_id=$_POST['CandidateID'];
             $data=[
                 'objectionID'=>uniqid('obj',true),
                 'Subject'=>$_POST['Subject'],
                 'Description'=>$_POST['Description'],
                 'Respond'=>'',
                 'Action'=>'',
-                'ElectionID'=>1251,
-                'CandidateID'=>'can01',
+                'ElectionID'=>$election_id,
+                'CandidateID'=>$candidate_id,
                 'VoterID'=>48,
             ];
             $this->objModel->AddObjection($data);
         }
-        $this->view('Voter/viewElection');
+        $this->view('Voter/viewElection',[
+            'election'=>$data_1,
+            'positions'=>$data_2,
+            'candidates'=>$data_3,
+        ]);
     }
 
-    public function viewObjections(){
-        $r=$this->objModel->RetrieveAll();
+    public function viewObjections($candidate_id,$election_id){
+//        $r=$this->objModel->RetrieveAll();
+        $data_1=$this->objModel->showObjectionsByElectionAndCandidateId($election_id,$candidate_id);
+        $data_2=$this->objModel->getCandidateName($candidate_id);
         if($_SERVER['REQUEST_METHOD']==='POST'){
             $id=$_POST['id'];
             $this->objModel->DeleteObjection($id);
-            $this->view('Voter/viewObjections',['r'=>$r]);
+//            $this->view('Voter/viewObjections',['r'=>$r]);
         }
-        $this->view('Voter/viewObjections',['r'=>$r]);
+        $this->view('Voter/viewObjections',[
+//            'r'=>$r,
+            'objections'=>$data_1,
+            'candidate'=>$data_2
+        ]);
     }
 
-    public function vote()
+    public function vote($id)
     {
-        $this->view('Voter/votingBallot');
+        $data_1=$this->elecModel->getElectionByElectionId($id);
+        $data_2=$this->elecModel->getPositionsByElectionId($id);
+        $data_3=$this->elecModel->getCandidatesByElectionId($id);
+        $this->view('Voter/votingBallot',[
+            'election'=>$data_1,
+            'positions'=>$data_2,
+            'candidates'=>$data_3,
+            'id'=>$id
+        ]);
     }
+
+    public function summary($id)
+    {
+        $data_1=$this->elecModel->getElectionByElectionId($id);
+        $data_2=$this->elecModel->getWinnersDetails($id);
+//        print_r($data_2);
+//        exit();
+//        $i=0;
+//        foreach ($data_2 as $winner){
+//            $candidateId=$winner->candidateID;
+////            echo $candidateId;
+////            exit();
+//            $data_3=$this->elecModel->getWinnersNames($candidateId);
+//            $i=$i+1;
+//        }
+       $this->view('Voter/electionSummary',[
+           'election'=>$data_1,
+           'winners'=>$data_2,
+//           'party'=>$data_3
+       ]);
+    }
+
 }
