@@ -17,13 +17,8 @@
 <div class="main-container">
     <div class="candidate d-flex flex-column border-primary border-radius-2 border-2 my-4">
         <div class="title">Adding Candidates</div>
-        <div class="mx-1 my-1">
-            <label for="type">This election is for: </label><br>
-            <input type="radio" name="type" id="humanRadio" onclick="displayDiv()"><label for="humanRadio">Humans</label>
-            <input type="radio" name="type" id="nonHumanRadio" onclick="displayDiv()"><label for="nonHumanRadio">Non-Humans</label>
-        </div>
-        <div class="humansDiv" id="humansDiv" style="display: none;">
-            <div class="text-center text-xl">Humans</div>
+        <div class="humansDiv" id="humansDiv" class="d-flex flex-column p-1">
+           
             <div class="align-items-center justify-content-center"><button onclick="createParty()" class="btn btn-primary w-50 mx-1 my-1">Create Party</button></div>
             <div class="partyCreate mx-1 my-1" id="createParty" style="display: none;" >
                 <div class="my-1"><label for="party">Party name:</label>
@@ -66,19 +61,28 @@
                     <option value="4"> Treasurer </option>
                 </select><br> -->
                 <label for="cPosition" class="my-1">Election Position: </label>
-                <select name="" id="positionListCandidate">
+                <select name="" id="positionListCandidate" class="border-1">
+                    
                     <?php
                     $c = 0;
                     $s = "";
-                    foreach($data["positionName"] as $key => $value){
-                        echo "<option value='".$data["positionId"][$key]."'>".$value."</option>";
-                        $s = $s.$value."-".$data["positionId"][$key]."|";
+                    foreach($data['positionRow'] as $position){
+                        echo "<option value='".$position->ID."'>".$position->positionName."</option>";
+                        $s = $s.$position->positionName."-".$positionName->ID."|";
                         $c++;
                     }
-                    echo "<input type='hidden' id='positionData' value='".$s."'>";
-                    echo "<input type='hidden' id='positionCount' value='".$c."'>";
+                    // foreach($data["positionName"] as $key => $value){
+                    //     echo "<option value='".$data["positionId"][$key]."'>".$value."</option>";
+                    //     $s = $s.$value."-".$data["positionId"][$key]."|";
+                    //     $c++;
+                    // }
+                    
                     ?>
                 </select><br>
+                <?php 
+                    echo "<input type='hidden' id='positionData' value='".$s."'>";
+                    echo "<input type='hidden' id='positionCount' value='".$c."'>";
+                ?>
                 <div class="my-1">
                     <label for="cName">Candidate Name: </label>
                     <input type="text" id="cName"><span id="cNameError"></span><br>
@@ -96,13 +100,13 @@
             </div>
             <div class="my-1">
                 <form action="<?php echo urlroot; ?>/Elections/insertParty" id="submissionForm" method="POST">
-                    <input type="hidden" name="electionId" value="<?php echo $data['electionId'];?>">
+                    <input type="hidden" name="electionId" value="<?php echo $data['ID'];?>">
                     <button type="submit" class="btn btn-primary mx-1">SUBMIT</button>
                 </form>
             </div>
         </div>
         <form action="<?php echo urlroot; ?>/Elections/insertParty" id="submissionForm" method="POST">
-            <input type="hidden" name="electionId" value="<?php echo $data['electionId'];?>">
+            <input type="hidden" name="electionId" value="<?php echo $data['ID'];?>">
             <button type="submit">SUBMIT</button>
         </form>
 

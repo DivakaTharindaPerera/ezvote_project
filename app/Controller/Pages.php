@@ -86,6 +86,23 @@
             }
         }
 
+        public function wayToAddVoters($eid){
+            $this->View('Supervisor/addVoters',$eid);
+        }
+
+        public function wayToAddPositions($eid){
+            $this->view('Supervisor/addPositions', $eid);
+        }
+
+        public function wayToAddCandidates($eid){
+            $positionRow = $this->positionModel->getElectionPositionByElectionId($eid);
+            $data = [
+                "ID" => $eid,
+                "positionRow" => $positionRow
+            ];
+            $this->view('Supervisor/addCandidates', $positionRow);
+        }
+
         public function fortests(){
             $this->view('sendEmail');
         }

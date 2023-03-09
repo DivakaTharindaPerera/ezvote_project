@@ -165,7 +165,8 @@ class Elections extends Controller
                     }
                 }
                 if ($flag == 1) {
-                    $this->view('Supervisor/addPositions', $data);
+                    redirect('Pages/wayToAddPositions/'.$data['electionId']);
+                    // $this->view('Supervisor/addPositions', $data);
                 } else {
                     echo "Error";
                 }
@@ -214,11 +215,10 @@ class Elections extends Controller
                         continue;
                     } else {
                         echo "error $i <br>";
-                        $this->view('Supervisor/addPositions', $data);
-                        return;
+                        redirect('Pages/wayToAddPositions/'.$data['electionId']);
                     }
                 }
-                $this->view('Supervisor/addCandidates', $positionData);
+                redirect('Pages/wayToAddCandidates/'.$data['electionId']);
             }
         }
     }
