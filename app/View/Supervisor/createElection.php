@@ -3,7 +3,7 @@
 <?php require approot.'/View/inc/sidebar-new.php';?>
 
 <div class="main-container">
-    <div class="d-flex flex-column bg-white mt-2 min-w-60 border-3 border-radius-2 border-primary mb-2 overflow-y">
+    <div class="d-flex flex-column bg-white mt-2 min-w-60 border-3 border-radius-2 border-primary mb-2 ">
         <div class="title">Create New Election</div>
         <form method="POST" action='<?php echo urlroot; ?>/Elections/crteelection' class="d-flex flex-column justify-content-center mx-1 mb-1">
             <div class="d-flex flex-column my-1">
@@ -46,27 +46,30 @@
                     <div>
                         <input type="checkbox"  id="objStatus" name="objectionstatus" value="1" onclick="ObjStatus()" class="mr-1">Allow objections against candidates
                     </div>
-                    <div class="d-flex border-primary border-radius-1 border-2" id="objstart" style="display: none;">
-                        <div class="text-center">Objection Period</div>
-                        <div class="d-flex flex-column">
-                            <div>
-                                Start date: <input type="date" id="OstartDate" name="OstartDate" class="date" onchange="dateCheckO()" disabled>
-                            </div>
-                            <div>&emsp14;
-                                Time: <input type="time" id="OstartTime" name="OstartTime" class="time" onchange="timeCheckO()" disabled>
-                            </div>
-                        </div>
-                        <div class="d-flex" id="objend" style="display: none;">
-                            <div>
+                    <div class="flex-column border-primary border-radius-1 border-2" id="objstart" style="display: none;">
+                        <div class="text-center my-1">Objection Period</div>
+                        <div class="d-flex justify-content-evenly mb-1" >
+                            <div class="d-flex flex-column">
                                 <div>
-                                    End date: <input type="date" id="OendDate" name="OendDate" class="date" onchange="dateCheckO()" disabled> &emsp14;
+                                    Start date: <input type="date" id="OstartDate" name="OstartDate" class="date" onchange="dateCheckO()" disabled>
                                 </div>
-                                <div>
-                                    Time: <input type="time" id="OendTime" name="OendTime" class="time" onchange="timeCheckO()" disabled>
-                                    <em id="out1" style="color:red;"></em>
+                                <div>&emsp14;
+                                    Time: <input type="time" id="OstartTime" name="OstartTime" class="time" onchange="timeCheckO()" disabled>
                                 </div>
                             </div>
+                            <div class="d-flex" id="objend" style="display: none;">
+                                <div>
+                                    <div>
+                                        End date: <input type="date" id="OendDate" name="OendDate" class="date" onchange="dateCheckO()" disabled> &emsp14;
+                                    </div>
+                                    <div>
+                                        Time: <input type="time" id="OendTime" name="OendTime" class="time" onchange="timeCheckO()" disabled>
+                                        <em id="out1" style="color:red;"></em>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 

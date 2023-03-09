@@ -5,7 +5,7 @@
             <span></span>
         </div>
         <ul class="navList d-flex px-1">
-                <li><a href="/ezvote/Voters/dashboard" class="px-1">Dashboard</a></li>
+                <li><a href="/ezvote/pages/dashboard" class="px-1">Dashboard</a></li>
                 <a href="#" class="px-1">Notifications</a>
                 <a href="#" class="px-1">Profile</a>
                 <a href="/ezvote/Controller/logout" class="btn btn-info">Logout</a>

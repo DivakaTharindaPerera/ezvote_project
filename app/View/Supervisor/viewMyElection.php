@@ -4,10 +4,13 @@
 
 
 
+
 <div class="main-container h-100">
     
     
-    <form action="<?php echo urlroot; ?>/Elections/updateElection" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2 w-100 overflow-y" id="updateForm">
+
+    <form action="<?php echo urlroot; ?>/Elections/updateElection" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2" id="updateForm">
+
         <div id="btn panel" class="d-flex text-center">
             <a href="<?php echo urlroot; ?>/Pages/electionVoters/<?php echo $data['ID'] ?>" class="btn btn-primary m-3">
                 <div>Voters</div>
@@ -68,11 +71,18 @@
                 <div id="nomi">
                     Self Nomination
 
-                    <input type="checkbox" name="nomi" id="" value="1" <?php if ($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled>
 
-                    <?php
-                    if ($data['electionRow']->SelfNomination == 1) {
-                        echo "
+<!--                    <img src="--><?php //echo urlroot;?><!--/public/img/tik.png" alt="" style="height: 30px;width: 30px">-->
+                    <input type="checkbox" name="nomi" id="" value="1" <?php if($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled >
+
+                    
+                   <input type="checkbox" name="nomi" id="" value="1" <?php if($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled >
+
+
+                    <?php 
+                        if($data['electionRow']->SelfNomination == 1){
+                            echo "
+
                             <textarea name='nomiDesc' id='' cols='30' rows='10' disabled>
                                 " . $data['electionRow']->NominationDescription . "
                             </textarea>
@@ -88,9 +98,11 @@
                 </div>
             </div>
 
+            
             <?php
-            if ($data['electionRow']->ObjectionStatus == 1) {
-                echo "
+                if($data['electionRow']->ObjectionStatus == 1){
+                    echo "
+
                     <div id='objDateAndTime' class='d-flex flex-column'>
                     <div id='objTopic' class='text-center'>
                        <h4> Objection Duration</h4>

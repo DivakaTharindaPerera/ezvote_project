@@ -109,30 +109,94 @@ class Election extends Controller{
         
     }
 
+
+    public function getOngoingElections()
+    {
+        date_default_timezone_set("Asia/Colombo");
+        $dates=date("Y-m-d");
+        $times=date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM election WHERE StartDate<='".$dates."' && StartTime<='".$times."' && EndDate>='".$dates."' && EndTime>='".$times."'"
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
+
+    public function getUpcomingElections()
+    {
+        $dates=date("Y-m-d");
+        $times=date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM election WHERE (StartDate='".$dates."' && StartTime>'".$times."') ||(StartDate>'".$dates."' && StartTime>='".$times."')|| (StartDate>'".$dates."' && StartTime<'".$times."') "
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+
+        }
+    }
+    public function getCompletedElections()
+    {
+        $dates = date("Y-m-d");
+        $times = date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM election WHERE (EndDate='" . $dates . "' && EndTime<'" . $times . "') ||(EndDate<'" . $dates . "' && EndTime>='" . $times . "') || (EndDate<'" . $dates . "' && EndTime<'" . $times . "')"
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong " . $e->getMessage();
+            return false;
+
+        }
+    }
+
+    public function getPositionsByElectionId($id){
+        $election_Id=$id;
+        $this->db->query("SELECT DISTINCT ID,positionName FROM electionposition WHERE ElectionID ='" .$election_Id. "'" );
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
+    public function getCandidatesByElectionId($id)
+    {
+        $election_Id = $id;
+        $this->db->query("SELECT * FROM candidate WHERE electionid ='" . $election_Id . "' order by positionid");
+        $row = $this->db->resultSet();
+        return $row;
+
+    }
+
+    public function getWinnersDetails($id)
+    {
+        $election_Id=1281;
+        $this->db->query("SELECT * FROM votes WHERE electionid ='" . $election_Id ."' order by NoOfVotes Desc" );
+        $row=$this->db->resultSet();
+        return $row;
+    }
+
+    public function getWinnerNames($id)
+    {
+        $candidate_Id=$id;
+        $this->db->query("SELECT candidate.candidateName,electionparty.partyName FROM candidate where candidateId='" .$candidate_Id. "' inner join electionparty on candidate.partyId=electionparty.partyId ");
+        $row=$this->db->resultSet();
+        print_r($row);
+        exit();
+        return $row;
+    }
+
+
     public function updateElection($data){
-        // $data=[
-        //     "id"=>trim($_POST['id']),
-        //     "title"=>trim($_POST['title']),
-        //     "org"=>trim($_POST['org']),
-        //     "desc"=>trim($_POST['desc']),
-
-        //     "esdate"=>trim($_POST['EstartDate']),
-        //     "eedate"=>trim($_POST['EendDate']),
-        //     "estime"=>trim($_POST['EstartTime']),
-        //     "eetime"=>trim($_POST['EendTime']),
-
-        //     "osdate"=>trim($_POST['OstartDate']),
-        //     "oedate"=>trim($_POST['OendDate']),
-        //     "ostime"=>trim($_POST['OstartTime']),
-        //     "oetime"=>trim($_POST['OendTime']),
-
-        //     "status"=>trim($_POST['stat']),
-
-        //     "nomi"=>trim($_POST['nomi']),
-        //     "nomidesc"=>trim($_POST['nomiDesc']),
-
-        //     "ostat"=>trim($_POST['ostat'])
-        // ];
+              
 
         $this->db->query(
                 "UPDATE Election SET 
@@ -192,4 +256,5 @@ class Election extends Controller{
             echo $e;
         }
     }      
+
 }
