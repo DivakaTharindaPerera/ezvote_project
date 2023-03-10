@@ -21,6 +21,7 @@ if (positions.length > 0) {
     for (var i = 0; i < positions.length; i++) {
         var positionDiv = document.createElement('div');
         positionDiv.id = positions[i][1];
+        positionDiv.setAttribute('class', 'border-1 border-radius-2 p-1');
         var positionHead = document.createElement('h3');
         positionHead.innerHTML = positions[i][0];
         positionDiv.appendChild(positionHead);
@@ -29,6 +30,7 @@ if (positions.length > 0) {
         positionMainDiv.appendChild(brk);
 
         var ctable = document.createElement('table');
+        ctable.setAttribute('class', 'mt-1');
         ctable.border = "1";
         ctable.id = "candidateTable" + positions[i][1];
         ctable.style.visibility = "hidden";
@@ -137,7 +139,9 @@ function addParty() {
 
     deleteBtn.innerHTML = "Delete";
     deleteBtn.setAttribute('onclick', 'deleteParty(this)');
+    deleteBtn.setAttribute('class', 'btn btn-danger card-hover');
     action.appendChild(deleteBtn);
+    
 
     row.appendChild(nameCell);
     row.appendChild(supNameCell);
@@ -306,6 +310,7 @@ function addCandidateToList() {
     var deleteBtn = document.createElement('button');
     deleteBtn.innerHTML = "Delete";
     deleteBtn.setAttribute('onclick', 'deleteCandidate(this)');
+    deleteBtn.setAttribute('class', 'btn btn-danger');
     action.appendChild(deleteBtn);
 
     namecell.innerHTML = name.value;
@@ -327,6 +332,9 @@ function addCandidateToList() {
     tablebody.appendChild(row);
 
     console.log(candidates);
+
+    name.value = "";
+    email.value = "";
 }
 
 document.getElementById("submissionForm").addEventListener("submit", () => {

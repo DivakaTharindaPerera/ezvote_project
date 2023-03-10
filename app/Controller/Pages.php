@@ -100,7 +100,7 @@
                 'ID' => $eid,
                 'positionRow' => $positionRow
             ];
-            $this->view('Supervisor/addCandidates', $positionRow);
+            $this->view('Supervisor/addCandidates', $data);
         }
 
         public function fortests(){
