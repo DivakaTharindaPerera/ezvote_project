@@ -97,8 +97,8 @@
         public function wayToAddCandidates($eid){
             $positionRow = $this->positionModel->getElectionPositionByElectionId($eid);
             $data = [
-                "ID" => $eid,
-                "positionRow" => $positionRow
+                'ID' => $eid,
+                'positionRow' => $positionRow
             ];
             $this->view('Supervisor/addCandidates', $positionRow);
         }

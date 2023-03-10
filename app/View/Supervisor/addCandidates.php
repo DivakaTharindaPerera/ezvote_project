@@ -1,50 +1,49 @@
-<?php //require approot . '/View/inc/header.php'; ?>
-<?php require approot.'/View/inc/VoterHeader.php'; ?>
+<?php //require approot . '/View/inc/header.php'; 
+?>
+<?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
-<!--    <style>-->
-<!--        span{-->
-<!--            color: red;-->
-<!--        }-->
-<!--    </style>-->
-<!--    <div class="top_nav_bar">-->
-<!--        --><?php
-//            require_once(approot."/View/topnavbar.php");
-//        ?>
-<!--    </div>-->
-<!--</head>-->
-<!--<body>-->
-<div class="main-container">
-    <div class="candidate d-flex flex-column border-primary border-radius-2 border-2 my-4">
-        <div class="title">Adding Candidates</div>
-        <div class="humansDiv" id="humansDiv" class="d-flex flex-column p-1">
-           
-            <div class="align-items-center justify-content-center"><button onclick="createParty()" class="btn btn-primary w-50 mx-1 my-1">Create Party</button></div>
-            <div class="partyCreate mx-1 my-1" id="createParty" style="display: none;" >
-                <div class="my-1"><label for="party">Party name:</label>
-                <input type="text" id="partyName"><span id="partyNameError"></span></div>
 
-                <div id="partySup">
-                    <label for="partySup">Party Supervisor </label><br>
-                    <label for="email">Email: </label><input type="email" id="partySupEmail"> <span id="supEmailError"></span><br>
-                    <label for="name">Name: </label> <input type="text" id="partySupName"> <span id="supNameError"></span><br>
+
+<div class="main-container">
+    <div class="candidate d-flex flex-column border-primary border-radius-2 border-2 my-4 w-95">
+        <div class="title">Adding Candidates</div>
+        <div class="humansDiv" id="humansDiv" class="d-flex flex-column p-1 w-100">
+
+            <div class="text-center"><button onclick="createParty()" class="btn btn-primary w-50 mx-1 my-1 w-10 card-hover"><b>Create Party</b></button></div>
+            <div class="partyCreate mx-1 my-1 w-80 border-1 p-1 border-radius-2 text-center" id="createParty" style="display: none;">
+                <div class="my-1">
+                    <input type="text" id="partyName" placeholder="Party name...."><span id="partyNameError" class="text-danger"></span>
                 </div>
-                <div class="my-1 align-items-center justify-content-evenly">
-                <button onclick="addParty()">Add Party</button>
-                <button onclick="cancelAddParty()">Cancel</button>
+
+                <div id="partySup" class="border-2 border-dark p-1 text-center border-radius-2">
+                    <div class="mb-1">
+                        <label for="partySup">Party Supervisor </label><br>
+                    </div>
+                    <div class="mb-1">
+                        <input type="email" id="partySupEmail" placeholder="Email...."> <span id="supEmailError" class="text-danger"></span><br>
+                    </div>
+                    <div class="mb-1">
+                        <input type="text" id="partySupName" placeholder="Name...."> <span id="supNameError" class="text-danger"></span><br>
+                    </div>
+                </div>
+                <div class="my-1 w-100 text-center">
+                    <button onclick="addParty()" class="btn btn-primary card-hover">Add Party</button>
+                    <button onclick="cancelAddParty()" class="btn btn-danger card-hover mr-auto">Cancel</button>
                 </div>
 
             </div>
 
-            <div id="partyList" class="table mx-1 my-1" style="visibility: hidden";>
+
+            <div id="partyList" class="table mx-1 my-1" style="visibility: hidden" ;>
                 <table border="1" id="partyTable">
                     <thead>
-                    <tr>
-                        <th>Party Name</th>
-                        <th>Party Supervisor</th>
-                        <th>Party Supervisor Email</th>
-                        <th>Action</th>
-                    </tr>
+                        <tr>
+                            <th>Party Name</th>
+                            <th>Party Supervisor</th>
+                            <th>Party Supervisor Email</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody id="parties">
 
@@ -62,13 +61,13 @@
                 </select><br> -->
                 <label for="cPosition" class="my-1">Election Position: </label>
                 <select name="" id="positionListCandidate" class="border-1">
-                    
+
                     <?php
                     $c = 0;
                     $s = "";
-                    foreach($data['positionRow'] as $position){
-                        echo "<option value='".$position->ID."'>".$position->positionName."</option>";
-                        $s = $s.$position->positionName."-".$positionName->ID."|";
+                    foreach ($data['positionRow'] as $position) {
+                        echo "<option value='" . $position->ID . "'>" . $position->positionName . "</option>";
+                        $s = $s . $position->positionName . "-" . $positionName->ID . "|";
                         $c++;
                     }
                     // foreach($data["positionName"] as $key => $value){
@@ -76,12 +75,12 @@
                     //     $s = $s.$value."-".$data["positionId"][$key]."|";
                     //     $c++;
                     // }
-                    
+
                     ?>
                 </select><br>
-                <?php 
-                    echo "<input type='hidden' id='positionData' value='".$s."'>";
-                    echo "<input type='hidden' id='positionCount' value='".$c."'>";
+                <?php
+                echo "<input type='hidden' id='positionData' value='" . $s . "'>";
+                echo "<input type='hidden' id='positionCount' value='" . $c . "'>";
                 ?>
                 <div class="my-1">
                     <label for="cName">Candidate Name: </label>
@@ -100,13 +99,13 @@
             </div>
             <div class="my-1">
                 <form action="<?php echo urlroot; ?>/Elections/insertParty" id="submissionForm" method="POST">
-                    <input type="hidden" name="electionId" value="<?php echo $data['ID'];?>">
+                    <input type="hidden" name="electionId" value="<?php echo $data['ID']; ?>">
                     <button type="submit" class="btn btn-primary mx-1">SUBMIT</button>
                 </form>
             </div>
         </div>
         <form action="<?php echo urlroot; ?>/Elections/insertParty" id="submissionForm" method="POST">
-            <input type="hidden" name="electionId" value="<?php echo $data['ID'];?>">
+            <input type="hidden" name="electionId" value="<?php echo $data['ID']; ?>">
             <button type="submit">SUBMIT</button>
         </form>
 
@@ -115,4 +114,3 @@
 
 <script src="<?php echo urlroot; ?>/js/addCandidates.js"></script>
 <?php require approot . '/View/inc/footer.php'; ?>
-
