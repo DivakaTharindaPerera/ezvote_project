@@ -255,7 +255,7 @@ class Elections extends Controller
                             $data1 = [
                                 'email' => $data['supEmail'],
                                 'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
-                                'body' => "You have been added as the party supervisor in the party ".$data['partyname']." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account see further infromation."
+                                'body' => "You have been added as the party supervisor in the party ".$data['partyName']." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account see further infromation."
                             ];
                             $this->emailModel->sendEmail($data1);
                             for ($j = 0; $j < $count; $j++) {
@@ -386,12 +386,13 @@ class Elections extends Controller
                             continue;
                         } else {
                             echo "error $i <br>";
-                            $this->view('Supervisor/addCandidate', $data);
                             return;
                         }
+
                     }
                 }
             }
+            $this->view('Supervisor/addCandidateSuccess','1');
         }
     }
 
