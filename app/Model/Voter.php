@@ -269,7 +269,7 @@ class Voter extends Controller{
     public function editVoterWithoutUser($data){
         $this->db->query(
             "UPDATE Voter
-            SET Name = :1, value = :2, Email = :3
+            SET Name = :1, value = :2, Email = :3, userId = NULL
             WHERE voterId = :4"
         );
 
