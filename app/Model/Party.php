@@ -69,5 +69,21 @@ class Party extends Controller{
         $result = $this->db->single();
         return $result;
     }
+
+    public function findDuplicateParty($eid,$pName){
+        $this->db->query(
+            "SELECT * FROM ElectionParty WHERE electionId = :eid AND partyName = :pName"
+        );
+        $this->db->bind(':eid', $eid);
+        $this->db->bind(':pName', $pName);
+
+        $row = $this->db->single();
+
+        if($this->db->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 

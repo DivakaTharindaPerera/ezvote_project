@@ -3,10 +3,39 @@
 <?php require approot.'/View/inc/sidebar-new.php';?>
 
     <div class="main-container">
-        <div class="h-80 overflow-scroll w-100" >
-            <div class="m-3 d-flex">
-                <a href="<?php echo urlroot; ?>/Pages/viewMyElection/<?php echo $data['ID'];?>" class="btn btn-danger m-2 text-xl">Back To Election</a>
-                <button class="btn btn-primary m-2" onclick="addPositionVisible()"><b class="text-xl"><i class="mt-auto mr-1 fa-solid fa-plus"></i>Add New Position</b></button>
+        <div class="h-100 overflow-scroll w-100" >
+            <div class="d-flex flex-column bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
+                <div class="d-flex m-1">
+                    <input type="hidden" name="" id="electionId" value="<?php echo $data['ID']; ?>">
+                    <a href="<?php echo urlroot; ?>/Pages/viewMyElection/<?php echo $data['ID'];?>" class="btn btn-danger text-xl card-hover"><i class="fa-solid fa-angles-left"></i><span class="ml-1">Back</span></a>
+                    <button class="btn btn-primary ml-1 card-hover" onclick="addPositionVisible()"><b class="text-xl"><i class="mt-auto mr-1 fa-solid fa-plus"></i>Add New Position</b></button>
+                </div>  
+
+                <div class="m-3 w-50 ml-auto mr-auto border-1 p-1 border-radius-2" id='formForPosition' style="display: none;" >
+                    <form action="" method="POST">
+                        <input type="hidden" name="id" value="<?php echo $data['ID']; ?>">
+                        <div class="m-1">
+                            <span class="text-danger">
+                                
+                            </span>
+                        </div>
+                        <div class="m-1">
+                            <input type="text" name="positionName" placeholder="Position Name..." required>
+                        </div>
+                        <div>
+                            <textarea name="positionDesc" id="" cols="30" rows="10" placeholder="Position Description..." required></textarea>
+                        </div>
+                        <div class="m-1">
+                            No of options: <input type="number" class="border-1 p-2" name="noOfOptions" placeholder="No of Options..." value="1" min="1">
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" id="addPositionBtn" class="btn btn-primary m-1 min-w-15"><b>Add</b></button>
+                            <button type="button" class="btn btn-danger m-1 min-w-15 text-center" onclick="cancel()"><b>Cancel</b></button>
+                        </div>
+                    </form>
+                </div>
+                
             </div>
 
             <!-- alert of successful position insertion -->
@@ -15,31 +44,6 @@
                     <h3 class="text-success"></h3>
                     <button class="btn btn-primary" id="<?php echo $data['ID']?>" onclick="funcDone(this.id)">OK</button>
                 </div>
-            </div>
-
-            <div class="m-3 w-50 ml-auto mr-auto border-1 p-1 border-radius-2" id='formForPosition' style="display: none;" >
-                <form action="" method="POST">
-                    <input type="hidden" name="id" value="<?php echo $data['ID']; ?>">
-                    <div class="m-1">
-                        <span class="text-danger">
-                            
-                        </span>
-                    </div>
-                    <div class="m-1">
-                        <input type="text" name="positionName" placeholder="Position Name..." required>
-                    </div>
-                    <div>
-                        <textarea name="positionDesc" id="" cols="30" rows="10" placeholder="Position Description..." required></textarea>
-                    </div>
-                    <div class="m-1">
-                        No of options: <input type="number" class="border-1 p-2" name="noOfOptions" placeholder="No of Options..." value="1" min="1">
-                    </div>
-                    
-                    <div class="text-center">
-                        <button type="submit" id="addPositionBtn" class="btn btn-primary m-1 min-w-15"><b>Add</b></button>
-                        <button type="button" class="btn btn-danger m-1 min-w-15 text-center" onclick="cancel()"><b>Cancel</b></button>
-                    </div>
-                </form>
             </div>
 
             <div class="m-3 w-50 ml-auto mr-auto" id='formForCandidate' style="display: none;" >
@@ -56,6 +60,7 @@
                     <div class="m-1">
                         Party:  
                         <select name="party" id="partyList" class="bg-secondary border border-1 border-radius-1 w-25 text-right px-1">
+                            <option value="NULL">No party</option>
                             <?php
                                 foreach($data['partyRow'] as $party){
                                     echo "<option value='".$party->partyId."'>".$party->partyName."</option>";
@@ -221,6 +226,8 @@
     </div>
 
 <script>
+    
+
     function addCandidate(id){
         document.getElementById("positionId").value = id;
         positionName = document.getElementById(id).parentNode.getElementsByTagName("input")[0].value;
@@ -232,6 +239,12 @@
     function cancel(){
         document.getElementById('formForCandidate').style.display = "none";
         document.getElementById('formForPosition').style.display = "none";
+        
+        
+        document.getElementById('formForPosition').getElementsByTagName('input')[1].value = "";
+        document.getElementById('formForPosition').getElementsByTagName('textarea')[0].value = "";
+        document.getElementById('formForPosition').getElementsByTagName('input')[2].value = 1;
+        document.getElementById('formForPosition').getElementsByTagName('span')[0].innerHTML = "";
     }
 
     function popupfunc(id){

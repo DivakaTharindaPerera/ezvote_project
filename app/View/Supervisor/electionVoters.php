@@ -3,7 +3,7 @@
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
 <div class="main-container">
-    <div id="taskbar" class="d-flex flex-column w-100 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;" >
+    <div id="taskbar" class="d-flex flex-column w-100 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);" >
         <div class="d-flex">
             <div id="buttons" class="m-1 mr-auto">
                 <a href="<?php echo urlroot?>/Pages/ViewMyElection/<?php echo $data['ID'] ?>" class="btn btn-danger card-hover min-h-90"><i class="fa-solid fa-angles-left"></i><span class="ml-1">Back</span></a>
@@ -51,8 +51,8 @@
                     <h3 class="mt-1"> Confirm Deleting Voter?</h3>
                     <h3 class="text-danger ml-1 mr-1 mt-1"> You cannot undo this action after clicking 'Confirm'</h3>
                 </Span>
-                <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Confirm</b></button>
-                <button type="button" onclick="closeDiv()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
+                <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1 card-hover"><b>Confirm</b></button>
+                <button type="button" onclick="closeDiv()" class="btn btn-danger w-15 h-10 p-1 m-1 card-hover"><b>Cancel</b></button>
             </form>
         </div>
     </div>
@@ -73,8 +73,8 @@
                 Value: <input type="number" name="" id="" min="1" value="" class="border-1 w-20 px-1" style="border-radius: 20px; padding: 5px;">
             </div>
             <div class="m-1">
-                <button class="btn btn-primary" onclick="editVoterConfirm()">Save</button>
-                <button class="btn btn-danger ml-1" onclick="closeDiv()">Cancel</button>
+                <button class="btn btn-primary card-hover" onclick="editVoterConfirm()">Save</button>
+                <button class="btn btn-danger ml-1 card-hover" onclick="closeDiv()">Cancel</button>
             </div>
             <input type="hidden" name="emailOld" value="">
         </div>
@@ -85,7 +85,7 @@
         if($data['unregVoterRow'] == null && $data['regVoterRow'] == null){
             echo "<h3 class='text-danger'>No voters added yet</h3>";
         }
-        
+
         foreach ($data['unregVoterRow'] as $row) {
         ?>
             <div class="card text-center p-1">
@@ -106,8 +106,8 @@
                     <input type="hidden" name="" value="<?php echo  $row->Name; ?>">
                     <input type="hidden" name="" value="<?php echo  $row->Email; ?>">
                     <input type="hidden" name="" value="<?php echo $row->value; ?>">
-                    <button class="btn btn-danger mr-1" id="<?php echo $row->voterId; ?>" onclick="deleteVoter(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
-                    <button class="btn btn-primary" id="<?php echo $row->voterId; ?>" onclick="editVoter(this.id)"><i class='fa-sharp fa-solid fa-pen'></i></button>
+                    <button class="btn btn-danger mr-1 card-hover" id="<?php echo $row->voterId; ?>" onclick="deleteVoter(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
+                    <button class="btn btn-primary card-hover" id="<?php echo $row->voterId; ?>" onclick="editVoter(this.id)"><i class='fa-sharp fa-solid fa-pen'></i></button>
                 </div>
                 <div class="mb-1">
                     <label class="text-danger">Not yet registered</label>
@@ -134,8 +134,11 @@
                         </div>
                         <div class="buttons mb-1">
                             <!-- for the action butttons -->
-                            <button class="btn btn-danger mr-1" id="<?php echo $voter->voterId; ?>" onclick="deleteVoter(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
-                            <button class="btn btn-primary" id="" onclick="editVoterReg()"><i class='fa-sharp fa-solid fa-pen'></i></button>
+                            <input type="hidden" name="" value="<?php echo  $voter->Name; ?>">
+                            <input type="hidden" name="" value="<?php echo  $voter->Email; ?>">
+                            <input type="hidden" name="" value="<?php echo  $voter->value; ?>">
+                            <button class="btn btn-danger mr-1 card-hover" id="<?php echo $voter->voterId; ?>" onclick="deleteVoter(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
+                            <button class="btn btn-primary card-hover" id="<?php echo $voter->voterId?>" onclick="editVoter(this.id)"><i class='fa-sharp fa-solid fa-pen'></i></button>
                         </div>
                     </div>
         <?php

@@ -22,6 +22,10 @@
                 <div>Objections</div>
             </a>
 
+            <a href="<?php echo urlroot; ?>/Pages/electionParties/<?php echo $data['ID'] ?>" class="btn btn-primary m-3">
+                <div>Parties</div>
+            </a>
+
         </div>
 
         <div id="information" class="card-pane d-flex flex-column">

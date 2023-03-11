@@ -758,4 +758,49 @@ class Elections extends Controller
             // }
         }
     }
+
+    public function addSingleParty(){
+        try {
+            $dataset = json_decode(file_get_contents('php://input'), true);
+            $data = [
+                'msg' => 'success',
+                'electionId' => $dataset['electionId'],
+                'partyName' => $dataset['partyName'],
+                'supName' => $dataset['supervisorName'],
+                'supEmail' => $dataset['supervisorEmail']
+            ]; 
+
+            if($this->partyModel->findDuplicateParty($data['electionId'], $data['partyName'])){
+                $data['msg'] = 'A party with the same name already exists. Try a different name.';
+                echo json_encode($data);
+                return;
+            }else{
+                if($this->userModel->findUserByEmail($data['supEmail'])){
+                    $user = $this->userModel->getUserByEmail($data['supEmail']);
+                    $data['userId'] = $user->UserId;
+
+                    if($this->partyModel->insertIntoParty2($data)){
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        $data['msg'] = 'Error occured. Try again later...';
+                        echo json_encode($data);
+                        return;
+                    }
+                }else{
+                    if($this->partyModel->insertIntoParty1($data)){
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        $data['msg'] = 'Error occured. Try again later...';
+                        echo json_encode($data);
+                        return;
+                    }
+                }
+            }
+
+        } catch (exception $e) {
+            
+        }
+    }
 }

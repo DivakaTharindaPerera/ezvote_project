@@ -261,6 +261,29 @@
 
         $this->view('Supervisor/viewObjections',$data);
     }
+
+    public function electionParties($id){
+        if(!isset($_SESSION["UserId"])){
+            redirect('View/login');
+        }else{
+            $electionRow = $this->electionModel->getElectionByElectionId($id);
+            if($electionRow->Supervisor == $_SESSION["UserId"]){
+                $data = [];
+
+                $partyRow = $this->partyModel->getPartiesByElectionId($id);
+                $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
+
+                $data['ID'] = $id;
+                $data['partyRow'] = $partyRow;
+                $data['candidateRow'] = $candidateRow;
+
+                $this->view('Supervisor/electionParties',$data);
+            }else{
+                echo "Forbidden Access";
+            }
+        }
+    }
+
     public function aboutUs(){
         $this->view('about_us');
     }
