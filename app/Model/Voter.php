@@ -71,8 +71,8 @@ class Voter extends Controller{
 
     public function getRegVotersByElectionId($id){
         $this->db->query(
-            "SELECT * FROM registered_voter
-            WHERE ElectionId = :1"
+            "SELECT * FROM Voter
+            WHERE electionId = :1 AND userId is NOT NULL"
         );
 
         $this->db->bind(':1', $id);
@@ -88,8 +88,8 @@ class Voter extends Controller{
 
     public function getUnregVotersByElectionId($id){
         $this->db->query(
-            "SELECT * FROM unregistered_voter
-            WHERE ElectionId = :1"
+            "SELECT * FROM Voter
+            WHERE electionId = :1 AND userId is NULL"
         );
 
         $this->db->bind(':1', $id);
@@ -103,27 +103,43 @@ class Voter extends Controller{
         }
     }
 
-    public function getRegVoterByUserId($id){
+    public function deleteVoterByVoterId($id){
         $this->db->query(
-            "SELECT * FROM registered_voter
-            WHERE UserId = :1"
+            "DELETE FROM Voter
+            WHERE voterId = :1"
         );
 
         $this->db->bind(':1', $id);
 
         try {
-            $result = $this->db->resultSet();
-            return $result;
+            $this->db->execute();
+            return true;
         } catch (Exception $e) {
             echo "Something went wrong ".$e->getMessage();
-            return false;
         }
     }
+
+    // public function getRegVoterByUserId($id){
+    //     $this->db->query(
+    //         "SELECT * FROM Voter
+    //         WHERE userId = :1"
+    //     );
+
+    //     $this->db->bind(':1', $id);
+
+    //     try {
+    //         $result = $this->db->resultSet();
+    //         return $result;
+    //     } catch (Exception $e) {
+    //         echo "Something went wrong ".$e->getMessage();
+    //         return false;
+    //     }
+    // }
 
     public function findRegVoterByUserIdAndElectionId($uid,$eid){
         $this->db->query(
-            "SELECT * FROM registered_voter
-            WHERE UserId = :1 AND ElectionId = :2"
+            "SELECT * FROM Voter
+            WHERE userId = :1 AND ElectionId = :2"
         );
 
         $this->db->bind(':1', $uid);
@@ -143,9 +159,10 @@ class Voter extends Controller{
             die();
         }
     }
-    public function findUnRegVoterByEmailAndElectionId($email,$eid){
+
+    public function findDuplicateVoters($email,$eid){
         $this->db->query(
-            "SELECT * FROM unregistered_voter
+            "SELECT * FROM Voter
             WHERE Email = :1 AND ElectionId = :2"
         );
 
@@ -167,54 +184,121 @@ class Voter extends Controller{
         }
     }
 
-    public function deleteUnregVoterByEmailAndElectionId($email,$eid){
+    // public function findUnRegVoterByEmailAndElectionId($email,$eid){
+    //     $this->db->query(
+    //         "SELECT * FROM Voter
+    //         WHERE Email = :1 AND ElectionId = :2"
+    //     );
+
+    //     $this->db->bind(':1', $email);
+    //     $this->db->bind(':2', $eid);
+
+    //     try {
+    //         $row= $this->db->single();
+    //         if( $this->db->rowCount() > 0){
+    //             //voter exists
+    //             return true;
+    //         }else{
+    //             //voter not exists
+    //             return false;
+    //         }
+    //     } catch (Exception $e) {
+    //         echo "Something went wrong ".$e->getMessage();
+    //         die();
+    //     }
+    // }
+
+    // public function deleteUnregVoterByEmailAndElectionId($email,$eid){
+    //     $this->db->query(
+    //         "DELETE FROM unregistered_voter
+    //         WHERE ElectionId = :1 AND Email = :2"
+    //     );
+
+    //     $this->db->bind(':1', $eid);
+    //     $this->db->bind(':2', $email);
+
+    //     try {
+    //         $this->db->execute();
+    //         return true;
+    //     } catch (Exception $e) {
+    //         echo "Something went wrong ".$e->getMessage();
+    //         return false;
+    //     }
+    // }
+
+    // public function deleteRegVoterByUserIdAndElectionId($uid,$eid){
+    //     $this->db->query(
+    //         "DELETE FROM registered_voter
+    //         WHERE ElectionId = :1 AND UserId = :2"
+    //     );
+
+    //     $this->db->bind(':1', $eid);
+    //     $this->db->bind(':2', $uid);
+
+    //     try {
+    //         $this->db->execute();
+    //         return true;
+    //     } catch (Exception $e) {
+    //         echo "Something went wrong ".$e->getMessage();
+    //         return false;
+    //     }
+    // }
+
+    // public function editUnregVoter($data){
+    //     $this->db->query(
+    //         "UPDATE unregistered_voter
+    //         SET name = :1, value = :2, Email = :5
+    //         WHERE ElectionId = :3 AND Email = :4"
+    //     );
+
+    //     $this->db->bind(':1', $data['name']);
+    //     $this->db->bind(':2', $data['value']);
+    //     $this->db->bind(':3', $data['eid']);
+    //     $this->db->bind(':4', $data['oldEmail']);
+    //     $this->db->bind(':5', $data['email']);
+
+    //     try {
+    //         $this->db->execute();
+    //         return true;
+    //     } catch (Exception $e) {
+    //         echo "Something went wrong ".$e->getMessage();
+    //         return false;
+    //     }
+    // }
+
+    public function editVoterWithoutUser($data){
         $this->db->query(
-            "DELETE FROM unregistered_voter
-            WHERE ElectionId = :1 AND Email = :2"
-        );
-
-        $this->db->bind(':1', $eid);
-        $this->db->bind(':2', $email);
-
-        try {
-            $this->db->execute();
-            return true;
-        } catch (Exception $e) {
-            echo "Something went wrong ".$e->getMessage();
-            return false;
-        }
-    }
-
-    public function deleteRegVoterByUserIdAndElectionId($uid,$eid){
-        $this->db->query(
-            "DELETE FROM registered_voter
-            WHERE ElectionId = :1 AND UserId = :2"
-        );
-
-        $this->db->bind(':1', $eid);
-        $this->db->bind(':2', $uid);
-
-        try {
-            $this->db->execute();
-            return true;
-        } catch (Exception $e) {
-            echo "Something went wrong ".$e->getMessage();
-            return false;
-        }
-    }
-
-    public function editUnregVoter($data){
-        $this->db->query(
-            "UPDATE unregistered_voter
-            SET name = :1, value = :2, Email = :5
-            WHERE ElectionId = :3 AND Email = :4"
+            "UPDATE Voter
+            SET Name = :1, value = :2, Email = :3
+            WHERE voterId = :4"
         );
 
         $this->db->bind(':1', $data['name']);
         $this->db->bind(':2', $data['value']);
-        $this->db->bind(':3', $data['eid']);
-        $this->db->bind(':4', $data['oldEmail']);
-        $this->db->bind(':5', $data['email']);
+        $this->db->bind(':3', $data['email']);
+        $this->db->bind(':4', $data['id']);
+
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
+
+    public function editVoterWithUser($data){
+        $this->db->query(
+            "UPDATE Voter
+            SET Name = :1, value = :2, Email = :3, userId = :4
+            WHERE voterId = :5"
+        );
+
+        $this->db->bind(':1', $data['name']);
+        $this->db->bind(':2', $data['value']);
+        $this->db->bind(':3', $data['email']);
+        $this->db->bind(':4', $data['uid']);
+        $this->db->bind(':5', $data['id']);
 
         try {
             $this->db->execute();
