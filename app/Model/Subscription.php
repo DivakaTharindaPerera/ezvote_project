@@ -48,7 +48,7 @@ class Subscription{
             
     }
 
-    public function updateSubscriptionplan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
+    public function updateSubscriptionPlan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
         $this->db->query('UPDATE subscription_plan SET PlanName=:PlanName,Description= :Description,Date= :Date,DurationDate= :DurationDate,DurationMonth= :DurationMonth,DurationYear= :DurationYear,Price= :Price,FullAccess= :FullAccess,VotersLimit= :VotersLimit,CandidateLimit= :CandidateLimit,ElectionLimit= :ElectionLimit,ManagerID= :ManagerID WHERE PlanID = :PlanID');
 
         $this->db->bind(':PlanName', $name);
@@ -70,6 +70,14 @@ class Subscription{
         }else{
             return false;
         }
+    }
+
+    public function deleteSubscriptionPlan($plan){
+        $this->db->query('DELETE FROM subscription_plan WHERE PlanID = :PlanID');
+
+        $this->db->bind(':PlanID', $plan);
+
+        return $this->db->resultSet();
     }
 
 }

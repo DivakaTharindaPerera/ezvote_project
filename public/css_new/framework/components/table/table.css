@@ -3,16 +3,19 @@ table{
     width: 100%;
     color: var(--black);
     text-align: center;
+    border-color: var(--primary);
+    border-radius: 2rem;
+    border: 2rem;
 }
 th{
-    background-color: var(--red-8);
+    background-color: var(--black);
     color: var(--white);
 }
 tr{
     background-color: var(--white);
 }
 tr:hover{
-    background-color: var(--dark-red);
+    background-color: var(--primary);
     color: var(--white);
 }
 

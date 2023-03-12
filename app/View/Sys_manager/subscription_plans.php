@@ -1,9 +1,8 @@
-<?php require approot.'/View/inc/header.php'; ?>
-<?php
-require approot.'/View/sysmanager_topnavbar.php';
-?>
+<?php require approot . '/View/inc/VoterHeader.php'; ?>
+<?php require approot . '/View/inc/ManagerNavbar.php'; ?>
+<?php require approot . '/View/inc/manager_sidebar.php'; ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,71 +11,53 @@ require approot.'/View/sysmanager_topnavbar.php';
     <meta name="viewport" content="width=device-width , initial-scale=1.0">
     <title>subscription plan</title>
     <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/subscription_plans.css">
-    <script src="../public/js/search.js"></script>
 </head>
 
-<body>
+<body> -->
 
-<div class="plan">
-    <h2>Subscription Plans</h2>
-    <a href="create_subscription">
-        <button type="button">
+<div class="main-container max-h-85">
+    <div class="w-75 justify-content-center align-items-center">
+    <div class="d-flex flex-column min-w-95"> 
+    <h2 class="title text-center">Subscription Plans</h2>
+    <div class="d-flex justify-content-center align-items-center my-1">
+    <a href="/ezvote/subscription_plan/create_subscription">
+        <button class="btn btn-primary justify-content-center align-items-center" type="button">
             Create new plan
         </button>
     </a>
-</div><br>
+    </div>
 
-<a href="/ezvote/System_manager/dashboard">
+
+<!-- <a href="/ezvote/System_manager/dashboard">
     <div class="back-to">
-        <img src="<?php echo urlroot; ?>/public/img/button.png" />
+        <img src="<?php echo urlroot; ?>/public/img/button.png" style="width: 50px; height: 50px; margin-left: 0px; margin-top: 0px;" />
     </div>
-</a>
-<div>
-    <p>
-    <div class="search">
-        <img src="<?php echo urlroot; ?>/public/img/search.png">
-        <input type="text" id="searchPlan" onkeyup="myFunction()" placeholder="Search Plan......">
+</a> -->
+<div class="w-100">
+    <div class="d-flex flex-column">
+    <div class="d-flex justify-content-evenly ">
+        <div class="justify-content-center border border-primary my-3 mr-1 min-w-50">
+        <input type="text" id="searchPlan" style="height:100%;" onkeyup="myFunction()" placeholder="Search Plan......" class="w-100 h-100">
+        </div>
+        <div class="my-3 d-flex mr-5">
         <a href="#">
-            <button>SEARCH</button>
-            <label>FILTER</label>
-        </a>
-    </div><br>
-
-    <div class="filter-img">
-        <img src="<?php echo urlroot; ?>/public/img/filter.png" />
+            <button class="btn btn-primary">SEARCH</button></a>
+            <div class="d-flex text-center align-items-center text-md ml-3">FILTER
+            </div>
+        </div>
     </div>
+    </div>
+    
 
-    <div class="plan-box1">
-        <table>
-            <div class="table-dash">
+    <!-- <div class="filter-img">
+        <img src="<?php echo urlroot; ?>/public/img/filter.png" />
+    </div> -->
+
+    <div>
+        <table class="table border border-radius-2 border-primary w-95 h-75">
+            <!-- <div class="my-1"> -->
                 <tbody>
-                <!-- <tr>
-                    <td class="td-1">Annual plan [$99.99]</td>
-                    <td class="td-2">
-                        <label class="switch">
-                            <input type="checkbox" id="toggle" onclick="myFunction()">
-                            <span class="slider round"></span>
 
-                        </label>
-                        <span id="myDIV" class="enabled"> Enabled</span>
-                    </td>
-                    <td class="td-3">
-                    <a href="edit_subscription.php">
-                    <button>Details</button>
-                    </a>
-                </td>
-                </tr>
-                <script>
-                    function myFunction() {
-                        var checkBox = document.getElementById("toggle");
-                        var text = document.getElementById("myDIV");
-                        if (checkBox.checked == false) {
-                            text.innerHTML = "Enabled";
-                        }else{
-                            text.innerHTML = "Disabled";
-                        }
-                    }
-                </script> -->
                 <?php
 
                 $i = 1;
@@ -95,8 +76,10 @@ require approot.'/View/sysmanager_topnavbar.php';
                                 </td>
                                 <td class="td-3"><a href="edit_subscription/'.$data[0][$x]->PlanID.'"> 
 
-                                    <button class="delete" style="background: #C30000">Delete</button>
-                                    <button>Details</button>
+                                    <button class="btn btn-info ml-5">Details</button>
+                                    </td></a>
+                                    <td class="td-4"><a href="delete_subscription/'.$data[0][$x]->PlanID.'">
+                                    <button class="btn btn-danger mr-1">Delete</button>
                                     </td></a>
                             </tr>
                             
@@ -126,12 +109,18 @@ require approot.'/View/sysmanager_topnavbar.php';
                     }
                 </script> -->
                 </tbody>
-            </div>
+            <!-- </div> -->
         </table>
     </div>
-    </p>
+    </div>
+</div>
+</div>
+</div>
 </div>
 
-</body>
+<script src="../public/js/search.js"></script>
+<?php require approot . '/View/inc/footer.php'; ?>
 
-</html>
+<!-- </body>
+
+</html> -->

@@ -17,23 +17,38 @@ function vote(){
 }
 
 function marked(id){
+    // console.log("hi");
     const elem = document.getElementById(id);
     const div = document.getElementById('card-' + id);
+    // console.log(div);
+    const cardParent=div.parentElement;
+    console.log(cardParent);
+    for (i=1;i<=cardParent.childElementCount;i++){
+        if(cardParent.children[i-1].id=='card-'+id){
+            continue;
+        }
+        else{
+            const div1 = cardParent.children[i-1];
+            console.log(i-1);
+            div1.classList.add('blur');
+        }
+
+    }
     // div.classList.toggle('hidden');
     // document.getElementById("card").disable();
 }
 
-function accepted(){
-    const rules=document.getElementById("rules");
-    const content=document.getElementById("content");
-    if(rules.checked){
-        content.style.display="flex";
-        // console.log("checked");
-    }
-    else {
-        content.style.display="none";
-    }
-}
+// function accepted(){
+//     const rules=document.getElementById("rules");
+//     const content=document.getElementById("content");
+//     if(rules.checked){
+//         content.style.display="flex";
+//         // console.log("checked");
+//     }
+//     else {
+//         content.style.display="none";
+//     }
+// }
 
 function cancelBallot(){
     window.location.href="/ezvote/Voters/vote";

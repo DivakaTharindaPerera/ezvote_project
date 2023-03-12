@@ -1,29 +1,17 @@
-<?php require approot.'/View/inc/header.php'; ?>
-<?php
-require approot.'/View/sysmanager_topnavbar.php';
-?>
+<?php require approot . '/View/inc/VoterHeader.php'; ?>
+<?php require approot . '/View/inc/ManagerNavbar.php'; ?>
+<?php require approot . '/View/inc/manager_sidebar.php'; ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width , initial-scale=1.0">
-    <title>sysmanager dashboard</title>
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/sysmanager_dashboard.css">
+<!-- <body> -->
 
-</head>
-
-<body>
-
-<div class="plans">
-    <label>Activities</label><br>
-    <p>
-    <div class="plan-box1">
-        <table>
-            <div class="table-dash">
-                <tbody>
+<div class="main-container">
+    <div class="title">Activities</div>
+    <div class="w-80">
+        <table class="table border-2 border-radius-2 border-primary w-95 mt-1">
+            <tbody>
                 <?php
                 $arrlength = count($data, COUNT_RECURSIVE);
 
@@ -31,11 +19,10 @@ require approot.'/View/sysmanager_topnavbar.php';
                     echo '<tr>
                         <td class="td-1">'.$data[0][$x]-> Description.'</td>
                         <td class="td-2">'.$data[0][$x]-> Date .'</td>
-                        <td class="td-3">
-                            <button>Details</button>
-                        </td>
+                        <td class="td-3"><a href="/ezvote/subscription_plan/edit_subscription/'.$data[0][$x]->PlanID.'">
+                            <button class="btn btn-info">Details</button>
+                        </td></a>
                     </tr>';
-                    echo "<br>";
                 }
                 // foreach($data as $row){
                 //     print_r($row);
@@ -48,12 +35,12 @@ require approot.'/View/sysmanager_topnavbar.php';
                 // </tr>';
                 // } ?>
                 </tbody>
+                </table>
             </div>
-        </table>
     </div>
-    <div class="navbar2"></div>
+    <!-- <div class="navbar2"></div> -->
 
-    <a href="#">
+    <!-- <a href="#">
         <button type="button" class="summary-btn">
             Summary of usage</button>
     </a>
@@ -62,15 +49,16 @@ require approot.'/View/sysmanager_topnavbar.php';
             Subscription plans</button>
     </a>
     <a href="./../subscription_plan/sales_subscription">
-        <button type="button" class="sale-btn">
+        <button class="button" type="button" class="sale-btn">
             Subscription Sales</button>
     </a>
     <a href="./../System_manager/announcements">
-        <button type="button" class="announcement-btn">
+        <button class="button" type="button" class="announcement-btn">
             Announcements</button>
-    </a>
+    </a> -->
     </p>
 </div>
-</body>
+<!-- </body>
 
-</html>
+</html> -->
+<?php require approot . '/View/inc/footer.php'; ?>

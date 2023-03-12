@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +9,6 @@
     <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
-
     <div class="wrapper">
        
         <!--Top menu -->
