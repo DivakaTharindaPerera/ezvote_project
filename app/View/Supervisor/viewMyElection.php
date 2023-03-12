@@ -5,29 +5,25 @@
 
 
 
-<div class="main-container h-100">
-    
-    
+<div class="main-container">
 
-    <form action="<?php echo urlroot; ?>/Elections/updateElection" method="post" class="min-w-60 border-radius-1 border-3 border-primary my-2" id="updateForm">
+    <div id="btn panel" class="d-flex text-center d-flex w-100 p-1 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
+        <a href="<?php echo urlroot; ?>/Pages/electionVoters/<?php echo $data['ID'] ?>" class="btn btn-primary ml-auto card-hover mt-1 mb-1">
+            <div><b>Voters</b></div>
+        </a>
+        <a href="<?php echo urlroot; ?>/Pages/electionCandidates/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
+            <div><b>Candidates & Positions</b></div>
+        </a>
+        <a href="<?php echo urlroot; ?>/Pages/viewObjections/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
+            <div><b>Objections</b></div>
+        </a>
+        <a href="<?php echo urlroot; ?>/Pages/electionParties/<?php echo $data['ID'] ?>" class="btn btn-primary mr-auto ml-2 card-hover mt-1 mb-1">
+            <div><b>Parties</b></div>
+        </a>
+    </div>
 
-        <div id="btn panel" class="d-flex text-center">
-            <a href="<?php echo urlroot; ?>/Pages/electionVoters/<?php echo $data['ID'] ?>" class="btn btn-primary m-3">
-                <div>Voters</div>
-            </a>
-            <a href="<?php echo urlroot; ?>/Pages/electionCandidates/<?php echo $data['ID'] ?>" class="btn btn-primary m-3">
-                <div>Candidates & Positions</div>
-            </a>
-            <a href="<?php echo urlroot; ?>/Pages/viewObjections/<?php echo $data['ID'] ?>" class="btn btn-primary m-3">
-                <div>Objections</div>
-            </a>
 
-            <a href="<?php echo urlroot; ?>/Pages/electionParties/<?php echo $data['ID'] ?>" class="btn btn-primary m-3">
-                <div>Parties</div>
-            </a>
-
-        </div>
-
+    <form action="<?php echo urlroot; ?>/Elections/updateElection" method="post" class="w-100  overflow-scroll p-2" id="updateForm">
         <div id="information" class="card-pane d-flex flex-column">
             <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
             Title: <input type='text' name="title" value="<?php echo $data['electionRow']->Title ?>" disabled>
@@ -76,16 +72,13 @@
                     Self Nomination
 
 
-<!--                    <img src="--><?php //echo urlroot;?><!--/public/img/tik.png" alt="" style="height: 30px;width: 30px">-->
-                    <input type="checkbox" name="nomi" id="" value="1" <?php if($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled >
-
-                    
-                   <input type="checkbox" name="nomi" id="" value="1" <?php if($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled >
-
-
-                    <?php 
-                        if($data['electionRow']->SelfNomination == 1){
-                            echo "
+                    <!--                    <img src="--><?php //echo urlroot;
+                                                            ?>
+                    <!--/public/img/tik.png" alt="" style="height: 30px;width: 30px">-->
+                    <input type="checkbox" name="nomi" id="" value="1" <?php if ($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled>
+                    <?php
+                    if ($data['electionRow']->SelfNomination == 1) {
+                        echo "
 
                             <textarea name='nomiDesc' id='' cols='30' rows='10' disabled>
                                 " . $data['electionRow']->NominationDescription . "
@@ -102,10 +95,10 @@
                 </div>
             </div>
 
-            
+
             <?php
-                if($data['electionRow']->ObjectionStatus == 1){
-                    echo "
+            if ($data['electionRow']->ObjectionStatus == 1) {
+                echo "
 
                     <div id='objDateAndTime' class='d-flex flex-column'>
                     <div id='objTopic' class='text-center'>
@@ -151,10 +144,10 @@
             </div>
         </div>
     </div>
-    <div class="text-center d-flex justify-content-end mb-1 mr-1" id="buttonContainer">
+    <div class="text-center d-flex bg-blue-2 w-100 p-1" id="buttonContainer" style="border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.4);">
         <input type="hidden" name="" value="<?php echo $data['ID']; ?>" id="electionId">
-        <button type="button" onclick="edit()" class="btn btn-primary w-30 py-1" id="editBtn"><b>EDIT</b></button>
-        <button class="btn btn-danger ml-1" onclick="deletePopup()" id="electionDelBtn"><b>Delete Election</b></button>
+        <button type="button" onclick="edit()" class="btn btn-primary w-30 ml-auto card-hover" id="editBtn"><b>EDIT</b></button>
+        <button class="btn btn-danger ml-1 mr-auto card-hover" onclick="deletePopup()" id="electionDelBtn"><b>Delete Election</b></button>
     </div>
 </div>
 <script src="<?php echo urlroot; ?>/js/createElection.js"></script>
