@@ -72,12 +72,12 @@
                     </a>
                 </li>
 
-                <!-- <li>
-                    <a href="#">
+                <li>
+                    <a href="<?php echo urlroot; ?>/Candidates/update_profile">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Edit profile</span>
                     </a>
-                </li> -->
+                </li>
             </ul>
         </div>
 

@@ -14,6 +14,8 @@ class Nomination extends Model
     protected $msg='';
 
     public function AddNomination($data){
+        // $this->db->query('INSERT INTO nomination (firstname,lastname,election_name,position,party_name,profile_picture,identity_proof,candidateDescription,msg) VALUES (:firstname,:lastname,:election_name,:position,:party_name,:image_url,:file_urls,:candidateDescription,:msg)');
+
         $this->db->query('INSERT INTO nomination (firstname,lastname,election_name,position,party_name,profile_picture,identity_proof,candidateDescription,msg) VALUES (:firstname,:lastname,:election_name,:position,:party_name,:image_url,:file_urls,:candidateDescription,:msg)');
         //bind values
         // $this->db->bind(':nominationID',$data['nominationID']);
@@ -268,5 +270,39 @@ class Nomination extends Model
 
         return $result->fetchAll();
     }
+
+    // public function getNominationDetails($id) {
+    //     $query = "SELECT * FROM nomination WHERE nominationID = :id LIMIT 1";
+    //     $stmt = $this->db->prepare($query);
+    //     $stmt->execute(array(':id' => $id));
+    //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    //     return $row;
+    // }
+
+    public function updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg) {
+        // public function updateSubscriptionplan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
+            $this->db->query('UPDATE candidate SET candidateName=:candidateName,candidateEmail=:candidateEmail,position=:position,party_name=:party_name,candidateDescription=:candidateDescription,msg=:msg WHERE nominationID = :nominationID');
     
-}
+            // $this->db->bind(':nominationID',$data['nominationID']);
+            $this->db->bind(':candidateName',$candidateName);
+            $this->db->bind(':candidateEmail',$candidateEmail);
+            // $this->db->bind(':election_name',$election_name);
+            $this->db->bind(':position',$position);
+        // $this->db->bind(':party_names',$data['party_names']);
+            $this->db->bind(':party_name',$party_name);
+        // $this->db->bind(':party_description',$data['party_description']);
+            // $this->db->bind(':image_url',$profile_picture);
+            // $this->db->bind(':file_urls',$data['identity_proof']);
+            $this->db->bind(':description',$description);
+            $this->db->bind(':vision',$vision);
+            // $this->db->bind(':nominationID',$nominationID);
+
+    
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
