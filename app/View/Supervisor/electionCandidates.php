@@ -49,7 +49,7 @@
             <div class="m-3 w-50 ml-auto mr-auto" id='formForCandidate' style="display: none;" >
                 <form action="<?php echo urlroot; ?>/Elections/addSingleCandidate" method="POST">
                     <input type="hidden" name="id" value="<?php echo $data['ID']; ?>">
-                    <input type="hidden" name="positionId"id='positionId' >
+                    <input type="hidden" name="positionId" id='positionId' >
                     <h4 id="positionPlaceholder" class="m-1"></h4>
                     <div class="m-1">
                         <input type="email" name="candidateEmail" placeholder="Candidate email..." required >
@@ -230,7 +230,8 @@
 
     function addCandidate(id){
         document.getElementById("positionId").value = id;
-        positionName = document.getElementById(id).parentNode.getElementsByTagName("input")[0].value;
+        const positionName = document.getElementById(id).parentNode.getElementsByTagName("input")[1].value;
+        console.log(positionName);
         document.getElementById('positionPlaceholder').innerHTML ="Position : "+ positionName;
         document.getElementById('formForCandidate').style.display = "block";
         document.getElementById('formForCandidate').getElementsByTagName('input')[2].focus();

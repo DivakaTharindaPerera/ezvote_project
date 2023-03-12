@@ -800,7 +800,75 @@ class Elections extends Controller
             }
 
         } catch (exception $e) {
+            $data['msg'] = 'Error occured. Try again later...'.$e;
+            echo json_encode($data);
+            return;
+        }
+    }
+
+    public function editSingleParty(){
+        try {
+            $dataset = json_decode(file_get_contents('php://input'), true);
+
+            $data = [
+                'eid' => $dataset['electionId'],
+                'msg' => 'success',
+                'partyId' => $dataset['partyId'],
+                'partyName' => $dataset['partyName'],
+                'supName' => $dataset['supervisorName'],
+                'supEmail' => $dataset['supervisorEmail'],
+                'oldPartyName' => $dataset['oldPartyName']
+            ];
             
+            if($data['partyName'] != $data['oldPartyName'] && $this->partyModel->findDuplicateParty($data['eid'], $data['partyName'])){
+                $data['msg'] = 'A party with the same name already exists. Try a different name.';
+                echo json_encode($data);
+                return;
+            }else{
+                if($this->userModel->findUserByEmail($data['supEmail'])){
+                    $user = $this->userModel->getUserByEmail($data['supEmail']);
+                    $data['userId'] = $user->UserId;
+
+                    if($this->partyModel->editPartyWithUser($data)){
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        $data['msg'] = 'Error occured. Try again later...';
+                        echo json_encode($data);
+                        return;
+                    }
+                }else{
+                    if($this->partyModel->editPartyWithoutUser($data)){
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        $data['msg'] = 'Error occured. Try again later...';
+                        echo json_encode($data);
+                        return;
+                    }
+                }
+            }
+
+        } catch (Exception $e) {
+            $data['msg'] = 'Error occured. Try again later...'.$e;
+            echo json_encode($data);
+            return;
+        }
+    }
+
+    public function removeParty(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'eid' => trim($_POST['electionId']),
+                'id' => trim($_POST['partyId'])
+            ];
+
+            if($this->partyModel->deletePartyByPartyId($data['id'])){
+                redirect('Pages/electionParties/'.$data['eid']);
+            }else{
+                die('Something went wrong');
+            }
         }
     }
 }
