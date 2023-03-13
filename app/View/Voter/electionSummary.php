@@ -22,14 +22,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($data['winners'] as $winner) { ?>
+<!--                --><?php //foreach ($data['winners'] as $winner) { ?>
                     <tr>
                         <td>Sandun</td>
                         <td>Secretary</td>
-                        <td><?= $winner->NoOfVotes?></td>
+                        <td>50</td>
                         <td>Heros</td>
                     </tr>
-                <?php } ?>
+<!--                --><?php //} ?>
                 </tbody>
             </table>
         </div>

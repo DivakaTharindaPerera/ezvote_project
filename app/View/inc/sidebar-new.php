@@ -68,7 +68,7 @@
                 </li>
                 <li>
                     <a href="<?php echo urlroot;?>/Pages/viewObjections">
-                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="icon"><i class="fa-solid fa-bullseye"></i></span>
                         <span class="item">Objections</span>
                     </a>
                 </li>

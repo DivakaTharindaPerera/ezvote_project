@@ -9,6 +9,7 @@
         protected $params = [];
 
         public function __construct(){
+            date_default_timezone_set("Asia/Colombo");
             $url = $this->getURL();
 
             if(file_exists('../app/Controller/' . ucwords($url[0]) . '.php')){

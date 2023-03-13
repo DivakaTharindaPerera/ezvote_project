@@ -11,6 +11,8 @@ function openPopup(id=null){
 function closePopup()
 {
     // console.log("close");
+    const button=document.getElementById("close");
+    event.preventDefault();
     let popup=document.getElementById("popup");
     popup.classList.remove("open-popup");
     // window.location.href = "/Voters/election";
@@ -39,25 +41,50 @@ function viewSummary($election_id){
 }
 
 function marked(id){
-    // console.log("hi");
-    const elem = document.getElementById(id);
     const div = document.getElementById('card-' + id);
-    // console.log(div);
+    console.log(div);
+    // let button_state;
     const cardParent=div.parentElement;
     console.log(cardParent);
+    cardParent.classList.toggle('marked');
     for (i=1;i<=cardParent.childElementCount;i++){
+        console.log(i);
         if(cardParent.children[i-1].id=='card-'+id){
+            if (cardParent.children[i-1].classList.contains('marked')) {
+                const button = cardParent.children[i - 1].getElementsByTagName('button')[0];
+                button.addEventListener('click', () => {
+                    console.log('hello');
+                });
+                button.disabled = false;
+            }
+            else{
+                const button = cardParent.children[i - 1].getElementsByTagName('button')[0];
+                button.removeEventListener('click')
+                button.disabled = true;
+            }
             continue;
         }
         else{
-            const div1 = cardParent.children[i-1];
-            console.log(i-1);
-            div1.classList.add('blur');
-        }
+            if (cardParent.children[i-1].classList.contains('marked')) {
+                const button = cardParent.children[i - 1].getElementsByTagName('button')[0];
+                button.addEventListener('click', () => {
+                    console.log('hello');
+                });
+                button.disabled = false;
+            }
+            else{
+                const button = cardParent.children[i - 1].getElementsByTagName('button')[0];
+                button.removeEventListener('click')
+                button.disabled = true;
+            }
+            //     const div1 = cardParent.children[i-1];
+            //     console.log(i-1)
+            // const button=div1.getElementsByTagName('button')[0];
+            // button.removeEventListener('click')
+            // button.disabled=true;
 
+        }
     }
-    // div.classList.toggle('hidden');
-    // document.getElementById("card").disable();
 }
 
 // function accepted(){

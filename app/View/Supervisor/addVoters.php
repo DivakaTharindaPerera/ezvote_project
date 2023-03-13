@@ -31,10 +31,10 @@
                Value of the vote: <input type="text" name="value" id="value">
            </div>
            <div class="addsinglevoterbtn align-items-center justify-content-center my-1">
-               <button id="addsinglevoter" class="mx-3 btn btn-primary" onclick="addSingleVoter()">ADD VOTER</button>
+               <button id="addsinglevoter" class="mx-1 btn btn-primary" onclick="addSingleVoter()">ADD VOTER</button>
            </div>
 <!--           <br>-->
-           <div class="d-flex align-items-center justify-content-center mx-3 my-1 btn btn-info">
+           <div class="d-flex align-items-center justify-content-center mx-1 my-1 btn btn-info">
                <input type="file" name="csvupload" id="csvupload"  accept=".txt">
                <!-- format :'name'-'email'-'value of the vote' -->
            </div>

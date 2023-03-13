@@ -37,14 +37,106 @@
         }  
 
         public function dashboard(){
-            $r_ongoing=$this->electionModel->getOngoingElections();
-            $r_upcoming=$this->electionModel->getUpcomingElections();
-            $r_completed=$this->electionModel->getCompletedElections();
-            $this->view('Voter/viewAllElection',[
-                'data1'=>$r_ongoing,
-                'data2'=>$r_upcoming,
-                'data3'=>$r_completed
-            ]);
+            $s_ongoing_filtered=[];
+            $s_upcoming_filtered=[];
+            $s_completed_filtered=[];
+            $v_ongoing_filtered=[];
+            $v_upcoming_filtered=[];
+            $v_completed_filtered=[];
+            $c_ongoing_filtered=[];
+            $c_upcoming_filtered=[];
+            $c_completed_filtered=[];
+            if($this->isLoggedIn()) {
+                $r_ongoing=$this->electionModel->getOngoingElections();
+                if($r_ongoing!=null) {
+                    foreach ($r_ongoing as $row) {
+                        if ($row->Supervisor == $_SESSION["UserId"]) {
+                            $s_ongoing_filtered[] = $row;
+                        } else {
+                            continue;
+                        }
+                    }
+                    foreach($r_ongoing as $row){
+                        $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
+                        if($v_row[0]->userId==$_SESSION["UserId"]){
+                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                            $v_ongoing_filtered[] = $row;
+                        }
+                    }
+                    foreach($r_ongoing as $row){
+                        $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                        if($c_row[0]->userId==$_SESSION["UserId"]){
+                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                            $c_ongoing_filtered[] = $row;
+                        }
+                    }
+                }
+                $r_upcoming=$this->electionModel->getUpcomingElections();
+                if($r_upcoming!=null){
+                    foreach ($r_upcoming as $row){
+                        if($row->Supervisor==$_SESSION["UserId"]){
+                            $s_upcoming_filtered[] = $row;
+                        }
+                        else{
+                            continue;
+                        }
+                    }
+                    foreach($r_upcoming as $row){
+                        $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
+                        if($v_row[0]->userId==$_SESSION["UserId"]){
+                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                            $v_upcoming_filtered[] = $row;
+                        }
+                    }
+                    foreach($r_upcoming as $row){
+                        $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                        if($c_row[0]->userId==$_SESSION["UserId"]){
+                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                            $c_upcoming_filtered[] = $row;
+                        }
+                    }
+                }
+                $r_completed=$this->electionModel->getCompletedElections();
+                if($r_completed!=null){
+                    foreach ($r_completed as $row){
+                        if($row->Supervisor==$_SESSION["UserId"]){
+                            $s_completed_filtered[] = $row;
+                        }
+                        else{
+                            continue;
+                        }
+                    }
+                    foreach($r_completed as $row){
+                        $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
+                        if($v_row[0]->userId==$_SESSION["UserId"]){
+                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                            $v_completed_filtered[] = $row;
+                        }
+                    }
+                    foreach($r_completed as $row){
+                        $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                        if($c_row[0]->userId==$_SESSION["UserId"]){
+                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                            $c_completed_filtered[] = $row;
+                        }
+                    }
+                }
+                $this->view('Voter/viewAllElection',[
+                    'data1'=>$s_ongoing_filtered,
+                    'data2'=>$s_upcoming_filtered,
+                    'data3'=>$s_completed_filtered,
+                    'data4'=>$v_ongoing_filtered,
+                    'data5'=>$v_upcoming_filtered,
+                    'data6'=>$v_completed_filtered,
+                    'data7'=>$c_ongoing_filtered,
+                    'data8'=>$c_upcoming_filtered,
+                    'data9'=>$c_completed_filtered
+                ]);
+            }
+            else {
+                $this->view('login');
+            }
+
         }
 
         public function register(){
@@ -259,6 +351,19 @@
     
     public function Sysmanager(){
         $this->view('Sys_manager/Sysmanager_login');
+    }
+
+    public function viewOngoingElection($electionId)
+    {
+        if($this->isLoggedIn()){
+            $data1=$this->electionModel->getElectionByElectionId($electionId);
+            $data2=$this->electionModel->getPositionsByElectionId($electionId);
+            $this->view('Supervisor/viewOngoingElection',
+            [
+                'election'=>$data1,
+                'positions'=>$data2
+            ]);
+        }
     }
 
 }

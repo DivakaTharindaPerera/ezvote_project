@@ -155,8 +155,10 @@ $validatedData = [
 
     public function candidateProfile()
     {
-        $r=$this->objModel->RetrieveAll();
-        $this->view('Candidate/candidateProfile',['r'=>$r]);
+//        $r=$this->objModel->RetrieveAll();
+        $this->view('Candidate/candidateProfile'
+//            ['r'=>$r]
+        );
     }
     
 

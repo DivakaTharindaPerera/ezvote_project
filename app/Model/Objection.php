@@ -8,7 +8,6 @@ class Objection extends Model
     protected $Respond;
 
     public function AddObjection($data){
-
         $this->db->query('INSERT INTO objection (ObjectionID,Subject,Description,Respond,Action,ElectionID,CandidateID,VoterID) VALUES (:ObjectID,:Subject,:Description,:Respond,:Action,:ElectionID,:CandidateID,:VoterID)');
         //bind values
         $this->db->bind(':ObjectID',$data['objectionID']);

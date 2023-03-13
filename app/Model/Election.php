@@ -112,12 +112,14 @@ class Election extends Controller{
 
     public function getOngoingElections()
     {
-        date_default_timezone_set("Asia/Colombo");
         $dates=date("Y-m-d");
         $times=date("H:i:s");
         $this->db->query(
-            "SELECT * FROM election WHERE StartDate<='".$dates."' && StartTime<='".$times."' && EndDate>='".$dates."' && EndTime>='".$times."'"
+            "SELECT * FROM election WHERE ((StartDate<'".$dates."' && ((EndDate='".$dates."' && EndTime>='".$times."') || (EndDate>'".$dates."'))) ||((StartDate='".$dates."' && StartTime<='".$times."') &&(EndDate>'".$dates."' || (EndDate='".$dates."' && EndTime>'".$times."'))))"
         );
+//        echo '<pre>';
+//        print_r($this->db);
+//        exit();
         try {
             $result = $this->db->resultSet();
             return $result;
@@ -244,5 +246,13 @@ class Election extends Controller{
             echo $e;
             return false;
         }
+    }
+
+    public function getVotersByElectionID($id)
+    {
+        $election_Id = $id;
+        $this->db->query("SELECT userId,voterId FROM voter WHERE electionid ='" . $election_Id . "'");
+        $row = $this->db->resultSet();
+        return $row;
     }
 }

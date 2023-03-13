@@ -6,6 +6,7 @@ class Voters extends Controller
     {
         $this->objModel = $this->model('Objection');
         $this->elecModel=$this->model('Election');
+        $this->voterModel=$this->model('Voter');
     }
     public function submitObjections(){
 //        if(!$this->isLoggedIn()){
@@ -62,28 +63,39 @@ class Voters extends Controller
     }
 
     public function election($election_id,$candidate_id=null){
-        $data_1=$this->elecModel->getElectionByElectionId($election_id);
-        $data_2=$this->elecModel->getPositionsByElectionId($election_id);
-        $data_3=$this->elecModel->getCandidatesByElectionId($election_id);
-        if($_SERVER['REQUEST_METHOD']==='POST'){
-            $candidate_id=$_POST['CandidateID'];
-            $data=[
-                'objectionID'=>uniqid('obj',true),
-                'Subject'=>$_POST['Subject'],
-                'Description'=>$_POST['Description'],
-                'Respond'=>'',
-                'Action'=>'',
-                'ElectionID'=>$election_id,
-                'CandidateID'=>$candidate_id,
-                'VoterID'=>48,
-            ];
-            $this->objModel->AddObjection($data);
+        if($this->isLoggedIn()){
+            $data_1=$this->elecModel->getElectionByElectionId($election_id);
+            $data_2=$this->elecModel->getPositionsByElectionId($election_id);
+            $data_3=$this->elecModel->getCandidatesByElectionId($election_id);
+            if($_SERVER['REQUEST_METHOD']==='POST'){
+                $user_id=$_SESSION['UserId'];
+                $voter_id=$this->voterModel->getVoterByUserId($user_id)->voterId;
+                $candidate_id=$_POST['CandidateID'];
+                $data=[
+                    'objectionID'=>uniqid('obj',true),
+                    'Subject'=>$_POST['Subject'],
+                    'Description'=>$_POST['Description'],
+                    'Respond'=>'',
+                    'Action'=>'',
+                    'ElectionID'=>$election_id,
+                    'CandidateID'=>$candidate_id,
+                    'VoterID'=>$voter_id
+                ];
+                $this->objModel->AddObjection($data);
+                redirect('voters/election/'.$election_id);
+            }
+            else {
+                $this->view('Voter/viewElection', [
+                    'election' => $data_1,
+                    'positions' => $data_2,
+                    'candidates' => $data_3,
+                ]);
+            }
         }
-        $this->view('Voter/viewElection',[
-            'election'=>$data_1,
-            'positions'=>$data_2,
-            'candidates'=>$data_3,
-        ]);
+        else{
+            $this->view('login');
+        }
+
     }
 
     public function viewObjections($candidate_id,$election_id){
@@ -107,6 +119,7 @@ class Voters extends Controller
         $data_1=$this->elecModel->getElectionByElectionId($id);
         $data_2=$this->elecModel->getPositionsByElectionId($id);
         $data_3=$this->elecModel->getCandidatesByElectionId($id);
+//        $data_4=$this->voterModel->temporaryVoting();
         $this->view('Voter/votingBallot',[
             'election'=>$data_1,
             'positions'=>$data_2,
@@ -118,7 +131,7 @@ class Voters extends Controller
     public function summary($id)
     {
         $data_1=$this->elecModel->getElectionByElectionId($id);
-        $data_2=$this->elecModel->getWinnersDetails($id);
+//        $data_2=$this->elecModel->getWinnersDetails($id);
 //        print_r($data_2);
 //        exit();
 //        $i=0;
@@ -131,7 +144,7 @@ class Voters extends Controller
 //        }
        $this->view('Voter/electionSummary',[
            'election'=>$data_1,
-           'winners'=>$data_2,
+//           'winners'=>$data_2,
 //           'party'=>$data_3
        ]);
     }

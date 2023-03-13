@@ -65,20 +65,20 @@ require approot.'/View/inc/sidebar-new.php';
                         <?php }?>
                     </div>
                 </div>
-                <div id="self-nomination" class="d-flex text-lg ">
-                    <div class="text-center">Multiple Cast of Votes : </div>
-                    <div class="d-flex text-lg text-primary">
-                        <?php if($data['election']->MultipleVotes==1) {?>
+<!--                <div id="self-nomination" class="d-flex text-lg ">-->
+<!--                    <div class="text-center">Multiple Cast of Votes : </div>-->
+<!--                    <div class="d-flex text-lg text-primary">-->
+<!--                        --><?php //if($data['election']->MultipleVotes==1) {?>
                             <!--                        <img src="--><?php //echo urlroot;?><!--/public/img/on.png" alt="" style="max-width: 40px;max-height: 40px">-->
-                            ON
-                        <?php }
-                        else{?>
+<!--                            ON-->
+<!--                        --><?php //}
+//                        else{?>
                             <!--                        <img src="--><?php //echo urlroot;?><!--/public/img/off.png" alt="" style="max-width: 40px;max-height: 40px">-->
-                            OFF
-                        <?php }?>
-                        </div>
+<!--                            OFF-->
+<!--                        --><?php //}?>
+<!--                        </div>-->
 <!--                        <img src="--><?php //echo urlroot;?><!--/public/img/off.png" alt="" style="max-width: 40px;max-height: 40px"> </div>-->
-                </div>
+<!--                </div>-->
             </div>
             <div id="candidates" class="d-flex flex-column w-100">
                 <div class="title">
@@ -119,7 +119,7 @@ require approot.'/View/inc/sidebar-new.php';
                                                     <input type="hidden" name="CandidateID"  value="" id="CandidateID">
 <!--                                                </div>-->
                                                 <div class="d-flex justify-content-between my-1 w-100">
-                                                    <div><button class="btn btn-danger px-1" onclick="closePopup()">Cancel</div>
+                                                    <div><button class="btn btn-danger px-1" onclick="closePopup()" id="close" type="reset">Cancel</div>
                                                     <div ><button class="btn btn-primary px-1" type="submit">Submit</div>
                                                 </div>
                                             </form>
