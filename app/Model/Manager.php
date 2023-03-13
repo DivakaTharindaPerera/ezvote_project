@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 class Manager{
     private $db;
 
@@ -34,6 +34,19 @@ class Manager{
         $this->db->bind(':ManagerID',$managerid);
         return $this->db->resultSet();
 
+    }
+
+    public function updatePassword($email, $pwd){
+        $this->db->query('UPDATE system_manager SET Password = :Password WHERE Email=:Email');
+
+        $this->db->bind(':Email',$email);
+        $this->db->bind(':Password',$pwd);
+        
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

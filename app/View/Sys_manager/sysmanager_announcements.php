@@ -128,7 +128,7 @@ window.onload = function(){
         </div>
         <div class="d-flex justify-content-end">
         <a href="/ezvote/System_manager/dashboard">
-        <button class="btn btn-primary gap-4" type="button" class="button" id="cancel" >Cancel</button>
+        <button class="btn btn-primary gap-3" type="button" class="button" id="cancel" >CANCEL</button>
         </a>
         </div>
     
