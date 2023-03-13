@@ -7,6 +7,7 @@
         private $positionModel;
         private $partyModel;
         private $voterModel;
+        private $objectionModel;
 
         public function __construct(){
             $this->postModel = $this->model('User');
@@ -15,6 +16,7 @@
             $this->positionModel = $this->model('electionPositions');
             $this->partyModel = $this->model('Party');
             $this->voterModel = $this->model('Voter');
+            $this->objectionModel = $this->model('Objection');
         }
 
         public function index(){
@@ -176,6 +178,23 @@
             }
         }
 
+        public function wayToAddVoters($eid){
+            $this->View('Supervisor/addVoters',$eid);
+        }
+
+        public function wayToAddPositions($eid){
+            $this->view('Supervisor/addPositions', $eid);
+        }
+
+        public function wayToAddCandidates($eid){
+            $positionRow = $this->positionModel->getElectionPositionByElectionId($eid);
+            $data = [
+                'ID' => $eid,
+                'positionRow' => $positionRow
+            ];
+            $this->view('Supervisor/addCandidates', $data);
+        }
+
         public function fortests(){
             $this->view('sendEmail');
         }
@@ -317,10 +336,46 @@
             }
         }
 
-    public function viewObjections()
-    {
-        $this->view('Supervisor/viewObjections');
+    public function viewObjections($id){
+
+        $objectionRow = $this->objectionModel->getObjectionsByElectionId($id);
+        $CandidateRow = $this->candidateModel->getCandidatesByElectionId($id);
+        $voterRow = $this->voterModel->getRegVotersByElectionId($id);
+        $users = $this->postModel->getUsers();
+
+        $data = [
+            'ID' => $id,
+            'objectionRow' => $objectionRow,
+            'candidateRow' => $CandidateRow,
+            'voterRow' => $voterRow,
+            'users' => $users,
+        ];
+
+        $this->view('Supervisor/viewObjections',$data);
+    }
+
+    public function electionParties($id){
+        if(!isset($_SESSION["UserId"])){
+            redirect('View/login');
+        }else{
+            $electionRow = $this->electionModel->getElectionByElectionId($id);
+            if($electionRow->Supervisor == $_SESSION["UserId"]){
+                $data = [];
+
+                $partyRow = $this->partyModel->getPartiesByElectionId($id);
+                $candidateRow = $this->candidateModel->getCandidatesByElectionId($id);
+
+                $data['ID'] = $id;
+                $data['partyRow'] = $partyRow;
+                $data['candidateRow'] = $candidateRow;
+
+                $this->view('Supervisor/electionParties',$data);
+            }else{
+                echo "Forbidden Access";
+            }
         }
+    }
+
     public function aboutUs(){
         $this->view('about_us');
     }

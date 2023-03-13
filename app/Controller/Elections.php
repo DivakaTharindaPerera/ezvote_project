@@ -165,7 +165,8 @@ class Elections extends Controller
                     }
                 }
                 if ($flag == 1) {
-                    $this->view('Supervisor/addPositions', $data);
+                    redirect('Pages/wayToAddPositions/'.$data['electionId']);
+                    // $this->view('Supervisor/addPositions', $data);
                 } else {
                     echo "Error";
                 }
@@ -214,11 +215,10 @@ class Elections extends Controller
                         continue;
                     } else {
                         echo "error $i <br>";
-                        $this->view('Supervisor/addPositions', $data);
-                        return;
+                        redirect('Pages/wayToAddPositions/'.$data['electionId']);
                     }
                 }
-                $this->view('Supervisor/addCandidates', $positionData);
+                redirect('Pages/wayToAddCandidates/'.$data['electionId']);
             }
         }
     }
@@ -255,7 +255,7 @@ class Elections extends Controller
                             $data1 = [
                                 'email' => $data['supEmail'],
                                 'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
-                                'body' => "You have been added as the party supervisor in the party ".$data['partyname']." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account see further infromation."
+                                'body' => "You have been added as the party supervisor in the party ".$data['partyName']." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account see further infromation."
                             ];
                             $this->emailModel->sendEmail($data1);
                             for ($j = 0; $j < $count; $j++) {
@@ -386,12 +386,13 @@ class Elections extends Controller
                             continue;
                         } else {
                             echo "error $i <br>";
-                            $this->view('Supervisor/addCandidate', $data);
                             return;
                         }
+
                     }
                 }
             }
+            $this->view('Supervisor/addCandidateSuccess','1');
         }
     }
 
@@ -650,53 +651,34 @@ class Elections extends Controller
                     'value' => $dataset['value'],
                 ];
 
-                if($this->userModel->findUserByEmail($data['email'])){
-                    $uid = $this->userModel->getUserByEmail($data['email'])->UserId;
-                    $data['id'] = $uid;
-                    if($this->voterModel->findRegVoterByUserIdAndElectionId($uid, $data['electionId'])){
-                        $data['msg'] = 'A voter with this email already registered for this election';
-                        echo json_encode($data);
-                        return;
+                if($this->voterModel->findDuplicateVoters($data['email'], $data['electionId'])){
+                    $data['msg'] = 'A voter with this email already registered for this election';
+                    echo json_encode($data);
+                    return;
+                }else{
+                    if($this->userModel->findUserByEmail($data['email'])){
+                        $user = $this->userModel->getUserByEmail($data['email']);
+                        $data['id'] = $user->UserId;
 
-                    }else{
                         if($this->voterModel->insertIntoRegVoters($data)){
-                            // $ElectionData = $this->electionModel->getElectionById($data['electionId']);
-                            // //email service
-                            // $data1 = [
-                            //     'email' => $data['email'],
-                            //     'subject' => "ELECTION REQUEST FROM " . $ElectionData->OrganizationName,
-                            //     'body' => "You have been invited to participate as a voter in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". Please login to your account see further infromation about the election."
-                            // ];
-                            // if($this->emailService->sendEmail($data1)){
-                            //     echo json_encode($data);
-                            //     return;
-                            // }
-
                             echo json_encode($data);
                             return;
                         }else{
-                            $data['msg'] = "Something went wrong. Try again later...";
+                            $data['msg'] = 'Error occured. Try again later...';
                             echo json_encode($data);
                             return;
                         }
-                    }
-                }else{
-                    if($this->voterModel->findUnRegVoterByEmailAndElectionId($data['email'], $data['electionId'])){
-                        $data['msg'] = 'A voter with this email already registered for this election';
-                        echo json_encode($data);
-                        return;
                     }else{
-                        if($this->voterModel->insertIntoUnRegVoters($data)){
+                        if($this->voterModel->insertIntoUnregVoters($data)){
                             echo json_encode($data);
                             return;
                         }else{
-                            $data['msg'] = "Something went wrong. Try again later...";
+                            $data['msg'] = 'Error occured. Try again later...';
                             echo json_encode($data);
                             return;
                         }
                     }
                 }
-
             } catch (Exception $e) {
                 $data['msg'] = 'Error occured. Try again later...'.$e;
                 echo json_encode($data);
@@ -713,10 +695,10 @@ class Elections extends Controller
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $data = [
                     'eid' => trim($_POST['eid']),
-                    'email' => trim($_POST['email'])
+                    'id' => trim($_POST['voterId'])
                 ];
 
-                if($this->voterModel->deleteUnregVoterByEmailAndElectionId($data['email'], $data['eid'])){
+                if($this->voterModel->deleteVoterByVoterId($data['id'])){
                     redirect('Pages/electionVoters/'.$data['eid']);
                 }else{
                     die('Something went wrong');
@@ -725,48 +707,167 @@ class Elections extends Controller
         }
     }
 
-    public function removeVoterReg(){
-        if(!$this->isLoggedIn()){
-            $this->view('login');
-        }else{
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $data = [
-                    'eid' => trim($_POST['eid']),
-                    'uid' => trim($_POST['uid'])
-                ];
-
-                if($this->voterModel->deleteRegVoterByUserIdAndElectionId($data['uid'], $data['eid'])){
-                    redirect('Pages/electionVoters/'.$data['eid']);
-                }else{
-                    die('Something went wrong');
-                }
-            }
-        }
-    }
-    public function editUnregVoter(){
+    public function editVoter(){
         $dataset = json_decode(file_get_contents('php://input'), true);
         $data = [
             'msg' => 'success',
             'eid' => $dataset['eid'],
-            'oldEmail' => $dataset['oldEmail'],
+            'id' => $dataset['voterId'],
             'name' => $dataset['name'],
             'email' => $dataset['email'],
             'value' => $dataset['value'],
+            'oldEmail' => $dataset['oldEmail']
         ];
 
-        if( $data['oldEmail'] != $data['email'] && $this->voterModel->findUnRegVoterByEmailAndElectionId($data['email'], $data['eid'])){
-            $data['msg'] = 'A voter with this email already registered for this election';
+        if( $data['email'] != $data['oldEmail'] && $this->voterModel->findDuplicateVoters($data['email'], $data['eid'])){
+            $data['msg'] = "A voter with this email is already registered for this election";
             echo json_encode($data);
             return;
         }else{
-            if($this->voterModel->editUnregVoter($data)){
+
+            if($this->userModel->findUserByEmail($data['email'])){
+                $user = $this->userModel->getUserByEmail($data['email']);
+                $data['uid'] = $user->UserId;
+
+                if($this->voterModel->editVoterWithUser($data)){
+                    echo json_encode($data);
+                    return;
+                }else{
+                    $data['msg'] = "Something went wrong. Try again later...";
+                    echo json_encode($data);
+                    return;
+                }
+
+            }else{
+                if($this->voterModel->editVoterWithoutUser($data)){
+                    echo json_encode($data);
+                    return;
+                }else{
+                    $data['msg'] = "Something went wrong. Try again later...";
+                    echo json_encode($data);
+                    return;
+                }
+            }
+            // if($this->voterModel->editUnregVoter($data)){
+            //     echo json_encode($data);
+            //     return;
+            // }else{
+            //     $data['msg'] = "Something went wrong. Try again later...";
+            //     echo json_encode($data);
+            //     return;
+            // }
+        }
+    }
+
+    public function addSingleParty(){
+        try {
+            $dataset = json_decode(file_get_contents('php://input'), true);
+            $data = [
+                'msg' => 'success',
+                'electionId' => $dataset['electionId'],
+                'partyName' => $dataset['partyName'],
+                'supName' => $dataset['supervisorName'],
+                'supEmail' => $dataset['supervisorEmail']
+            ]; 
+
+            if($this->partyModel->findDuplicateParty($data['electionId'], $data['partyName'])){
+                $data['msg'] = 'A party with the same name already exists. Try a different name.';
                 echo json_encode($data);
                 return;
             }else{
-                $data['msg'] = "Something went wrong. Try again later...";
+                if($this->userModel->findUserByEmail($data['supEmail'])){
+                    $user = $this->userModel->getUserByEmail($data['supEmail']);
+                    $data['userId'] = $user->UserId;
+
+                    if($this->partyModel->insertIntoParty2($data)){
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        $data['msg'] = 'Error occured. Try again later...';
+                        echo json_encode($data);
+                        return;
+                    }
+                }else{
+                    if($this->partyModel->insertIntoParty1($data)){
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        $data['msg'] = 'Error occured. Try again later...';
+                        echo json_encode($data);
+                        return;
+                    }
+                }
+            }
+
+        } catch (exception $e) {
+            $data['msg'] = 'Error occured. Try again later...'.$e;
+            echo json_encode($data);
+            return;
+        }
+    }
+
+    public function editSingleParty(){
+        try {
+            $dataset = json_decode(file_get_contents('php://input'), true);
+
+            $data = [
+                'eid' => $dataset['electionId'],
+                'msg' => 'success',
+                'partyId' => $dataset['partyId'],
+                'partyName' => $dataset['partyName'],
+                'supName' => $dataset['supervisorName'],
+                'supEmail' => $dataset['supervisorEmail'],
+                'oldPartyName' => $dataset['oldPartyName']
+            ];
+            
+            if($data['partyName'] != $data['oldPartyName'] && $this->partyModel->findDuplicateParty($data['eid'], $data['partyName'])){
+                $data['msg'] = 'A party with the same name already exists. Try a different name.';
                 echo json_encode($data);
                 return;
+            }else{
+                if($this->userModel->findUserByEmail($data['supEmail'])){
+                    $user = $this->userModel->getUserByEmail($data['supEmail']);
+                    $data['userId'] = $user->UserId;
+
+                    if($this->partyModel->editPartyWithUser($data)){
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        $data['msg'] = 'Error occured. Try again later...';
+                        echo json_encode($data);
+                        return;
+                    }
+                }else{
+                    if($this->partyModel->editPartyWithoutUser($data)){
+                        echo json_encode($data);
+                        return;
+                    }else{
+                        $data['msg'] = 'Error occured. Try again later...';
+                        echo json_encode($data);
+                        return;
+                    }
+                }
+            }
+
+        } catch (Exception $e) {
+            $data['msg'] = 'Error occured. Try again later...'.$e;
+            echo json_encode($data);
+            return;
+        }
+    }
+
+    public function removeParty(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'eid' => trim($_POST['electionId']),
+                'id' => trim($_POST['partyId'])
+            ];
+
+            if($this->partyModel->deletePartyByPartyId($data['id'])){
+                redirect('Pages/electionParties/'.$data['eid']);
+            }else{
+                die('Something went wrong');
             }
         }
     }

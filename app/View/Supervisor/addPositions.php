@@ -14,7 +14,7 @@
     <div class="title">Adding Positions</div>
     <div class="d-flex flex-column border-primary border-radius-2 border-2 my-4">
         <div class="position mx-1 my-1">
-            <div><?php echo $data['electionId'];?></div>
+            <div><?php echo $data;?></div>
             <div class="positionName mx-1 my-1" id="position1">
                 <label for="positionName">Position Name: </label>
                 <input type="text" name="positionName" id="positionName">
@@ -50,7 +50,7 @@
 
         <div class="finalForm mx-2 my-1">
             <form action="<?php echo urlroot; ?>/Elections/insertPositions" id="form" method="POST" class="align-items-center justify-content-center">
-                <input type="hidden" name="electionId" value="<?php echo $data['electionId']; ?>">
+                <input type="hidden" name="electionId" value="<?php echo $data; ?>">
                 <button type="submit" class="btn btn-primary" >ADD POSITIONS</button>
             </form>
         </div>

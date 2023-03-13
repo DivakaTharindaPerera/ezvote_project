@@ -47,8 +47,8 @@ class Election extends Controller{
         try {
             $this->db->execute();
             $data['id'] = $this->db->lastInsertId();
-            $this->view('Supervisor/addVoters', $data);
-            
+            redirect('Pages/wayToAddVoters/'.$data['id']);
+            // $this->view('Supervisor/addVoters', $data);  
         } catch (Exception $e) {
             echo "Something went wrong";
         }return false;
@@ -248,6 +248,7 @@ class Election extends Controller{
         }
     }
 
+
     public function getVotersByElectionID($id)
     {
         $election_Id = $id;
@@ -255,4 +256,15 @@ class Election extends Controller{
         $row = $this->db->resultSet();
         return $row;
     }
+
+    public function deleteElection($id){
+        $this->db->query("DELETE FROM Election WHERE ElectionId = :id");
+        $this->db->bind(':id', $id);
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }      
 }

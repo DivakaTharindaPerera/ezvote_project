@@ -2,22 +2,9 @@
 <?php require approot.'/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
-<!--</head>-->
-<!--<body>-->
-<!---->
-<!--    <div class="top_nav_bar">-->
-<!--        --><?php
-//            require_once(approot."/View/topnavbar.php");
-//        ?>
-<!--    </div>-->
-<!--    <br>-->
-<!--    --><?php
-//        echo "id: ".$data['id'];
-//    ?>
-<!---->
-<!--    <br>-->
    <div class="main-container">
        <div class="title">Adding Voters</div>
+       <?php echo $data;?>
        <div class="d-flex flex-column border-primary border-radius-2 border-2 my-4">
            <div class="nameinput mx-1 my-1">
                Name of the voter: <input type="text" name="name" id="name"><span id="nameerror" style="color: red;"></span>
@@ -70,7 +57,7 @@
 <!--           <br>-->
            <div class="d-flex my-1 mx-3 align-items-center justify-content-center">
                <form action="<?php echo urlroot; ?>/Elections/insertvoters" id="form" method="POST">
-                   <input type="hidden" name="electionId" value="<?php echo $data['id']; ?>"><br>
+                   <input type="hidden" name="electionId" value="<?php echo $data; ?>"><br>
                    <button type="submit" class="btn btn-primary">ADD VOTERS</button>
                </form>
            </div>
