@@ -71,7 +71,7 @@ window.onload = function(){
                          Discount: '.$data[$x]->Discount.'%
                     </div> '; ?>
 
-                    <button class="btn btn-info my-1" onclick="document.getElementById('discount-input').value = '<?php echo $data[$x]->Discount ?>';document.getElementById('update').action='./edit_process/<?php echo $data[$x]->planID; ?>';  openPopup();">EDIT</button>
+                    <button class="btn btn-info my-1" onclick="document.getElementById('discount-input').value = '<?php echo $data[$x]->Discount ?>';document.getElementById('update').action='./edit_process/<?php echo $data[$x]->planID; ?>'; openPopup();">EDIT</button>
                     <div class="dialog-box-outer" id="popup">
                     <div class="popup mx-1 my-1 px-1 py-1 min-w-20 min-h-25">
                     <div class="title text-center">Edit Discount</div>
@@ -80,15 +80,15 @@ window.onload = function(){
                     <div class="my-4 w-100 d-flex flex-row justify-content-center align-items-center">
                         <div class="text-black w-50">
                         <label>Discount (%) :</label>
-                    <input name="Discount" id="discount-input" class="px-1 border border-black bg-primary w-25" style="border:1px solid black; margin-left:1rem; padding-left: 1rem;" type="number" id="discount" value="">
+                    <input name="Discount" id="discount-input" class="px-1 border border-black bg-primary w-30" style="border:1px solid black; margin-left:1rem; padding-left: 1rem;" type="number" min="0" max="100" id="discount" value="">
                     </div>
                     </div>          
-                    <div class="d-flex flex-row mx-5 my-3">
+                    <div class="d-flex flex-row mx-5 my-2">
                     <div class="justify-content-start">
-                        <button type="submit" class="btn btn-primary ml-5">Save</button>
+                        <button type="submit" class="btn btn-primary ml-5">SAVE</button>
                     </div>
-                    <div class="justify-content-end">
-                        <div  onclick="closePopup()" class="btn btn-primary mx-5">cancel</div>
+                    <div class="justify-content-end" onclick="closePopup()">
+                        <div type="button" class="btn btn-primary ml-3">CANCEL</div>
                     </div></div>
                     </form>
                     </div>

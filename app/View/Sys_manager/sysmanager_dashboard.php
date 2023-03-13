@@ -19,10 +19,10 @@
 
 <div class="main-container max-h-85">
     <div class="title">Activities</div>
-    <div class="border border-primary w-90 h-50 mt-1">
+    <div class=" w-90 h-50 mt-1">
     <div class="w-100 h-50" style="overflow:auto; height:50vh;">
    
-        <table class="table w-100 ">
+        <table class="table border border-primary w-100 ">
             <tbody>
                 <?php
                 $arrlength = count($data, COUNT_RECURSIVE);
@@ -32,7 +32,7 @@
                         <td class="td-1">'.$data[0][$x]-> Description.'</td>
                         <td class="td-2">'.$data[0][$x]-> Date .'</td>
                         <td class="td-3"><a href="/ezvote/subscription_plan/edit_subscription/'.$data[0][$x]->PlanID.'">
-                            <button class="btn btn-info">Details</button>
+                            <button class="btn btn-info">DETAILS</button>
                         </td></a>
                     </tr>';
                 }

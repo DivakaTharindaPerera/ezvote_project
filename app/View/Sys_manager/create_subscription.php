@@ -68,17 +68,17 @@ window.onload = function(){
 
         <label id="text-3" for="day">days</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary mb-1" type="number" id="day" name="day">
+        <input class="w-100 bg-primary mb-1" type="number" min="0" max="31" id="day" name="day">
         </div>
 
         <label id="text-4" for="month">months</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" id="month" name="month">
+        <input class="w-100 bg-primary" type="number" min="0" max="12" id="month" name="month">
         </div>
 
         <label id="text-5" for="year">years</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" id="year" name="year">
+        <input class="w-100 bg-primary" type="number" min="0" id="year" name="year">
         </div>
 
         <br>
@@ -121,12 +121,12 @@ window.onload = function(){
 
         <div class="d-flex gap-4 justify-center-end justify-content-evenly">
             <div class="d-flex">
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">CREATE</button>
 
             </div>
             <div class="d-flex">
             <a href="../System_manager/dashboard">
-                <button type="button" class="btn btn-primary">Cancel</button>
+                <button type="button" class="btn btn-primary">CANCEL</button>
             </a>
             </div>
             
