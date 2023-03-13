@@ -30,6 +30,7 @@
                 <div class="mt-2 w-100">
                     <button onclick="addParty()" class="btn btn-primary card-hover"><b>Add Party</b></button>
                     <button onclick="cancelAddParty()" class="btn btn-danger card-hover mr-auto"><b>Cancel</b></button>
+
                 </div>
 
             </div>
@@ -51,8 +52,10 @@
                 </table>
             </div>
 
+
             <div id="addCandidate" class="addCandidate mx-1 my-1">
             
+
                 <label for="cPosition" class="my-1">Election Position: </label>
                 <select name="" id="positionListCandidate" class="border-1 px-1 text-right border-radius-2">
 
@@ -89,7 +92,7 @@
                         <button onclick="addCandidateToList()" class="btn btn-primary w-25 card-hover text-xl"><b>Add Candidate</b></button>
                     </div>
                 </div>
-
+                <button onclick="addCandidateToList()" class="btn btn-primary w-45">Add Candidate</button>
 
 
                 <div id="candidateList" class="my-1 text-center"></div>

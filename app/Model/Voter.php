@@ -308,4 +308,28 @@ class Voter extends Controller{
             return false;
         }
     }
+
+    public function addTemporaryVoting()
+    {
+        $this->db->query();
+    }
+    public function deleteTemporaryVoting()
+    {
+        $this->db->query();
+    }
+
+    public function getVoterByUserId($id){
+        $this->db->query("SELECT * FROM voter WHERE UserId = '" .$id."' ");
+
+//        $this->db->bind(':1', $id);
+
+        try {
+            $result = $this->db->single();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
+
 }

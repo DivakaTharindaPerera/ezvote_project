@@ -1,4 +1,5 @@
-<?php //echo '<pre>';
+<?php
+//echo '<pre>';
 //print_r ($data['candidates']);
 //exit();?>
 <?php require approot . '/View/inc/VoterHeader.php'; ?>

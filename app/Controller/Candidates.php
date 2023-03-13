@@ -220,8 +220,12 @@ $validatedData = [
 
     public function candidateProfile()
     {
-        $r=$this->nominateModel->RetrieveAll();
-        $this->view('Candidate/candidateProfile',['r'=>$r]);
+
+//        $r=$this->objModel->RetrieveAll();
+        $this->view('Candidate/candidateProfile'
+//            ['r'=>$r]
+        );
+
     }
     
     // public function candidateProfile($id) {

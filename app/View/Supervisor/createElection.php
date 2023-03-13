@@ -16,7 +16,7 @@
             </div>
             <div class="d-flex flex-column my-1">
                 <div>Description:</div>
-                <textarea id="description" cols="50" rows="10" name="description" class="border-1 w-100 border-radius-1" placeholder="Enter description of the election and other rules and regulations.... "></textarea><br>
+                <textarea id="description" cols="50" rows="10" name="description" class="border-1 w-100 border-radius-1 px-1 py-1" placeholder="Enter description of the election and other rules and regulations.... "></textarea><br>
             </div>
             <div class="d-flex justify-content-evenly">
                 <div class="card">
@@ -87,7 +87,7 @@
                     <input type="checkbox"  id="selfNomi" name="selfnomination" value="1" class="mr-1" onclick="Snomi()">Allow self nominations
                 </div>
                 <div class="mb-1">
-                    <textarea id="nomi-description" cols="50" rows="10" name="nomi_description" disabled placeholder="Enter description that should be displayed when self nominations.... " class="border-1 border-radius-1 w-100" ></textarea>
+                    <textarea id="nomi-description" cols="50" rows="10" name="nomi_description" disabled placeholder="Enter description that should be displayed when self nominations.... " class="border-1 border-radius-1 w-100 px-1 py-1" ></textarea>
                 </div>
 
     <!-- <b>Voters</b><br>
