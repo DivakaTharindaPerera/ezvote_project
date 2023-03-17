@@ -1,6 +1,6 @@
 <?php
 //echo '<pre>';
-//print_r($data['data3']);
+//print_r($data['data6']);
 //exit();
 require approot.'/View/inc/VoterHeader.php';
 require approot.'/View/inc/AuthNavbar.php';
@@ -136,6 +136,21 @@ require approot.'/View/inc/sidebar-new.php';
                             </div>
                         </div>
                     <?php }
+                    foreach ($data['data6'] as $row){?>
+                        <?php $id=$row->ElectionId;
+                        if($row->StatVisibality==1){?>
+                        <div class="d-flex bg-secondary p-1 border-radius-3 card" style="align-items: center">
+                            <div id="election-title" class="title"><?php echo $row->Title?></div>
+                            <div id="election-title" class="sub-title"><?php echo $row->OrganizationName?></div>
+                            <div class="d-flex flex-column justify-center align-center">
+                                <button class="btn btn-primary" onclick="viewSummary('<?=$id?>')">View</button>
+                            </div>
+                        </div>
+                        <?php }
+                        else{
+                            continue;
+                        }
+                 }
                 }?>
             </div>
         </div>

@@ -114,7 +114,7 @@ class Voters extends Controller
         ]);
     }
 
-    public function vote($id)
+    public function vote($id=null,$candidate_id=null)
     {
         $data_1=$this->elecModel->getElectionByElectionId($id);
         $data_2=$this->elecModel->getPositionsByElectionId($id);
@@ -148,5 +148,11 @@ class Voters extends Controller
 //           'party'=>$data_3
        ]);
     }
+     public function temporaryVotes(){
+        $data_1=$this->voterModel->temporaryVoting();
+        $this->view('Voter/temporaryVotes',[
+            'votes'=>$data_1
+        ]);
+     }
 
 }

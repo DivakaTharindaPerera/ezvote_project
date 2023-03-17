@@ -40,7 +40,7 @@ function viewSummary($election_id){
     window.location.href="/ezvote/Voters/summary/"+election_id;
 }
 
-function marked(id){
+function marked(id,candidate_id){
     const div = document.getElementById('card-' + id);
     console.log(div);
     // let button_state;
@@ -85,6 +85,8 @@ function marked(id){
 
         }
     }
+    // console.log('hello');
+    // window.location.href="/ezvote/Voters/temporaryVotes/"+candidate_id;
 }
 
 // function accepted(){

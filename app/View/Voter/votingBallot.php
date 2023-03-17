@@ -31,7 +31,7 @@
                             <div class="text-lg">BraveIo</div>
                         </div>
                         <div class="d-flex justify-content-center mb-1">
-                            <button class="btn btn-primary min-w-50" id="1" onclick="marked(<?=$i?>)">Vote</button>
+                            <button class="btn btn-primary min-w-50" id="1" onclick="marked(<?=$i,$candidates->candidateId?>)">Vote</button>
 <!--                            --><?php //array_push($voted,)?>
                         </div>
                     </div>

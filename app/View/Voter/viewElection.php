@@ -1,4 +1,6 @@
 <?php
+//print_r($data['election']);
+//exit();
 require approot.'/View/inc/VoterHeader.php';
 require approot.'/View/inc/AuthNavbar.php';
 require approot.'/View/inc/sidebar-new.php';
@@ -65,20 +67,18 @@ require approot.'/View/inc/sidebar-new.php';
                         <?php }?>
                     </div>
                 </div>
-<!--                <div id="self-nomination" class="d-flex text-lg ">-->
-<!--                    <div class="text-center">Multiple Cast of Votes : </div>-->
-<!--                    <div class="d-flex text-lg text-primary">-->
-<!--                        --><?php //if($data['election']->MultipleVotes==1) {?>
-                            <!--                        <img src="--><?php //echo urlroot;?><!--/public/img/on.png" alt="" style="max-width: 40px;max-height: 40px">-->
-<!--                            ON-->
-<!--                        --><?php //}
-//                        else{?>
-                            <!--                        <img src="--><?php //echo urlroot;?><!--/public/img/off.png" alt="" style="max-width: 40px;max-height: 40px">-->
-<!--                            OFF-->
-<!--                        --><?php //}?>
-<!--                        </div>-->
+                <div id="self-nomination" class="d-flex text-lg ">
+                    <div class="text-center">Visibility of Statistics For Voters and Candidates: </div>
+                    <div class="d-flex text-lg text-primary">
+                        <?php if($data['election']->StatVisibality==1) {?>
+                            ON
+                        <?php }
+                        else{?>
+                            OFF
+                        <?php }?>
+                        </div>
 <!--                        <img src="--><?php //echo urlroot;?><!--/public/img/off.png" alt="" style="max-width: 40px;max-height: 40px"> </div>-->
-<!--                </div>-->
+                </div>
             </div>
             <div id="candidates" class="d-flex flex-column w-100">
                 <div class="title">
