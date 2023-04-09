@@ -51,7 +51,7 @@
   <option value="president">President</option>
   <option value="wise president">Wise President</option>
   <option value="secretary">Secretary</option>
-  <option value="tresurer">Tresurer</option>
+  <option value="Treasurer">Treasurer</option>
 </select>
 <!-- <div class="error" id="position_err"><?php echo isset($errors['position']) ? $errors['position'] : ''; ?></div> -->
 

@@ -7,7 +7,7 @@ require approot . '/View/inc/AuthNavbar.php';
         <div class="stripe">
 
         <!-- ********************** -->
-        <form action="<?php echo urlroot; ?>/Candidates/candidateProfile" method="POST">
+        <form action="<?php echo urlroot; ?>/Candidates/viewElections" method="POST">
         <!-- <form action="index.php?controller=Election&action=view" method="POST"> -->
 
         <h1>Nomination Successful</h1>
