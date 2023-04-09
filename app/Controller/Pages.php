@@ -313,23 +313,7 @@
                 if($electionRow->Supervisor == $_SESSION["UserId"]){
                     $data = [];
 
-                    //dummy data
-                    $nominationRow = array(
-                        array(1,"John Doe",21,"Party1"),
-                        array(2,"Jane Pow",22,"Party2"),
-                        array(3,"John DoW",21,"Party3"),
-                        array(4,"Jane Now",22,"Party4"),
-                        array(5,"John Mow",23,"Party5"),
-                    );
-
-                    $positionRow = array(
-                        array(21,"President"),
-                        array(22,"Vice President"),
-                        array(23,"Secretary"),
-                        array(24,"Treasurer"),
-                    );
-
-                    $this->view('Supervisor/electionNominations',$data);
+                    
                 }else{
                     echo "Forbidden Access";
                 }
