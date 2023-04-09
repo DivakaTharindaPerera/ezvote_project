@@ -73,8 +73,12 @@ class Users extends Controller{
             
             if($this->userModel->verificationCode($email,$code)){
                 $this->userModel->getUserByEmail($email);
-                $this->userModel->userIdAutoFill($this->userModel->UserId,$email);
-                redirect('View/login');
+                if($this->userModel->userIdAutoFill($this->userModel->UserId,$email)){
+                    redirect('View/login');
+                }else{
+                    echo "Something went wrong";
+                }
+                
             }else{
                 $data =[
                     'email' => $_POST["email"],
