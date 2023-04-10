@@ -447,31 +447,61 @@ class Elections extends Controller
                 $ElectionData = $this->electionModel->findElectionById($data['electionId']);
                 $PartyData = $this->partyModel->getPartyById($data['partyId']);
 
-                if ($this->userModel->findUserByEmail($data['candidateEmail'])) {
-                    $user = $this->userModel->getUserByEmail($data['candidateEmail']);
-                    $data['userId'] = $user->UserId;
-                    if ($id = $this->candidateModel->insertRegCandidate($data)) {
-                        $data2 = [
-                            'email' => $data['candidateEmail'],
-                            'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
-                            'body' => "You have been added as a candidate representing the party ".$PartyData->partyName." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account to access the election candidate panel."
-                        ];
-                        $this->emailModel->sendEmail($data2);
-
-                        redirect('Pages/electionCandidates/'.$data['electionId']);
-                    } 
+                if($data['partyId'] == "NULL"){
+                    if ($this->userModel->findUserByEmail($data['candidateEmail'])) {
+                        $user = $this->userModel->getUserByEmail($data['candidateEmail']);
+                        $data['userId'] = $user->UserId;
+                        if ($id = $this->candidateModel->insertRegCandidatePartyNull($data)) {
+                            $data2 = [
+                                'email' => $data['candidateEmail'],
+                                'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                                'body' => "You have been added as a candidate in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account to access the election candidate panel."
+                            ];
+                            $this->emailModel->sendEmail($data2);
+    
+                            redirect('Pages/electionCandidates/'.$data['electionId']);
+                        } 
+                    }else{
+                        if ($id = $this->candidateModel->insertUnregCandidatePartyNull($data)) {
+                            $data2 = [
+                                'email' => $data['candidateEmail'],
+                                'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                                'body' => "You have been added as a candidate in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please create an account in ezvote.lk to access the election."
+                            ];
+                            $this->emailModel->sendEmail($data2);
+    
+                            redirect('Pages/electionCandidates/'.$data['electionId']);
+                        } 
+                    }
                 }else{
-                    if ($id = $this->candidateModel->insertUnregCandidate($data)) {
-                        $data2 = [
-                            'email' => $data['candidateEmail'],
-                            'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
-                            'body' => "You have been added as a candidate representing the party ".$PartyData->partyName." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please create an account in ezvote.lk to access the election."
-                        ];
-                        $this->emailModel->sendEmail($data2);
-
-                        redirect('Pages/electionCandidates/'.$data['electionId']);
-                    } 
+                    if ($this->userModel->findUserByEmail($data['candidateEmail'])) {
+                        $user = $this->userModel->getUserByEmail($data['candidateEmail']);
+                        $data['userId'] = $user->UserId;
+                        if ($id = $this->candidateModel->insertRegCandidate($data)) {
+                            $data2 = [
+                                'email' => $data['candidateEmail'],
+                                'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                                'body' => "You have been added as a candidate representing the party ".$PartyData->partyName." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please login to your account to access the election candidate panel."
+                            ];
+                            $this->emailModel->sendEmail($data2);
+    
+                            redirect('Pages/electionCandidates/'.$data['electionId']);
+                        } 
+                    }else{
+                        if ($id = $this->candidateModel->insertUnregCandidate($data)) {
+                            $data2 = [
+                                'email' => $data['candidateEmail'],
+                                'subject' => "ALERT FROM " . $ElectionData->OrganizationName,
+                                'body' => "You have been added as a candidate representing the party ".$PartyData->partyName." in the election " . $ElectionData->Title . " by " . $ElectionData->OrganizationName . ". <br> Please create an account in ezvote.lk to access the election."
+                            ];
+                            $this->emailModel->sendEmail($data2);
+    
+                            redirect('Pages/electionCandidates/'.$data['electionId']);
+                        } 
+                    }
                 }
+
+                
             }
         }   
     }

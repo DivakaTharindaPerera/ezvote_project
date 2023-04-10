@@ -309,14 +309,14 @@ class Voter extends Controller{
         }
     }
 
-    public function addTemporaryVoting()
-    {
-        $this->db->query();
-    }
-    public function deleteTemporaryVoting()
-    {
-        $this->db->query();
-    }
+    // public function addTemporaryVoting()
+    // {
+    //     $this->db->query();
+    // }
+    // public function deleteTemporaryVoting()
+    // {
+    //     $this->db->query();
+    // }
 
     public function getVoterByUserId($id){
         $this->db->query("SELECT * FROM voter WHERE UserId = '" .$id."' ");
