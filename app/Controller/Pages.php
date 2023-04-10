@@ -123,6 +123,8 @@
                         }
                     }
                 }
+                $voters = $this->voterModel->getVotersByUserId($_SESSION["UserId"]);
+
                 $this->view('Voter/viewAllElection',[
                     'data1'=>$s_ongoing_filtered,
                     'data2'=>$s_upcoming_filtered,
@@ -132,7 +134,8 @@
                     'data6'=>$v_completed_filtered,
                     'data7'=>$c_ongoing_filtered,
                     'data8'=>$c_upcoming_filtered,
-                    'data9'=>$c_completed_filtered
+                    'data9'=>$c_completed_filtered,
+                    'voters'=>$voters
                 ]);
             }
             else {
@@ -200,14 +203,13 @@
         }
 
         public function ViewMyElections(){
-//            if(!isset($_SESSION["UserId"])){
-//                redirect('View/login');
-//            }else{
-//                $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
-                $row = $this->electionModel->getElectionsByUserId('48');
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
                 $this->view('Supervisor/ViewMyElections',$row);
             }
-//        }
+        }
 
         public function sortByTitle(){
             if(!isset($_SESSION["UserId"])){
@@ -402,6 +404,16 @@
                 'election'=>$data1,
                 'positions'=>$data2
             ]);
+        }
+    }
+
+    public function castVotePrologue(){
+        if($this->isLoggedIn()){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $otp = substr(number_format(time() * rand() , 0, '', ''), 0, 6);
+            
+        }else{
+            redirect('View/login');
         }
     }
 
