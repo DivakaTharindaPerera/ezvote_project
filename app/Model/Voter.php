@@ -345,11 +345,31 @@ class Voter extends Controller{
         }
     }
 
-    public function checkVoterAuthentication($vid,$eid){
-        $this->db->query("SELECT * FROM Voter WHERE userId= :1 AND ElectionId = :2");
-        $this->db->bind(':1', $vid);
-        $this->db->bind(':2', $eid);
+    // public function checkVoterAuthentication($vid,$eid){
+    //     $this->db->query("SELECT * FROM Voter WHERE userId= :1 AND ElectionId = :2");
+    //     $this->db->bind(':1', $vid);
+    //     $this->db->bind(':2', $eid);
 
-        
+
+    // }
+
+    public function updateVoterOtp($data){
+        $this->db->query(
+            "UPDATE Voter
+            SET OTP = :1
+            WHERE electionId = :2 AND userId = :3"
+        );
+        $this->db->bind(':1', $data['otp']);
+        $this->db->bind(':2', $data['eid']);
+        $this->db->bind(':3', $data['uid']);
+
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+
     }
 }

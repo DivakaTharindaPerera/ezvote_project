@@ -8,6 +8,8 @@
         private $partyModel;
         private $voterModel;
         private $objectionModel;
+        private $userModel;
+        private $mail;
 
         public function __construct(){
             $this->postModel = $this->model('User');
@@ -17,6 +19,8 @@
             $this->partyModel = $this->model('Party');
             $this->voterModel = $this->model('Voter');
             $this->objectionModel = $this->model('Objection');
+            $this->userModel = $this->model('User');
+            $this->mail = $this->model('Email');
         }
 
         public function index(){
@@ -410,8 +414,35 @@
     public function castVotePrologue(){
         if($this->isLoggedIn()){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $eid = $_POST['eid'];
             $otp = substr(number_format(time() * rand() , 0, '', ''), 0, 6);
-            
+
+            $vEmail = $this->userModel->getUserById($_SESSION['UserId']);
+            $electionRow = $this->electionModel->getElectionByElectionId($eid);
+
+            $mailData = [
+                'email' => $vEmail->Email,
+                'subject' => "OTP for voting",
+                'body' => 'Your one time password for the '.$electionRow->Title." election is ".$otp.". Please do not share this with anyone.",
+            ];
+
+
+
+            $otp = password_hash($otp, PASSWORD_DEFAULT);
+
+            $data = [
+                'eid' => $eid,
+                'otp' => $otp,
+                'uid' => $_SESSION['UserId'],
+                'email' => $vEmail->Email,
+            ];
+            if($this->voterModel->updateVoterOtp($data)){
+                if($this->mail->sendEmail($mailData)){
+                    $this->view('Voter/otpVerify', $data);
+                }else{
+                    die("Error sending Email with OTP");
+                }
+            }
         }else{
             redirect('View/login');
         }
