@@ -34,7 +34,7 @@
                 ];
                 $this->view('index', $data);
             }
-             $posts = $this->postModel->getPosts();
+            //  $posts = $this->postModel->getPosts();
             
         }
 
