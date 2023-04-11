@@ -426,8 +426,6 @@
                 'body' => 'Your one time password for the '.$electionRow->Title." election is ".$otp.". Please do not share this with anyone.",
             ];
 
-
-
             $otp = password_hash($otp, PASSWORD_DEFAULT);
 
             $data = [
@@ -436,9 +434,11 @@
                 'uid' => $_SESSION['UserId'],
                 'email' => $vEmail->Email,
             ];
+
+            $_SESSION['email'] = $data['email'];
             if($this->voterModel->updateVoterOtp($data)){
                 if($this->mail->sendEmail($mailData)){
-                    $this->view('Voter/otpVerify', $data);
+                    redirect('Votings/otpVerifyPage/'.$eid);
                 }else{
                     die("Error sending Email with OTP");
                 }

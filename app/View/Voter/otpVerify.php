@@ -40,7 +40,7 @@
     document.getElementById("resendBtn").disabled = true;
     document.getElementById("resendBtn").style.cursor = "not-allowed";
     document.getElementById("resendBtn").style.opacity = "0.5";
-    document.getElementById("resendBtn").innerHTML = "Resend OTP (5s)";
+    document.getElementById("resendBtn").innerHTML = "Resend OTP (5m 0s)";
     
     var mins = 300000;
     setInterval(function(){

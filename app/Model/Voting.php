@@ -17,4 +17,17 @@ class Voting extends Controller{
         return $row;
     }
 
+    public function checkForVoter($uid,$eid){
+        $this->db->query("SELECT * FROM Voter WHERE userId = :uid AND electionId = :eid");
+        $this->db->bind(':uid', $uid);
+        $this->db->bind(':eid', $eid);
+
+        $row = $this->db->single();
+
+        if($this->db->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
