@@ -6,6 +6,7 @@ class Votings extends Controller{
     private $electionModel;
     private $votingModel;
     private $positionModel;
+    private $partyModel;
 
     public function __construct(){
         $this->voterModel = $this->model('Voter');
@@ -13,6 +14,7 @@ class Votings extends Controller{
         $this->electionModel = $this->model('Election');
         $this->votingModel = $this->model('Voting');
         $this->positionModel = $this->model('electionPositions');
+        $this->partyModel = $this->model('Party');
     }
 
     public function otpVerify(){
@@ -24,11 +26,16 @@ class Votings extends Controller{
             $candidateRow = $this->candidateModel->getCandidatesByElectionId($eid);
             $positionRow = $this->positionModel->getElectionPositionByElectionId($eid);
 
+            $electionRow = $this->electionModel->getElectionByElectionId($eid);
+            $partyRow = $this->partyModel->getPartiesByElectionId($eid);
+
             $voteData = [
                 'vid' => $row->voterId,
                 'eid' => $eid,
                 'candidates' => $candidateRow,
-                'positions' => $positionRow
+                'positions' => $positionRow,
+                'election' => $electionRow,
+                'parties' => $partyRow
             ];
 
             if(password_verify($otp, $row->OTP)){

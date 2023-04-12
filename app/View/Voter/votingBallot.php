@@ -8,14 +8,22 @@
 
 <div class="main-container">
     <div class="title justify-content-center mt-1"><?php echo $data['election']->Title?><br><?php echo $data['election']->OrganizationName?></div>
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column w-100">
             <?php $i=0;
 //            $voted=array();
             foreach ($data['positions'] as $position){
                 $position_id=$position->ID;
                 ?>
             <div class="d-flex flex-column">
-                <div class="title"><?php echo $position->positionName?></div>
+                <div class="title w-100 bg-blue-10" style="color: white;"><?php echo $position->positionName?></div>
+                <div class="text-danger text-center text-2xl">
+                    <span>
+                    <?php 
+                        echo $position->NoofOptions." ";
+                    ?>
+                    </span> 
+                    option(s) available
+                </div>
                 <div class="d-flex justify-content-center flex-wrap">
                     <?php foreach ($data['candidates'] as $candidates){
                     if ($candidates->positionId==$position_id) {
@@ -28,9 +36,24 @@
                             <div><img src="/ezvote/public/img/profile.jpg" style="max-height:50px;max-width: 50px" alt="profile photo"></div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <div class="text-lg">BraveIo</div>
+                            <div class="text-lg">
+                            <?php
+                                $flag=0;
+                                foreach ($data['parties'] as $party){
+                                    if ($party->ID==$candidates->partyId){
+                                        echo $party->partyName;
+                                        $flag=1;
+                                        break;
+                                    }
+                                }
+                                if($flag == 0){
+                                    echo "--No Party--";
+                                }
+                            ?>
+                            </div>
+                            <!-- <div class="text-lg">BraveIo</div> -->
                         </div>
-                        <div class="d-flex justify-content-center mb-1">
+                        <div class="d-flex justify-content-center mb-1 mt-1">
                             <button class="btn btn-primary min-w-50" id="1" onclick="marked(<?=$i?>)">Vote</button>
 <!--                            --><?php //array_push($voted,)?>
                         </div>
