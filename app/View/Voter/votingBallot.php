@@ -22,7 +22,7 @@
             <div class="d-flex flex-column" id="<?php echo $position_id; ?>">
                 <div class="title w-100 bg-blue-10 p-1" style="color: white;"><?php echo $position->positionName . '-' . $position_id; ?></div>
                 <div class="text-danger text-center text-2xl">
-                    <span>
+                    <span class="optionCounts">
                         <?php
                         echo $position->NoofOptions . " ";
                         ?>
@@ -79,27 +79,34 @@
         </div>
 
     </div>
-    <div id="confirmDiv" class="d-flex flex-column w-100" style="display: none;">
-        <div id="finalVotes">
-            <?php
-            foreach ($data['positions'] as $position) {
-            ?>
-                <div id="<?php echo $position->ID ?>-confirm">
-                    <div class="title w-100 bg-blue-10 p-1" style="color: white;"><?php echo $position->positionName . '-' . $position_id; ?></div>
-                </div>
+    <div id="confirmDiv" class="w-100" style="display: none;">
+        <div class="">
+            <div class="title w-100 p-1" style="color: blue;">Confirm Your Votes</div>
+            <div class="title w-100 p-1"><span id="optionsRemaining" class="my-1" style="color: red;"></span></div>
+            <div id="finalVotes">
+                <?php
+                foreach ($data['positions'] as $position) {
+                ?>
+                    <div id="<?php echo $position->ID ?>-confirm">
+                        <div class="title w-100 bg-blue-10 p-1" style="color: white;"><?php echo $position->positionName . '-' . $position_id; ?></div>
+                        <div class="d-flex justify-content-center flex-wrap" id="finalCandidates-<?php echo $position->ID?>"></div>
+                    </div>
 
-            <?php
-            }
-            ?>
+                <?php
+                }
+                ?>
+            </div>
+            <form action="" method="POST" id="finalData" class="m-1 text-center">
+                <input type="hidden" name="cCount" value="" id="candidateCount">
+                <button type="submit" class="btn btn-primary"><b>CONFIRM</b></button>
+                <button type="button" class="btn btn-danger" onclick="recast()"><b>RECAST</b></button>
+            </form>
         </div>
-        <form action="" method="POST" id="finalData">
-            <button type="submit" class="btn btn-primary"><b>SUBMIT</b></button>
-            <button class="btn btn-danger" onclick="recast()"><b>RECAST</b></button>
-        </form>
     </div>
 </div>
 
 <script>
+    var c = 0;
     function voteMarked(id) {
         console.log(id);
         var idArray = id.split("-");
@@ -135,6 +142,19 @@
                 }
             }
 
+            card1 = card.cloneNode(true);
+            card1.getElementsByTagName("button")[0].style.display = "none";
+            card1.setAttribute('id',candidateId+'-voted');
+            document.getElementById('finalCandidates-'+positionId).appendChild(card1);
+
+            c++;
+            var data = document.createElement("input");
+            data.setAttribute("hidden", "text");
+            data.setAttribute("name", "candidate"+c);
+            data.setAttribute("value", candidateId);
+            data.setAttribute("id", candidateId+"-data");
+            document.getElementById("finalData").appendChild(data);
+
         } else {
             cardBtn.classList.remove("btn-danger");
             cardBtn.classList.add("btn-primary");
@@ -152,6 +172,10 @@
             }
 
             noOfOptions = parseInt(noOfOptions) + 1;
+            c--;
+            document.getElementById('finalCandidates-'+positionId).removeChild(document.getElementById(candidateId+'-voted'));
+            document.getElementById("finalData").removeChild(document.getElementById(candidateId+"-data"));
+
         }
 
         noOfOptionsElement.innerHTML = noOfOptions;
@@ -166,6 +190,20 @@
     function submitVote() {
         document.getElementById("candidatesWithPositions").style.display = "none";
         document.getElementById("confirmDiv").style.display = "block";
+        var counts = document.getElementsByClassName("optionCounts");
+
+        for (var i = 0; i < counts.length; i++) {
+            var count = counts[i].innerHTML;
+            if (count > 0) {
+                document.getElementById("optionsRemaining").innerHTML = "You have unspent votes remaining!!";
+                console.log(count);
+                break;
+                
+            }else{
+                document.getElementById("optionsRemaining").innerHTML = "";
+            }
+        }
+        document.getElementById("candidateCount").value = c;
         // document.getElementById("confirmDiv").style.display = "block";
         // document.querySelector('body').classList.add('no-scroll-for-popup');
     }
