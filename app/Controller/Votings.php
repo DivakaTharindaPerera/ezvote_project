@@ -29,13 +29,16 @@ class Votings extends Controller{
             $electionRow = $this->electionModel->getElectionByElectionId($eid);
             $partyRow = $this->partyModel->getPartiesByElectionId($eid);
 
+            $voterRow = $this->voterModel->findRegVoterByUserIdAndElectionId($_SESSION['UserId'], $eid);
+
             $voteData = [
                 'vid' => $row->voterId,
                 'eid' => $eid,
                 'candidates' => $candidateRow,
                 'positions' => $positionRow,
                 'election' => $electionRow,
-                'parties' => $partyRow
+                'parties' => $partyRow,
+                'voter' => $voterRow
             ];
 
             if(password_verify($otp, $row->OTP)){
