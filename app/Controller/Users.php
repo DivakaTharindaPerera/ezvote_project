@@ -11,10 +11,12 @@
 class Users extends Controller{
     private $userModel;
     private $mail;
+    private $userEncrypt;
 
     public function __construct(){
         $this->userModel = $this->model('User');
         $this->mail = $this->model('Email');
+        $this->userEncrypt = $this->model('userEncrypt');
     }
 
     public function register(){

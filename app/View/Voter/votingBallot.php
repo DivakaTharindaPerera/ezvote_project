@@ -77,7 +77,6 @@
             <button class="btn btn-primary min-w-20 text-2xl text-uppercase card-hover" onclick="submitVote()">Submit</button>
             <button class="btn btn-danger min-w-20 text-2xl text-uppercase ml-1 card-hover" onclick="resetVotes()">Reset</button>
         </div>
-
     </div>
     <div id="confirmDiv" class="w-100" style="display: none;">
         <div class="">

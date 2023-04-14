@@ -372,4 +372,18 @@ class Voter extends Controller{
         }
 
     }
+
+    public function getVoterByUserIdAndElectionId($uid,$eid){
+        $this->db->query("SELECT * FROM Voter WHERE userId= :1 AND electionId = :2");
+        $this->db->bind(':1', $uid);
+        $this->db->bind(':2', $eid);
+
+        try {
+            $result = $this->db->single();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
 }
