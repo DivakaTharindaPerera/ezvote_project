@@ -67,4 +67,15 @@ class Votings extends Controller{
             $this->view('Voter/otpVerify', $data);
         }
     }
+    public function saveVotes(){
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $cCount = trim($_POST['cCount']);
+            $eid = trim($_POST['electionId']);
+            $vid = trim($_POST['voterId']);
+            for($i = 1; $i <= $cCount; $i++){
+                $cid = trim()
+            }
+        }
+    }
 }
