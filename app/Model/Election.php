@@ -7,9 +7,11 @@
 
 class Election extends Controller{
     private $db;
+    private $logModel;
 
     public function __construct(){
         $this->db = new Database;
+        $this->logModel = $this->model('log');
     }
 
     public function insertIntoElection($data){
@@ -47,6 +49,10 @@ class Election extends Controller{
         try {
             $this->db->execute();
             $data['id'] = $this->db->lastInsertId();
+
+            $logDesc = "Created election with title ".$data['title']." By ".$data['orgname'].".";
+            $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
+
             redirect('Pages/wayToAddVoters/'.$data['id']);
             // $this->view('Supervisor/addVoters', $data);  
         } catch (Exception $e) {

@@ -20,4 +20,16 @@ class Vote extends Controller{
             echo $e->getMessage();
         }
     }
+
+    public function retrieveVotes($vid){
+        $this->db->query('SELECT * FROM Vote WHERE voter = :vid');
+        $this->db->bind(':vid', $vid);
+
+        try{
+            $row = $this->db->resultSet();
+            return $row;
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
 }

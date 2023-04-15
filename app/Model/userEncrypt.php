@@ -28,7 +28,7 @@ class userEncrypt extends Controller
         }
     }
 
-    public function getKey($vid){
+    public function getKeyAndIv($vid){
         $this->db->query('SELECT * FROM UserEncryption WHERE User = :user');
         $this->db->bind(':user', $vid);
         try{

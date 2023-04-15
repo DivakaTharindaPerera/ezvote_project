@@ -386,4 +386,17 @@ class Voter extends Controller{
             return false;
         }
     }
+
+    public function getVoterByVoterId($vid){
+        $this->db->query("SELECT * FROM Voter WHERE voterId= :1");
+        $this->db->bind(':1', $vid);
+
+        try {
+            $result = $this->db->single();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
 }

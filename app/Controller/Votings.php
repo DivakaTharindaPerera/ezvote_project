@@ -109,8 +109,35 @@ class Votings extends Controller{
         return $encryptedData;
     }
 
+    public function decrypt($data,$key,$iv){
+        $decryptedData = base64_decode($data);
+        $decryptedData = openssl_decrypt($decryptedData, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv);
+        return $decryptedData;
+    }
+
     public function savedVotes($eid){
+        $candidateArray = [];
+        $candidateRowArray = [];
+
         $voter = $this->voterModel->getVoterByUserIdAndElectionId($_SESSION['UserId'], $eid);
-        
+        $encryption = $this->encryptModel->getKeyAndIv($voter->voterId);
+
+        $votes = $this->voteModel->retrieveVotes($voter->voterId);
+
+        foreach ($votes as $vote) {
+            array_push($candidateArray, $this->decrypt($vote->candidate, $encryption->Key, $encryption->Iv));
+        }
+
+        // foreach ($candidateArray as $candidate) {
+        //     array_push($candidateRowArray, $this->candidateModel->getCandidateByCandidateId($candidate));
+        // }
+
+        $data = [
+            'candidates' => $candidateArray,
+            'election' => $this->electionModel->getElectionByElectionId($eid),
+            'position' => $this->positionModel->getElectionPositionByElectionId($eid)
+        ];
+
+        $this->view('Voter/electionSummary', $data);
     }
 }

@@ -273,14 +273,14 @@ class Candidates extends Controller
                         $vision = $_POST['vision'];
                         if(isset($_POST['update'])){
 
-                        $res = $this->nominateModel->updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg);
+                        // $res = $this->nominateModel->updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg);
    
-                        if($res){
-                            header("Location: ../View/Candidate/candidateProfile.php");
-                        }
-                        else{
-                            header("Location: ../View/Candidate/candidateProfile.php");
-                        }
+                        // if($res){
+                        //     header("Location: ../View/Candidate/candidateProfile.php");
+                        // }
+                        // else{
+                        //     header("Location: ../View/Candidate/candidateProfile.php");
+                        // }
 
                 }
             }
@@ -551,13 +551,13 @@ class Candidates extends Controller
     //             }
     //         }
 
-    public function viewprofile($candidateId)
-    {
-        $candidateData = Nomination::getById($candidateId);
-        $view = new View('candidate/profile');
-        $view->setData('candidateData', $candidateData);
-        $view->render();
-    }
+    // public function viewprofile($candidateId)
+    // {
+    //     $candidateData = Nomination::getById($candidateId);
+    //     $view = new View('candidate/profile');
+    //     $view->setData('candidateData', $candidateData);
+    //     $view->render();
+    // }
 
     
 
