@@ -7,9 +7,6 @@
     <div class="title">
         By <?php echo $data['election']->Title; ?>
     </div>
-    <div class="text-xl">
-        <?php echo $data['election']->Description; ?>
-    </div>
 
     <?php
     foreach ($data['position'] as $position) {
@@ -22,10 +19,17 @@
         foreach ($data['candidates'] as $candidate) {
             if ($candidate->positionId == $position->ID) {
     ?>
-                <div class="card">
-                    <div class="text-xs">
-                        <?php echo $candidate->candidateId; ?>
+                <div class="card d-flex flex-column">
+                    <div class="m-1">
+                        <img src="/ezvote/public/img/profile.jpg" style="max-height:50px;max-width: 50px" alt="profile photo">
                     </div>
+                    <div class="text-xl mb-1">
+                        <?php echo $candidate->candidateName; ?>
+                    </div>
+                    <div class="text-xs mb-1">
+                        <?php echo $candidate->candidateEmail; ?>
+                    </div>
+
                 </div>
     <?php
             }
