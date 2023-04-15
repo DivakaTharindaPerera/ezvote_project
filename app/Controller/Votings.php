@@ -1,6 +1,7 @@
 <?php
 
-class Votings extends Controller{
+class Votings extends Controller
+{
     private $voterModel;
     private $candidateModel;
     private $electionModel;
@@ -10,7 +11,8 @@ class Votings extends Controller{
     private $encryptModel;
     private $voteModel;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->voterModel = $this->model('Voter');
         $this->candidateModel = $this->model('Candidate');
         $this->electionModel = $this->model('Election');
@@ -21,8 +23,9 @@ class Votings extends Controller{
         $this->voteModel = $this->model('Vote');
     }
 
-    public function otpVerify(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function otpVerify()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $otp = trim($_POST['otp']);
             $eid = trim($_POST['eid']);
 
@@ -45,9 +48,9 @@ class Votings extends Controller{
                 'voter' => $voterRow
             ];
 
-            if(password_verify($otp, $row->OTP)){
+            if (password_verify($otp, $row->OTP)) {
                 $this->view('Voter/votingBallot', $voteData);
-            }else{
+            } else {
                 $data = [
                     'error' => "Invalid OTP. Try again.",
                     'eid' => $eid,
@@ -55,67 +58,91 @@ class Votings extends Controller{
                 ];
                 $this->view('Voter/otpVerify', $data);
             }
-
         }
     }
 
-    public function otpVerifyPage($eid){
+    public function otpVerifyPage($eid)
+    {
         $data = [
             'eid' => $eid,
             'email' => $_SESSION['email']
         ];
 
-        if(!$this->votingModel->checkForVoter($_SESSION['UserId'],$data['eid'])){
+        if (!$this->votingModel->checkForVoter($_SESSION['UserId'], $data['eid'])) {
             redirect('Pages/dashboard');
-        }else{
+        } else {
             $this->view('Voter/otpVerify', $data);
         }
     }
-    public function saveVotes(){
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+    public function saveVotes()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $cCount = trim($_POST['cCount']);
             $eid = trim($_POST['electionId']);
             $vid = trim($_POST['voterId']);
 
-            $key = openssl_random_pseudo_bytes(32);
-            $iv = openssl_random_pseudo_bytes(16);
+            $randomBytes = openssl_random_pseudo_bytes(32);
+            $randomIv = openssl_random_pseudo_bytes(16);
 
-            $this->encryptModel->storeKey($vid, $key, $iv);
-
-
-            for($i = 1; $i <= $cCount; $i++){
-                $cid = trim($_POST['candidateId'.$i]);
-                $pid = $this->positionModel->getPositionIdByCandidateId($cid);
-                $candidate = $this->encrypt($cid, $key, $iv);
-
-                if($this->voteModel->saveVote($vid, $candidate, $pid)){
-                    continue;
-                }else{ 
-                    echo "Something went wrong";
-                    return;
-                }
+            $key = '';
+            for ($i = 0; $i < 16; $i++) {
+                $key .= ord($randomBytes[$i]) % 10;
             }
 
-            $this->votingModel->castVote($vid);
+            $iv = '';
+            for ($i = 0; $i < 16; $i++) {
+                $iv .= ord($randomIv[$i]) % 10;
+            }
 
-            redirect('Votings/savedVotes'.$eid);
+
+            try {
+                $abtKey = $this->encryptModel->storeKey($vid, $key, $iv);
+                if ($abtKey == true) {
+                    echo "Key stored";
+                } else {
+                    die($abtKey);
+                }
+
+
+                for ($i = 1; $i <= $cCount; $i++) {
+                    $cid = trim($_POST['candidate' . $i]);
+                    $pid = $this->positionModel->getPositionIdByCandidateId($cid)->positionId;
+                    $candidate = $this->encrypt($cid, $key, $iv);
+
+                    if ($this->voteModel->saveVote($vid, $candidate, $pid)) {
+                        continue;
+                    } else {
+                        echo "Something went wrong";
+                        return;
+                    }
+                }
+
+                $this->votingModel->castVote($vid);
+
+                redirect('Votings/savedVotes/' . $eid);
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
         }
     }
 
-    public function encrypt($data,$key,$iv){
+    public function encrypt($data, $key, $iv)
+    {
         $encryptedData = openssl_encrypt($data, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv);
         $encryptedData = base64_encode($encryptedData);
         return $encryptedData;
     }
 
-    public function decrypt($data,$key,$iv){
+    public function decrypt($data, $key, $iv)
+    {
         $decryptedData = base64_decode($data);
         $decryptedData = openssl_decrypt($decryptedData, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv);
         return $decryptedData;
     }
 
-    public function savedVotes($eid){
+    public function savedVotes($eid)
+    {
         $candidateArray = [];
         $candidateRowArray = [];
 
@@ -128,16 +155,17 @@ class Votings extends Controller{
             array_push($candidateArray, $this->decrypt($vote->candidate, $encryption->Key, $encryption->Iv));
         }
 
-        // foreach ($candidateArray as $candidate) {
-        //     array_push($candidateRowArray, $this->candidateModel->getCandidateByCandidateId($candidate));
-        // }
+        foreach ($candidateArray as $candidate) {
+            array_push($candidateRowArray, $this->candidateModel->getCandidateByCandidateId($candidate));
+        }
 
         $data = [
-            'candidates' => $candidateArray,
+            'candidates' => $candidateRowArray,
             'election' => $this->electionModel->getElectionByElectionId($eid),
             'position' => $this->positionModel->getElectionPositionByElectionId($eid)
+
         ];
 
-        $this->view('Voter/electionSummary', $data);
+        $this->view('Voter/votingSuccess', $data);
     }
 }

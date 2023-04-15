@@ -32,7 +32,7 @@ class Voting extends Controller{
     }
 
     public function castVote($vid){
-        $this->db->query("UPDATE Voter SET cast= 1 WHERE id = :vid");
+        $this->db->query("UPDATE Voter SET cast= 1 WHERE voterId = :vid");
 
         $this->db->bind(':vid', $vid);
 
@@ -40,7 +40,7 @@ class Voting extends Controller{
             $this->db->execute();
             return true;
         }catch(PDOException $e){
-            echo $e->getMessage();
+            die($e->getMessage());
         }
     }
 }

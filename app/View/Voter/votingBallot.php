@@ -95,7 +95,7 @@
                 }
                 ?>
             </div>
-            <form action="" method="POST" id="finalData" class="m-1 text-center">
+            <form action="<?php echo urlroot;?>/Votings/saveVotes" method="POST" id="finalData" class="m-1 text-center">
                 <input type="hidden" name="voterId" value="<?php echo $data['voter']->voterId; ?>">
                 <input type="hidden" name="electionId" value="<?php echo $data['election']->ElectionId; ?>">
                 <input type="hidden" name="cCount" value="" id="candidateCount">

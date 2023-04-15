@@ -90,7 +90,7 @@ class electionPositions{
     }
 
     public function getPositionIdByCandidateId($id){
-        $this->db->query("SELECT positionId FROM Candidate WHERE candidateId = :id");
+        $this->db->query("SELECT * FROM Candidate WHERE candidateId = :id");
         $this->db->bind(':id', $id);
         try{
             $row = $this->db->single();
