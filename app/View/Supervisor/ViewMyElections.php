@@ -32,11 +32,12 @@
                 </div>
         </div>
     </div>
-    <div id="elections" class="d-flex flex-wrap mr-1 ml-3 my-1 min-h-100">
+    <div id="elections" class="d-flex flex-wrap mr-1 ml-3 min-h-100 my-2">
     <?php
+        date_default_timezone_set('Asia/Colombo');
+        $currentDate = date('Y-m-d H:i:s');
         foreach($data as $row):
-            date_default_timezone_set('Asia/Colombo');
-            $currentDate = date('Y-m-d H:i:s');
+            
         ?>
             <div class='card electionCard' id='<?=$row->ElectionId?>' >
             <div class='d-flex flex-column'>

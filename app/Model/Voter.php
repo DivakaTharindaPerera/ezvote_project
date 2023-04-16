@@ -332,4 +332,71 @@ class Voter extends Controller{
         }
     }
 
+    public function getVotersByUserId($id){
+        $this->db->query("SELECT * FROM Voter WHERE UserId = :1");
+        $this->db->bind(':1', $id);
+
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            // return false;
+        }
+    }
+
+    // public function checkVoterAuthentication($vid,$eid){
+    //     $this->db->query("SELECT * FROM Voter WHERE userId= :1 AND ElectionId = :2");
+    //     $this->db->bind(':1', $vid);
+    //     $this->db->bind(':2', $eid);
+
+
+    // }
+
+    public function updateVoterOtp($data){
+        $this->db->query(
+            "UPDATE Voter
+            SET OTP = :1
+            WHERE electionId = :2 AND userId = :3"
+        );
+        $this->db->bind(':1', $data['otp']);
+        $this->db->bind(':2', $data['eid']);
+        $this->db->bind(':3', $data['uid']);
+
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+
+    }
+
+    public function getVoterByUserIdAndElectionId($uid,$eid){
+        $this->db->query("SELECT * FROM Voter WHERE userId= :1 AND electionId = :2");
+        $this->db->bind(':1', $uid);
+        $this->db->bind(':2', $eid);
+
+        try {
+            $result = $this->db->single();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
+
+    public function getVoterByVoterId($vid){
+        $this->db->query("SELECT * FROM Voter WHERE voterId= :1");
+        $this->db->bind(':1', $vid);
+
+        try {
+            $result = $this->db->single();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
 }

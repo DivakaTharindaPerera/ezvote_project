@@ -29,7 +29,7 @@ class User{
     }
 
     public function getUserById($id){
-        $this->db->query("SELECT * FROM User WHERE id = :id");
+        $this->db->query("SELECT * FROM User WHERE UserId = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
 

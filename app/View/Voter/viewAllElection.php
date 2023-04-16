@@ -57,7 +57,26 @@ require approot.'/View/inc/sidebar-new.php';
                                     echo $interval->format("%h hours, %i minutes");
                                     ?>
                                 </div>
-                                <button class="btn btn-primary"  onclick="vote('<?=$id?>')">Vote</button>
+                                <?php 
+                                    foreach($data['voters'] as $vrow){
+                                        if($vrow->electionId == $row->ElectionId){
+                                            if($vrow->cast == 0){
+                                                // echo "<a href='".urlroot."/Pages/castVotePrologue/".$row->ElectionId."' class='btn btn-primary'>Vote</a>";
+                                                ?>
+                                                <form action="<?php echo urlroot;?>/Pages/castVotePrologue" method="POST">
+                                                    <input type="hidden" name="eid" value="<?php echo $row->ElectionId;?>">
+                                                    <button type="submit" class="btn btn-primary">Vote</button>
+                                                </form>
+                                                <?php 
+                                            }else{
+                                                echo "<a class='btn btn-danger' disabled>Voted</a>";
+                                            }
+                                        }
+                                    }
+                                ?>
+
+                                
+                                <!-- <button class="btn btn-primary"  onclick="vote('<=$id?>')">Vote</button> -->
                             </div>
                         </div>
                     <?php }

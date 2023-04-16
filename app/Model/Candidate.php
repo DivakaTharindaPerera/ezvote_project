@@ -172,4 +172,19 @@ class Candidate extends Controller{
             echo "Something went wrong :".$e->getMessage();
         }
     }
+
+    public function getCandidateByCandidateId($id){
+        $this->db->query(
+            "SELECT * FROM Candidate
+            WHERE candidateId = :1
+            "
+        );
+        $this->db->bind(':1', $id);
+        try {
+            $this->db->execute();
+            return $this->db->single();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+    }
 }

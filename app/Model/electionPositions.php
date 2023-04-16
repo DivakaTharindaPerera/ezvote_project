@@ -86,7 +86,18 @@ class electionPositions{
             return true;
         }catch(Exception $e){
             echo "Something went wrong :".$e->getMessage();
-            return false;
         }
+    }
+
+    public function getPositionIdByCandidateId($id){
+        $this->db->query("SELECT * FROM Candidate WHERE candidateId = :id");
+        $this->db->bind(':id', $id);
+        try{
+            $row = $this->db->single();
+            return $row;
+        }catch(Exception $e){
+            echo "Something went wrong :".$e->getMessage();
+        }
+
     }
 }

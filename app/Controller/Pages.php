@@ -8,6 +8,8 @@
         private $partyModel;
         private $voterModel;
         private $objectionModel;
+        private $userModel;
+        private $mail;
 
         public function __construct(){
             $this->postModel = $this->model('User');
@@ -17,6 +19,8 @@
             $this->partyModel = $this->model('Party');
             $this->voterModel = $this->model('Voter');
             $this->objectionModel = $this->model('Objection');
+            $this->userModel = $this->model('User');
+            $this->mail = $this->model('Email');
         }
 
         public function index(){
@@ -30,7 +34,7 @@
                 ];
                 $this->view('index', $data);
             }
-             $posts = $this->postModel->getPosts();
+            //  $posts = $this->postModel->getPosts();
             
         }
 
@@ -123,6 +127,8 @@
                         }
                     }
                 }
+                $voters = $this->voterModel->getVotersByUserId($_SESSION["UserId"]);
+
                 $this->view('Voter/viewAllElection',[
                     'data1'=>$s_ongoing_filtered,
                     'data2'=>$s_upcoming_filtered,
@@ -132,7 +138,8 @@
                     'data6'=>$v_completed_filtered,
                     'data7'=>$c_ongoing_filtered,
                     'data8'=>$c_upcoming_filtered,
-                    'data9'=>$c_completed_filtered
+                    'data9'=>$c_completed_filtered,
+                    'voters'=>$voters
                 ]);
             }
             else {
@@ -200,14 +207,13 @@
         }
 
         public function ViewMyElections(){
-//            if(!isset($_SESSION["UserId"])){
-//                redirect('View/login');
-//            }else{
-//                $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
-                $row = $this->electionModel->getElectionsByUserId('48');
+            if(!isset($_SESSION["UserId"])){
+                redirect('View/login');
+            }else{
+                $row = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
                 $this->view('Supervisor/ViewMyElections',$row);
             }
-//        }
+        }
 
         public function sortByTitle(){
             if(!isset($_SESSION["UserId"])){
@@ -402,6 +408,43 @@
                 'election'=>$data1,
                 'positions'=>$data2
             ]);
+        }
+    }
+
+    public function castVotePrologue(){
+        if($this->isLoggedIn()){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $eid = $_POST['eid'];
+            $otp = substr(number_format(time() * rand() , 0, '', ''), 0, 6);
+
+            $vEmail = $this->userModel->getUserById($_SESSION['UserId']);
+            $electionRow = $this->electionModel->getElectionByElectionId($eid);
+
+            $mailData = [
+                'email' => $vEmail->Email,
+                'subject' => "OTP for voting",
+                'body' => 'Your one time password for the '.$electionRow->Title." election is ".$otp.". Please do not share this with anyone.",
+            ];
+
+            $otp = password_hash($otp, PASSWORD_DEFAULT);
+
+            $data = [
+                'eid' => $eid,
+                'otp' => $otp,
+                'uid' => $_SESSION['UserId'],
+                'email' => $vEmail->Email,
+            ];
+
+            $_SESSION['email'] = $data['email'];
+            if($this->voterModel->updateVoterOtp($data)){
+                if($this->mail->sendEmail($mailData)){
+                    redirect('Votings/otpVerifyPage/'.$eid);
+                }else{
+                    die("Error sending Email with OTP");
+                }
+            }
+        }else{
+            redirect('View/login');
         }
     }
 
