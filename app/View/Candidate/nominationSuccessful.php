@@ -14,7 +14,7 @@ require approot . '/View/inc/AuthNavbar.php';
         </div>
         <br>
         <p class="text-center">Congratulations, your nomination application <br>has been successfully submitted.</p>
-        <button type="submit" class="btn bg-primary text-white m-2 text-3xl" style="margin-left:100px;" id="continue">Continue <img src="<?php echo urlroot; ?>/img/welcome/next.png"></button>
+        <button type="submit" class="btn bg-primary text-white m-2 text-3xl" style="margin-left:85px;" id="continue">Continue <img src="<?php echo urlroot; ?>/img/welcome/next.png"></button>
         </form>
 
     </div>
