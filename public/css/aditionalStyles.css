@@ -28,3 +28,29 @@
 .no-scroll-for-popup{
   overflow: hidden;
 }
+
+/* @media print{
+  body{
+    margin: 1cm;
+  }
+
+  h1, p{
+    page-break-inside: avoid;
+    page-break-after: always;
+    page-break-before: always;
+  }
+  
+  .page-break{
+    page-break-inside: always;
+    page-break-after: always;
+    page-break-before: always;
+
+    overflow: auto;
+
+    height: 300px;
+  }
+
+  #pageWidth{
+    display: inline;
+  }
+} */

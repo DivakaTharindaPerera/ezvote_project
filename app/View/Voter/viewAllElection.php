@@ -18,7 +18,7 @@ require approot.'/View/inc/sidebar-new.php';
                     foreach ($data['data1'] as $row){
                         $id=$row->ElectionId;
                         ?>
-                        <div class="d-flex flex-column bg-secondary p-1 border-radius-3 card" style="align-items: center">
+                        <div class="d-flex flex-column bg-primary p-1 border-radius-3 card" style="align-items: center">
                             <div id="election-title" class="title"><?php echo $row->Title?></div>
                             <!--                    <div class="text-center text-lg">by</div>-->
                             <div id="election-title" class="sub-title"><?php echo $row->OrganizationName?></div>
@@ -69,7 +69,7 @@ require approot.'/View/inc/sidebar-new.php';
                                                 </form>
                                                 <?php 
                                             }else{
-                                                echo "<a class='btn btn-danger' disabled>Voted</a>";
+                                                echo "<a class='btn btn-dark' href='".urlroot."/Votings/savedVotes/$row->ElectionId' >VOTED</a>";
                                             }
                                         }
                                     }

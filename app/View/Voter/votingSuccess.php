@@ -12,7 +12,7 @@
     foreach ($data['position'] as $position) {
         echo "
         <div>
-        <div class='text-xl text-center m-2 bg-blue-10 text-white p-1 border-radius-14'>
+        <div id='pageWidth' class='text-xl text-center m-2 bg-blue-10 text-white p-1 border-radius-14 page-break'>
             <b>$position->positionName</b>
         </div>
         <div class='d-flex p-1 justify-content-center'>";
@@ -37,6 +37,13 @@
         echo "</div></div>";
     }
     ?>
+    <button class="btn btn-primary" onclick="printThis()">PRINT</button>
 </div>
+
+<script>
+    function printThis(){
+       window.print();
+    }
+</script>
 
 <?php require approot . '/View/inc/footer.php'; ?>
