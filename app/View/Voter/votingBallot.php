@@ -8,6 +8,7 @@
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
 <div class="main-container">
+
     <div class="title justify-content-center mt-1"><?php echo $data['election']->Title ?><br>By <?php echo $data['election']->OrganizationName ?></div>
     <div class="justify-content-center">
         <p class="text-xl"><?php echo $data['election']->Description; ?>
@@ -28,6 +29,7 @@
                         ?>
                     </span>
                     option(s) available
+
                 </div>
                 <div class="d-flex justify-content-center flex-wrap">
                     <?php foreach ($data['candidates'] as $candidates) {

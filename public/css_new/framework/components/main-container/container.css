@@ -14,5 +14,7 @@
     overflow-x: auto;
     overflow-y: auto;
     background-color: var(--secondary);
-    /* border-top: 4rem solid rgb(5, 68, 104); */
+
+    /*border-top: 4rem solid rgb(5, 68, 104);*/
+
 }

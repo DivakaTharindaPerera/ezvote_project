@@ -22,11 +22,10 @@
                 <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
             <div class="profile">
-                <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" style="object-fit: cover" alt="profile_picture">
-<!--                <h3>John Doe</h3>-->
+                <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" style="object-fit: cover" alt="profile_picture"><br>
+                <h3 class="text-center text-md text-white mr-1"><?= $_SESSION['fname']." ".$_SESSION['lname']?></h3>
 <!--                <p>Blogger</p>-->
             </div>
-
 
 
             <ul>
@@ -50,7 +49,12 @@
                         <span class="item">Create Election</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="<?php echo urlroot; ?>/Pages/viewAllObjections">
+                        <span class="icon"><i class="fa-solid fa-bullseye"></i></span>
+                        <span class="item">Objections</span>
+                    </a>
+                </li>
                 <!-- view elections -->
 
                 <li>
@@ -62,14 +66,14 @@
 
                 <li>
                     <a href="#">
-                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="icon"><i class="fa-brands fa-wpforms"></i></span>
                         <span class="item">Discussion Forum</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo urlroot;?>/Pages/viewObjections">
-                        <span class="icon"><i class="fa-solid fa-bullseye"></i></span>
-                        <span class="item">Objections</span>
+                    <a href="<?php echo urlroot; ?>/Pages/viewAllConferences">
+                        <span class="icon"><i class="fa-solid fa-users"></i></span>
+                        <span class="item">Conferences</span>
                     </a>
                 </li>
 
