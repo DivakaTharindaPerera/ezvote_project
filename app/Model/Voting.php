@@ -43,4 +43,18 @@ class Voting extends Controller{
             die($e->getMessage());
         }
     }
+
+    public function alreadyVoted($uid,$eid){
+        $this->db->query("SELECT * FROM Voter WHERE userId = :uid AND electionId = :eid AND cast = 1");
+        $this->db->bind(':uid', $uid);
+        $this->db->bind(':eid', $eid);
+
+        $row = $this->db->single();
+
+        if($this->db->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
