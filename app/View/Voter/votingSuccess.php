@@ -39,7 +39,7 @@
     ?>
     </div>
     <div class="justify-content-center d-flex bg-blue-2 w-100 p-1 mb-auto" id="buttonContainer" style="border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.4);">
-        <a href="<?php echo urlroot;?>/Pages/landingPage" class="btn btn-danger mx-1 my-1"><b>HOME</b></a>
+        <a href="<?php echo urlroot;?>/Pages/dashboard" class="btn btn-danger mx-1 my-1"><b>HOME</b></a>
         <button class="btn btn-primary mx-1 my-1" onclick="printThis()"><b>PRINT</b></button>
 
     </div>

@@ -608,9 +608,10 @@
                     'electionID'=>$electionID,
                     'candidates'=>$candidates
                 ]);
+        }else{
+            redirect('View/login');
         }
-        else{
-=======
+    }
     public function castVotePrologue(){
         if($this->isLoggedIn()){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
