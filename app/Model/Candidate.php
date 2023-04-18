@@ -104,6 +104,7 @@ class Candidate extends Controller{
     }
 
     public function getCandidatesByElectionId($id){
+//        $id=1281;
         $this->db->query(
             "SELECT * FROM Candidate
             WHERE electionid = :1
