@@ -45,8 +45,13 @@ class Votings extends Controller
                 'positions' => $positionRow,
                 'election' => $electionRow,
                 'parties' => $partyRow,
-                'voter' => $voterRow
+                'voter' => $voterRow,
+                'stat' => 0
             ];
+
+            if($electionRow->StatVisibality == 1){
+                $voteData['stat'] = 1;
+            }
 
             if (password_verify($otp, $row->OTP)) {
                 $this->view('Voter/votingBallot', $voteData);
@@ -143,29 +148,33 @@ class Votings extends Controller
 
     public function savedVotes($eid)
     {
-        $candidateArray = [];
-        $candidateRowArray = [];
+        if ($this->votingModel->checkForVoter($_SESSION['UserId'], $eid) && $this->votingModel->alreadyVoted($_SESSION['UserId'],$eid) ){
+            $candidateArray = [];
+            $candidateRowArray = [];
 
-        $voter = $this->voterModel->getVoterByUserIdAndElectionId($_SESSION['UserId'], $eid);
-        $encryption = $this->encryptModel->getKeyAndIv($voter->voterId);
+            $voter = $this->voterModel->getVoterByUserIdAndElectionId($_SESSION['UserId'], $eid);
+            $encryption = $this->encryptModel->getKeyAndIv($voter->voterId);
 
-        $votes = $this->voteModel->retrieveVotes($voter->voterId);
+            $votes = $this->voteModel->retrieveVotes($voter->voterId);
 
-        foreach ($votes as $vote) {
-            array_push($candidateArray, $this->decrypt($vote->candidate, $encryption->Key, $encryption->Iv));
+            foreach ($votes as $vote) {
+                array_push($candidateArray, $this->decrypt($vote->candidate, $encryption->Key, $encryption->Iv));
+            }
+
+            foreach ($candidateArray as $candidate) {
+                array_push($candidateRowArray, $this->candidateModel->getCandidateByCandidateId($candidate));
+            }
+
+            $data = [
+                'candidates' => $candidateRowArray,
+                'election' => $this->electionModel->getElectionByElectionId($eid),
+                'position' => $this->positionModel->getElectionPositionByElectionId($eid)
+
+            ];
+
+            $this->view('Voter/votingSuccess', $data);
+        }else{
+            redirect('Pages/dashboard');
         }
-
-        foreach ($candidateArray as $candidate) {
-            array_push($candidateRowArray, $this->candidateModel->getCandidateByCandidateId($candidate));
-        }
-
-        $data = [
-            'candidates' => $candidateRowArray,
-            'election' => $this->electionModel->getElectionByElectionId($eid),
-            'position' => $this->positionModel->getElectionPositionByElectionId($eid)
-
-        ];
-
-        $this->view('Voter/votingSuccess', $data);
     }
 }
