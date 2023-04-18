@@ -147,6 +147,84 @@
             }
 
         }
+        //replacement for dashboard function
+        public function landingPage(){
+            $dates=date("Y-m-d");
+            $times=date("H:i:s");
+            $dataPre =[
+                'ongoing'=>[],
+                'upcoming'=>[],
+                'completed'=>[]
+            ];
+            try {
+                $row = $this->electionModel->getElectionIdByVoterId($_SESSION["UserId"]);
+                echo $_SESSION["UserId"].'<br>';
+                foreach ($row as $r) {
+                    $eid = $r->electionId;
+                    
+                    $election = $this->electionModel->getElectionByElectionId($eid);
+
+                    echo $eid.'-'.$election->StartDate.'-'.$election->EndDate.'-';
+
+                    if($election->StartDate > $dates && $election->StartTime > $times){
+                        echo 'upcoming-';
+                        $dataPre['upcoming'][]=($election) ;
+                    }
+                    if($election->StartDate <= $dates && $election->StartTime <= $times && $election->EndDate > $dates){
+                        echo 'ongoing-';
+                        $dataPre['ongoing'][]=($election);
+                    }
+                    if($election->EndDate == $dates && $election->EndTime == $times){
+                        echo 'ongoing-';
+                        $dataPre['ongoing'][]=($election);
+                    }
+                    if($election->EndDate == $dates && $election->EndTime < $times){
+                        echo 'completed-';
+                        $dataPre['completed'][]=($election);
+                    }
+                    if($election->EndDate < $dates && $election->EndTime < $times){
+                        echo 'completed-';
+                        $dataPre['completed'][]=($election);
+                    }
+                    echo '<br>';
+                }
+
+                $voters = $this->voterModel->getVotersByUserId($_SESSION["UserId"]);
+
+                echo 'ongoing<br>';
+                foreach ($dataPre['ongoing'] as $row) {
+                    echo $row->ElectionId.'<br>';
+                }
+
+                echo '<br>upcoming<br>';
+                foreach ($dataPre['upcoming'] as $row) {
+                    echo $row->ElectionId.'<br>';
+                }
+
+                echo '<br>completed<br>';
+                foreach ($dataPre['completed'] as $row) {
+                    echo $row->ElectionId.'<br>';
+                }
+
+                $this->view('Voter/viewAllElection',[
+                    'data1'=>'',
+                    'data2'=>'',
+                    'data3'=>'',
+                    'data4'=>$dataPre['ongoing'],
+                    'data5'=>$dataPre['upcoming'],
+                    'data6'=>$dataPre['completed'],
+                    'data7'=>'',
+                    'data8'=>'',
+                    'data9'=>'',
+                    'voters'=>$voters
+                ]);
+                
+                
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+
+        }
 
         public function register(){
             $data =[];

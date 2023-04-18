@@ -46,7 +46,8 @@
                             $_SESSION["lname"] = $user->Lname;
                             $_SESSION["email"] = $user->Email;
 
-                            header('location: '.urlroot.'/Pages/dashboard');
+                            // header('location: '.urlroot.'/Pages/dashboard');
+                            redirect('Pages/landingPage');
                         }else{
                             $data = [
                                 'error' => "invalid password",

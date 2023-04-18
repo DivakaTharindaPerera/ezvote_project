@@ -7,6 +7,7 @@ require approot.'/View/inc/AuthNavbar.php';
 require approot.'/View/inc/sidebar-new.php';
 ?>
 <div class="main-container">
+    <?php echo $_SESSION['UserId'];?>
     <div id="Elections" class="w-95 d-flex flex-column my-1" style="z-index: 2">
         <div id="ongoingElections" class="d-flex flex-column" style="justify-content: center;align-items: center">
             <div class="sub-title dark-title max-w-8">Ongoing Elections</div>

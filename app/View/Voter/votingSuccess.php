@@ -1,13 +1,13 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 
-<div class="w-100 d-flex h-100 flex-column mb-auto p-2 overflow-y">
+<div class="w-100 d-flex h-100 flex-column mb-auto overflow-y">
     <div class="title">
         <?php echo $data['election']->Title; ?>
     </div>
     <div class="title">
         By <?php echo $data['election']->Title; ?>
     </div>
-
+    <div class="d-flex flex-column overflow-scroll">
     <?php
     foreach ($data['position'] as $position) {
         echo "
@@ -37,7 +37,12 @@
         echo "</div></div>";
     }
     ?>
-    <button class="btn btn-primary" onclick="printThis()">PRINT</button>
+    </div>
+    <div class="justify-content-center d-flex bg-blue-2 w-100 p-1 mb-auto" id="buttonContainer" style="border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.4);">
+        <a href="<?php echo urlroot;?>/Pages/landingPage" class="btn btn-danger mx-1 my-1"><b>HOME</b></a>
+        <button class="btn btn-primary mx-1 my-1" onclick="printThis()"><b>PRINT</b></button>
+
+    </div>
 </div>
 
 <script>
