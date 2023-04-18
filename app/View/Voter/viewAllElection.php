@@ -11,6 +11,7 @@ require approot.'/View/inc/sidebar-new.php';
         <div id="ongoingElections" class="d-flex flex-column mb-1" style="justify-content: center;align-items: center">
             <div class="sub-title dark-title ">ONGOING ELECTIONS</div>
             <div class="d-flex mx-auto flex-wrap justify-content-center align-items-center">
+
                 <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh">
                     <div class="d-flex text-xl justify-content-center align-items-center my-1">Supervising Elections</div>
                     <div class="d-flex justify-content-center align-items-center mb-1 mx-1">
@@ -39,6 +40,7 @@ require approot.'/View/inc/sidebar-new.php';
                                         </div>
                                         <button class="btn btn-primary"  onclick="ongoing_summary('<?=$id?>')">View</button>
                                     </div>
+
                                 </div>
                             <?php }
                         }?>
@@ -70,7 +72,26 @@ require approot.'/View/inc/sidebar-new.php';
                                     echo $interval->format("%h hours, %i minutes");
                                     ?>
                                 </div>
-                                <button class="btn btn-primary"  onclick="vote('<?=$id?>')">Vote</button>
+                                <?php 
+                                    foreach($data['voters'] as $vrow){
+                                        if($vrow->electionId == $row->ElectionId){
+                                            if($vrow->cast == 0){
+                                                // echo "<a href='".urlroot."/Pages/castVotePrologue/".$row->ElectionId."' class='btn btn-primary'>Vote</a>";
+                                                ?>
+                                                <form action="<?php echo urlroot;?>/Pages/castVotePrologue" method="POST">
+                                                    <input type="hidden" name="eid" value="<?php echo $row->ElectionId;?>">
+                                                    <button type="submit" class="btn btn-primary">Vote</button>
+                                                </form>
+                                                <?php 
+                                            }else{
+                                                echo "<a class='btn btn-dark' href='".urlroot."/Votings/savedVotes/$row->ElectionId' >VOTED</a>";
+                                            }
+                                        }
+                                    }
+                                ?>
+
+                                
+                                <!-- <button class="btn btn-primary"  onclick="vote('<=$id?>')">Vote</button> -->
                             </div>
                         </div>
                     <?php }

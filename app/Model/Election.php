@@ -7,9 +7,11 @@
 
 class Election extends Controller{
     private $db;
+    private $logModel;
 
     public function __construct(){
         $this->db = new Database;
+        $this->logModel = $this->model('log');
     }
 
     public function insertIntoElection($data){
@@ -47,6 +49,10 @@ class Election extends Controller{
         try {
             $this->db->execute();
             $data['id'] = $this->db->lastInsertId();
+
+            $logDesc = "Created election with title ".$data['title']." By ".$data['orgname'].".";
+            $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
+
             redirect('Pages/wayToAddVoters/'.$data['id']);
             // $this->view('Supervisor/addVoters', $data);  
         } catch (Exception $e) {
@@ -115,7 +121,7 @@ class Election extends Controller{
         $dates=date("Y-m-d");
         $times=date("H:i:s");
         $this->db->query(
-            "SELECT * FROM election WHERE ((StartDate<'".$dates."' && ((EndDate='".$dates."' && EndTime>='".$times."') || (EndDate>'".$dates."'))) ||((StartDate='".$dates."' && StartTime<='".$times."') &&(EndDate>'".$dates."' || (EndDate='".$dates."' && EndTime>'".$times."'))))"
+            "SELECT * FROM Election WHERE ((StartDate<'".$dates."' && ((EndDate='".$dates."' && EndTime>='".$times."') || (EndDate>'".$dates."'))) ||((StartDate='".$dates."' && StartTime<='".$times."') &&(EndDate>'".$dates."' || (EndDate='".$dates."' && EndTime>'".$times."'))))"
         );
 //        echo '<pre>';
 //        print_r($this->db);
@@ -134,7 +140,7 @@ class Election extends Controller{
         $dates=date("Y-m-d");
         $times=date("H:i:s");
         $this->db->query(
-            "SELECT * FROM election WHERE (StartDate='".$dates."' && StartTime>'".$times."') ||(StartDate>'".$dates."' && StartTime>='".$times."')|| (StartDate>'".$dates."' && StartTime<'".$times."') "
+            "SELECT * FROM Election WHERE (StartDate='".$dates."' && StartTime>'".$times."') ||(StartDate>'".$dates."' && StartTime>='".$times."')|| (StartDate>'".$dates."' && StartTime<'".$times."') "
         );
         try {
             $result = $this->db->resultSet();
@@ -150,7 +156,7 @@ class Election extends Controller{
         $dates = date("Y-m-d");
         $times = date("H:i:s");
         $this->db->query(
-            "SELECT * FROM election WHERE (EndDate='" . $dates . "' && EndTime<'" . $times . "') ||(EndDate<'" . $dates . "' && EndTime>='" . $times . "') || (EndDate<'" . $dates . "' && EndTime<'" . $times . "')"
+            "SELECT * FROM Election WHERE (EndDate='" . $dates . "' && EndTime<'" . $times . "') ||(EndDate<'" . $dates . "' && EndTime>='" . $times . "') || (EndDate<'" . $dates . "' && EndTime<'" . $times . "')"
         );
         try {
             $result = $this->db->resultSet();
@@ -164,7 +170,7 @@ class Election extends Controller{
 
     public function getPositionsByElectionId($id){
         $election_Id=$id;
-        $this->db->query("SELECT DISTINCT ID,positionName FROM electionposition WHERE ElectionID ='" .$election_Id. "'" );
+        $this->db->query("SELECT DISTINCT ID,positionName FROM ElectionPosition WHERE ElectionID ='" .$election_Id. "'" );
         $row = $this->db->resultSet();
         return $row;
     }
@@ -172,7 +178,7 @@ class Election extends Controller{
     public function getCandidatesByElectionId($id)
     {
         $election_Id = $id;
-        $this->db->query("SELECT * FROM candidate WHERE electionid ='" . $election_Id . "' order by positionid");
+        $this->db->query("SELECT * FROM Candidate WHERE electionid ='" . $election_Id . "' order by positionid");
         $row = $this->db->resultSet();
         return $row;
 
@@ -189,7 +195,7 @@ class Election extends Controller{
     public function getWinnerNames($id)
     {
         $candidate_Id=$id;
-        $this->db->query("SELECT candidate.candidateName,electionparty.partyName FROM candidate where candidateId='" .$candidate_Id. "' inner join electionparty on candidate.partyId=electionparty.partyId ");
+        $this->db->query("SELECT Candidate.candidateName,ElectionParty.partyName FROM Candidate where candidateId='" .$candidate_Id. "' inner join electionparty on Candidate.partyId=ElectionParty.partyId ");
         $row=$this->db->resultSet();
         print_r($row);
         exit();
@@ -252,7 +258,7 @@ class Election extends Controller{
     public function getVotersByElectionID($id)
     {
         $election_Id = $id;
-        $this->db->query("SELECT userId,voterId FROM voter WHERE electionid ='" . $election_Id . "'");
+        $this->db->query("SELECT userId,voterId FROM Voter WHERE electionid ='" . $election_Id . "'");
         $row = $this->db->resultSet();
         return $row;
     }

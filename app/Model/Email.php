@@ -15,10 +15,11 @@
             $this->mail->Host = 'smtp.gmail.com';
             $this->mail->SMTPAuth = true;
             $this->mail->Username = 'ezvoteservice@gmail.com';
-            $this->mail->Password = 'avdvagetvbboufca';
+            $this->mail->Password = 'gzshvqfwwnkrvzyy';
             $this->mail->SMTPSecure = 'ssl';
             $this->mail->Port = 465;
             $this->mail->SMTPKeepAlive = true;
+            $this->mail->SMTPDebug = 2;
         }
         public function sendEmail($data){
             $this->mail->setFrom('ezvoteservice@gmail.com');

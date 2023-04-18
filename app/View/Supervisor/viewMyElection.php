@@ -14,12 +14,16 @@
         <a href="<?php echo urlroot; ?>/Pages/electionCandidates/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
             <div><b>Candidates & Positions</b></div>
         </a>
-        <a href="<?php echo urlroot; ?>/Pages/viewObjections/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
-            <div><b>Objections</b></div>
-        </a>
-        <a href="<?php echo urlroot; ?>/Pages/electionParties/<?php echo $data['ID'] ?>" class="btn btn-primary mr-auto ml-2 card-hover mt-1 mb-1">
+        <a href="<?php echo urlroot; ?>/Pages/electionParties/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
             <div><b>Parties</b></div>
         </a>
+        <a href="<?php echo urlroot; ?>/Pages/electionNominations/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
+            <div><b>Nominations</b></div>
+        </a>
+        <a href="<?php echo urlroot; ?>/Pages/viewObjections/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1 mr-auto">
+            <div><b>Objections</b></div>
+        </a>
+        
     </div>
 
 

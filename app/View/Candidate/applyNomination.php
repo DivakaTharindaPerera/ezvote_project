@@ -1,9 +1,9 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 
-<div class="overflow-y">
+<!-- <div class="overflow-y"> -->
 
-    <div class="form border-1 border-dark p-2 text-1xl bg-light" style=" margin-top:60px; ">
+    <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light" style=" margin-top:60px; ">
         <form action="/ezvote/Candidates/nomination_apply" method="POST" enctype='multipart/form-data' >
         <!-- enctype="multipart/form-data" -->
         
@@ -22,100 +22,89 @@
     </div>
     <br><br>
 
-<label for="fullname">Name:</label>
+<label for="fullname">Name<span class="text-danger">*</span> :</label>
 <div class="d-flex">
 
 <!-- first Name -->
 <input type="text" name="firstname" id="firstname" placeholder="First Name...">
-<!-- <div class="error" id="firstname_err"><?php echo isset($errors['firstname']) ? $errors['firstname'] : ''; ?></div> -->
+<em class="text-danger"><?php if(isset($data['fname_err'])){ echo $data['fname_err']; } ?></em>
+
 
 <!-- last Name -->
 <input type="text" name="lastname" id="lastname" placeholder="Last Name...">
-<!-- <div class="error" id="lastname_err"><?php echo isset($errors['lastname']) ? $errors['lastname'] : ''; ?></div> -->
+<em class="text-danger"><?php if(isset($data['lname_err'])){ echo $data['lname_err']; } ?></em>
 
 </div>
 <br>
 
 <!-- Election Name -->
-<label for="election">Election:</label>
+<label for="election">Election<span class="text-danger">*</span> :</label>
 <input type="text" name="election_name" id="election_name" placeholder="Election you wish to contest...">
-<div class="error" id="election_name_err"><?php echo isset($errors['election_name']) ? $errors['election_name'] : ''; ?></div>
+<em class="text-danger"><?php if(isset($data['election_err'])){ echo $data['election_err']; } ?></em>
 
 <br><br>
 
 <!-- Position -->
-<label for="positions">Select position :</label>
+<label for="positions">Select position<span class="text-danger">*</span> :</label>
 
 <select name="position" id="position" class="border-1 border-dark w-25">
   <option value="">Select...</option>
   <option value="president">President</option>
   <option value="wise president">Wise President</option>
   <option value="secretary">Secretary</option>
-  <option value="tresurer">Tresurer</option>
+  <option value="Treasurer">Treasurer</option>
 </select>
-<!-- <div class="error" id="position_err"><?php echo isset($errors['position']) ? $errors['position'] : ''; ?></div> -->
+<em class="text-danger"><?php if(isset($data['position_err'])){ echo $data['position_err']; } ?></em>
 
 <br><br>
 
-<!-- check if the party is existing party -->
-
-<!-- <div class="error" id="checkbox_err"><?php echo isset($errors['checkbox']) ? $errors['checkbox'] : ''; ?></div> -->
-<div class="check">
+<label for="party-names">Party Name<span class="text-danger">*</span> :</label>
 
 
-<!-- Create new party -->
-
-<label for="party-names">Party Name:</label>
-
-
-<!-- new party name -->
+<!-- party name -->
     <input type="text" class="new_party" name="party_name" id="party_name" placeholder="Party Name..."><br><br>
-    <!-- <div class="error" id="party_name_err"><?php echo isset($errors['new_party']) ? $errors['new_party'] : ''; ?></div> -->
-
-<!-- new party description -->
-
-    </div>
+    <em class="text-danger"><?php if(isset($data['party_err'])){ echo $data['party_err']; } ?></em>
     <br>
 <div class="d-flex">
 
 <!-- profile picture -->
     <div class="column">
-        <p>Upload Profile Picture:
+        <p>Upload Profile Picture<span class="text-danger">*</span> :
           <input type="file" id="imgfile" style="color: transparent;"name="imgfile"/></p>
-          
+          <em class="text-danger"><?php if(isset($data['profilepic_err'])){ echo $data['profilepic_err']; } ?></em>
     </div>
 
 <!-- upload identity proof -->
     <div class="column">
-        <p>Upload Identity Proof:
+        <p>Upload Identity Proof<span class="text-danger">*</span> :
         <input type="file" name="file" id="files" style="color: transparent;" multiple></p>
-
+        <em class="text-danger"><?php if(isset($data['identityproof_err'])){ echo $data['identityproof_err']; } ?></em>
     </div>
 </div>
 <br>
 
 <!-- candidate description -->
-    <label for="candidateDescription">Candidate Description:
+    <label for="candidateDescription">Candidate Description<span class="text-danger">*</span> :
     <input type="text" name="candidateDescription" id="candidateDescription" placeholder="Candidate description...">
-    <!-- <div class="error" id="candidateDescription_err"><?php echo isset($errors['candidateDescription']) ? $errors['candidateDescription'] : ''; ?></div> -->
+    <em class="text-danger"><?php if(isset($data['description_err'])){ echo $data['description_err']; } ?></em>
 <br><br>
 
     </label>
 <!-- msg to the voters -->
-    <label for="candidate vision">Candidate Vision:    
+    <label for="candidate vision">Candidate Vision<span class="text-danger">*</span> :    
     <input type="text" name="msg" id="msg" placeholder="Message to the voters...">
-    <!-- <div class="error" id="msg_err"><?php echo isset($errors['msg']) ? $errors['msg'] : ''; ?></div> -->
+    <em class="text-danger"><?php if(isset($data['msg_err'])){ echo $data['msg_err']; } ?></em>
 
 <br><br></label>
 
 <!-- cancel -->
-    <button type="submit" id="btn" name="cancel" class="btn bg-primary m-1 w-10"><a href="<?php echo urlroot; ?>/Candidates/viewAllElections" class="text-white">Cancel</a></button>
+    <button type="submit" id="btn" name="cancel" class="btn bg-primary m-1 w-10"><a href="<?php echo urlroot; ?>/Candidates/applyNomination" class="text-white">Cancel</a></button>
 
 <!-- save -->
     <button type="submit" id="btn" name="save" class="btn bg-primary text-white m-1 w-10">Save</button>
     <br><br>
-    <!-- <a href="<?php echo urlroot; ?>/Candidates/nominationSuccessful" class="text-white"> -->
+    
 </form>
 </div>
-</div>
-<!-- <?php require approot.'/View/inc/footer.php';?> -->
+<!-- </div> -->
+<?php require approot.'/View/inc/footer.php';?>

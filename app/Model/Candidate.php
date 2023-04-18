@@ -56,6 +56,53 @@ class Candidate extends Controller{
             return false;
         }
     }
+
+    public function insertRegCandidatePartyNull($data){
+        $this->db->query(
+            "INSERT INTO Candidate
+            (candidateName, candidateEmail, electionId, positionId, userId)
+            VALUES(:1,:2,:3,:4,:6)
+            "
+        );
+
+        $this->db->bind(':1', $data['candidateName']);
+        $this->db->bind(':2', $data['candidateEmail']);
+        $this->db->bind(':3', $data['electionId']);
+        $this->db->bind(':4', $data['positionId']);
+        $this->db->bind(':6', $data['userId']);
+
+        try {
+            $this->db->execute();
+            return $this->db->lastInsertId();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+            return false;
+        }
+    }
+
+    public function insertUnregCandidatePartyNull($data){
+        $this->db->query(
+            "INSERT INTO Candidate
+            (candidateName, candidateEmail, electionId, positionId)
+            VALUES(:1,:2,:3,:4)
+            "
+        );
+
+        $this->db->bind(':1', $data['candidateName']);
+        $this->db->bind(':2', $data['candidateEmail']);
+        $this->db->bind(':3', $data['electionId']);
+        $this->db->bind(':4', $data['positionId']);
+        
+        
+        try {
+            $this->db->execute();
+            return $this->db->lastInsertId();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+            return false;
+        }
+    }
+
     public function getCandidatesByElectionId($id){
 //        $id=1281;
         $this->db->query(
@@ -122,6 +169,21 @@ class Candidate extends Controller{
         try {
             $this->db->execute();
             return true;
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+    }
+
+    public function getCandidateByCandidateId($id){
+        $this->db->query(
+            "SELECT * FROM Candidate
+            WHERE candidateId = :1
+            "
+        );
+        $this->db->bind(':1', $id);
+        try {
+            $this->db->execute();
+            return $this->db->single();
         } catch (Exception $e) {
             echo "Something went wrong :".$e->getMessage();
         }

@@ -342,6 +342,10 @@ function addCandidateToList() {
     name.value = "";
     email.value = "";
 
+    document.getElementById('cNameError').innerHTML = "";
+    document.getElementById('cEmailError').innerHTML = "";
+    
+
 }
 
 document.getElementById("submissionForm").addEventListener("submit", () => {

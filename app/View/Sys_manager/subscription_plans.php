@@ -32,7 +32,7 @@ window.onload = function(){
     <div class="d-flex justify-content-center align-items-center my-1">
     <a href="/ezvote/Subscription_plan/create_subscription">
         <button class="btn btn-primary justify-content-center align-items-center" type="button">
-            Create new plan
+            CREATE NEW PLAN
         </button>
     </a>
     </div>
@@ -78,10 +78,10 @@ window.onload = function(){
                                 </td>
                                 <td class="td-3"><a href="edit_subscription/'.$data[0][$x]->PlanID.'"> 
 
-                                    <button class="btn btn-info ml-5">Details</button>
+                                    <button class="btn btn-info ml-5">DETAILS</button>
                                     </td></a>
                                     <td class="td-4"><a href="delete_subscription/'.$data[0][$x]->PlanID.'">
-                                    <button class="btn btn-danger mr-1">Delete</button>
+                                    <button class="btn btn-danger mr-1">DELETE</button>
                                     </td></a>
                             </tr>
                             

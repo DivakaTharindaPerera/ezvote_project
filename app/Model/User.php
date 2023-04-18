@@ -29,7 +29,7 @@ class User{
     }
 
     public function getUserById($id){
-        $this->db->query("SELECT * FROM User WHERE id = :id");
+        $this->db->query("SELECT * FROM User WHERE UserId = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
 
@@ -72,5 +72,45 @@ class User{
         }else{
             return false;
         }
+    }
+
+    public function userIdAutoFill($id,$email){
+        //updating voter table
+        $this->db->query("UPDATE Voter SET userId = :id WHERE Email = :email");
+        $this->db->bind(':id', $id);
+        $this->db->bind(':email', $email);
+        
+        try {
+            $this->db->execute();
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+
+        //updating candidate table
+        $this->db->query("UPDATE Candidate SET userId = :id WHERE candidateEmail = :email");
+        $this->db->bind(':id', $id);
+        $this->db->bind(':email', $email);
+
+        try {
+            $this->db->execute();
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+
+        //updating party table
+        $this->db->query("UPDATE ElectionParty SET userId = :id WHERE supEmail = :email");
+        $this->db->bind(':id', $id);
+        $this->db->bind(':email', $email);
+
+        try {
+            $this->db->execute();
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+
+        return true;
     }
 }

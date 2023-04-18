@@ -92,7 +92,7 @@
                         <button onclick="addCandidateToList()" class="btn btn-primary w-25 card-hover text-xl"><b>Add Candidate</b></button>
                     </div>
                 </div>
-                <button onclick="addCandidateToList()" class="btn btn-primary w-45">Add Candidate</button>
+                <!-- <button onclick="addCandidateToList()" class="btn btn-primary w-45">Add Candidate</button> -->
 
 
                 <div id="candidateList" class="my-1 text-center"></div>
