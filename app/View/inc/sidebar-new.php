@@ -23,7 +23,7 @@
 
             <div class="profile">
                 <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" style="object-fit: cover" alt="profile_picture"><br>
-                <h3 class="text-center text-white mr-1"><?= $_SESSION['fname']." ".$_SESSION['lname']?></h3>
+                <h3 class="text-center text-md text-white mr-1"><?= $_SESSION['fname']." ".$_SESSION['lname']?></h3>
 <!--                <p>Blogger</p>-->
             </div>
 
