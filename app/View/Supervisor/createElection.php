@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="mt-1"> <img src="<?php echo urlroot;?>/public/img/end.png" alt="" style="max-height: 40px;max-width:40px"></div>
+                    <div class="mt-1"> <img src="<?php echo urlroot;?>/public/img/endtime.png" alt="" style="max-height: 40px;max-width:40px"></div>
                     <div class="justify-content-center text-lg mb-1">Ending</div>
                     <div class="justify-content-start mb-1">
                         Date: <input type="date" id="EendDate" name="EendDate" class="date" onchange="dateCheck()" required>

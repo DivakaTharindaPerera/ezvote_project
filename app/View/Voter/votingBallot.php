@@ -31,8 +31,13 @@
                             <div class="text-lg">BraveIo</div>
                         </div>
                         <div class="d-flex justify-content-center mb-1">
-                            <button class="btn btn-primary min-w-50" id="1" onclick="marked(<?=$i,$candidates->candidateId?>)">Vote</button>
+                            <form action="" method="post">
+                                <input type="hidden" name="candidate_id" value="<?php echo $candidates->candidateId?>">
+                                <input type="hidden" name="election_id" value="<?php echo $data['election']->ElectionId?>">
+                                <input type="hidden" name="position_id" value="<?php echo $position_id?>">
+                                <input type="submit" class="btn btn-primary min-w-50" id="1" value="Vote">
 <!--                            --><?php //array_push($voted,)?>
+                            </form>
                         </div>
                     </div>
                        <?php

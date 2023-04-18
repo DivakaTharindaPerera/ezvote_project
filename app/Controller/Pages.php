@@ -8,6 +8,7 @@
         private $partyModel;
         private $voterModel;
         private $objectionModel;
+        private $conferenceModel;
 
         public function __construct(){
             $this->postModel = $this->model('User');
@@ -17,6 +18,7 @@
             $this->partyModel = $this->model('Party');
             $this->voterModel = $this->model('Voter');
             $this->objectionModel = $this->model('Objection');
+            $this->conferenceModel = $this->model('Conference');
         }
 
         public function index(){
@@ -337,7 +339,8 @@
         }
 
     public function viewObjections($id){
-
+            echo $id;
+            exit();
         $objectionRow = $this->objectionModel->getObjectionsByElectionId($id);
         $CandidateRow = $this->candidateModel->getCandidatesByElectionId($id);
         $voterRow = $this->voterModel->getRegVotersByElectionId($id);
@@ -418,6 +421,121 @@
                 'election'=>$data1,
                 'positions'=>$data2
             ]);
+        }
+    }
+
+    public function viewCompletedElection($electionId)
+    {
+        if($this->isLoggedIn()){
+            $data1=$this->electionModel->getElectionByElectionId($electionId);
+            $data2=$this->electionModel->getPositionsByElectionId($electionId);
+            $this->view('Supervisor/electionSummary',
+                [
+                    'election'=>$data1,
+                    'positions'=>$data2
+                ]);
+        }
+    }
+
+    public function viewAllObjections()
+    {
+        echo "view all objections";
+//       $this->view('Supervisor/viewAllObjections');
+    }
+
+    public function viewAllConferences()
+    {
+        if($this->isLoggedIn()){
+
+            $data=$this->conferenceModel->getConferencesByUserID($_SESSION["UserId"]);
+            //get current time
+            $now = new DateTime();
+            //get ongoing conferences
+            $data1=array();
+            foreach ($data as $row){
+                $interval = $now->diff(new DateTime($row->DateAndTime));
+//                echo $interval->format('%H:%I:%S');
+//                exit();
+                if($interval->format('%H:%I:%S')>0){
+                    array_push($data1,$row);
+                }
+            }
+            //get upcoming conferences
+            $data2=array();
+            foreach ($data as $row){
+                $interval = $now->diff(new DateTime($row->DateAndTime));
+//                echo $interval->format('%R%a');
+//                exit();
+                if($interval->format('%H:%I:%S')<=0){
+                    array_push($data2,$row);
+                }
+            }
+            $this->view('Supervisor/viewAllConference',
+                [
+                    'ongoing_conferences'=>$data1,
+                    'upcoming_conferences'=>$data2
+                ]);
+        }
+        else{
+            redirect('View/login');
+        }
+    }
+
+    public function addConference($electionID)
+    {
+        if($this->isLoggedIn()){
+            if($_SERVER['REQUEST_METHOD']==="POST"){
+                $candidates = $_POST['candidate'];
+                if (empty($candidates)) {
+                    $data['candidateError'] = "Please select at least one candidate";
+                }
+                $data=[
+                    'topic'=>trim($_POST['conferenceName']),
+                    'date'=>trim($_POST['date']),
+                    'time'=>trim($_POST['time']),
+                    'supervisorId'=>$_SESSION["UserId"],
+                    'electionId'=>$electionID
+                ];
+                $data['start_date']=$data['date']." ".$data['time'];
+                unset($data['date']);
+                unset($data['time']);
+//                Create a random password with 10 characters
+                $data['password']=substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+                if (isset($_POST['duration']) && $_POST['duration'] != "") {
+                    $data['duration'] = $_POST['duration'];
+                }else{
+                    $data['duration'] = 30;
+                }
+                if(empty($data['topic'])){
+                    $data['conferenceNameError']="Please enter conference name";
+                }
+                if(empty($_POST['date'])){
+                    $data['dateAndTimeError']="Please enter date and time";
+                }
+                if(empty($data['conferenceNameError']) && empty($data['candidateError']) && empty($data['dateAndTimeError'])){
+                    $data['conferenceID']=uniqid('conf_');
+                    if($this->conferenceModel->addConference($data,$candidates)){
+                        $this->conferenceModel->AddCandidateToConference($data['conferenceID'],$candidates);
+//                        exit();
+                        redirect('Supervisor/viewAllConferences');
+                    }
+                    else{
+                        die("Something went wrong");
+                    }
+                }
+                else{
+                    $this->view('Supervisor/scheduleConference',$data);
+                }
+            }
+            $candidates=$this->candidateModel->getCandidatesByElectionId($electionID);
+            $this->view('Supervisor/scheduleConference',
+                [
+                    'electionID'=>$electionID,
+                    'candidates'=>$candidates
+                ]);
+        }
+        else{
+            redirect('View/login');
         }
     }
 

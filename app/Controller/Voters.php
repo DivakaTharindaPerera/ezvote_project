@@ -116,6 +116,41 @@ class Voters extends Controller
 
     public function vote($id=null,$candidate_id=null)
     {
+//        unset($_SESSION['tmpElection']);
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+//            print_r($_POST);
+//            exit();
+            $electionID=$_POST['election_id'];
+            $positionID=$_POST['position_id'];
+            $candidateID=$_POST['candidate_id'];
+            $tempElection=$_SESSION['tmpElection'] ;
+            if(empty($tempElection)){
+                $_SESSION['tmpElection']=[
+                    $electionID=>[
+                        $positionID=>$candidateID
+                    ]
+                ];
+            }
+            else{
+                if(array_key_exists($electionID,$tempElection)){
+                    if(array_key_exists($positionID,$tempElection[$electionID])){
+                        var_dump($candidateID);
+//                        exit();
+                        $tempElection[$electionID][$positionID]=$candidateID;
+                    }
+                    else{
+                        $tempElection[$electionID][$positionID]=$candidateID;
+                    }
+                }
+                else{
+                    $tempElection[$electionID]=[
+                        $positionID=>$candidateID
+                    ];
+                }
+            }
+            print_r($_SESSION['tmpElection']);
+            exit();
+        }
         $data_1=$this->elecModel->getElectionByElectionId($id);
         $data_2=$this->elecModel->getPositionsByElectionId($id);
         $data_3=$this->elecModel->getCandidatesByElectionId($id);

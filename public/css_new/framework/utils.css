@@ -273,6 +273,9 @@
 .min-h-30{
     min-height: 30%;
 }
+.min-h-37vh{
+    min-height: 37vh;
+}
 .min-h-40{
     min-height: 40%;
 }
