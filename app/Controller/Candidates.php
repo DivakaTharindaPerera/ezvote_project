@@ -52,45 +52,55 @@ class Candidates extends Controller
             // var_dump($position_id);
 
             $data=[
-
-                /************************************************/
-                // 'nominationID'=>uniqid('obj',true),
                 'firstname'=>trim($_POST['firstname']),
                 'lastname'=>trim($_POST['lastname']),
-                // 'election_name'=>trim($_POST['election_name']),
-                // 'position'=>trim($_POST['position']),                
-                // 'party_name'=>trim($_POST['party_name']),
-
-                // 'profile_picture'=>$_FILES['imgfile'],
-                'profile_picture'=>$imageName,
-                // 'identity_proof'=>$_FILES['file'],
-                'identity_proof'=>$filename2,
-                'candidateDescription'=>trim($_POST['candidateDescription']),
-                'msg'=>trim($_POST['msg']),
                 'ElectionID'=>$elect_id,
                 'ID'=>$position_id,
                 'PartyId'=>$party_id,
-
-
-                'firstname_err'=>'',
-                'lastname_err'=>'',
-                // 'election_name_err'=>'',
-                // 'position_err'=>'',                
-                // 'party_name_err'=>'',
-                'profile_picture_err' =>'',
-                'candidateDescription_err'=>'',
-                'msg_err'=>''
-
+                'profile_picture'=>$imageName,
+                'identity_proof'=>$filename2,
+                'candidateDescription'=>trim($_POST['candidateDescription']),
+                'msg'=>trim($_POST['msg']),
+                
+                'fname_err'=>'',
+                'lname_err'=>'',
+                'election_err'=>'',
+                'position_err'=>'',
+                'party_err'=>'',
+                'profilepic_err'=>'',
+                'identityproof_err'=>'',
+                'description_err'=>'',
+                'msg_err'=>'',                
             ];
 
             //validate data
 
             if(empty($data['firstname'])){
-                $data['fname_err']='Please enter fname';
+                $data['fname_err']='Please enter first name';
             }
 
             if(empty($data['lastname'])){
-                $data['lname_err']='Please enter lname';
+                $data['lname_err']='Please enter last name';
+            }
+
+            if(empty($data['ElectionID'])){
+                $data['election_err']='Please enter election name';
+            }
+
+            if(empty($data['ID'])){
+                $data['position_err']='Please enter position you wish to contest';
+            }
+
+            if(empty($data['PartyId'])){
+                $data['party_err']='Please enter party name you wish to contest';
+            }
+
+            if(empty($data['profile_picture'])){
+                $data['profilepic_err']='Please attach profile picture';
+            }
+
+            if(empty($data['identity_proof'])){
+                $data['identityproof_err']='Please attach identity proof documents';
             }
 
             if(empty($data['candidateDescription'])){
@@ -101,37 +111,10 @@ class Candidates extends Controller
                 $data['msg_err']='Please enter msg';
             }
 
-           
-
-    //Check whether all the fields are filled properly
-    // if(!$_POST['firstname'] && !$_POST['lastname'] && !$_POST['election_name'] && !$_POST['position'] && !$_POST['party_name'] && !$_POST['imgfile'] && !$_POST['file'] && !$_POST['candidateDescription'] && !$_POST['msg']){
-    //             $data['firstname_err'] =  "*This field is Required";
-    //             $data['lastname_err'] = "*This field is Required";
-    //             $data['election_name_err'] = "*This field is Required";
-    //             $data['position_err'] = "*This field is Required";
-    //             $data['party_name_err'] = "*This field is Required";
-    //             $data['profile_picture_err'] = "*This field is Required";
-    //             $data['identity_proof_err'] = "*This field is Required";
-    //             $data['candidateDescription_err'] = "*This field is Required";
-    //             $data['msg_err'] = "*This field is Required";
-    //         }
-
-    
-    // $filename = $_FILES["imgfile"]["name"];
-    // $tempname = $_FILES["imgfile"]["tmp_name"];
-    // $folder = urlroot."/img/welcome/" . $filename;
-    // move_uploaded_file($tempname, $folder);
-
-    // $filename2 = $_FILES["file"]["name"];
-    // $tempname2 = $_FILES["file"]["tmp_name"];
-    // $folder2 = urlroot."/img/welcome/" . $filename2;
-    // move_uploaded_file($tempname2, $folder2);
-
     //make sure no errors
  if(empty($data['fname_err']) && empty($data['lname_err']) && empty($data['description_err']) && empty($data['msg_err'])){
                 //validated
                 if($this->nominateModel->AddNomination($data)){
-//                    flash('register_success','You have successfully submitted your objection');
                     redirect('/Candidates/nominationSuccessful');}
                 else{
                     die('Something went wrong');
@@ -209,10 +192,6 @@ class Candidates extends Controller
 
                 'firstname'=>'',
                 'lastname'=>'',
-                // 'election_name'=>'',
-                // 'position'=>'',
-                // 'checkbox'=>'',
-                // 'party_name'=>'',
                 'profile_picture'=>'',
                 'identity_proof'=>'',
                 'candidateDescription'=>'',
