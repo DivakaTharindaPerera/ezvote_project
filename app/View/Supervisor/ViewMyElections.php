@@ -61,7 +61,7 @@
                     }else if($end > $timenow && $start < $timenow){
                         echo "
                         <div class='text-warning'>Ongoing Election</div>
-                        <div><a href='".urlroot."/Pages/InspectMyElection/$row->ElectionId'> <span class='btn btn-primary'>Inspect</span> </a></div>
+                        <div><a href='".urlroot."/Votings/inspectMyElection/$row->ElectionId'> <span class='btn btn-primary'>Inspect</span> </a></div>
                         ";
                     }else{
                         echo "

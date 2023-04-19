@@ -47,7 +47,7 @@
                             $_SESSION["email"] = $user->Email;
 
                             // header('location: '.urlroot.'/Pages/dashboard');
-                            redirect('Pages/dashboard');
+                            redirect('Pages/landingPage');
                         }else{
                             $data = [
                                 'error' => "invalid password",

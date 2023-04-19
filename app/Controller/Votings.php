@@ -177,4 +177,69 @@ class Votings extends Controller
             redirect('Pages/dashboard');
         }
     }
+
+    //utility function
+    //will return an associative array with candidateId as key and count of votes as value
+    public function calculateVotes($eid){
+        $candidates = array();
+        $voters = $this->voterModel->getVotersByElectionId($eid);
+        $candidateRows = $this->candidateModel->getCandidatesByElectionId($eid);
+        foreach($candidateRows as $candidateRow){
+            $candidates[$candidateRow->candidateId] = 0;
+        }
+        foreach($voters as $voter){
+            // echo $voter->voterId."<br>";
+            $encryption = $this->encryptModel->getKeyAndIv($voter->voterId);
+            $votes = $this->voteModel->retrieveVotes($voter->voterId);
+            foreach($votes as $vote){
+                $candidate = $this->decrypt($vote->candidate, $encryption->Key, $encryption->Iv);
+                // echo $candidate."<br>";
+                if($this->verifyCandidate($eid,$candidate)){
+                    $candidates[$candidate] += $voter->value;
+                }
+            }
+        }
+        // // print candidates
+
+        // $keys = array_keys($candidates);
+        
+        // echo "Candidates : Votes <br>";
+        // foreach($keys as $key){
+        //     echo $key . " : " . $candidates[$key] . "<br>";
+        // }
+
+        return $candidates;
+    }
+
+    public function verifyCandidate($eid,$cid){
+        $candidate = $this->candidateModel->getCandidateByCandidateId($cid);
+        $election = $this->electionModel->getElectionByElectionId($eid);
+        if($election->ElectionId == $candidate->electionid){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function inspectMyElection($eid){
+        $data =[];
+        $election = $this->electionModel->getElectionByElectionId($eid);
+        $voters = $this->voterModel->getVotersByElectionId($eid);
+        $candidates = $this->candidateModel->getCandidatesByElectionId($eid);
+        $positions = $this->positionModel->getElectionPositionByElectionId($eid);
+        if($election->Supervisor == $_SESSION['UserId']){
+            $candidatesWithVotes = $this->calculateVotes($eid);
+            $data=[
+                'election'=>$election,
+                'voters'=>$voters,
+                'candidates'=>$candidates,
+                'positions' => $positions,
+                'votes' => $candidatesWithVotes
+            ];
+
+            $this->view('Supervisor/inspectElection',$data);
+        }else{
+            echo "<h1 style='color:red;'>Forbidden Access!<h1>";
+        }
+    }
 }

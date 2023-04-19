@@ -24,6 +24,7 @@
                         <img src="/ezvote/public/img/profile.jpg" style="max-height:50px;max-width: 50px" alt="profile photo">
                     </div>
                     <div class="text-xl mb-1">
+                        <?php echo $candidate->candidateId; ?>
                         <?php echo $candidate->candidateName; ?>
                     </div>
                     <div class="text-xs mb-1">

@@ -399,4 +399,16 @@ class Voter extends Controller{
             return false;
         }
     }
+
+    public function getVotersByElectionId($eid){
+        $this->db->query("SELECT * FROM Voter WHERE electionId= :1");
+        $this->db->bind(':1', $eid);
+
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+        }
+    }
 }
