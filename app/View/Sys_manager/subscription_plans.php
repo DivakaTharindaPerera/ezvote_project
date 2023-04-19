@@ -74,7 +74,7 @@ window.onload = function(){
                                     <input type="checkbox" id="toggle-'.$i.'" onclick="myFunction'.$i.'()">
                                         <span class="slider round"></span>
                                     </label>
-                                    <span id="myDIV-'.$i.'" class="enabled"> Enabled</span>
+                                    <span id="myDIV-'.$i.'" class="ml-1 enabled">Disabled</span>
                                 </td>
                                 <td class="td-3"><a href="edit_subscription/'.$data[0][$x]->PlanID.'"> 
 
@@ -90,9 +90,9 @@ window.onload = function(){
                                     var checkBox = document.getElementById("toggle-'.$i.'");
                                     var text = document.getElementById("myDIV-'.$i.'");
                                     if (checkBox.checked == false) {
-                                        text.innerHTML = "Enabled";
-                                    }else{
                                         text.innerHTML = "Disabled";
+                                    }else{
+                                        text.innerHTML = "Enabled";
                                     }
                                 }
                             </script>
