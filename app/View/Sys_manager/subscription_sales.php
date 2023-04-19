@@ -46,7 +46,7 @@ window.onload = function(){
             <tr>
                 <th>Plan Name</th>
                 <th>Price ($)</th>
-                <th>Purchsed Users</th>
+                <th>Purchased Users</th>
                 <th>Plan Income ($)</th>
                 <th>Discount Details</th>
                 </tr>
