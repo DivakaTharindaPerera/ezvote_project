@@ -13,33 +13,30 @@ window.onload = function(){
 }
 </script>
 
-    <div class="main-container max-h-85">
+    <div class="main-container">
+    <div class="min-w-75 min-h-65">
     <div class="d-flex flex-column justify-content-center align-items-center ">
         <div class="subscription">
             <h2 class="title text-center">Subscription Sales</h2>
         </div>
 
-    <!-- <a href="/ezvote/System_manager/dashboard">
-    <div class="ml-1 mt-1">
-        <img src="<?php echo urlroot; ?>/public/img/button.png" />
-    </div>
-</a> -->
 
 <div class="d-flex flex-column">
     <div class="d-flex justify-content-evenly ">
-        <div class="justify-content-center border border-primary my-3 mr-1 min-w-50">
+        <div class="justify-content-center border border-primary my-3 mr-4 min-w-85">
         <input type="text" id="searchInput" value="" onchange="myFunction(this.value)" placeholder="Search Plan......" class="w-100 h-100">
         </div>
-        <div class="my-3 d-flex mr-5">
+        <div class="my-3 d-flex mr-4">
         <a href="#">
-            <button class="btn btn-primary ml-2" >SEARCH</button></a>
-            <div class="d-flex text-center align-items-center text-md ml-2">FILTER
+            <button class="btn btn-primary mr-3" >SEARCH</button></a>
+            <div class="d-flex text-center align-items-center text-md">FILTER
             </div>
         </div>
     </div>
     </div>
+    
 
-<div class="w-100 h-50" style="overflow:auto; height:50vh;">
+<div class="w-100 h-50 overflow-scroll">
 <table id= "myTable" class="table border border-primary w-100 h-50">
             <tr class="min-w-75">
             <thead>
@@ -102,6 +99,7 @@ window.onload = function(){
 
     </tbody>
 </table>
+</div>
 </div>
 </div>
 </div>

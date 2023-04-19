@@ -2,18 +2,6 @@
 <?php require approot . '/View/inc/ManagerNavbar.php'; ?>
 <?php require approot . '/View/inc/manager_sidebar.php'; ?>
 
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>create subscription</title>
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/create_subscription.css">
-    <script src="../public/js/disableInput.js"></script>
-</head> -->
-
-<!-- <body> -->
 <script>
 
 window.onload = function(){
@@ -133,7 +121,3 @@ window.onload = function(){
 </div>
 <script src="../../public/js/disableInput.js"></script>
 <?php require approot . '/View/inc/footer.php'; ?>
-<!-- 
-</body>
-
-</html> -->

@@ -2,20 +2,6 @@
 <?php require approot . '/View/inc/ManagerNavbar.php'; ?>
 <?php require approot . '/View/inc/manager_sidebar.php'; ?>
 
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width , initial-scale=1.0">
-    <title>sysmanager_announcemets</title>
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/sysmanager_announcements.css">
-</head> -->
-
-<!-- <body> -->
-
 <script>
 
 window.onload = function(){
@@ -55,9 +41,6 @@ window.onload = function(){
     </div>
 </div>
 
-<!-- <div class="justify-content-center">
-    <label style="font-weight: 700;">Attachments</label>
-</div> -->
 
 <br>
 <div class="send">
@@ -156,5 +139,4 @@ window.onload = function(){
 </div>
 
 <?php require approot . '/View/inc/footer.php'; ?>
-<!-- </body>
-</html> -->
+
