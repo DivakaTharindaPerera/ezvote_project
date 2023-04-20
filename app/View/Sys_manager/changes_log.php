@@ -17,10 +17,9 @@ window.onload = function(){
     <div class="title text-center">Changes Log</div>
     <div class="min-w-85 min-h-85">
         <div class="w-100 h-50 justify-content-center align-items-center">
-            <!-- <div class="btn btn-primary justify-content-end mr-2">Change Logs</div> -->
-            <table class="table border border-primary w-90 h-50 ml-2 mt-2">
+            <table class="table border border-primary w-90 h-50 ml-2 mt-2 overflow-scroll">
                 <thead>
-                    <tr>
+                    <tr class="h-75">
                         <th>Plan ID</th>
                         <th>Date</th>
                         <th>Time</th>
