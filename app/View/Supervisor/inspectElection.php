@@ -10,6 +10,35 @@
     ?>
     <div class="title" style="color: rgb(0, 0, 153);"><?php echo $election->Title; ?></div>
     <div class="title" style="color: rgb(0, 0, 153);">By <?php echo $election->OrganizationName; ?></div>
+
+    <div id="timePanel" class="d-flex flex-column my-2 w-100 p-2" style="color: rgb(0, 0, 153)">
+        <div id="datesTimes" class="d-flex w-50 mr-auto ml-auto" >
+            <div id="startDateTime" class="text-xl mr-auto">
+                From: <b> <?php echo $election->StartDate; ?> : <?php echo $election->StartTime; ?> </b>
+            </div>
+            <div id="endDateTime" class="text-xl ml-auto">
+                To: <b> <?php echo $election->EndDate; ?> : <?php echo $election->EndTime; ?> </b>
+            </div>
+        </div>
+        <div style="display:none;">
+            <input type="date" name="" id="eEndDate" value="<?php echo $election->EndDate; ?>">
+            <input type="time" name="" id="eEndTime" value="<?php echo $election->EndTime; ?>">
+            <input type="date" name="" id="eStartDate" value="<?php echo $election->StartDate; ?>">
+            <input type="time" name="" id="eStartTime" value="<?php echo $election->StartTime; ?>">
+        </div>
+        <div id="remainTime" class="mx-auto my-1">
+            <div class="d-flex flex-column">
+                <div id="remainTimeTitle" class="text-xl mx-auto">Elapsed Time</div>
+                <div id="elapsedTimeValue" class="text-2xl mx-auto"></div>
+            </div>
+        </div>
+        <div id="remainTime" class="mx-auto my-1">
+            <div class="d-flex flex-column">
+                <div id="remainTimeTitle" class="text-xl text-danger mx-auto">Remaining Time</div>
+                <div id="remainTimeValue" class="text-2xl text-danger"></div>
+            </div>
+        </div>
+    </div>
     <div class="w-100 d-flex justify-content-center flex-column">
         <div id="voterHeader" class="w-90 bg-blue-9 h-10 d-flex p-1 text-light border-radius-2 mx-auto flex-column">
             <div class="d-flex">
@@ -42,14 +71,16 @@
         <div class="ml-auto mr-5">
             <canvas id="VotedVSOthersChart" class="w-100 h-100 text-2xl"></canvas>
         </div>
-        <div class="bg-primary mr-auto ml-5 d-flex flex-column text-white p-1 border-radius-2 my-auto w-30">
-            <div class="d-flex mb-1">
-                <div class="text-xl mr-auto">VOTED</div>
-                <div class="text-xl ml-auto"><?php echo $votedCount;?></div>
+        <div class=" mr-auto ml-5 d-flex flex-column text-white p-1 border-radius-2 my-auto w-45">
+            <div class="bg-primary border-radius-2 p-1 d-flex mb-1">
+                <div class="text-xl mr-auto w-45">VOTED</div>
+                <div class="text-xl ml-auto"><?php echo number_format($votedCount / $voterCount * 100, 2) ?>%</div>
+                <div class="text-xl ml-auto"><?php echo $votedCount; ?></div>
             </div>
-            <div class="d-flex mt-1">
-                <div class="text-xl mr-auto">NOT VOTED</div>
-                <div class="text-xl ml-auto"><?php echo $voterCount - $votedCount;?></div>
+            <div class=" bg-primary border-radius-2 p-1 d-flex mt-1">
+                <div class="text-xl mr-auto w-45">NOT VOTED</div>
+                <div class="text-xl ml-auto"><?php echo number_format(($voterCount - $votedCount) / $voterCount * 100, 2) ?>%</div>
+                <div class="text-xl ml-auto"><?php echo $voterCount - $votedCount; ?></div>
             </div>
         </div>
     </div>
@@ -82,6 +113,46 @@
 </div>
 
 <script>
+    function createDateTime(dateStr, timeStr) {
+        const dateTimeStr = `${dateStr}T${timeStr}`;
+        return new Date(dateTimeStr);
+    }
+
+    const endDateTime = createDateTime(document.getElementById("eEndDate").value, document.getElementById("eEndTime").value);
+    const startDateTime = createDateTime(document.getElementById("eStartDate").value, document.getElementById("eStartTime").value);
+
+    function remainDateTime() {
+        var container1 = document.getElementById("remainTimeValue");
+        var container2 = document.getElementById("elapsedTimeValue");
+
+        const endDate = new Date(endDateTime);
+        const total = endDate.getTime() - Date.now();
+        const seconds = Math.floor((total / 1000) % 60);
+        const minutes = Math.floor((total / 1000 / 60) % 60);
+        const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+        const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+        container1.innerHTML = `<b>${days} days ${hours} hours ${minutes} minutes ${seconds} seconds</b>`;
+        
+
+        const endDate1 = new Date(startDateTime);
+        const total1 =  Date.now() - endDate1.getTime() ;
+        const seconds1 = Math.floor((total1 / 1000) % 60);
+        const minutes1 = Math.floor((total1 / 1000 / 60) % 60);
+        const hours1 = Math.floor((total1 / (1000 * 60 * 60)) % 24);
+        const days1 = Math.floor(total1 / (1000 * 60 * 60 * 24));
+
+        container2.innerHTML = `<b>${days1} days ${hours1} hours ${minutes1} minutes ${seconds1} seconds</b>`;
+        console.log(total +"-"+ total1);
+    }
+    
+
+    setInterval(remainDateTime, 500);
+    setInterval(function() {
+        location.reload();
+    }, 50000);
+
+
     var voterCnt = document.getElementById("voterCnt").value;
 
     var votedCnt = document.getElementById("votedCnt").value;
