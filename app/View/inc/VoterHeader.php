@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/ezvote/public/css_new/framework/utils.css">
     <link rel="stylesheet" href="/ezvote/public/css/aditionalStyles.css">
     <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>ezVote</title>
 </head>
 <body>
