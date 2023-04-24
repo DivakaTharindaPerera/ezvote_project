@@ -22,7 +22,7 @@
                <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
            <div class="profile">
-               <img src="<?php echo urlroot; ?>/public/img/profile.png" alt="profile_picture">
+               <img src="<?php echo urlroot; ?>/public/img/sys_manager.png" alt="profile_picture">
                <!-- <h3><?php //echo $_SESSION["name"];?></h3>
                <p>Blogger</p> -->
            </div>
@@ -31,7 +31,7 @@
 
            <ul>
                <li>
-                   <a href="#" id="home" class="active">
+                   <a href="<?php echo urlroot; ?>/Pages/home" id="home" class="active">
                        <span class="icon"><i class="fas fa-home"></i></span>
                        <span class="item">Home</span>
                    </a>

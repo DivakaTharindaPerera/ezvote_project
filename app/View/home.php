@@ -39,7 +39,7 @@
            
 
               <h1 class="h1-txt">Simple and convenient <br> online voting platform</h1>
-            <button type="submit" class="learn_more">Learn More</button>
+            <!-- <button type="submit" class="learn_more">Learn More</button> -->
         </div>
             </div>
         </div>

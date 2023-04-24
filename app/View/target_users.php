@@ -12,7 +12,7 @@
     <title>ezVote</title>
 </head>
 <body>
-    <div class="nav-bar">
+    <div class="nav-bar" style="height:2.5vh;">
         <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
         <div class="links">
             <a href="/ezvote/Pages/home">Home</a>
