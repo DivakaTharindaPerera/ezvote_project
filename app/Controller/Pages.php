@@ -539,4 +539,9 @@
         }
     }
 
+    public function services()
+    {
+        $this->view('services');
+    }
+
 }

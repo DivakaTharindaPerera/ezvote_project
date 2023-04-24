@@ -7,6 +7,7 @@
 @import "util/colors/base.css";
 @import "util/border/border.css";
 @import "util/animation.css";
+@import "util/images.css";
 
 /*Titles*/
 @import "components/title/title.css";
@@ -293,6 +294,9 @@
 }
 .min-h-85{
     min-height: 85%;
+}
+.max-h-25{
+    max-height: 25%;
 }
 .max-h-85{
     max-height: 85%;
