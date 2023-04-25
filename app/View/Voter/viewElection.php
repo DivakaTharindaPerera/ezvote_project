@@ -106,7 +106,9 @@ require approot.'/View/inc/sidebar-new.php';
                                     <div class="dialog-box-outer" id="popup">
                                         <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
                                             <div class="title">Make Objection</div>
-                                            <form action="/ezvote/Voters/election/<?=$data['election']->ElectionId?>/<?=$candidate->CandidateId?>" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start" id="Objection_form">
+                                            <form action="/ezvote/Voters/submitObjection" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start" id="Objection_form">
+                                                <input type="text" name="candidateId" value="<?php echo $candidate->candidateId; ?>" >
+                                                <input type="text" name="electionId" value="<?php echo $data['election']->ElectionId; ?>">
                                                 <div class="d-flex flex-column justify-content-center my-1 w-100">
                                                     <label for="Subject" class="mr-1 text-left text-md">Subject</label>
                                                     <input id="Subject" type="text" class="border-1" style="width:100%" name="Subject">

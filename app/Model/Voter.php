@@ -412,4 +412,6 @@ class Voter extends Controller{
             echo "Something went wrong ".$e->getMessage();
         }
     }
+
+    
 }

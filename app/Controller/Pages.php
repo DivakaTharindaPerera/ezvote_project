@@ -427,22 +427,25 @@ class Pages extends Controller
 
     public function viewObjections($id)
     {
-        echo $id;
-        exit();
-        $objectionRow = $this->objectionModel->getObjectionsByElectionId($id);
-        $CandidateRow = $this->candidateModel->getCandidatesByElectionId($id);
-        $voterRow = $this->voterModel->getRegVotersByElectionId($id);
-        $users = $this->postModel->getUsers();
+        $electionRow = $this->electionModel->getElectionByElectionId($id);
+        if($electionRow->Supervisor == $_SESSION["UserId"]){
+            $objectionRow = $this->objectionModel->getObjectionsByElectionId($id);
+            $CandidateRow = $this->candidateModel->getCandidatesByElectionId($id);
+            $voterRow = $this->voterModel->getRegVotersByElectionId($id);
+            $users = $this->postModel->getUsers();
 
-        $data = [
-            'ID' => $id,
-            'objectionRow' => $objectionRow,
-            'candidateRow' => $CandidateRow,
-            'voterRow' => $voterRow,
-            'users' => $users,
-        ];
+            $data = [
+                'ID' => $id,
+                'objections' => $objectionRow,
+                'candidates' => $CandidateRow,
+                'voters' => $voterRow,
+                'users' => $users,
+            ];
 
-        $this->view('Supervisor/viewObjections', $data);
+            $this->view('Supervisor/viewObjections', $data);
+        }else{
+            $this->view('Supervisor/forbiddenPage');
+        }
     }
 
     public function electionParties($id)
