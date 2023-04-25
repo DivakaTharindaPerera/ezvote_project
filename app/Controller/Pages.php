@@ -545,7 +545,11 @@ class Pages extends Controller
                         'votes' => $votes
                     ]
                 );
+            }else{
+                $this->view('Supervisor/forbiddenPage');
             }
+        }else{
+            redirect('View/login');
         }
     }
 
