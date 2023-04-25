@@ -406,6 +406,7 @@ class Voter extends Controller{
 
         try {
             $result = $this->db->resultSet();
+            echo $this->db->rowCount();
             return $result;
         } catch (Exception $e) {
             echo "Something went wrong ".$e->getMessage();
