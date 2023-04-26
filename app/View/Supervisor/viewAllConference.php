@@ -1,5 +1,5 @@
 <?php
-//print_r($data['upcoming_conferences']) ;
+//print_r($data['elections']) ;
 //exit();
 require approot.'/View/inc/VoterHeader.php';
 require approot.'/View/inc/AuthNavbar.php';
@@ -7,10 +7,31 @@ require approot.'/View/inc/sidebar-new.php';
 ?>
 <div class="main-container">
     <div class="title">My Conferences</div>
-    <div class="d-flex flex-column bg-secondary justify-content-center align-items-center mx-1 my-1">
+    <div class="d-flex flex-column justify-content-end ml-auto absolute right-0 top-5">
+        <button type="button" class="btn btn-primary mr-2 mb-1" onclick="showElections()"><i class="fa-solid fa-plus"></i><br>Schedule New</button>
+        <div class="none my-1 " id="dropdown-content">
+            <?php
+            if (isset($data['elections']) and !empty($data['elections'])):
+                foreach ($data['elections'] as $election){?>
+                    <ul style="text-decoration: none;list-style-type: none" class="d-flex gap-1 justify-content-center align-items-center hover-effect">
+                    <li class="text-md text-primary">
+                        <a href="<?php echo urlroot.'/Pages/addConference/'.$election->ElectionId?>"><?php echo $election->OrganizationName?></a>
+                    </li>
+                    </ul>
+                <?php }
+            else: ?>
+
+                    No Elections
+
+                <?php endif;
+            ?>
+
+        </div>
+    </div>
+    <div class="d-flex flex-column bg-secondary justify-content-center align-items-center mx-1 my-2">
         <div class="d-flex flex-column bg-white-0-7 border-radius-2 shadow justify-content-center align-items-center mx-1 my-1">
             <div class="sub-title mx-1 my-1">ONGOING CONFERENCES</div>
-            <div class="d-flex justify-content-evenly">
+            <div class="d-flex flex-wrap justify-content-evenly my-1">
                 <?php
                 if (isset($data['ongoing_conferences']) and !empty($data['ongoing_conferences'])):
                 foreach ($data['ongoing_conferences'] as $conference){?>
@@ -36,6 +57,7 @@ require approot.'/View/inc/sidebar-new.php';
             <div class="sub-title mt-1 mx-1">UPCOMING CONFERENCES</div>
             <div class="d-flex my-1">
                 <?php
+                if(isset($data['upcoming_conferences']) and !empty($data['upcoming_conferences'])):
                 foreach ($data['upcoming_conferences'] as $conference){?>
                     <div class="card mx-1 my-1">
                         <div class="text-xl"><?php echo $conference->ConferenceName?></div>
@@ -45,7 +67,9 @@ require approot.'/View/inc/sidebar-new.php';
                         <!--                        <div class="sub-title">--><?php //echo $conference->candidateID?><!--</div>-->
                     </div>
                 <?php }
-                ?>
+                else:?>
+                    <div class="text-xl text-primary mb-1">No Upcoming Conferences</div>
+                <?php endif;?>
             </div>
         </div>
     </div>

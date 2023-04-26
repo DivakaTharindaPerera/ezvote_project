@@ -86,7 +86,7 @@
             <h2>Generating reports as summary of election</h2>
             <br>
             <p class="features">Supervisors,candidates and voters can take completed election's summary as pdf.</p>
-            <img src="<?php echo urlroot; ?>/img/welcome/report.png" alt="accessibility" class="feat">
+            <img src="<?php echo urlroot; ?>/img/welcome/reporting.jpg" alt="accessibility" class="feat">
 
         </div>
 

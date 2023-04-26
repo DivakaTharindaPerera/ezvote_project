@@ -21,7 +21,7 @@
             <!--menu item-->
                 <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
-            <div class="profile">
+            <div class="profile mr-1">
                 <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" style="object-fit: cover" alt="profile_picture"><br>
                 <h3 class="text-center text-md text-white mr-1"><?= $_SESSION['fname']." ".$_SESSION['lname']?></h3>
 <!--                <p>Blogger</p>-->
@@ -49,12 +49,12 @@
                         <span class="item">Create Election</span>
                     </a>
                 </li>
-                <li>
-                    <a href="<?php echo urlroot; ?>/Pages/viewAllObjections">
-                        <span class="icon"><i class="fa-solid fa-bullseye"></i></span>
-                        <span class="item">Objections</span>
-                    </a>
-                </li>
+<!--                <li>-->
+<!--                    <a href="--><?php //echo urlroot; ?><!--/Pages/viewAllObjections">-->
+<!--                        <span class="icon"><i class="fa-solid fa-bullseye"></i></span>-->
+<!--                        <span class="item">Objections</span>-->
+<!--                    </a>-->
+<!--                </li>-->
                 <!-- view elections -->
 
                 <li>

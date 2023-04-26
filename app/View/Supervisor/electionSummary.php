@@ -6,9 +6,10 @@ require approot.'/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
     <div class="main-container">
+        <div  id="printJS-report">
         <div class="title"><?=$data['election']->Title ?></div>
-        <div class="sub-title"><?=$data['election']->OrganizationName ?></div>
-        <div class="d-flex flex-column my-1 bg-white-0-7 border-radius-2 w-75 shadow">
+        <div class="title justify-content-center"><?=$data['election']->OrganizationName ?></div>
+        <div class="d-flex flex-column my-1 bg-white-0-7 border-radius-2 w-97 shadow">
             <div class="d-flex mx-1 my-1">
                 <div class="d-flex flex-column mx-2">
                     <div class="d-flex justify-content-center align-items-center text-xl">Voted Percentage</div>
@@ -107,10 +108,14 @@ require approot.'/View/inc/VoterHeader.php'; ?>
 
                 </div>
             </div>
-
+        </div>
+    </div>
+        <div class="d-flex justify-content-end my-2 mr-8 w-75">
+            <button class="btn btn-primary w-20" type="button" onclick="printJS('printJS-report','html')">Print</button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="print.js"></script>
 
     <script>
         const ctx_1 = document.getElementById('voted_state');
