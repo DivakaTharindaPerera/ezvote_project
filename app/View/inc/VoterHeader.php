@@ -9,6 +9,7 @@
 <!--    importing new library-->
     <link rel="stylesheet" href="/ezvote/public/css_new/framework/utils.css">
     <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>ezVote</title>
 </head>
 <body>

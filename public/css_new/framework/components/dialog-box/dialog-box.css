@@ -43,3 +43,7 @@
     align-items: center;
     gap: 1rem;
 }
+
+.ReplyModal{
+    background-color: #ffffff;
+}
