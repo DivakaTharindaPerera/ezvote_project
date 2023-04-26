@@ -20,8 +20,9 @@ require approot.'/View/inc/sidebar-new.php';
                     </ul>
                 <?php }
             else: ?>
-
+                <div class="text-xl text-primary mb-1">
                     No Elections
+                </div>
 
                 <?php endif;
             ?>
