@@ -428,7 +428,7 @@ class Pages extends Controller
     public function viewObjections($id)
     {
         $electionRow = $this->electionModel->getElectionByElectionId($id);
-        if($electionRow->Supervisor == $_SESSION["UserId"]){
+        if ($electionRow->Supervisor == $_SESSION["UserId"]) {
             $objectionRow = $this->objectionModel->getObjectionsByElectionId($id);
             $CandidateRow = $this->candidateModel->getCandidatesByElectionId($id);
             $voterRow = $this->voterModel->getRegVotersByElectionId($id);
@@ -443,7 +443,7 @@ class Pages extends Controller
             ];
 
             $this->view('Supervisor/viewObjections', $data);
-        }else{
+        } else {
             $this->view('Supervisor/forbiddenPage');
         }
     }
@@ -548,10 +548,10 @@ class Pages extends Controller
                         'votes' => $votes
                     ]
                 );
-            }else{
+            } else {
                 $this->view('Supervisor/forbiddenPage');
             }
-        }else{
+        } else {
             redirect('View/login');
         }
     }
@@ -754,5 +754,29 @@ class Pages extends Controller
         } else {
             return false;
         }
+    }
+
+    public function viewCandidate($cid)
+    {
+        $candidate = $this->candidateModel->getCandidateByCandidateId($cid);
+        $election = $this->electionModel->getElectionByElectionId($candidate->electionid);
+        $party = $this->partyModel->getPartyById($candidate->partyId);
+        $positions = $this->positionModel->getElectionPositionByElectionId($candidate->electionid);
+        $duplicates = $this->candidateModel->getCandidatesByEmailAndElectionId($candidate->candidateEmail, $candidate->electionid);
+
+        if($election->Supervisor == $_SESSION['UserId']){
+            $data=[
+                'election' =>$election,
+                'candidate' => $candidate,
+                'party' => $party,
+                'positions' => $positions,
+                'duplicates'=> $duplicates
+            ];
+            $this->view('Supervisor/inspectCandidate',$data);
+        }else{
+            $this->view('Supervisor/forbiddenPage');
+        }
+
+
     }
 }

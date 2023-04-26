@@ -36,16 +36,18 @@
                             <?php
                             foreach ($data['candidates'] as $candidateRow) {
                                 if ($candidateRow->candidateId == $objectionRow->CandidateID) {
-                                    echo $candidateRow->candidateName;
+                                    echo "<a href='".urlroot."/Pages/viewCandidate/$candidateRow->candidateId' >$candidateRow->candidateName</a>";
                                 }
                             }
                             ?>
                         </b>
                     </div>
                     <div>
-                        <button class="btn btn-primary my-1" id="<?php echo $objectionRow->ObjectionID; ?>" onclick="objectionPopUp(this.id)"><b>Cancel</b></button>
                         <button class="btn btn-danger my-1"><b>Remove Candidate</b></button>
                         <button class="btn btn-danger my-1"><b>Remove Objection</b></button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary my-1" id="<?php echo $objectionRow->ObjectionID; ?>" onclick="objectionPopUp(this.id)"><b>Cancel</b></button>
                     </div>
                 </div>
             </div>
