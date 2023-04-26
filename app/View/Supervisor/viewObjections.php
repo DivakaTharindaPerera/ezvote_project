@@ -52,7 +52,6 @@
                 </div>
             </div>
             <div class="card">
-                <h3 class="mt-1"><?php echo $objectionRow->Subject; ?></h3>
                 <?php
                 foreach ($data['candidates'] as $candidateRow) {
                     if ($candidateRow->candidateId == $objectionRow->CandidateID) {
