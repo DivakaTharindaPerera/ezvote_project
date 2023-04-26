@@ -16,7 +16,42 @@
     justify-content: center;
     box-shadow: 5px 5px var(--primary);
 }
+.card-lg{
+    background-color: rgba(255,255,255,0.7);
+    border: 2px solid #10558d;
+    border-radius: 50px;
+    box-shadow: 5px 5px var(--primary);
 
+    padding: 8px;
+    position: relative;
+    width: 400px;
+    height: 400px ;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    box-shadow: 5px 5px var(--primary);
+}
+.card-xl{
+    background-color: rgba(255,255,255,0.7);
+    border: 2px solid #10558d;
+    border-radius: 50px;
+    box-shadow: 5px 5px var(--primary);
+
+    padding: 8px;
+    position: relative;
+    width: 600px;
+    height: 600px ;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    box-shadow: 5px 5px var(--primary);
+}
 .card-custom-sized{
     background-color: rgba(255,255,255,0.7);
     border: 2px solid #10558d;

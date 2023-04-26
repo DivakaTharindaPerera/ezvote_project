@@ -72,3 +72,10 @@ document.querySelector('.select').onchange = function (e) {
     // pass the selected items
     return items;
 };
+ function showElections(){
+
+     const content=document.getElementById('dropdown-content');
+     console.log(content)
+     content.classList.remove('none')
+
+ }
