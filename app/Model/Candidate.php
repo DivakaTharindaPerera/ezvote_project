@@ -190,9 +190,6 @@ class Candidate extends Controller{
     }
 
     public function sendEmail($candidateId,$data){
-        echo '<pre>';
-        print_r($data);
-        exit();
         $this->db->query(
             "SELECT candidateEmail FROM candidate WHERE candidateId = :1");
         $this->db->bind(':1', $candidateId);
