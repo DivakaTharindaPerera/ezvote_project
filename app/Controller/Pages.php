@@ -519,7 +519,7 @@
 
     public function addConference($electionID)
     {
-        $electionID=1281;
+//        $electionID=1281;
         if($this->isLoggedIn()){
             if($_SERVER['REQUEST_METHOD']==="POST"){
                 $candidates = $_POST['candidate'];
