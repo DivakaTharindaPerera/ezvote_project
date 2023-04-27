@@ -433,6 +433,7 @@ class Pages extends Controller
             $CandidateRow = $this->candidateModel->getCandidatesByElectionId($id);
             $voterRow = $this->voterModel->getRegVotersByElectionId($id);
             $users = $this->postModel->getUsers();
+            $positions = $this->positionModel->getElectionPositionByElectionId($id);
 
             $data = [
                 'ID' => $id,
@@ -440,6 +441,7 @@ class Pages extends Controller
                 'candidates' => $CandidateRow,
                 'voters' => $voterRow,
                 'users' => $users,
+                'positions' =>$positions
             ];
 
             $this->view('Supervisor/viewObjections', $data);
