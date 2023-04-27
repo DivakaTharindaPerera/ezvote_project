@@ -8,7 +8,7 @@ table{
     border: 2rem;
 }
 th{
-    background-color: var(--black);
+    background-color: var(--info);
     color: var(--white);
 }
 tr{
@@ -24,4 +24,9 @@ tr:hover{
 .z-table tr:hover {background-color: var(--blue-4);}
 th, td {
     padding: 15px;
+}
+
+.comment:hover{
+background-color:rgba(221, 235, 244, 0.921);
+color: black;
 }

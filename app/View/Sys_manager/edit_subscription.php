@@ -2,18 +2,6 @@
 <?php require approot . '/View/inc/ManagerNavbar.php'; ?>
 <?php require approot . '/View/inc/manager_sidebar.php'; ?>
 
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>create subscription</title>
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/create_subscription.css">
-    <script src="../public/js/disableInput.js"></script>
-</head> -->
-
-<!-- <body> -->
 <script>
 
 window.onload = function(){
@@ -68,17 +56,17 @@ window.onload = function(){
 
         <label id="text-3" for="day">days</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" id="day" value="<?php echo $data[0]->DurationDate ?>" name="day" placeholder="<?php echo $data[0]->DurationDate ?>">
+        <input class="w-100 bg-primary" type="number" min="0" max="31" id="day" value="<?php echo $data[0]->DurationDate ?>" name="day" placeholder="<?php echo $data[0]->DurationDate ?>">
         </div>
 
         <label id="text-4" for="month">months</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" id="month" value="<?php echo $data[0]->DurationMonth ?>" name="month" placeholder="<?php echo $data[0]->DurationMonth ?>">
+        <input class="w-100 bg-primary" type="number" min="0" max="12" id="month" value="<?php echo $data[0]->DurationMonth ?>" name="month" placeholder="<?php echo $data[0]->DurationMonth ?>">
         </div>
 
         <label id="text-5" for="year">years</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" id="year" value="<?php echo $data[0]->DurationYear ?>" name="year" placeholder="<?php echo $data[0]->DurationYear ?>">
+        <input class="w-100 bg-primary" type="number" min="0" id="year" value="<?php echo $data[0]->DurationYear ?>" name="year" placeholder="<?php echo $data[0]->DurationYear ?>">
         </div>
 
         <br>
@@ -120,11 +108,11 @@ window.onload = function(){
 
         <div class="d-flex gap-4 justify-content-evenly">
             <div class="d-flex">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">SAVE</button>
             </div>
             <div class="d-flex">
             <a href="../System_manager/dashboard">
-                <button type="button" class="btn btn-primary">Cancel</button>
+                <button type="button" class="btn btn-primary">CANCEL</button>
             </a>
             </div>
 </div>
@@ -133,7 +121,3 @@ window.onload = function(){
 </div>
 <script src="../../public/js/disableInput.js"></script>
 <?php require approot . '/View/inc/footer.php'; ?>
-<!-- 
-</body>
-
-</html> -->

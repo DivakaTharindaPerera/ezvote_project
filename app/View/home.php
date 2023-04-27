@@ -16,7 +16,7 @@
         <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
         <div class="links">
             <a href="/ezvote/Pages/home">Home</a>
-            <a href="#">Services</a>
+            <a href="/ezvote/Pages/services">Services</a>
             <a href="/ezvote/Pages/pricing">Pricing</a>
             <a href="/ezvote/Pages/targetUsers">Target users</a>
             <a href="/ezvote/Pages/aboutUs">About Us</a>
@@ -27,7 +27,7 @@
   <button class="dropbtn">Login</button>
   <div class="dropdown-content">
   <a href="<?php echo urlroot; ?>/Pages/Sysmanager">Administrator</a>
-  <a href="<?php echo urlroot; ?>/View/Login">Other Users</a>
+  <a href="<?php echo urlroot; ?>/pages/Login">Other Users</a>
   </div>
 </div>
     <a href="<?php echo urlroot; ?>/View/Register"><button class="dropbtn" style="margin-top: -6px;">Register</button></a>
@@ -39,7 +39,7 @@
            
 
               <h1 class="h1-txt">Simple and convenient <br> online voting platform</h1>
-            <button type="submit" class="learn_more">Learn More</button>
+            <!-- <button type="submit" class="learn_more">Learn More</button> -->
         </div>
             </div>
         </div>

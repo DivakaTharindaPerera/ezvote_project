@@ -2,10 +2,6 @@
 <?php require approot . '/View/inc/ManagerNavbar.php'; ?>
 <?php require approot . '/View/inc/manager_sidebar.php'; ?>
 
-<!-- <!DOCTYPE html>
-<html lang="en"> -->
-
-<!-- <body> -->
     <script>
 
     window.onload = function(){
@@ -17,61 +13,49 @@
     }
     </script>
 
-<div class="main-container max-h-85">
+<div class="main-container">
+    <div class="min-w-85 overflow-y overflow-x">
     <div class="title">Activities</div>
-    <div class="border border-primary w-90 h-50 mt-1">
-    <div class="w-100 h-50" style="overflow:auto; height:50vh;">
-   
-        <table class="table w-100 ">
-            <tbody>
-                <?php
-                $arrlength = count($data, COUNT_RECURSIVE);
+    <div class="w-90 h-50">
+    <div class="w-100 h-50 d-flex flex-wrap justify-content-center align-items-center">
 
-                for($x = 0; $x < $arrlength-1; $x++) {
-                    echo '<tr>
-                        <td class="td-1">'.$data[0][$x]-> Description.'</td>
-                        <td class="td-2">'.$data[0][$x]-> Date .'</td>
-                        <td class="td-3"><a href="/ezvote/subscription_plan/edit_subscription/'.$data[0][$x]->PlanID.'">
-                            <button class="btn btn-info">Details</button>
-                        </td></a>
-                    </tr>';
-                }
-                // foreach($data as $row){
-                //     print_r($row);
+                        <?php
+
+                        $arrlength = count($data, COUNT_RECURSIVE);
+
+                        for($x = 0; $x < $arrlength-1; $x++){
+                        echo ' 
+                        <div class="card-pane justify-content-center align-items-center mt-1">
+                        <div class="card">
+                        <div class="header-title">'.$data[0][$x]-> Description.'</div>
+                        <div class="mt-1 d-flex flex-column">
+                            Date: '.$data[0][$x]-> Date .'
+                            <a href="/ezvote/subscription_plan/edit_subscription/'.$data[0][$x]->PlanID.'"><div class="btn btn-info mt-1">DETAILS</div></a>
+                       </div>
+                    </div>
+    </div>'; } ?>
+   
+        <!-- <table class="table border border-primary w-100 my-1">
+            <tbody>
+                <?//php
+                //$arrlength = count($data, COUNT_RECURSIVE);
+
+                // for($x = 0; $x < $arrlength-1; $x++) {
                 //     echo '<tr>
-                //     <td class="td-1">'.$row['Description'].'</td>
-                //     <td class="td-2">'.$row['Date'].'</td>
-                //     <td class="td-3">
-                //         <button>Details</button>
-                //     </td>
-                // </tr>';
-                // } ?>
+                //         <td class="td-1"></td>
+                //         <td class="td-2">'.$data[0][$x]-> Date .'</td>
+                //         <td class="td-3"><a href="/ezvote/subscription_plan/edit_subscription/'.$data[0][$x]->PlanID.'">
+                //             <button class="btn btn-info">DETAILS</button>
+                //         </td></a>
+                //     </tr>';
+                //}
+                 ?> -->
                 </tbody>
                 </table>
                 </div>
+                </div>
             </div>
     </div>
-    <!-- <div class="navbar2"></div> -->
-
-    <!-- <a href="#">
-        <button type="button" class="summary-btn">
-            Summary of usage</button>
-    </a>
-    <a href="./../subscription_plan/index">
-        <button type="button" class="subscription-btn">
-            Subscription plans</button>
-    </a>
-    <a href="./../subscription_plan/sales_subscription">
-        <button class="button" type="button" class="sale-btn">
-            Subscription Sales</button>
-    </a>
-    <a href="./../System_manager/announcements">
-        <button class="button" type="button" class="announcement-btn">
-            Announcements</button>
-    </a> -->
     </p>
 </div>
-<!-- </body>
-
-</html> -->
 <?php require approot . '/View/inc/footer.php'; ?>

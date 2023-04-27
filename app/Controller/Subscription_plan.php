@@ -77,6 +77,7 @@ class Subscription_plan extends Controller
 
     }
 
+
     public function update_process($plan){
         if(!$this->isLoggedIn()){
             $this->view('Sys_manager/Sysmanager_login');
@@ -118,11 +119,13 @@ class Subscription_plan extends Controller
                 $election_limit = NULL;
             }
             $cur_Date = date("Y-m-d");
+            $cur_Time = date("h:i");
             $manager_ID = $_SESSION['manager_ID'];
 
+            $res1 = $this->SubscriptionModel->addChanges($plan, $cur_Date, $cur_Time, $description);
             $res = $this->SubscriptionModel->updateSubscriptionPlan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID);
 
-            if($res){
+            if($res && $res1){
                 header("Location: /ezvote/System_manager/dashboard");
             }
             else{
@@ -150,13 +153,13 @@ class Subscription_plan extends Controller
         }
     }
 
-    // public function sales_subscription(){
-    //     if (!isset($_SESSION["UserId"])) {
-    //         redirect('Sysmanager/login');
-    //     } else {
-    //         $this->view('Sys_manager/subscription_sales');
-    //     }
-    // }
+    public function create_subscription(){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $this->view('Sys_manager/create_subscription');
+        }
+    }
 
     public function edit_subscription($plan){
         if (!isset($_SESSION["UserId"])) {
@@ -189,11 +192,22 @@ class Subscription_plan extends Controller
         } 
     }
 
-    public function create_subscription(){
+
+    public function changeLog(){
         if (!isset($_SESSION["UserId"])) {
             redirect('System_manager/login');
         } else {
-            $this->view('Sys_manager/create_subscription');
+            $data = $this->SubscriptionModel->viewChanges();
+
+            $this->view('Sys_manager/changes_log',$data); 
+        }
+    }
+
+    public function pricing(){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $this->view('Sys_manager/plan_pricing');
         }
     }
 }

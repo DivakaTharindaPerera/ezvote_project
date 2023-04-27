@@ -7,9 +7,11 @@
 
 class Election extends Controller{
     private $db;
+    private $logModel;
 
     public function __construct(){
         $this->db = new Database;
+        $this->logModel = $this->model('log');
     }
 
     public function insertIntoElection($data){
@@ -47,8 +49,12 @@ class Election extends Controller{
         try {
             $this->db->execute();
             $data['id'] = $this->db->lastInsertId();
-            $this->view('Supervisor/addVoters', $data);
-            
+
+            $logDesc = "Created election with title ".$data['title']." By ".$data['orgname'].".";
+            $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
+
+            redirect('Pages/wayToAddVoters/'.$data['id']);
+            // $this->view('Supervisor/addVoters', $data);  
         } catch (Exception $e) {
             echo "Something went wrong";
         }return false;
@@ -109,30 +115,97 @@ class Election extends Controller{
         
     }
 
+    
+
+    public function getOngoingElections()
+    {
+        $dates=date("Y-m-d");
+        $times=date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM Election WHERE ((StartDate<'".$dates."' && ((EndDate='".$dates."' && EndTime>='".$times."') || (EndDate>'".$dates."'))) ||((StartDate='".$dates."' && StartTime<='".$times."') &&(EndDate>'".$dates."' || (EndDate='".$dates."' && EndTime>'".$times."'))))"
+        );
+//        echo '<pre>';
+//        print_r($this->db);
+//        exit();
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
+
+    public function getUpcomingElections()
+    {
+        $dates=date("Y-m-d");
+        $times=date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM Election WHERE (StartDate='".$dates."' && StartTime>'".$times."') ||(StartDate>'".$dates."' && StartTime>='".$times."')|| (StartDate>'".$dates."' && StartTime<'".$times."') "
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+
+        }
+    }
+    public function getCompletedElections()
+    {
+        $dates = date("Y-m-d");
+        $times = date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM Election WHERE (EndDate='" . $dates . "' && EndTime<'" . $times . "') ||(EndDate<'" . $dates . "' && EndTime>='" . $times . "') || (EndDate<'" . $dates . "' && EndTime<'" . $times . "')"
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong " . $e->getMessage();
+            return false;
+
+        }
+    }
+
+    public function getPositionsByElectionId($id){
+        $election_Id=$id;
+        $this->db->query("SELECT DISTINCT ID,positionName FROM ElectionPosition WHERE ElectionID ='" .$election_Id. "'" );
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
+    public function getCandidatesByElectionId($id)
+    {
+        $election_Id = $id;
+        $this->db->query("SELECT * FROM Candidate WHERE electionid ='" . $election_Id . "' order by positionid");
+        $row = $this->db->resultSet();
+        return $row;
+
+    }
+
+    public function getWinnersDetails($id)
+    {
+        $election_Id=1281;
+        $this->db->query("SELECT * FROM votes WHERE electionid ='" . $election_Id ."' order by NoOfVotes Desc" );
+        $row=$this->db->resultSet();
+        return $row;
+    }
+
+    public function getWinnerNames($id)
+    {
+        $candidate_Id=$id;
+        $this->db->query("SELECT Candidate.candidateName,ElectionParty.partyName FROM Candidate where candidateId='" .$candidate_Id. "' inner join electionparty on Candidate.partyId=ElectionParty.partyId ");
+        $row=$this->db->resultSet();
+        print_r($row);
+        exit();
+        return $row;
+    }
+
+
     public function updateElection($data){
-        // $data=[
-        //     "id"=>trim($_POST['id']),
-        //     "title"=>trim($_POST['title']),
-        //     "org"=>trim($_POST['org']),
-        //     "desc"=>trim($_POST['desc']),
-
-        //     "esdate"=>trim($_POST['EstartDate']),
-        //     "eedate"=>trim($_POST['EendDate']),
-        //     "estime"=>trim($_POST['EstartTime']),
-        //     "eetime"=>trim($_POST['EendTime']),
-
-        //     "osdate"=>trim($_POST['OstartDate']),
-        //     "oedate"=>trim($_POST['OendDate']),
-        //     "ostime"=>trim($_POST['OstartTime']),
-        //     "oetime"=>trim($_POST['OendTime']),
-
-        //     "status"=>trim($_POST['stat']),
-
-        //     "nomi"=>trim($_POST['nomi']),
-        //     "nomidesc"=>trim($_POST['nomiDesc']),
-
-        //     "ostat"=>trim($_POST['ostat'])
-        // ];
+              
 
         $this->db->query(
                 "UPDATE Election SET 
@@ -181,5 +254,30 @@ class Election extends Controller{
             return false;
         }
     }
-        
+
+
+    public function getVotersByElectionID($id)
+    {
+        $election_Id = $id;
+        $this->db->query("SELECT userId,voterId FROM Voter WHERE electionid ='" . $election_Id . "'");
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
+    public function deleteElection($id){
+        $this->db->query("DELETE FROM Election WHERE ElectionId = :id");
+        $this->db->bind(':id', $id);
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }  
+    
+    public function getElectionIdByVoterId($id){
+        $this->db->query("SELECT electionId FROM Voter WHERE userid = :id");
+        $this->db->bind(':id', $id);
+        return $this->db->resultSet();
+    }
 }

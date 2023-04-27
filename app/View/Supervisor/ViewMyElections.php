@@ -6,15 +6,15 @@
     <div class="d-flex justify-content-center align-items-center title">Created Elections</div>
     <div class="d-flex mt-1 justify-content-end  ">
         <div id="search" class="d-flex justify-content-end mx-1 justify-content-end">
-            <input type="text" id="searchInput" placeholder="Search for elections" onkeyup="searchElection()">
+            <input type="text" id="searchInput" placeholder="Search for elections" onkeyup="searchElection()" class="border-primary border-3">
         </div>
 
         <div id="sort" class="d-flex mx-1 ">
 
 <!--                Sort Elections-->
-                <div class="d-flex justify-content-center">
-                    <form action="<?php echo urlroot; ?>/Pages/sortByTitle" method="post" class="d-flex justify-content-evenly">
-                        <div>
+                <div class="d-flex justify-content-center w-100">
+                    <form action="<?php echo urlroot; ?>/Pages/sortByTitle" method="post" class="d-flex justify-content-evenly w-100">
+                        <div class="d-flex justify-content-center align-items-center">
                             <label for="sortMethod">Sortings:</label>
                             <select name="sortMethod" class="bg-secondary border border-1 border-radius-1 w-25 text-center">
                                 <option value="asc">A-Z</option>
@@ -23,18 +23,21 @@
                                 <option value="Ddesc">Date Descending</option>
                             </select>
                         </div>
-                        <div>
-                            <button type="submit" value="Sort" class="btn btn-primary">Sort</button>
+
+                        <div class="d-flex mx-1">
+                            <button type="submit" value="Sort" class="btn btn-primary ">Filter</button>
+
                         </div>
                     </form>
                 </div>
         </div>
     </div>
-    <div id="elections" class="d-flex flex-wrap mr-1 ml-3 my-1 min-h-100">
+    <div id="elections" class="d-flex flex-wrap mr-1 ml-3 min-h-100 my-2">
     <?php
+        date_default_timezone_set('Asia/Colombo');
+        $currentDate = date('Y-m-d H:i:s');
         foreach($data as $row):
-            date_default_timezone_set('Asia/Colombo');
-            $currentDate = date('Y-m-d H:i:s');
+            
         ?>
             <div class='card electionCard' id='<?=$row->ElectionId?>' >
             <div class='d-flex flex-column'>
@@ -53,12 +56,12 @@
                     if($end <= $timenow){
                         echo "
                         <div class='text-danger'>Election Ended</div>
-                        <div><a href='".urlroot."/Pages/ViewMyElectionResults/$row->ElectionId'> <span class='btn btn-primary'>Results</span> </a></div>
+                        <div><a href='".urlroot."/Pages/viewCompletedElection/$row->ElectionId'> <span class='btn btn-primary'>Results</span> </a></div>
                         ";
                     }else if($end > $timenow && $start < $timenow){
                         echo "
                         <div class='text-warning'>Ongoing Election</div>
-                        <div><a href='".urlroot."/Pages/ViewMyElection/$row->ElectionId'> <span class='btn btn-primary'>View</span> </a></div>
+                        <div><a href='".urlroot."/Votings/inspectMyElection/$row->ElectionId'> <span class='btn btn-primary'>Inspect</span> </a></div>
                         ";
                     }else{
                         echo "

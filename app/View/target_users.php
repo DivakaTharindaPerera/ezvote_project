@@ -12,11 +12,11 @@
     <title>ezVote</title>
 </head>
 <body>
-    <div class="nav-bar">
+    <div class="nav-bar" style="height:2.5vh;">
         <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
         <div class="links">
             <a href="/ezvote/Pages/home">Home</a>
-            <a href="#">Services</a>
+            <a href="/ezvote/Pages/services">Services</a>
             <a href="/ezvote/Pages/pricing">Pricing</a>
             <a href="/ezvote/Pages/targetUsers">Target users</a>
             <a href="/ezvote/Pages/aboutUs">About Us</a>
@@ -44,7 +44,7 @@
      <h1 class="text-center text-white " style="padding-top:10rem; font-size:120px;">TARGET USERS</h1>
   
      </div>
-     </div>
+</div>
      <!-- <div class="w-50 bg-white m-auto py-1">
 
             <div class="w-75 m-auto bg-dark py-1">
@@ -205,7 +205,7 @@
 </div> -->
 
 </div>
-     
+</body>
 
 
 <?php require approot.'/View/inc/footer.php';?>

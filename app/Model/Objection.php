@@ -19,10 +19,17 @@ class Objection extends Model
         $this->db->bind(':CandidateID',$data['CandidateID']);
         $this->db->bind(':VoterID',$data['VoterID']);
         //execute
-        if($this->db->execute()){
-            return true;
-        }else{
-            return false;
+//        if($this->db->execute()){
+//            return true;
+//        }else{
+//
+//            return false;
+//        }
+        try {
+            $this->db->execute();
+        } catch (Exception $e) {
+//            return false;
+            throw $e;
         }
     }
 //    {
@@ -39,12 +46,46 @@ class Objection extends Model
 //        }
 //        $this->db->execute();
 //    }
+
+    public function insertObjection($data){
+        $this->db->query('INSERT INTO objection (Subject,Description,ElectionID,CandidateID,VoterID) VALUES (:Subject,:Description,:ElectionID,:CandidateID,:VoterID)');
+        $this->db->bind(':Subject',$data['subject']);
+        $this->db->bind(':Description',$data['description']);
+        $this->db->bind(':ElectionID',$data['electionId']);
+        $this->db->bind(':CandidateID',$data['candidateId']);
+        $this->db->bind(':VoterID',$data['voterId']);
+
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function DeleteObjection($id)
     {
         $this->db->query('DELETE FROM objection WHERE ObjectionID=:ObjectionID');
         $this->db->bind(':ObjectionID',$id);
         $this->db->execute();
-}
+    }
+
+    public function showObjectionsByElectionAndCandidateId($electionId,$candidateId)
+    {
+        $this->db->query('SELECT * FROM objection WHERE ElectionID=:ElectionID AND CandidateID=:CandidateID');
+        $this->db->bind(':ElectionID',$electionId);
+        $this->db->bind(':CandidateID',$candidateId);
+        $results=$this->db->resultSet();
+        return $results;
+    }
+
+    public function getCandidateName($id)
+    {
+        $this->db->query('SELECT candidateName FROM candidate WHERE CandidateID=:CandidateID');
+        $this->db->bind(':CandidateID',$id);
+        $row=$this->db->single();
+        return $row;
+    }
 
     /**
      * @return mixed
@@ -196,5 +237,12 @@ class Objection extends Model
     public function tableName(): string
     {
         return 'objection';
+    }
+
+    public function getObjectionsByElectionId($id){
+        $this->db->query('SELECT * FROM objection WHERE ElectionID=:ElectionID');
+        $this->db->bind(':ElectionID',$id);
+        $results=$this->db->resultSet();
+        return $results;
     }
 }

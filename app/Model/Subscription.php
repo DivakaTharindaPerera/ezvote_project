@@ -85,10 +85,9 @@ class Subscription{
         }
     }
 
-    public function saleSubscriptionPlan(){
-        $this->db->query('SELECT * FROM sale_subscription ');
 
-        
+    public function saleSubscriptionPlan(){
+        $this->db->query('SELECT * FROM sale_subscription');
 
         return $this->db->resultSet();
     }
@@ -97,6 +96,28 @@ class Subscription{
         $this->db->query('DELETE FROM subscription_plan WHERE PlanID = :PlanID');
 
         $this->db->bind(':PlanID', $plan);
+
+        return $this->db->resultSet();
+    }
+
+    public function addChanges($plan, $cur_Date, $cur_Time, $description){
+        // print_r($description);die();
+        $this->db->query('INSERT INTO plan_changes (PlanID, Date, Time, Description) VALUES (:PlanID, :Date, :Time, :Description)');
+
+        $this->db->bind(':PlanID', $plan);
+        $this->db->bind(':Date', $cur_Date);
+        $this->db->bind(':Time', $cur_Time);
+        $this->db->bind(':Description', $description);
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function viewChanges(){
+        $this->db->query('SELECT * FROM plan_changes');
 
         return $this->db->resultSet();
     }

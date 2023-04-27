@@ -13,40 +13,37 @@ window.onload = function(){
 }
 </script>
 
-    <div class="main-container max-h-85">
+    <div class="main-container">
+    <div class="min-w-75 min-h-65">
     <div class="d-flex flex-column justify-content-center align-items-center ">
         <div class="subscription">
             <h2 class="title text-center">Subscription Sales</h2>
         </div>
 
-    <!-- <a href="/ezvote/System_manager/dashboard">
-    <div class="ml-1 mt-1">
-        <img src="<?php echo urlroot; ?>/public/img/button.png" />
-    </div>
-</a> -->
 
 <div class="d-flex flex-column">
     <div class="d-flex justify-content-evenly ">
-        <div class="justify-content-center border border-primary my-3 mr-1 min-w-50">
+        <div class="justify-content-center border border-primary my-3 mr-4 min-w-85">
         <input type="text" id="searchInput" value="" onchange="myFunction(this.value)" placeholder="Search Plan......" class="w-100 h-100">
         </div>
-        <div class="my-3 d-flex mr-5">
+        <div class="my-3 d-flex mr-4">
         <a href="#">
-            <button class="btn btn-primary ml-2" >SEARCH</button></a>
-            <div class="d-flex text-center align-items-center text-md ml-2">FILTER
+            <button class="btn btn-primary mr-3" >SEARCH</button></a>
+            <div class="d-flex text-center align-items-center text-md">FILTER
             </div>
         </div>
     </div>
     </div>
+    
 
-<div class="w-100 h-50" style="overflow:auto; height:50vh;">
+<div class="w-100 h-50 overflow-scroll">
 <table id= "myTable" class="table border border-primary w-100 h-50">
             <tr class="min-w-75">
             <thead>
             <tr>
                 <th>Plan Name</th>
                 <th>Price ($)</th>
-                <th>Purchsed Users</th>
+                <th>Purchased Users</th>
                 <th>Plan Income ($)</th>
                 <th>Discount Details</th>
                 </tr>
@@ -71,7 +68,7 @@ window.onload = function(){
                          Discount: '.$data[$x]->Discount.'%
                     </div> '; ?>
 
-                    <button class="btn btn-info my-1" onclick="document.getElementById('discount-input').value = '<?php echo $data[$x]->Discount ?>';document.getElementById('update').action='./edit_process/<?php echo $data[$x]->planID; ?>';  openPopup();">EDIT</button>
+                    <button class="btn btn-info my-1" onclick="document.getElementById('discount-input').value = '<?php echo $data[$x]->Discount ?>';document.getElementById('update').action='./edit_process/<?php echo $data[$x]->planID; ?>'; openPopup();">EDIT</button>
                     <div class="dialog-box-outer" id="popup">
                     <div class="popup mx-1 my-1 px-1 py-1 min-w-20 min-h-25">
                     <div class="title text-center">Edit Discount</div>
@@ -80,15 +77,15 @@ window.onload = function(){
                     <div class="my-4 w-100 d-flex flex-row justify-content-center align-items-center">
                         <div class="text-black w-50">
                         <label>Discount (%) :</label>
-                    <input name="Discount" id="discount-input" class="px-1 border border-black bg-primary w-25" style="border:1px solid black; margin-left:1rem; padding-left: 1rem;" type="number" id="discount" value="">
+                    <input name="Discount" id="discount-input" class="px-1 border border-black bg-primary w-30" style="border:1px solid black; margin-left:1rem; padding-left: 1rem;" type="number" min="0" max="100" id="discount" value="">
                     </div>
                     </div>          
-                    <div class="d-flex flex-row mx-5 my-3">
+                    <div class="d-flex flex-row mx-5 my-2">
                     <div class="justify-content-start">
-                        <button type="submit" class="btn btn-primary ml-5">Save</button>
+                        <button type="submit" class="btn btn-primary ml-5">SAVE</button>
                     </div>
-                    <div class="justify-content-end">
-                        <div  onclick="closePopup()" class="btn btn-primary mx-5">cancel</div>
+                    <div class="justify-content-end" onclick="closePopup()">
+                        <div type="button" class="btn btn-primary ml-3">CANCEL</div>
                     </div></div>
                     </form>
                     </div>
@@ -102,6 +99,7 @@ window.onload = function(){
 
     </tbody>
 </table>
+</div>
 </div>
 </div>
 </div>

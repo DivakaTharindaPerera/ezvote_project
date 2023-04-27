@@ -2,50 +2,82 @@
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/side_bar.php'; ?>
 
-        <h2 class="" style="margin-left:200px; margin-top:30px;">Discussion Forum</h2>
+<div class="border-2 border-dark border-radius-5 w-65 p-2 bg-light h-75" style="margin-left:250px; overflow-y: scroll; scrollbar-width: none; margin-top:10vh;">
+  <!-- Modal -->
+  <div class="dialog-box-outer" id="popup">
+    <div id="ReplyModal" class="ReplyModal p-3 w-45" role="dialog">
+      <div class="">
 
-        <div class="border-2 border-dark border-radius-5 m-1 p-1 bg-light" style="width:800px; margin-left:250px; box-shadow: 5px 5px #888888">
-        
-        <div class="d-flex">
-        <img src="<?php echo urlroot; ?>/img/welcome/boy2.jfif" alt="Profile image" class="border-radius-13" style="width:100px; height:100px;"/>
-        <p class="px-2 text-dark"><br>John Doe<br>12min ago</p>
-        <p class="px-5">How could your vision be possible?</p>
-        </div>
+        <!-- Modal content-->
+        <!-- reply dialog box -->
+        <div class="">
+          <div class="">
+            <!-- <button type="button" class=""  onclick="closePopup()">&times;</button> -->
+            <h4 class="">Reply Question</h4>
+            <br>
+          </div>
+          <div class="modal-body">
+            <form name="frm1" method="post">
+              <input type="hidden" id="commentid" name="Rcommentid">
+              <div class="">
+                <label for="usr">Write your name:</label>
+                <input type="text" class="form-control" name="Rname" required>
+              </div>
+              <div class="">
+                <label for="comment">Write your reply:</label>
+                <input type="text" class="form-control" rows="5" name="Rmsg" style="height:10vh;" required>
+              </div>
+              <br>
+              <input type="button" id="btncancel" name="btncancel" class="btn btn-danger" value="Cancel" onclick="closePopup()">
+              <input type="button" id="btnreply" name="btnreply" class="btn btn-primary" value="Reply">
 
-        <div style="padding-left:500px;">
-        <img src="<?php echo urlroot; ?>/img/welcome/like.png" alt="like" class="" style="width:30px; height:30px; cursor:pointer;"/> Like
-        <img src="<?php echo urlroot; ?>/img/welcome/reply.png" alt="reply" class="" style="width:30px; height:30px; cursor:pointer;"/> Reply
+            </form>
+          </div>
         </div>
-        
-        </div>
+      </div>
 
-        <div class="border-2 border-dark border-radius-5 m-1 p-1 bg-light" style="width:800px; margin-left:250px; box-shadow: 5px 5px #888888">
-        
-        <div class="d-flex">
-        <img src="<?php echo urlroot; ?>/img/welcome/girl.jpg" alt="Profile image" class="w-10 h-50 border-radius-13" style="width:100px; height:100px;"/>
-        <p class="px-2 text-dark"><br>Michel Rose <br>6h ago</p>
-        <p class="px-5">What is your future plan as the president?</p>
-        </div>
+    </div>
+  </div>
 
-        <div style="padding-left:500px;">
-        <img src="<?php echo urlroot; ?>/img/welcome/like.png" alt="like" class="" style="width:30px; height:30px; cursor:pointer;"/> Like
-        <img src="<?php echo urlroot; ?>/img/welcome/reply.png" alt="reply" class="" style="width:30px; height:30px; cursor:pointer;"/> Reply
-        </div>
-        
-        </div>
+  <!-- posting the question -->
+  <!-- <div class="container"> -->
 
-        <div class="border-2 border-dark border-radius-5 m-1 p-1 bg-light" style="width:800px; margin-left:250px; box-shadow: 5px 5px #888888">
-        
-        <div class="d-flex">
-        <img src="<?php echo urlroot; ?>/img/welcome/girl2.jpg" alt="Profile image" class="w-10 h-50 border-radius-13" style="width:100px; height:100px;"/>
-        <p class="px-2 text-dark"><br>Hanna Lussifer <br>12h ago</p>
-        <p class="px-5">What were your previous social works?</p>
+  <div class="" style="margin-top:20px">
+    <div>
+      <h3>Community forum</h3>
+      <hr>
+      <form name="frm" method="post">
+        <input type="hidden" id="commentid" name="Pcommentid" value="0">
+        <div>
+          <label for="usr">Write your name:</label>
+          <input type="text" class="form-control" name="name" required>
         </div>
+        <div>
+          <label for="comment">Write your question:</label>
+          <input type="text" class="form-control m-1" rows="5" name="msg" style="height:10vh;" required>
+        </div>
+        <br>
+        <input type="button" id="butsave" name="save" class="btn btn-primary" value="Send">
+      </form>
+    </div>
+    <!-- </div> -->
 
-        <div style="padding-left:500px;">
-        <img src="<?php echo urlroot; ?>/img/welcome/like.png" alt="like" class="" style="width:30px; height:30px; cursor:pointer;"/> Like
-        <img src="<?php echo urlroot; ?>/img/welcome/reply.png" alt="reply" class="" style="width:30px; height:30px; cursor:pointer;"/> Reply
-        </div>
-        
-        </div>
-    <?php require approot.'/View/inc/footer.php';?>
+
+    <div class="">
+      <div class="">
+        <br>
+        <h4>Recent questions</h4>
+        <table class="" id="MyTable">
+          <tbody id="record">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="<?php echo urlroot; ?>/js/discussion.js"></script>
+<?php
+require approot . '/View/inc/footer.php';
+?>
