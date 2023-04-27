@@ -1,5 +1,5 @@
 <?php require approot.'/View/inc/VoterHeader.php'; ?>
-<?php require approot.'/View/inc/AuthNavbar.php'; ?>
+<?php //require approot.'/View/inc/AuthNavbar.php'; ?>
 <!--</head>-->
 <!--<body>-->
 
@@ -12,7 +12,7 @@
     <div class="form">
     <?php
     //if the code is wrong
-        echo "<div class='d-flex justify-content-center text-xl'> Verification code has been sent to the email ".$data['email']." </div>";
+        echo "<div class='d-flex justify-content-center text-center text-xl'> Verification code has been sent to the email <br> <em style='color: red'>" .$data['email']." </em> </div>";
     ?>
         <div class="d-flex justify-content-center">
             <form action="<?php echo urlroot ?>/users/verifyEmail" method="POST" >
@@ -28,8 +28,8 @@
                 <div class="border-primary border-3">
                     <input type="text" name="verification_code" class="insert" placeholder="Enter your verification code..." required>
                 </div>
-                <div class="my-1 d-flex">
-                    <input type="submit" name="verify" class="verify" value="Verify Email">
+                <div class="my-1 d-flex justify-content-center">
+                    <input type="submit" name="verify" class="verify btn btn-primary" value="Verify Email">
                 </div>
             </form>
         </div>

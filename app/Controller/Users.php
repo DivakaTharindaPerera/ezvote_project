@@ -11,10 +11,12 @@
 class Users extends Controller{
     private $userModel;
     private $mail;
+    private $userEncrypt;
 
     public function __construct(){
         $this->userModel = $this->model('User');
         $this->mail = $this->model('Email');
+        $this->userEncrypt = $this->model('userEncrypt');
     }
 
     public function register(){
@@ -72,7 +74,13 @@ class Users extends Controller{
             $code = trim($_POST["verification_code"]);
             
             if($this->userModel->verificationCode($email,$code)){
-                redirect('View/login');
+                $user = $this->userModel->getUserByEmail($email);
+                if($this->userModel->userIdAutoFill($user->UserId,$email)){
+                    redirect('View/login');
+                }else{
+                    echo "Something went wrong";
+                }
+                
             }else{
                 $data =[
                     'email' => $_POST["email"],

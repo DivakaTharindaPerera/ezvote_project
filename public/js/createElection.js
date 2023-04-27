@@ -1,7 +1,7 @@
 function ObjStatus(){
     if(document.getElementById("objStatus").checked){
-        document.getElementById("objstart").style.display = "block";
-        document.getElementById("objend").style.display = "block";
+        document.getElementById("objstart").style.display = "flex";
+        document.getElementById("objend").style.display = "flex";
 
         
         document.getElementById("OstartDate").disabled = false;
@@ -124,20 +124,24 @@ function edit(){
 
     var div = document.getElementById('buttonContainer');
     div.appendChild(cncl);
+
+    document.getElementById('electionDelBtn').style.display = "none";
 }
 
 function cancel(){
-    var inputs = document.getElementById('information').getElementsByTagName( 'input' );
-    for (var i = 0; i < inputs.length; i++) {
-        inputs[i].disabled = true;
-    }
-    var btn = document.getElementById("editBtn");
-    btn.setAttribute("class", "btn btn-primary w-30");
-    btn.setAttribute("onclick", "edit()");
-    btn.innerHTML = "<b>Edit</b>";
+    // var inputs = document.getElementById('information').getElementsByTagName( 'input' );
+    // for (var i = 0; i < inputs.length; i++) {
+    //     inputs[i].disabled = true;
+    // }
+    // var btn = document.getElementById("editBtn");
+    // btn.setAttribute("class", "btn btn-primary w-30");
+    // btn.setAttribute("onclick", "edit()");
+    // btn.innerHTML = "<b>Edit</b>";
 
-    var div = document.getElementById('buttonContainer');
-    div.removeChild(div.lastChild);
+    // var div = document.getElementById('buttonContainer');
+    // div.removeChild(div.lastChild);
+
+    location.reload();
 }
 
 function update(){
@@ -146,3 +150,9 @@ function update(){
     form.submit();
 }
 
+function deletePopup(){
+    document.getElementById("deletePopUp").style.display = "block";
+
+    const body = document.querySelector('body');
+    body.classList.add('no-scroll-for-popup');
+}

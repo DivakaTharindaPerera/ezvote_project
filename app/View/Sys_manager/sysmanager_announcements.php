@@ -2,19 +2,16 @@
 <?php require approot . '/View/inc/ManagerNavbar.php'; ?>
 <?php require approot . '/View/inc/manager_sidebar.php'; ?>
 
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
+<script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width , initial-scale=1.0">
-    <title>sysmanager_announcemets</title>
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/sysmanager_announcements.css">
-</head> -->
+window.onload = function(){
+    var element = document.getElementById("home");
+    element.classList.remove("active");
 
-<!-- <body> -->
+    var element = document.getElementById("announcement");
+    element.classList.add("active");
+}
+</script>
 
 <div class="main-container" >
     <div class="d-flex flex-column w-75 mb-2">
@@ -44,9 +41,6 @@
     </div>
 </div>
 
-<!-- <div class="justify-content-center">
-    <label style="font-weight: 700;">Attachments</label>
-</div> -->
 
 <br>
 <div class="send">
@@ -54,14 +48,31 @@
 </div>
 <div class="body-div">
     <div>
-        <input type="radio" id="user" name="user" style="width: 19px; height: 19px;">
+        <input type="radio" id="user1" name="user" style="width: 19px; height: 19px;" onchange=radiocheck()>
         <label for="user" style="margin-left: 10px;">All users</label>
     </div>
 
     <div>
-        <input type="radio" id="user" name="user" style="width: 19px; height: 19px;">
+        <input type="radio" id="user2" name="user" style="width: 19px; height: 19px;" onchange=radiocheck()>
         <label for="user"  style="margin-left: 10px;">Specific users</label>
     </div>
+
+    <script>
+        function radiocheck(){
+            var radio = document.getElementById("user1");
+            var radioch = radio.checked;
+            console.log(radioch);
+            if (radio.checked == true) {
+                document.getElementById("user3").disabled = true;
+                document.getElementById("user4").disabled = true;
+                document.getElementById("user5").disabled = true;
+            } else {
+                document.getElementById("user3").disabled = false;
+                document.getElementById("user4").disabled = false;
+                document.getElementById("user5").disabled = false;
+            } 
+        }
+    </script>
 </div>
 <br>
 <div class="user">
@@ -70,15 +81,15 @@
 
 <div class="body-div2">
     <div>
-        <input type="checkbox" id="user1" name="user1">
+        <input type="checkbox" id="user3" name="user1">
         <label for="user1" style="word-wrap: break-word;">Supervisors</label>
     </div>
     <div>
-        <input type="checkbox" id="user2" name="user2">
+        <input type="checkbox" id="user4" name="user2">
         <label for="user2" style="word-wrap: break-word;">Voters</label>
     </div>
     <div>
-        <input type="checkbox" id="user3" name="user3">
+        <input type="checkbox" id="user5" name="user3">
         <label for="user3" style="word-wrap: break-word;">Candidates</label>
     </div>
 </div>
@@ -117,7 +128,7 @@
         </div>
         <div class="d-flex justify-content-end">
         <a href="/ezvote/System_manager/dashboard">
-        <button class="btn btn-primary gap-4" type="button" class="button" id="cancel" >Cancel</button>
+        <button class="btn btn-primary gap-3" type="button" class="button" id="cancel" >CANCEL</button>
         </a>
         </div>
     
@@ -128,5 +139,4 @@
 </div>
 
 <?php require approot . '/View/inc/footer.php'; ?>
-<!-- </body>
-</html> -->
+

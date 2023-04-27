@@ -245,6 +245,30 @@ class Candidates extends Controller
         //        }
         //        else{
 
+        
+                // if($this->IsPost()){
+
+                        // $nominationID = uniqid('obj',true);
+                        $candidateName = $_POST['candidateName'];
+                        $candidateEmail = $_POST['candidateEmail'];
+                        $position = $_POST['position'];                
+                        $party_name = $_POST['party_name'];
+                        // // 'profile_picture'=>$_FILES['imgfile'],
+                        // // 'identity_proof'=>$_FILES['file'],
+                        $description = $_POST['description'];
+                        $vision = $_POST['vision'];
+                        if(isset($_POST['update'])){
+
+                        // $res = $this->nominateModel->updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg);
+   
+                        // if($res){
+                        //     header("Location: ../View/Candidate/candidateProfile.php");
+                        // }
+                        // else{
+                        //     header("Location: ../View/Candidate/candidateProfile.php");
+                        // }
+
+
         // if($this->IsPost()){
 
         // $nominationID = uniqid('obj',true);
@@ -289,6 +313,7 @@ class Candidates extends Controller
 
     public function candidateProfile()
     {
+
         if (!isset($_SESSION["UserId"])) {
             header("Location: " . urlroot . "/View/Login");
             exit;
@@ -311,6 +336,7 @@ class Candidates extends Controller
         echo "<h3> Welcome " . htmlspecialchars($_SESSION["fname"]) . " " . htmlspecialchars($_SESSION["lname"]) . "</h3>";
         // $r=$this->nominateModel->RetrieveAll();
         // $this->view('Candidate/candidateProfile',['r'=>$r]);
+
     }
 
     public function objections()
@@ -618,6 +644,7 @@ class Candidates extends Controller
     //             }
     //         }
 
+
     public function viewprofile($candidateId)
     {
         $candidateData = Nomination::getById($candidateId);
@@ -626,3 +653,4 @@ class Candidates extends Controller
         $view->render();
     }
 }
+
