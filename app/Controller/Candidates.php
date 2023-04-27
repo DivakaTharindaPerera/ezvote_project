@@ -241,29 +241,6 @@ class Candidates extends Controller
         //        }
         //        else{
 
-        
-                // if($this->IsPost()){
-
-                        // $nominationID = uniqid('obj',true);
-                        $candidateName = $_POST['candidateName'];
-                        $candidateEmail = $_POST['candidateEmail'];
-                        $position = $_POST['position'];                
-                        $party_name = $_POST['party_name'];
-                        // // 'profile_picture'=>$_FILES['imgfile'],
-                        // // 'identity_proof'=>$_FILES['file'],
-                        $description = $_POST['description'];
-                        $vision = $_POST['vision'];
-                        if(isset($_POST['update'])){
-
-                        // $res = $this->nominateModel->updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg);
-   
-                        // if($res){
-                        //     header("Location: ../View/Candidate/candidateProfile.php");
-                        // }
-                        // else{
-                        //     header("Location: ../View/Candidate/candidateProfile.php");
-                        // }
-
 
         // if($this->IsPost()){
 
@@ -278,12 +255,36 @@ class Candidates extends Controller
         $vision = $_POST['vision'];
         if (isset($_POST['update'])) {
 
-            $res = $this->nominateModel->updateCandidateProfile($nominationID, $firstname, $lastname, $election_name, $position, $party_name, $candidateDescription, $msg);
+            // $res = $this->nominateModel->updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg);
 
-            if ($res) {
-                header("Location: ../View/Candidate/candidateProfile.php");
-            } else {
-                header("Location: ../View/Candidate/candidateProfile.php");
+            // if($res){
+            //     header("Location: ../View/Candidate/candidateProfile.php");
+            // }
+            // else{
+            //     header("Location: ../View/Candidate/candidateProfile.php");
+            // }
+
+
+            // if($this->IsPost()){
+
+            // $nominationID = uniqid('obj',true);
+            $candidateName = $_POST['candidateName'];
+            $candidateEmail = $_POST['candidateEmail'];
+            $position = $_POST['position'];
+            $party_name = $_POST['party_name'];
+            // // 'profile_picture'=>$_FILES['imgfile'],
+            // // 'identity_proof'=>$_FILES['file'],
+            $description = $_POST['description'];
+            $vision = $_POST['vision'];
+            if (isset($_POST['update'])) {
+
+                $res = $this->nominateModel->updateCandidateProfile($nominationID, $firstname, $lastname, $election_name, $position, $party_name, $candidateDescription, $msg);
+
+                if ($res) {
+                    header("Location: ../View/Candidate/candidateProfile.php");
+                } else {
+                    header("Location: ../View/Candidate/candidateProfile.php");
+                }
             }
         }
     }
@@ -634,4 +635,3 @@ class Candidates extends Controller
         $view->render();
     }
 }
-
