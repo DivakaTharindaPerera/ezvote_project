@@ -139,7 +139,7 @@ class Pages extends Controller
 //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
 //                            $c_upcoming_filtered[] = $row;
 //                        }
-\
+
                     }
                 }
             }
@@ -849,13 +849,12 @@ class Pages extends Controller
 
 
     }
-}
-
-//    service page
     public function services()
     {
         $this->view('services');
     }
 
 }
+
+//    service page
 
