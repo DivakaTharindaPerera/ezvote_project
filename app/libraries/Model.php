@@ -21,12 +21,14 @@ abstract class Model
 
     public function RetrieveAll()
     {
+
         $tableName=$this->tableName();
         $sql="SELECT * FROM $tableName";
         $db=new Database();
         $db->query($sql);
-        return $db->resultSet();
-
+//        return $db->resultSet();
+        print_r($db->resultSet());
+        exit();
     }
 
     public function save(){

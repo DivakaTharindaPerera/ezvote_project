@@ -1,7 +1,13 @@
 <?php
-    require_once '../app/bootstrap.php';
+require_once '../vendor/autoload.php';
 
-    //init core library
+$dotenv=Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+require_once '../app/bootstrap.php';
+
+
+//init core library
 
     $init = new Core();
 ?>

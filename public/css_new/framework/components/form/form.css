@@ -63,5 +63,7 @@ input[type="checkbox"]{
     height: 20px;
     outline: 2px solid #10558d;
     filter:hue-rotate(12deg);
+    border: none;
 }
+
 
