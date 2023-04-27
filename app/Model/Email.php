@@ -19,7 +19,9 @@
             $this->mail->SMTPSecure = 'ssl';
             $this->mail->Port = 465;
             $this->mail->SMTPKeepAlive = true;
+
             // $this->mail->SMTPDebug = 2;
+
         }
         public function sendEmail($data){
             $this->mail->setFrom('ezvoteservice@gmail.com');

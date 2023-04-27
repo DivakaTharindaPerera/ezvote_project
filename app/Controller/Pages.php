@@ -75,19 +75,33 @@ class Pages extends Controller
                     } else {
                         continue;
                     }
-                }
-                foreach ($r_ongoing as $row) {
-                    $v_row = $this->electionModel->getVotersByElectionID($row->ElectionId);
-                    if ($v_row[0]->userId == $_SESSION["UserId"]) {
-                        $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
-                        $v_ongoing_filtered[] = $row;
+
+                    foreach($r_ongoing as $row){
+                        $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
+                        foreach ($v_row as $voter){
+                            if($voter->userId==$_SESSION["UserId"]){
+                                $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                                $v_ongoing_filtered[] = $row;
+                            }
+                        }
                     }
-                }
-                foreach ($r_ongoing as $row) {
-                    $c_row = $this->electionModel->getCandidatesByElectionId($row->ElectionId);
-                    if ($c_row[0]->userId == $_SESSION["UserId"]) {
-                        $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
-                        $c_ongoing_filtered[] = $row;
+//                    echo '<pre>';
+//                    print_r($v_ongoing_filtered);
+//                    exit;
+
+                    foreach($r_ongoing as $row){
+                        $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                        foreach ($c_row as $candidate){
+                            if($candidate->userId==$_SESSION["UserId"]){
+                                $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                                $c_ongoing_filtered[] = $row;
+                            }
+                        }
+//                        if($c_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $c_ongoing_filtered[] = $row;
+//                        }
+
                     }
                 }
             }
@@ -99,19 +113,33 @@ class Pages extends Controller
                     } else {
                         continue;
                     }
-                }
-                foreach ($r_upcoming as $row) {
-                    $v_row = $this->electionModel->getVotersByElectionID($row->ElectionId);
-                    if ($v_row[0]->userId == $_SESSION["UserId"]) {
-                        $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
-                        $v_upcoming_filtered[] = $row;
+
+                    foreach($r_upcoming as $row){
+                        $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
+                        foreach ($v_row as $voter){
+                            if($voter->userId==$_SESSION["UserId"]){
+                                $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                                $v_upcoming_filtered[] = $row;
+                            }
+                        }
+//                        if($v_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $v_upcoming_filtered[] = $row;
+//                        }
                     }
-                }
-                foreach ($r_upcoming as $row) {
-                    $c_row = $this->electionModel->getCandidatesByElectionId($row->ElectionId);
-                    if ($c_row[0]->userId == $_SESSION["UserId"]) {
-                        $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
-                        $c_upcoming_filtered[] = $row;
+                    foreach($r_upcoming as $row){
+                        $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                        foreach ($c_row as $candidate){
+                            if($candidate->userId==$_SESSION["UserId"]){
+                                $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                                $c_upcoming_filtered[] = $row;
+                            }
+                        }
+//                        if($c_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $c_upcoming_filtered[] = $row;
+//                        }
+\
                     }
                 }
             }
@@ -123,19 +151,33 @@ class Pages extends Controller
                     } else {
                         continue;
                     }
-                }
-                foreach ($r_completed as $row) {
-                    $v_row = $this->electionModel->getVotersByElectionID($row->ElectionId);
-                    if ($v_row[0]->userId == $_SESSION["UserId"]) {
-                        $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
-                        $v_completed_filtered[] = $row;
+
+                    foreach($r_completed as $row){
+                        $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
+                        foreach ($v_row as $voter){
+                            if($voter->userId==$_SESSION["UserId"]){
+                                $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                                $v_completed_filtered[] = $row;
+                            }
+                        }
+//                        if($v_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $v_completed_filtered[] = $row;
+//                        }
                     }
-                }
-                foreach ($r_completed as $row) {
-                    $c_row = $this->electionModel->getCandidatesByElectionId($row->ElectionId);
-                    if ($c_row[0]->userId == $_SESSION["UserId"]) {
-                        $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
-                        $c_completed_filtered[] = $row;
+                    foreach($r_completed as $row){
+                        $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                        foreach ($c_row as $candidate){
+                            if($candidate->userId==$_SESSION["UserId"]){
+                                $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                                $c_completed_filtered[] = $row;
+                            }
+                        }
+//                        if($c_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $c_completed_filtered[] = $row;
+//                        }
+
                     }
                 }
             }
@@ -591,23 +633,33 @@ class Pages extends Controller
                     array_push($data2, $row);
                 }
             }
-            $this->view(
-                'Supervisor/viewAllConference',
+
+            $data3=$this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
+            $this->view('Supervisor/viewAllConference',
                 [
-                    'ongoing_conferences' => $data1,
-                    'upcoming_conferences' => $data2
-                ]
-            );
-        } else {
+                    'ongoing_conferences'=>$data1,
+                    'upcoming_conferences'=>$data2,
+                    'elections'=>$data3
+                ]);
+        }
+        else{
+
             redirect('View/login');
         }
     }
 
+
     public function addConference($electionID)
     {
-        if ($this->isLoggedIn()) {
-            if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+//        $electionID=1281;
+        if($this->isLoggedIn()){
+            if($_SERVER['REQUEST_METHOD']==="POST"){
+
                 $candidates = $_POST['candidate'];
+//                echo '<pre>';
+//                print_r($candidates);
+//                exit();
                 if (empty($candidates)) {
                     $data['candidateError'] = "Please select at least one candidate";
                 }
@@ -634,22 +686,35 @@ class Pages extends Controller
                 if (empty($_POST['date'])) {
                     $data['dateAndTimeError'] = "Please enter date and time";
                 }
-                if (empty($data['conferenceNameError']) && empty($data['candidateError']) && empty($data['dateAndTimeError'])) {
-                    $data['conferenceID'] = uniqid('conf_');
-                    if ($this->conferenceModel->addConference($data, $candidates)) {
-                        $this->conferenceModel->AddCandidateToConference($data['conferenceID'], $candidates);
-                        //                        exit();
-                        redirect('Supervisor/viewAllConferences');
-                    } else {
+
+                if(empty($data['conferenceNameError']) && empty($data['candidateError']) && empty($data['dateAndTimeError'])){
+                    $data['conferenceID']=uniqid('conf_');
+                    if($this->conferenceModel->addConference($data,$candidates)){
+//
+
+
+                        $this->conferenceModel->AddCandidateToConference($data['conferenceID'],$candidates);
+                        foreach ($candidates as $candidate){
+                            $this->candidateModel->sendEMail($candidate,$data);
+                            var_dump($candidate);
+                        }
+
+
+                        redirect('pages/viewAllConferences');
+                    }
+                    else{
+
                         die("Something went wrong");
                     }
                 } else {
                     $this->view('Supervisor/scheduleConference', $data);
                 }
             }
-            $candidates = $this->candidateModel->getCandidatesByElectionId($electionID);
-            $this->view(
-                'Supervisor/scheduleConference',
+
+
+            $candidates=$this->candidateModel->getCandidatesByElectionId($electionID);
+            $this->view('Supervisor/scheduleConference',
+
                 [
                     'electionID' => $electionID,
                     'candidates' => $candidates
@@ -658,10 +723,12 @@ class Pages extends Controller
         } else {
             redirect('View/login');
         }
+
     }
     public function castVotePrologue()
     {
         if ($this->isLoggedIn()) {
+
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $eid = $_POST['eid'];
             $otp = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
@@ -697,6 +764,7 @@ class Pages extends Controller
             redirect('View/login');
         }
     }
+
 
     public function encrypt($data, $key, $iv)
     {
@@ -782,3 +850,12 @@ class Pages extends Controller
 
     }
 }
+
+//    service page
+    public function services()
+    {
+        $this->view('services');
+    }
+
+}
+

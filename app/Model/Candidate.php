@@ -189,6 +189,7 @@ class Candidate extends Controller{
         }
     }
 
+
     public function getCandidatesByEmailAndElectionId($email,$eid){
         $this->db->query(
             "SELECT * FROM Candidate
@@ -203,4 +204,26 @@ class Candidate extends Controller{
             echo "Something went wrong :".$e->getMessage();
         }
     }
+
+    public function sendEmail($candidateId,$data){
+        $this->db->query(
+            "SELECT candidateEmail FROM candidate WHERE candidateId = :1");
+        $this->db->bind(':1', $candidateId);
+            $this->db->execute();
+            $candidate = $this->db->single();
+            $email = new Email();
+            $data = [
+                'email' => $candidate->candidateEmail,
+                'subject' => 'You have a meting',
+                'body' => 'You have a meting with supervisor.<br>
+                            Topic-'.$data['topic'].'<br>
+                            Date-'.$data['start_date'].'<br>
+                            Password-'.$data['password'].'<br>
+                            Please be sure to log on ezvote platform to attend the meeting.'
+            ];
+
+            $email->sendEmail($data);
+    }
+
+
 }

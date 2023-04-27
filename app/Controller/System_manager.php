@@ -103,11 +103,11 @@ class System_manager extends Controller
                 $mail = $_SESSION['email'];
             }
             else {
-                
+                header("Location: ./reset");
             }
         }
         else {
-            echo "Wromg OTP";
+            header("Location: ./forgot");
         }
     }
 
@@ -116,15 +116,12 @@ class System_manager extends Controller
             redirect('System_manager/login');
         } else {
             $this->view('Sys_manager/sysmanager_announcements');
-            
 
+            // $voter = $_POST['Email'];
+            // $supervisor = $_POST['supervisor'];
+            // $candidate = $_POST['candidateEmail'];
         }
     }
-
-    // public function sendMail(){
-    //     $mail_obj = new Email;
-
-    // }
 
     public function logout(){
         unset($_SESSION['UserId']);

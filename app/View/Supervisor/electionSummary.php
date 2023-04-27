@@ -5,6 +5,7 @@
 require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
+
 <div class="main-container">
     <?php
     $partyVotes = array();
@@ -73,6 +74,7 @@ require approot . '/View/inc/VoterHeader.php'; ?>
                 <div class="d-flex justify-content-center align-items-center text-xl">Voted Percentage</div>
                 <div>
                     <canvas id="voted_state"></canvas>
+
                 </div>
             </div>
             <?php if ($data['parties'] != NULL) { ?>
@@ -161,6 +163,7 @@ require approot . '/View/inc/VoterHeader.php'; ?>
                         </table>
                     </div>
                 </div>
+
             <?php } ?>
 
         </div>
@@ -169,6 +172,7 @@ require approot . '/View/inc/VoterHeader.php'; ?>
         <?php 
             $jsonData = json_encode($partyVotes);
         ?>
+
 
         <?php
         $candidateArray = [];

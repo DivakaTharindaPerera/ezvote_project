@@ -1,5 +1,7 @@
 <?php require approot.'/View/inc/VoterHeader.php'; ?>
-
+    <div class="d-flex justify-content-center align-items-center my-1">
+        <a href="<?php echo urlroot; ?>/page/home" class="nav-link-text"><i class="fa-solid fa-house"></i></a>
+    </div>
 <div class="d-flex border-radius-3 min-w-60 min-h-85 border-4 border-primary">
     <div class="d-flex w-50 bg-primary justify-content-center align-items-center">
         <img src="<?php echo urlroot;?>/public/img/login.jpg" alt="" style="min-height: 165px; max-width:400px;" > </div>
@@ -25,10 +27,6 @@
                 <div class="d-flex justify-content-center mt-1 px-1 mb-1">
                     <button type="submit" class="btn btn-primary" style="min-width: 250px">SIGN IN</button>
                 </div>
-                <!-- <div class="d-flex justify-content-center mt-1 px-1">
-                    <button type="submit" class="btn bg-white text-center" style="min-width: 250px">
-                        <img src="<?php echo urlroot;?>/public/img/google.png" alt="" style="max-width: 30px; max-height: 25px" class="mx-1">SIGN IN WITH GOOGLE</button>
-                </div> -->
         </form>
         </div>
     </div>

@@ -36,6 +36,18 @@
     background-repeat: no-repeat; 
     width: 94rem;
   }
+
+.bg_services {
+  background-image: url(/ezvote/public/img/welcome/services.jpg);
+  background-size: cover;
+  object-fit: contain;
+  min-height: 35vw;
+  background-position: 10% 10%;
+  background-repeat: no-repeat;
+  width: 94rem;
+  padding-top:-100px;
+  filter: brightness(70%);
+}
   
   .bg_target_users {
     background-image: url(/ezvote/public/img/welcome/target_users.jpg);

@@ -6,7 +6,10 @@ require approot.'/View/inc/side_bar.php';
 ?>
       
 <div class="w-100 text-lg px-2" style="margin-left:850px;">
-<?php foreach ($r as $value){?>
+<?php 
+// foreach ($r as $value){
+    
+    ?>
 
         <h2 class="my-2" style="margin-left:300px;">My candidate profile</h2>
 
@@ -71,5 +74,7 @@ require approot.'/View/inc/side_bar.php';
         <!-- <button class="btn bg-primary text-white text-lg" type="submit" style="margin-left:400px;">Withdraw</button> -->
     </div>
     
-        <?php } ?>
+        <?php 
+    // } 
+    ?>
     <?php require approot.'/View/inc/footer.php';?>

@@ -5,11 +5,11 @@
   }
   
   .hover-effect:hover {
-    background-color: rgb(5, 68, 104);
+    background-color: var(--info);
     /* cursor: pointer; */
    color: white;
    transition: all 400ms ease-in-out;
-   transform: translateY(-20px);
+   /*transform: translateY(-20px);*/
 
   }
 

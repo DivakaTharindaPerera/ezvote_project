@@ -1,7 +1,8 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
-<div class="main-container">
+<div class="main-container" >
+    <div id="printJS-report">
     <div class="title my-1">
         <?= $data['election']->Title ?><br>
         <?= $data['election']->OrganizationName ?>
@@ -43,8 +44,14 @@
             <canvas id="voters"></canvas>
         </div>
     </div>
+        </div>
+    <div class="d-flex justify-content-end my-2 mr-3 p-2 w-75">
+    <button class="btn btn-primary w-20" type="button" onclick="printJS('printJS-report', 'html')">Print</button>
+    </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="print.js"></script>
 
 <script>
     const ctx = document.getElementById('results');
