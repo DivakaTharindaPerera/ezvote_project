@@ -11,8 +11,12 @@
 
     <div class="title justify-content-center mt-1"><?php echo $data['election']->Title ?><br>By <?php echo $data['election']->OrganizationName ?></div>
     <div class="justify-content-center">
-        <p class="text-xl"><?php echo $data['election']->Description; ?>
-        <p>
+        <p class="text-xl"><?php echo $data['election']->Description; ?></p>
+        <?php 
+            if($data['stat']==1){
+                echo "status visible";
+            }
+        ?>
     </div>
     <div class="d-flex flex-column w-100" id="candidatesWithPositions">
         <?php $i = 0;
