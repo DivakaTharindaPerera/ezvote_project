@@ -56,4 +56,19 @@ class electionPositions{
         }
 
     }
+
+    public function findPositionNameById($id){
+
+        $this->db->query("SELECT * FROM electionposition WHERE ID=$id");
+    
+        try {
+            $this->db->execute();
+            return $this->db->resultSet(); // return object
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+
+    }
+
+    
 }

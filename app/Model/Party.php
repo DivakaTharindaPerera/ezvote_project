@@ -69,5 +69,18 @@ class Party extends Controller{
         $result = $this->db->single();
         return $result;
     }
+
+    public function findPartyNameById($id){
+
+        $this->db->query("SELECT * FROM electionparty WHERE partyId=$id");
+    
+        try {
+            $this->db->execute();
+            return $this->db->resultSet(); // return object
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+
+    }
 }
 

@@ -181,5 +181,16 @@ class Election extends Controller{
             return false;
         }
     }
+
+    public function findelectNameById($id){
+        $this->db->query("SELECT * FROM election WHERE electionid=$id");
+        try {
+            $this->db->execute();
+            return $this->db->resultSet(); // return object
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+
+    }
         
 }

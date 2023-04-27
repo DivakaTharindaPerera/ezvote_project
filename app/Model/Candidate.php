@@ -70,4 +70,17 @@ class Candidate extends Controller{
             echo "Something went wrong :".$e->getMessage();
         }
     }
+
+    public function getCandidateProfile($candidate_id){
+       
+        $this->db->query("SELECT * FROM candidate WHERE userId = $candidate_id");
+        try {
+            $this->db->execute();
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+    }
+
+    
 }
