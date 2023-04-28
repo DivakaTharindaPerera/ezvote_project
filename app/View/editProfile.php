@@ -28,14 +28,14 @@ require approot.'/View/inc/sidebar-new.php';
                 <label for="changePassword">Do you want to change password?</label>
                 <input type="checkbox" id="changePassword_check" name="changePassword" onclick="showPassword()" class="mt-1">
                 <div class="d-flex flex-column my-1 " id="changePassword" style="display: none">
-                        <label for="changePassword">Old Password</label>
+                        <label for="changePassword" class="mb-1">Old Password</label>
                         <input type="password" id="old_password" name="old_password" placeholder="Password" class="mt-1" required>
-                        <input type='submit' name='submit' value='Submit' class='d-flex btn btn-primary w-25 justify-content-center align-items-center' onclick="confirmOld()">
+<!--                        <input type='submit' name='submit' value='Submit' class='d-flex btn btn-primary w-25 justify-content-center align-items-center' onclick="confirmOld()">-->
                 </div>
                 <div class="d-flex flex-column my-1" id="getNewPassword" style="display: none">
                         <label for="changePassword">New Password</label>
                         <input type="password" id="new_password" name="new_password" placeholder="Password" required>
-                        <input type='submit' name='submit' value='Submit' class='d-flex btn btn-primary w-25 justify-content-center align-items-center'>
+<!--                        <input type='submit' name='submit' value='Submit' class='d-flex btn btn-primary w-25 justify-content-center align-items-center'>-->
                 </div>
 
             </div>

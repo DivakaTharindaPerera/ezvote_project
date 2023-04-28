@@ -657,7 +657,7 @@
                     'lname'=>trim($_POST['lname']),
                     'email'=>trim($_POST['email']),
                     'old_password'=>trim($_POST['old_password']),
-//                    'confirmPassword'=>trim($_POST['confirmPassword']),
+                    'confirmPassword'=>trim($_POST['confirmPassword']),
                     'fnameError'=>'Please enter your first name',
                     'lnameError'=>'Please enter your last name',
                     'emailError'=>'Please enter your email',
@@ -671,7 +671,9 @@
                         $data['old_passwordError']='Password is incorrect';
                     }
                     else{
-                        return true;
+                        echo '<script type="text/javascript">',
+                        'showNewPassword();',
+                        '</script>';
                     }
 
                 }
@@ -684,8 +686,7 @@
         else{
             redirect('View/login');
         }
-        $this->view('editProfile');
-
+//        $this->view('editProfile');
     }
 
 }
