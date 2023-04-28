@@ -218,7 +218,7 @@ require approot.'/View/inc/sidebar-new.php';
         <div id="ongoingElections" class="d-flex flex-column mb-1" style="justify-content: center;align-items: center">
             <div class="sub-title dark-title ">COMPLETED ELECTIONS</div>
             <div class="d-flex justify-content-center align-items-center">
-                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-50">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh  min-w-25 max-w-50">
                     <div class="d-flex text-xl justify-content-center align-items-center my-1 text-center">Supervised Elections</div>
                     <div class="d-flex justify-content-center align-items-center mb-1 mx-1 flex-wrap">
                     <?php if ($data['data3'] == null){?>
@@ -239,7 +239,7 @@ require approot.'/View/inc/sidebar-new.php';
                     </div>
                 </div>
                 <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-50">
-                    <div class="d-flex text-xl justify-content-center align-items-center my-1">Elections as Voter/Candidate</div>
+                    <div class="d-flex text-xl justify-content-center align-items-center my-1 mx-1">Elections as Voter/Candidate</div>
                     <div class="d-flex justify-content-center align-items-center flex-wrap mb-1 mx-1">
                         <?php if ($data['data6'] == null && $data['data9']==null){?>
                             <div class="d-flex flex-column text-center text-primary text-xl" style="align-items: center">No Completed Elections</div>

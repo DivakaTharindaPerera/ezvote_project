@@ -480,34 +480,50 @@
     {
         if($this->isLoggedIn()){
 
-            $data=$this->conferenceModel->getConferencesByUserID($_SESSION["UserId"]);
+            $data1=$this->conferenceModel->getConferencesByUserID($_SESSION["UserId"]);
+            $data=$this->candidateModel->getCandidateIDByUserId();
+            $data2=[];
+            foreach ($data as $candidateID){
+                $row=$this->conferenceModel->getConferencesByCandidateId($candidateID);
+                $data2[]=$row;
+            }
+
+//            var_dump($data);
+//            exit();
             //get current time
-            $now = new DateTime();
-            //get ongoing conferences
-            $data1=array();
-            foreach ($data as $row){
-                $interval = $now->diff(new DateTime($row->DateAndTime));
-//                echo $interval->format('%H:%I:%S');
-//                exit();
-                if($interval->format('%H:%I:%S')>0){
-                    array_push($data1,$row);
-                }
-            }
+//            $now = new DateTime();
+//            //get ongoing conferences
+//            $data1=array();
+//            foreach ($data as $row){
+//                $t=new DateTime($row->DateAndTime);
+////                $interval = $now->diff($t);
+////                var_dump($interval);
+////                exit();
+//                //                echo $interval->format('%H:%I:%S');
+////                exit();
+//                $now->setTimestamp($now->getTimestamp()+19800);
+//                if($now->getTimestamp()<$t->getTimestamp()){
+//                    array_push($data1,$row);
+//                }
+//            }
             //get upcoming conferences
-            $data2=array();
-            foreach ($data as $row){
-                $interval = $now->diff(new DateTime($row->DateAndTime));
-//                echo $interval->format('%R%a');
-//                exit();
-                if($interval->format('%H:%I:%S')<=0){
-                    array_push($data2,$row);
-                }
-            }
+//            $data2=array();
+//            foreach ($data as $row){
+//                $t=new DateTime($row->DateAndTime);
+////                $interval = $now->diff($t);
+////                echo $interval->format('%R%a');
+////                exit();
+//                if($now->getTimestamp()>$t->getTimestamp()){
+//                    array_push($data2,$row);
+//                }
+//            }
             $data3=$this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
             $this->view('Supervisor/viewAllConference',
                 [
-                    'ongoing_conferences'=>$data1,
-                    'upcoming_conferences'=>$data2,
+                    'supervising_conferences'=>$data1,
+                    'candidating_conferences'=>$data2,
+//                    'ongoing_conferences'=>$data1,
+//                    'upcoming_conferences'=>$data2,
                     'elections'=>$data3
                 ]);
         }
@@ -628,6 +644,48 @@
     public function services()
     {
         $this->view('services');
+    }
+
+//    profile viewing
+    public function editProfile()
+    {
+        if($this->isLoggedIn()){
+            if ($_SERVER['REQUEST_METHOD']==='POST'){
+                $data=[
+                    'id'=>$_SESSION['UserId'],
+                    'fname'=>trim($_POST['fname']),
+                    'lname'=>trim($_POST['lname']),
+                    'email'=>trim($_POST['email']),
+                    'old_password'=>trim($_POST['old_password']),
+//                    'confirmPassword'=>trim($_POST['confirmPassword']),
+                    'fnameError'=>'Please enter your first name',
+                    'lnameError'=>'Please enter your last name',
+                    'emailError'=>'Please enter your email',
+                    'old_passwordError'=>'Please enter your old password',
+                    'confirmPasswordError'=>'Please enter your confirm password'
+                ];
+                $data1=$this->userModel->getUserById($_SESSION['UserId']);
+                if(empty($data['old_passwordError'])){
+                    $data['old_password']=password_hash($data['old_password'],PASSWORD_DEFAULT);
+                    if($data['old_password']!=$data1->Password){
+                        $data['old_passwordError']='Password is incorrect';
+                    }
+                    else{
+                        return true;
+                    }
+
+                }
+                $this->userModel->updateProfile($data);
+            }
+            else{
+                $this->view('editProfile');
+            }
+        }
+        else{
+            redirect('View/login');
+        }
+        $this->view('editProfile');
+
     }
 
 }

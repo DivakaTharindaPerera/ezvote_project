@@ -274,3 +274,18 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function profile(){
+    let popup=document.getElementById("popup2");
+    popup.classList.add("open-popup");
+}
+function closeProfile(){
+    let popup=document.getElementById("popup2");
+    popup.classList.remove("open-popup");
+}
+function editingProfile(){
+    window.location.href="/ezvote/pages/editProfile";
+}
+function savingDetails(){
+    window.location.href="/ezvote/pages/editProfile";
+}

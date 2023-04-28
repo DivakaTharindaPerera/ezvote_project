@@ -178,8 +178,10 @@ class Election extends Controller{
     public function getCandidatesByElectionId($id)
     {
         $election_Id = $id;
-        $this->db->query("SELECT * FROM Candidate WHERE electionid ='" . $election_Id . "' order by positionid");
+        $this->db->query("SELECT * FROM candidate WHERE electionid ='" . $election_Id . "' order by positionid");
         $row = $this->db->resultSet();
+//        var_dump($row);
+//        exit();
         return $row;
 
     }
