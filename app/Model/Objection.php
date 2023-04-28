@@ -245,4 +245,16 @@ class Objection extends Model
         $results=$this->db->resultSet();
         return $results;
     }
+
+    public function setObjectionSeen($id){
+        $this->db->query('UPDATE objection SET inspected=1 WHERE ObjectionID=:id');
+        $this->db->bind(':id',$id);
+
+        try {
+            $this->db->execute();
+            return 20;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }

@@ -9,6 +9,7 @@ class Elections extends Controller
     private $candidateModel;
     private $emailModel;
     private $logModel;
+    private $objectionModel;
 
     public function __construct()
     {
@@ -20,6 +21,7 @@ class Elections extends Controller
         $this->partyModel = $this->model('Party');
         $this->candidateModel = $this->model('Candidate');
         $this->logModel = $this->model('log');
+        $this->objectionModel = $this->model('Objection');
     }
 
     public function sendEmail()
@@ -237,6 +239,10 @@ class Elections extends Controller
         }
     }
 
+    public function addParty(){
+        
+    }
+
     public function insertParty()
     {
         if (!$this->isLoggedIN()) {
@@ -251,7 +257,6 @@ class Elections extends Controller
                 for ($k = 0; $k < $count; $k++) {
                     echo $electionId . "-" . trim($_POST[$k . "party"]) . "-" . trim($_POST[$k . "name"]) . "-" . trim($_POST[$k . "email"]) . "-" . trim($_POST[$k . "position"]) . "<br>";
                 }
-
                 for ($i = 0; $i < $partyCount; $i++) {
                     $data = [
                         'electionId' => $electionId,
@@ -1049,6 +1054,18 @@ class Elections extends Controller
             }
 
         }
+    }
+
+    public function objectionSeen($id){
+        $dataset = json_decode(file_get_contents('php://input'), true);
+        $status = $this->objectionModel->setObjectionSeen($dataset['id']);
+        if($status == 20){
+            $data['msg'] = 'success';
+        }else{
+            $data['msg'] = $status;
+        }
+        echo json_encode($data);
+        return;
     }
 }
 
