@@ -58,14 +58,14 @@
                                         <div class="d-flex flex-column overflow-scroll">
                                             <div class="w-100">
                                                 <?php
-
                                                 foreach ($data['objections'] as $objection) {
                                                     if ($candidate->candidateId == $objection->CandidateID) {
 
                                                 ?>
                                                         <div class="w-100 d-flex flex-column my-1 border-radius-2 bg-primary">
                                                             <div class="w-100 bg-blue-10 border-radius-2 px-1 d-flex text-white">
-                                                                <div class="text-x mr-auto my-auto"><?php echo $objection->Subject; ?></div>
+                                                                <div class="text-x mr-auto my-auto"><?php echo $objection->ObjectionID; ?><?php echo $objection->Subject; ?></div>
+                                                                <input type="hidden" value="<?php echo $objection->ObjectionID; ?>" class="objection-<?php echo $candidate->candidateId ?>">
                                                                 <div class="my-auto ml-auto" style="color: red;" id="status-<?php echo $objection->ObjectionID; ?>">
                                                                     <?php
                                                                     if ($objection->inspected == 0) {
@@ -90,7 +90,7 @@
 
                                         </div>
                                         <div class="mt-auto mx-auto">
-                                            <button id="del-<?php echo $candidate->candidateEmail; ?>" class="btn btn-danger ml-auto mr-2 card-hover" onclick="removeCand(this.id)"><b>Remove Candidate</b></button>
+                                            <button id="del-<?php echo $candidate->candidateId; ?>" class="btn btn-danger ml-auto mr-2 card-hover" onclick="removeCand(this.id,'<?= $candidate->candidateName; ?>')"><b>Remove Candidate</b></button>
                                             <button class="btn btn-danger mr-auto card-hover"><b>Remove Objections</b></button>
                                         </div>
                                         <div>
@@ -98,21 +98,33 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php
+                        <?php
                             }
                         }
                     }
-                    if($flag == 0){
-                    ?>
+                    if ($flag == 0) {
+                        ?>
                         <div class="text-2xl text-danger my-1">
                             <b>No objections to show</b>
                         </div>
-                    <?php
+                <?php
                     }
                 }
                 ?>
                 </div>
             </div>
+    </div>
+    <div class="popup-window-1 bg-secondary text-center border-1 border-radius-2" id="deletePopUp" style="display: none;">
+        <div class="popup-window-1-content bg-light border-radius-2 p-2 d-flex flex-column">
+            <div class="text-2xl text-danger">Confirm Deleting Candidate </div>
+            <div class="text-2xl text-primary mb-1" id="candidateDeleteName"></div>
+            <div class="text-xl text-danger mb-1">This action cannot be undone after confirming</div>
+            <form action="<?php echo urlroot; ?>/Elections/removeCanidateFromObjections" method="POST" id="deleteForm">
+                <input type="text" id="candidateDelete" name="cid" value="">
+                <button type="submit" class="btn btn-danger mt-1 text-xl">Confirm</button>
+                <button type="button" class="btn btn-primary mt-1 text-xl" onclick="removeCand()">Cancel</button>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -166,6 +178,26 @@
             document.getElementById('removePositions').classList.remove('border-1');
             document.getElementById('removePositions').classList.add('btn-danger');
             document.getElementById('removePositions').classList.add('card-hover');
+        }
+    }
+
+    function removeCand(id = null, name = null) {
+        if (id != null) {
+            id = id.split('-')[1];
+            document.getElementById('candidateDelete').value = id;
+        }
+        if (name != null) {
+            document.getElementById('candidateDeleteName').innerHTML = "<b>"+name + " ?</b>";
+        }else{
+            document.getElementById('candidateDeleteName').innerHTML = "";
+        }
+        var popup = document.getElementById('deletePopUp');
+        if (popup.style.display === "none") {
+            popup.style.display = "block";
+            document.querySelector('body').classList.add('no-scroll-for-popup');
+        } else {
+            popup.style.display = "none";
+            document.querySelector('body').classList.remove('no-scroll-for-popup');
         }
     }
 

@@ -257,4 +257,27 @@ class Objection extends Model
             return $e->getMessage();
         }
     }
+
+    public function getObjectionsByCandidateId($id){
+        $this->db->query('SELECT * FROM objection WHERE CandidateID=:CandidateID');
+        $this->db->bind(':CandidateID',$id);
+        try{
+            $results=$this->db->resultSet();
+            return $results;
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function setActionOnObjection($oid,$action){
+        $this->db->query('UPDATE objection SET Action=:action WHERE ObjectionID=:oid');
+        $this->db->bind(':action',$action);
+        $this->db->bind(':oid',$oid);
+        try{
+            $this->db->execute();
+            return '1';
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
 }
