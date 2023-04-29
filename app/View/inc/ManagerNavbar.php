@@ -8,6 +8,7 @@
                 <li><a href="<?php echo urlroot; ?>/System_manager/dashboard" class="px-1">Dashboard</a></li>
                 <a href="<?php echo urlroot; ?>/System_manager/announcements" class="px-1">Announcements</a>
                 <a href="#" class="px-1">Profile</a>
+                <a href="<?php echo urlroot; ?>/Subscription_plan/pricing" class="px-1">Pricing</a>
                 <a href="<?php echo urlroot; ?>/System_manager/logout" class="btn btn-info">Logout</a>
         </ul>
     </nav>

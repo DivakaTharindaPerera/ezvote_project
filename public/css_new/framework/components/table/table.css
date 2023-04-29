@@ -25,3 +25,8 @@ tr:hover{
 th, td {
     padding: 15px;
 }
+
+.comment:hover{
+background-color:rgba(221, 235, 244, 0.921);
+color: black;
+}

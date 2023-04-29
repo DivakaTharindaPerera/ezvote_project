@@ -2,18 +2,6 @@
 <?php require approot . '/View/inc/ManagerNavbar.php'; ?>
 <?php require approot . '/View/inc/manager_sidebar.php'; ?>
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width , initial-scale=1.0">
-    <title>subscription plan</title>
-    <link rel="stylesheet" href="<?php echo urlroot; ?>/public/css/subscription_plans.css">
-</head>
-
-<body> -->
 <script>
 
 window.onload = function(){
@@ -55,9 +43,8 @@ window.onload = function(){
     </div>
     
 
-    <div class="w-100 h-50" style="overflow:auto; height:50vh;">
+    <div class="w-100 h-50 overflow-scroll">
         <table id="myTable" class="table border border-primary w-100 h-35">
-            <!-- <div class="my-1"> -->
                 <tbody>
 
                 <?php
@@ -74,7 +61,7 @@ window.onload = function(){
                                     <input type="checkbox" id="toggle-'.$i.'" onclick="myFunction'.$i.'()">
                                         <span class="slider round"></span>
                                     </label>
-                                    <span id="myDIV-'.$i.'" class="enabled"> Enabled</span>
+                                    <span id="myDIV-'.$i.'" class="ml-1 enabled">Disabled</span>
                                 </td>
                                 <td class="td-3"><a href="edit_subscription/'.$data[0][$x]->PlanID.'"> 
 
@@ -90,9 +77,9 @@ window.onload = function(){
                                     var checkBox = document.getElementById("toggle-'.$i.'");
                                     var text = document.getElementById("myDIV-'.$i.'");
                                     if (checkBox.checked == false) {
-                                        text.innerHTML = "Enabled";
-                                    }else{
                                         text.innerHTML = "Disabled";
+                                    }else{
+                                        text.innerHTML = "Enabled";
                                     }
                                 }
                             </script>
@@ -111,7 +98,6 @@ window.onload = function(){
                     }
                 </script> -->
                 </tbody>
-            <!-- </div> -->
         </table>
     </div>
     </div>
@@ -122,6 +108,3 @@ window.onload = function(){
 </script><script src="/ezvote/public/js/search.js"></script>
 <?php require approot . '/View/inc/footer.php'; ?>
 
-<!-- </body>
-
-</html> -->

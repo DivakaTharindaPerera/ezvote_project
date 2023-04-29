@@ -189,6 +189,22 @@ class Candidate extends Controller{
         }
     }
 
+
+    public function getCandidatesByEmailAndElectionId($email,$eid){
+        $this->db->query(
+            "SELECT * FROM Candidate
+            WHERE candidateEmail = :1 AND electionid = :2
+            "
+        );
+        $this->db->bind(':1', $email);
+        $this->db->bind(':2', $eid);
+        try {
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+    }
+
     public function sendEmail($candidateId,$data){
         $this->db->query(
             "SELECT candidateEmail FROM candidate WHERE candidateId = :1");

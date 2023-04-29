@@ -100,7 +100,7 @@
     <!-- Profile -->
 
     
-    <script src="<?php echo urlroot; ?>/js/side_bar.js"></script>
+    <!-- <script src="<?php echo urlroot; ?>/js/side_bar.js"></script> -->
 
 </body>
 </html>
