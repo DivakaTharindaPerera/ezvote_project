@@ -21,20 +21,25 @@ require approot.'/View/inc/side_bar.php';
         
     
     </div> 
+        <?php
 
+        //  var_dump($res);
+        //  var_dump($res[0]->candidateName);
+        //  die();
+        ?>
         <!-- <div class="pic2">     -->
         <!-- <p><button class="can_no">Candidate No: CN<?php echo $field1name ?></button></p> -->
         <!-- </div> -->
     </div>
 
-    
+        
         <!-- <label for="full name">Full Name:</label>  -->
         <div class="d-flex">
         <label for="full name">First Name:</label> 
-        <textarea name="first-name" id="full-name"  readonly class=" bg-light text-dark border-1 border-dark border-radius-3 mx-2" style="overflow:hidden; resize: none; box-shadow: 5px 5px; margin-left:15px; width:18rem;"><?php echo $candidateData['firstName']?></textarea>
+        <textarea name="first-name" id="full-name"  readonly class=" bg-light text-dark border-1 border-dark border-radius-3 mx-2" style="overflow:hidden; resize: none; box-shadow: 5px 5px; margin-left:15px; width:18rem;"><?php echo $res[0]->candidateName?></textarea>
         
         <label for="full name">Last Name:</label> 
-        <textarea name="last-name" id="full-name"  readonly class=" bg-light text-dark border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px; margin-left:15px; width:18rem;"><?php echo $candidateData['lastName']; ?></textarea><br><br>
+        <!-- <textarea name="last-name" id="full-name"  readonly class=" bg-light text-dark border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px; margin-left:15px; width:18rem;"><?php echo $candidateData['lastName']; ?></textarea><br><br> -->
 </div>
 <br>
         <?php 
@@ -42,31 +47,31 @@ require approot.'/View/inc/side_bar.php';
         ?>
         
         <label for="tre">Election:</label> 
-        <textarea name="tre" id="tre"  readonly class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:30px;"><?php echo $candidateData['electionName']; ?></textarea><br><br>
+        <textarea name="tre" id="tre"  readonly class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:30px;"><?php echo $elect[0]->OrganizationName.''.$elect[0]->Title; ?></textarea><br><br>
         <?php 
         // echo $student['election_name']; 
         ?>
 
         <label for="party">Party:</label> 
-        <textarea name="party" id="party"  readonly class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:50px;"><?php echo $candidateData['partyName']; ?></textarea><br><br>
+        <textarea name="party" id="party"  readonly class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:50px;"><?php echo $party[0]->partyName; ?></textarea><br><br>
         <?php 
         // echo $student['party_name']; 
         ?>
 
         <label for="position">Position:</label> 
-        <textarea name="position" id="position" readonly class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:30px;"><?php echo $candidateData['position']; ?></textarea><br><br>
+        <textarea name="position" id="position" readonly class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:30px;"><?php echo $position[0]->positionName; ?></textarea><br><br>
         <?php 
         // echo $student['position']; 
         ?>
 
         <label for="about">About: 
-        <textarea name="about" id="about" readonly  class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:40px;"><?php echo $candidateData['candidateDescription']; ?></textarea><br><br>
+        <textarea name="about" id="about" readonly  class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:40px;"><?php echo $res[0]->description; ?></textarea><br><br>
         <?php 
         // echo $student['candidateDescription']; 
         ?>
 
         <label for="vision">Vision:</label>    
-        <textarea name="vision" id="vision" readonly class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:40px;"><?php echo $candidateData['msg']; ?></textarea><br><br>
+        <textarea name="vision" id="vision" readonly class="bg-light text-dark w-50 border-1 border-dark border-radius-3" style="overflow:hidden; resize: none; box-shadow: 5px 5px ; margin-left:40px;"><?php echo $res[0]->vision; ?></textarea><br><br>
         <?php 
         // echo $student['msg']; 
         ?>
