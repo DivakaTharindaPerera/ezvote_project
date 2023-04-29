@@ -42,9 +42,9 @@
      </div>
      </div>
 
-    <form action="#" class="form border-2 border-dark text-1xl bg-dark px-5 text-white my-2" method="POST" enctype="multipart/form-data" style="margin-left:450px; width:600px">
+    <form action="#" class="form border-2 border-dark text-1xl bg-dark px-5 text-white my-3" method="POST" enctype="multipart/form-data" style="margin-left:450px; width:600px">
         
-    <h2 class="text-center">Let's Chat</h2><br>
+    <h2 class="text-center my-1">Let's Chat</h2><br>
 
     <div class="d-flex">
     <div class="flex-column px-1 ">

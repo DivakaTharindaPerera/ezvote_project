@@ -12,7 +12,7 @@
     <title>ezVote</title>
 </head>
 <body>
-    <div class="nav-bar" style="height:2.5vh;">
+    <div class="nav-bar" style="height:7vh;">
         <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
         <div class="links">
             <a href="/ezvote/Pages/home">Home</a>
@@ -27,24 +27,23 @@
             <a href="<?php echo urlroot; ?>/View/Register"><button id="trial">Register</button></a> -->
 
             <div class="dropdown">
-  <button class="dropbtn">Login</button>
-  <div class="dropdown-content">
-  <a href="#">Administrator</a>
-  <a href="<?php echo urlroot; ?>/View/Login">Other Users</a>
-  </div>
-</div>
-    <a href="<?php echo urlroot; ?>/View/Register"><button class="dropbtn" style="margin-top: -6px;">Register</button></a>
+                <button class="dropbtn">Login</button>
+                <div class="dropdown-content">
+                    <a href="#">Administrator</a>
+                    <a href="<?php echo urlroot; ?>/View/Login">Other Users</a>
+                </div>
+            </div>
+            <a href="<?php echo urlroot; ?>/View/Register"><button class="dropbtn" style="margin-top: -6px;">Register</button></a>
 
         </div>
     </div>
 
-<div class="overflow-y" style="overflow-x:hidden;">
-<div class="bg_target_users">
-     <div class="p-1 m-2">
-     <h1 class="text-center text-white " style="padding-top:10rem; font-size:120px;">TARGET USERS</h1>
-  
-     </div>
-</div>
+    <div class="d-flex flex-column overflow-y" style="overflow-x:hidden;">
+        <div class="bg_target_users">
+        <div class="p-1 m-2">
+            <h1 class="text-center text-white " style="padding-top:10rem; font-size:120px;">TARGET USERS</h1>
+        </div>
+    </div>
      <!-- <div class="w-50 bg-white m-auto py-1">
 
             <div class="w-75 m-auto bg-dark py-1">
@@ -114,7 +113,7 @@
 
 
                 <!-- **************************************-->
-                <div class="d-flex" style="margin:auto 100px auto 100px;">
+            <div class="d-flex" style="margin:auto 100px auto 100px;">
 
                 <div class="relative min-h-10 px-1" style="width:33.33%; " >
                     <div class="text-center text-md my-1 bg-white bg_imgs hover-effect" style="padding: 80px 30px; box-shadow: 0 0 9px rgba(0,0,0.6); ">
@@ -161,9 +160,9 @@
 
               </div>
 
-              </div>
 
-            </div>
+
+
 <!-- <div class="footer">
     <div class="container">
         <div class="row">

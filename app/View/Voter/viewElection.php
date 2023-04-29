@@ -139,7 +139,6 @@ require approot.'/View/inc/sidebar-new.php';
             </div>
         </div>
     </div>
-    <a href="/ezvote/Pages/addConference/<?=$data['election']->ElectionId?>">Schedule a meeting</a>
 </div>
 <?php
 require approot.'/View/inc/footer.php';?>

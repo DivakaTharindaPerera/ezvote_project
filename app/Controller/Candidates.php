@@ -648,6 +648,15 @@ class Candidates extends Controller
     //         }
 
 
+    // public function viewprofile($candidateId)
+    // {
+    //     $candidateData = Nomination::getById($candidateId);
+    //     $view = new View('candidate/profile');
+    //     $view->setData('candidateData', $candidateData);
+    //     $view->render();
+    // }
+
+
     public function viewprofile($candidateId)
     {
         $candidateData = Nomination::getById($candidateId);

@@ -43,6 +43,7 @@ function addPosition(){
     var positionNameCell = document.createElement('td');
     var noOfOptionsCell = document.createElement('td');
     var desc = document.createElement('td');
+    var Buttons = document.createElement('td');
     desc.setAttribute('colspan', '4');
     desc.setAttribute('style', 'text-align: center;');
     var actionCell = document.createElement('button');
@@ -55,17 +56,23 @@ function addPosition(){
     actionCell.innerHTML = "Delete";
     actionCell.setAttribute('onclick', 'deletePosition(this.id)');
     actionCell.setAttribute('id', count);
+    actionCell.classList.add('btn');
+    actionCell.classList.add('btn-danger');
+    actionCell.classList.add('mr-1');
 
     extendDesc.innerHTML = "Extend";
     extendDesc.setAttribute('onclick', 'extendDesc(this.id)');
     extendDesc.setAttribute('id', count);
     extendDesc.setAttribute('name', 'extendDesc');
+    extendDesc.classList.add('btn');
+    extendDesc.classList.add('btn-primary');
 
+    Buttons.appendChild(actionCell);
+    Buttons.appendChild(extendDesc);
 
     row.appendChild(positionNameCell);
     row.appendChild(noOfOptionsCell);
-    row.appendChild(actionCell);
-    row.appendChild(extendDesc);
+    row.appendChild(Buttons);
 
     descRow.appendChild(desc);
     
