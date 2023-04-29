@@ -287,5 +287,6 @@ function editingProfile(){
     window.location.href="/ezvote/pages/editProfile";
 }
 function savingDetails(){
+    console.log("saving details")
     window.location.href="/ezvote/pages/editProfile";
 }

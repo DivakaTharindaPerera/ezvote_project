@@ -651,33 +651,68 @@
     {
         if($this->isLoggedIn()){
             if ($_SERVER['REQUEST_METHOD']==='POST'){
+//                var_dump($_POST);
+//                exit();
                 $data=[
                     'id'=>$_SESSION['UserId'],
                     'fname'=>trim($_POST['fname']),
                     'lname'=>trim($_POST['lname']),
                     'email'=>trim($_POST['email']),
                     'old_password'=>trim($_POST['old_password']),
-                    'confirmPassword'=>trim($_POST['confirmPassword']),
-                    'fnameError'=>'Please enter your first name',
-                    'lnameError'=>'Please enter your last name',
-                    'emailError'=>'Please enter your email',
-                    'old_passwordError'=>'Please enter your old password',
-                    'confirmPasswordError'=>'Please enter your confirm password'
+                    'new_password'=>trim($_POST['new_password']),
+                    'confirmPassword'=>trim($_POST['confirmed_password']),
+                    'fnameError'=>'',
+                    'lnameError'=>'',
+                    'emailError'=>'',
+                    'old_passwordError'=>'',
+                    'new_passwordError'=>'',
+                    'confirmPasswordError'=>''
                 ];
+                if(empty($data['fname'])){
+                    $data['fnameError']="Please enter first name";
+                }
+                if(empty($data['lname'])){
+                    $data['lnameError']="Please enter last name";
+                }
+                if(empty($data['email'])){
+                    $data['emailError']="Please enter email";
+                }
+//                else{
+//                    if($this->userModel->findUserByEmail($data['email'])){
+//                        $data['emailError']="Email already taken";
+//                    }
+//                }
+                if(empty($data['old_password'])){
+                    $data['old_passwordError']="Please enter old password";
+                }
+                if(empty($data['new_password'])){
+                    $data['new_passwordError']="Please enter new password";
+                }
+                if(empty($data['confirmPassword'])){
+                    $data['confirmPasswordError']="Please enter confirm password";
+                }
                 $data1=$this->userModel->getUserById($_SESSION['UserId']);
                 if(empty($data['old_passwordError'])){
-                    $data['old_password']=password_hash($data['old_password'],PASSWORD_DEFAULT);
-                    if($data['old_password']!=$data1->Password){
-                        $data['old_passwordError']='Password is incorrect';
+                    if((password_verify($data['old_password'],$data1->Password))){
+                        if($data['new_password']===$data['confirmPassword']){
+                            $data['new_password']=password_hash($data['new_password'],PASSWORD_DEFAULT);
+//                            var_dump('hello');
+//                            exit();
+                            $this->userModel->updateProfile($data);
+                            redirect('pages/dashboard');
+                        }
+                        else{
+                            $data['confirmPasswordError']="Password does not match";
+                        }
                     }
                     else{
-                        echo '<script type="text/javascript">',
-                        'showNewPassword();',
-                        '</script>';
+                        $data['old_passwordError']="Password does not match";
                     }
 
                 }
-                $this->userModel->updateProfile($data);
+                else{
+                    $this->view('editProfile',$data);
+                }
             }
             else{
                 $this->view('editProfile');
@@ -686,7 +721,6 @@
         else{
             redirect('View/login');
         }
-//        $this->view('editProfile');
     }
 
 }

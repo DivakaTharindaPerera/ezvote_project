@@ -1,4 +1,6 @@
 <?php
+//var_dump($data);
+//exit();
 require approot.'/View/inc/VoterHeader.php';
 require approot.'/View/inc/AuthNavbar.php';
 require approot.'/View/inc/sidebar-new.php';
@@ -18,6 +20,7 @@ require approot.'/View/inc/sidebar-new.php';
             </div>
             <div class="d-flex mt-1 mx-1">
                 <input type="email" id="email" name="email" placeholder="Email" required>
+                <br>
                 <?php
                 if(isset($data['emailError'])){
                     echo "<em style='color: red'> ".$data['emailError']." </em>";
@@ -25,26 +28,35 @@ require approot.'/View/inc/sidebar-new.php';
                 ?>
             </div>
             <div class="d-flex flex-column my-1 mx-1" >
-                <label for="changePassword">Do you want to change password?</label>
-                <input type="checkbox" id="changePassword_check" name="changePassword" onclick="showPassword()" class="mt-1">
-                <div class="d-flex flex-column my-1 " id="changePassword" style="display: none">
-                        <label for="changePassword" class="mb-1">Old Password</label>
-                        <input type="password" id="old_password" name="old_password" placeholder="Password" class="mt-1" required>
+<!--                <label for="changePassword">Do you want to change password?</label>-->
+<!--                <input type="checkbox" id="changePassword_check" name="changePassword" onclick="showPassword()" class="mt-1">-->
+                <div class="d-flex flex-column my-1 " id="changePassword">
+                    <label for="changePassword" class="">Old Password</label>
+                    <input type="password" id="old_password" name="old_password" placeholder="Password" class="mt-1">
+                    <br>
+                    <?php if(isset($data['old_passwordError'])){
+                        echo "<em style='color: red'> ".$data['passwordError']." </em>";
+                    }?>
 <!--                        <input type='submit' name='submit' value='Submit' class='d-flex btn btn-primary w-25 justify-content-center align-items-center' onclick="confirmOld()">-->
                 </div>
-                <div class="d-flex flex-column my-1" id="getNewPassword" style="display: none">
-                        <label for="changePassword">New Password</label>
-                        <input type="password" id="new_password" name="new_password" placeholder="Password" required>
-<!--                        <input type='submit' name='submit' value='Submit' class='d-flex btn btn-primary w-25 justify-content-center align-items-center'>-->
+                <div class="d-flex flex-column my-1" id="getNewPassword">
+                    <label for="changePassword">New Password</label>
+                    <input type="password" id="new_password" name="new_password" placeholder="New Password" class="mb-1">
+                    <input type="password" id="confirmed_password" name="confirmed_password" placeholder="Confirm New Password">
+                    <?php if(isset($data['confirmPasswordError'])){
+                        echo "<em style='color: red'> ".$data['confirmPasswordError']." </em>";
+                    }?>
+                    <!--                        <input type='submit' name='submit' value='Submit' class='d-flex btn btn-primary w-25 justify-content-center align-items-center'>-->
                 </div>
 
             </div>
             <div class="d-flex justify-content-center align-items-center my-1">
-                <button class="btn btn-primary " onclick="savingDetails()">Save</button>
+                <input class="btn btn-primary " type="submit"></input>
             </div>
         </form>
     </div>
 </div>
 <script src="<?= urlroot?>/public/js/editProfile.js"></script>
+
 <?php require approot.'/View/inc/footer.php';?>
 

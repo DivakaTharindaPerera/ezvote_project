@@ -116,10 +116,11 @@ class User{
 
     public function updateProfile($data)
     {
-        $this->db->query('UPDATE user SET Fname = :fname, Lname = :lname, Email = :email WHERE UserId = :id');
+        $this->db->query('UPDATE user SET Fname = :fname, Lname = :lname, Email = :email,Password= :password WHERE UserId = :id');
         $this->db->bind(':fname', $data['fname']);
         $this->db->bind(':lname', $data['lname']);
         $this->db->bind(':email', $data['email']);
+        $this->db->bind(':password', $data['new_password']);
         $this->db->bind(':id', $data['id']);
         try{
             $this->db->execute();
