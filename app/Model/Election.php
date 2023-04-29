@@ -115,6 +115,7 @@ class Election extends Controller{
         
     }
 
+    
 
     public function getOngoingElections()
     {
@@ -273,6 +274,7 @@ class Election extends Controller{
         } catch (Exception $e) {
             echo $e;
         }
+
     }      
     public function findelectNameById($id){
         $this->db->query("SELECT * FROM election WHERE electionid=$id");
@@ -285,4 +287,13 @@ class Election extends Controller{
 
 }
 
+}
+
+    }  
+    
+    public function getElectionIdByVoterId($id){
+        $this->db->query("SELECT electionId FROM Voter WHERE userid = :id");
+        $this->db->bind(':id', $id);
+        return $this->db->resultSet();
+    }
 }
