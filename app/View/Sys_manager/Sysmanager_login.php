@@ -27,10 +27,6 @@
                 <div class="d-flex justify-content-center mt-1 px-1 mb-1">
                     <button type="submit" class="btn btn-primary" style="min-width: 250px">SIGN IN</button>
                 </div>
-                <!-- <div class="d-flex justify-content-center mt-1 px-1">
-                    <button type="submit" class="btn bg-white text-center" style="min-width: 250px">
-                        <img src="<?php echo urlroot;?>/public/img/google.png" alt="" style="max-width: 30px; max-height: 25px" class="mx-1">SIGN IN WITH GOOGLE</button>
-                </div> -->
         </form>
         </div>
     </div>

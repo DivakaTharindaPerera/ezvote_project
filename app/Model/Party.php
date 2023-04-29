@@ -70,6 +70,7 @@ class Party extends Controller{
         return $result;
     }
 
+
     public function findDuplicateParty($eid,$pName){
         $this->db->query(
             "SELECT * FROM ElectionParty WHERE electionId = :eid AND partyName = :pName"
@@ -148,6 +149,19 @@ class Party extends Controller{
         } catch (Exception $e) {
             echo "Something went wrong :".$e->getMessage();
             return false;
+        }
+    }
+
+
+    public function findPartyNameById($id){
+
+        $this->db->query("SELECT * FROM electionparty WHERE partyId=$id");
+    
+        try {
+            $this->db->execute();
+            return $this->db->resultSet(); // return object
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
         }
     }
 }

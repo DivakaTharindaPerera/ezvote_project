@@ -11,66 +11,32 @@
 
 
 <label for="fullname">Name:</label>
-<div class="d-flex">
+<input type="text" name="candidateName" placeholder="Name..." value="">
 
-<!-- first Name -->
-<input type="text" name="candidatename" id="candidatename" placeholder="Name...">
-<!-- <div class="error" id="firstname_err"><?php echo isset($errors['firstname']) ? $errors['firstname'] : ''; ?></div> -->
-
-<!-- last Name -->
-<!-- <input type="text" name="lastname" id="lastname" placeholder="Last Name..."> -->
-<!-- <div class="error" id="lastname_err"><?php echo isset($errors['lastname']) ? $errors['lastname'] : ''; ?></div> -->
-
-</div>
-<br>
+<br><br>
 
 <!-- Election Name -->
-<label for="election">Election:</label>
-<input type="text" name="election_name" id="election_name" placeholder="Election you wish to contest...">
-<!-- <div class="error" id="election_name_err"><?php echo isset($errors['election_name']) ? $errors['election_name'] : ''; ?></div> -->
-
-<br><br>
+<label for="email">Email:</label>
+<input type="text" name="candidateEmail" placeholder="Email address...">
 
 <!-- Position -->
-<label for="positions">Select position :</label>
-<input type="text" name="position" id="position" placeholder="Position you wish to contest...">
-
-<!-- <select name="position" id="position" class="border-1 border-dark w-25">
-  <option value="">Select...</option>
-  <option value="president">President</option>
-  <option value="wise president">Wise President</option>
-  <option value="secretary">Secretary</option>
-  <option value="tresurer">Tresurer</option>
-</select> -->
-<!-- <div class="error" id="position_err"><?php echo isset($errors['position']) ? $errors['position'] : ''; ?></div> -->
+<!-- <label for="positions">Select position :</label>
+<input type="text" name="position" id="position" placeholder="Position you wish to contest..."> -->
 
 <br><br>
 
-<!-- check if the party is existing party -->
-
-<!-- <div class="error" id="checkbox_err"><?php echo isset($errors['checkbox']) ? $errors['checkbox'] : ''; ?></div> -->
-<div class="check">
-
-
-<!-- Create new party -->
-
-<label for="party-names">Party Name:</label>
-
+<!-- <label for="party-names">Party Name:</label> -->
 
 <!-- new party name -->
-    <input type="text" class="new_party" name="party_name" id="party_name" placeholder="Party Name..."><br><br>
+    <!-- <input type="text" class="new_party" name="party_name" id="party_name" placeholder="Party Name..."><br><br> -->
     <!-- <div class="error" id="party_name_err"><?php echo isset($errors['new_party']) ? $errors['new_party'] : ''; ?></div> -->
-
-<!-- new party description -->
-
-    </div>
     <br>
-<div class="d-flex">
 
+<div class="d-flex">
 <!-- profile picture -->
     <div class="column">
         <p>Upload Profile Picture:
-          <input type="file" id="imgfile" style="color: transparent;"name="imgfile"/></p>
+          <input type="file" id="imgfile" style="color: transparent;" name="imgfile"/></p>
           
     </div>
 
@@ -81,18 +47,18 @@
 
     </div>
 </div>
-<br>
+<br><br>
 
 <!-- candidate description -->
     <label for="candidateDescription">Candidate Description:
-    <input type="text" name="candidateDescription" id="candidateDescription" placeholder="Candidate description...">
+    <input type="text" name="description" placeholder="Candidate description...">
     <!-- <div class="error" id="candidateDescription_err"><?php echo isset($errors['candidateDescription']) ? $errors['candidateDescription'] : ''; ?></div> -->
 <br><br>
 
     </label>
 <!-- msg to the voters -->
     <label for="candidate vision">Candidate Vision:    
-    <input type="text" name="msg" id="msg" placeholder="Message to the voters...">
+    <input type="text" name="vision" placeholder="Message to the voters...">
     <!-- <div class="error" id="msg_err"><?php echo isset($errors['msg']) ? $errors['msg'] : ''; ?></div> -->
 
 <br><br></label>

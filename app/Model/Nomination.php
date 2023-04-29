@@ -331,17 +331,17 @@ class Nomination extends Model
     //     return $row;
     // }
 
-    public function updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg) {
+    public function updateCandidateProfile($data) {
         // public function updateSubscriptionplan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
-            $this->db->query('UPDATE candidate SET candidateName=:candidateName,candidateEmail=:candidateEmail,position=:position,party_name=:party_name,candidateDescription=:candidateDescription,msg=:msg WHERE nominationID = :nominationID');
+            $this->db->query('UPDATE candidate SET candidateName=:candidateName,candidateEmail=:candidateEmail,description=:description, vision=:vision WHERE candidateId = :candidateId');
     
             // $this->db->bind(':nominationID',$data['nominationID']);
             $this->db->bind(':candidateName',$candidateName);
             $this->db->bind(':candidateEmail',$candidateEmail);
             // $this->db->bind(':election_name',$election_name);
-            $this->db->bind(':position',$position);
+            // $this->db->bind(':position',$position);
         // $this->db->bind(':party_names',$data['party_names']);
-            $this->db->bind(':party_name',$party_name);
+            // $this->db->bind(':party_name',$party_name);
         // $this->db->bind(':party_description',$data['party_description']);
             // $this->db->bind(':image_url',$profile_picture);
             // $this->db->bind(':file_urls',$data['identity_proof']);
@@ -355,6 +355,19 @@ class Nomination extends Model
             }else{
                 return false;
             }
+        }
+
+        public function getCandidateId($id)
+        {
+            // var_dump($id);
+            
+            $this->db->query("SELECT * FROM candidate WHERE CandidateID=$id");
+            $id=22;
+            // print_r("SELECT `Subject`,`Description` FROM objection WHERE ObjectionID=$id");
+            // $this->db->bind(':ObjectionID',$id);
+            // $this->db->execute();
+            $obj=$this->db->resultSet();
+            return $obj;
         }
 
 
@@ -375,7 +388,7 @@ class Nomination extends Model
 
         public function getObjection($id)
         {
-            var_dump($id);
+            // var_dump($id);
             
             $this->db->query("SELECT * FROM objection WHERE CandidateID=$id");
             $id=20;
@@ -387,6 +400,20 @@ class Nomination extends Model
         }
 
     public function respondToObjection($data){
+        // var_dump($data);
+        $this->db->query("UPDATE `objection` SET Respond = :Respond WHERE ObjectionID = :ObjectionID;");
+        //bind values
+        $this->db->bind(':ObjectionID',$data['ObjectionID']);
+        $this->db->bind(':Respond',$data['Respond']);
+        //execute
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function viewRespond($data){
         // var_dump($data);
         $this->db->query("UPDATE `objection` SET Respond = :Respond WHERE ObjectionID = :ObjectionID;");
         //bind values

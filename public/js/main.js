@@ -151,6 +151,7 @@ exist_party.addEventListener("change",()=>{
     }
 })
 
+
 // ************************************** discussion.js ********************************************************************
 
 
@@ -290,3 +291,4 @@ function savingDetails(){
     console.log("saving details")
     window.location.href="/ezvote/pages/editProfile";
 }
+
