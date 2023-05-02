@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="d-flex mx-1">
-                        <button type="submit" value="Sort" class="btn btn-primary ">Filter</button>
+                        <button type="submit" value="Sort" class="btn btn-primary ">SORT</button>
 
                     </div>
                 </form>
