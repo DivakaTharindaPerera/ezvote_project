@@ -7,7 +7,7 @@ require approot.'/View/inc/sidebar-new.php';
 ?>
 
 <div class="main-container">
-    <div id="Election" class="w-95 align-center d-flex flex-column p-1 " style="min-height: 92%">
+    <div id="Election" class="w-95 align-center d-flex flex-column p-1 ">
         <div class="d-flex flex-column w-75 justify-content-start align-items-center">
             <div class="title"><?= $data['election']->Title?></div>
             <div id="desc-reg" class="w-50 d-flex flex-column px-1 align-items-center bg-white border-radius-2">
@@ -29,7 +29,7 @@ require approot.'/View/inc/sidebar-new.php';
                 </div>
             </div>
         </div>
-        <div id="content" class="flex-column w-80 ">
+        <div id="content" class="flex-column w-100 ">
             <div id="scheduled" class="mt-1 d-flex justify-content-evenly">
                 <div id="from" class="card">
                     <div class="justify-content-center sub-title mb-1">Commencing</div>
@@ -84,11 +84,11 @@ require approot.'/View/inc/sidebar-new.php';
                 <div class="title">
                     Candidates
                 </div>
-                <div id="competitors" class="d-flex flex-wrap w-100">
+                <div id="competitors" class="d-flex flex-wrap w-100 ml-5">
                     <?php foreach ($data['positions'] as $position){
                         $position_id=$position->ID; ?>
-                    <div id="positions" class="d-flex w-100 flex-wrap mb-2" style="gap: 2rem">
-                        <div id="president" class="d-flex flex-column w-45" style="gap: 0.2rem">
+                    <div id="positions" class="d-flex flex-wrap mb-2 w-100" style="gap: 2rem">
+                        <div id="president" class="d-flex flex-column w-80 " style="gap: 0.2rem">
                             <div class="sub-title"><?= $position->positionName?></div>
                             <?php $i=0;
                             foreach ($data['candidates'] as $candidate){
@@ -102,7 +102,6 @@ require approot.'/View/inc/sidebar-new.php';
                                 <div id="btn-panel" class="mr-1">
                                     <button class=" btn btn-primary">Q & A</button>
                                     <button class=" btn btn-primary" onclick="openPopup('<?=$candidate->candidateId?>')">Make Objection</button>
-<!--                                    --><?php //var_dump($candidate);?>
                                     <div class="dialog-box-outer" id="popup">
                                         <div class="popup mx-1 my-1 px-1 py-1 min-w-40 min-h-50" >
                                             <div class="title">Make Objection</div>

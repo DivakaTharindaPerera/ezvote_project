@@ -75,8 +75,9 @@ class Pages extends Controller
                     } else {
                         continue;
                     }
+                }
 
-                    foreach($r_ongoing as $row){
+                foreach($r_ongoing as $row){
                         $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
                         foreach ($v_row as $voter){
                             if($voter->userId==$_SESSION["UserId"]){
@@ -89,7 +90,7 @@ class Pages extends Controller
 //                    print_r($v_ongoing_filtered);
 //                    exit;
 
-                    foreach($r_ongoing as $row){
+                foreach($r_ongoing as $row){
                         $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
                         foreach ($c_row as $candidate){
                             if($candidate->userId==$_SESSION["UserId"]){
@@ -103,7 +104,7 @@ class Pages extends Controller
 //                        }
 
                     }
-                }
+
             }
             $r_upcoming = $this->electionModel->getUpcomingElections();
             if ($r_upcoming != null) {
@@ -113,8 +114,9 @@ class Pages extends Controller
                     } else {
                         continue;
                     }
+                }
 
-                    foreach($r_upcoming as $row){
+                foreach($r_upcoming as $row){
                         $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
                         foreach ($v_row as $voter){
                             if($voter->userId==$_SESSION["UserId"]){
@@ -127,7 +129,7 @@ class Pages extends Controller
 //                            $v_upcoming_filtered[] = $row;
 //                        }
                     }
-                    foreach($r_upcoming as $row){
+                foreach($r_upcoming as $row){
                         $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
                         foreach ($c_row as $candidate){
                             if($candidate->userId==$_SESSION["UserId"]){
@@ -141,7 +143,6 @@ class Pages extends Controller
 //                        }
 
                     }
-                }
             }
             $r_completed = $this->electionModel->getCompletedElections();
             if ($r_completed != null) {
@@ -151,10 +152,11 @@ class Pages extends Controller
                     } else {
                         continue;
                     }
+                }
 
-                    foreach($r_completed as $row){
-                        $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
-                        foreach ($v_row as $voter){
+                foreach($r_completed as $row){
+                    $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
+                    foreach ($v_row as $voter){
                             if($voter->userId==$_SESSION["UserId"]){
                                 $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
                                 $v_completed_filtered[] = $row;
@@ -164,23 +166,23 @@ class Pages extends Controller
 //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
 //                            $v_completed_filtered[] = $row;
 //                        }
-                    }
-                    foreach($r_completed as $row){
-                        $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
-                        foreach ($c_row as $candidate){
-                            if($candidate->userId==$_SESSION["UserId"]){
-                                $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
-                                $c_completed_filtered[] = $row;
-                            }
+                }
+                foreach($r_completed as $row){
+                    $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                    foreach ($c_row as $candidate){
+                        if($candidate->userId==$_SESSION["UserId"]){
+                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                            $c_completed_filtered[] = $row;
                         }
+                    }
 //                        if($c_row[0]->userId==$_SESSION["UserId"]){
 //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
 //                            $c_completed_filtered[] = $row;
 //                        }
 
-                    }
                 }
             }
+
             $voters = $this->voterModel->getVotersByUserId($_SESSION["UserId"]);
 
             $this->view('Voter/viewAllElection', [
@@ -672,9 +674,6 @@ class Pages extends Controller
             if($_SERVER['REQUEST_METHOD']==="POST"){
 
                 $candidates = $_POST['candidate'];
-//                echo '<pre>';
-//                print_r($candidates);
-//                exit();
                 if (empty($candidates)) {
                     $data['candidateError'] = "Please select at least one candidate";
                 }
@@ -864,6 +863,8 @@ class Pages extends Controller
 
 
     }
+
+    //services page
     public function services()
     {
         $this->view('services');
@@ -873,69 +874,85 @@ class Pages extends Controller
     public function editProfile()
     {
         if($this->isLoggedIn()){
+            $userID=$_SESSION['UserId'];
+//            var_dump($_SESSION);
+////                var_dump($_FILES);
+//            exit();
             if ($_SERVER['REQUEST_METHOD']==='POST'){
-//                var_dump($_POST);
-//                exit();
+                if(isset($_FILES['profilePhoto'])){
+                    $image=$_FILES['profilePhoto']['name'];
+                }
                 $data=[
                     'id'=>$_SESSION['UserId'],
+                    'profile_pic'=>$_FILES['profilePhoto'],
                     'fname'=>trim($_POST['fname']),
                     'lname'=>trim($_POST['lname']),
                     'email'=>trim($_POST['email']),
                     'old_password'=>trim($_POST['old_password']),
                     'new_password'=>trim($_POST['new_password']),
                     'confirmPassword'=>trim($_POST['confirmed_password']),
-                    'fnameError'=>'',
-                    'lnameError'=>'',
-                    'emailError'=>'',
                     'old_passwordError'=>'',
                     'new_passwordError'=>'',
                     'confirmPasswordError'=>''
                 ];
-                if(empty($data['fname'])){
-                    $data['fnameError']="Please enter first name";
-                }
-                if(empty($data['lname'])){
-                    $data['lnameError']="Please enter last name";
-                }
-                if(empty($data['email'])){
-                    $data['emailError']="Please enter email";
-                }
 //                else{
 //                    if($this->userModel->findUserByEmail($data['email'])){
 //                        $data['emailError']="Email already taken";
 //                    }
 //                }
-                if(empty($data['old_password'])){
+//                if(empty($data['old_password'])){
+//                    $data['old_passwordError']="Please enter old password";
+//                }
+                if(!empty($data['fname']) && !empty($data['lname']) && !empty($data['email']) && empty($data['old_password']) && !empty($data['new_password'])){
                     $data['old_passwordError']="Please enter old password";
                 }
-                if(empty($data['new_password'])){
-                    $data['new_passwordError']="Please enter new password";
-                }
-                if(empty($data['confirmPassword'])){
+                if(!empty($data['fname']) && !empty($data['lname']) && !empty($data['email']) && !empty($data['old_password']) && !empty($data['new_password']) && empty($data['confirmPassword'])){
                     $data['confirmPasswordError']="Please enter confirm password";
                 }
                 $data1=$this->userModel->getUserById($_SESSION['UserId']);
                 if(empty($data['old_passwordError'])){
-                    if((password_verify($data['old_password'],$data1->Password))){
-                        if($data['new_password']===$data['confirmPassword']){
-                            $data['new_password']=password_hash($data['new_password'],PASSWORD_DEFAULT);
+                    if(empty($data['old_password'])){
+                        $data=[
+                            'id'=>$_SESSION['UserId'],
+                            'profile_pic'=>$_POST['profilePhoto'],
+                            'fname'=>trim($_POST['fname']),
+                            'lname'=>trim($_POST['lname']),
+                            'email'=>trim($_POST['email']),
+                            'old_password'=>$data1->Password,
+                            'new_password'=>$data1->Password,
+                            'confirmPassword'=>$data1->Password,
+                            'old_passwordError'=>'',
+                            'new_passwordError'=>'',
+                            'confirmPasswordError'=>''
+                        ];
+                        $this->userModel->updateProfile($data);
+                        redirect('pages/dashboard');
+                    }
+                    else {
+                        if ((password_verify($data['old_password'], $data1->Password))) {
+                            if ($data['new_password'] === $data['confirmPassword']) {
+                                $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
 //                            var_dump('hello');
 //                            exit();
-                            $this->userModel->updateProfile($data);
-                            redirect('pages/dashboard');
+                                $this->userModel->updateProfile($data);
+                                redirect('pages/dashboard');
+                            }
+                            else {
+                                $data['confirmPasswordError'] = "Password does not match";
+                            }
                         }
                         else{
-                            $data['confirmPasswordError']="Password does not match";
+                            $data['old_passwordError']="Password does not match";
                         }
                     }
-                    else{
-                        $data['old_passwordError']="Password does not match";
-                    }
-
+                    $_SESSION['fname']=$data['fname'];
+                    $_SESSION['lname']=$data['lname'];
+                    $_SESSION['email']=$data['email'];
                 }
-                else{
-                    $this->view('editProfile',$data);
-                }
+//                else{
+//                    $this->view('editProfile',$data);
+//                }
+                $this->view('editProfile',$data);
             }
             else{
                 $this->view('editProfile');
@@ -946,7 +963,18 @@ class Pages extends Controller
         }
     }
 
+    public function uploadProfileImage()
+    {
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            $data=[
+                'id'=>$_SESSION['UserId'],
+                'profile_pic'=>$_FILES['profile_pic']
+            ];
+            $this->userModel->uploadProfileImage($data);
+            echo json_encode(['status'=>true,'message'=>'Profile picture uploaded successfully']);
+        }
+    }
+
 }
 
-//    service page
 
