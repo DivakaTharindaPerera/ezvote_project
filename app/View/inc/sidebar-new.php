@@ -89,12 +89,6 @@
                         <span class="item">Edit profile</span>
                     </a>
                 </li>
-                <li>
-                    <a href="<?php echo urlroot; ?>/Candidates/candidateProfile">
-                        <span class="icon"><i class="fas fa-cog"></i></span>
-                        <span class="item">Candidate</span>
-                    </a>
-                </li>
             </ul>
         </div>
 
