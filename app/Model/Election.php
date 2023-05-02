@@ -289,6 +289,12 @@ class Election extends Controller{
 
 }
 
+// public function getAllElectionNames(){
+//     $this->db->query("SELECT * FROM election");
+//     $electionName=$this->db->resultSet();
+//     return $electionName;
+// }
+
 }
 
     }  
