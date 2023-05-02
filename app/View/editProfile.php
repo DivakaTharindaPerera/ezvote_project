@@ -10,9 +10,10 @@ require approot.'/View/inc/sidebar-new.php';
     <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mb-2 w-50">
         <form action="/ezvote/pages/editProfile" method="post" class="border border-3 border-radius-2 w-100" enctype="multipart/form-data" >
             <div class="d-flex align-items-center justify-content-center mt-1 img-container">
+
                 <img id="profile_pic_img"  src="<?=$_SESSION['profile_picture']?>" alt="" class="max-h-20 max-w-20" style="border-radius: 50%" onclick="changeImage()">
 <!--                <div class="absolute">-->
-<!--                    <i class="fa-regular fa-pen-to-square absolute icon"></i>-->
+<!--                    <i class="fa-regular fa-pen-to-square absolute icon "></i>-->
 <!--                </div>-->
                 <input type="text" id="profile_pic" name="profilePhoto" accept="image/*" hidden>
             </div>
