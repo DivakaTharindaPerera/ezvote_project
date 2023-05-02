@@ -331,32 +331,6 @@ class Nomination extends Model
     //     return $row;
     // }
 
-    public function updateCandidateProfile($data) {
-        // public function updateSubscriptionplan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
-            $this->db->query('UPDATE candidate SET candidateName=:candidateName,candidateEmail=:candidateEmail,description=:description, vision=:vision WHERE candidateId = :candidateId');
-    
-            // $this->db->bind(':nominationID',$data['nominationID']);
-            $this->db->bind(':candidateName',$candidateName);
-            $this->db->bind(':candidateEmail',$candidateEmail);
-            // $this->db->bind(':election_name',$election_name);
-            // $this->db->bind(':position',$position);
-        // $this->db->bind(':party_names',$data['party_names']);
-            // $this->db->bind(':party_name',$party_name);
-        // $this->db->bind(':party_description',$data['party_description']);
-            // $this->db->bind(':image_url',$profile_picture);
-            // $this->db->bind(':file_urls',$data['identity_proof']);
-            $this->db->bind(':description',$description);
-            $this->db->bind(':vision',$vision);
-            // $this->db->bind(':nominationID',$nominationID);
-
-    
-            if($this->db->execute()){
-                return true;
-            }else{
-                return false;
-            }
-        }
-
         public function getCandidateId($id)
         {
             // var_dump($id);
@@ -369,22 +343,6 @@ class Nomination extends Model
             $obj=$this->db->resultSet();
             return $obj;
         }
-
-
-        // public function getById($candidateId)
-        // {
-        //     $this->$db = Database::getInstance();
-        //     $this->db->query('SELECT candidateName,Title,partyName,positionName,description,vision
-        //             FROM candidate
-        //             JOIN election ON candidate.electionid = election.ElectionId
-        //             JOIN electionparty ON candidate.partyId = elctionparty.partyId
-        //             JOIN electionposition ON candidate.positionId = electionposition.ID
-        //             WHERE candidate.candidateId = :candidateId');
-        //     $stmt = $this->$db->prepare($this->db->query);
-        //     $stmt->execute([':candidateId' => $candidateId]);
-        //     $candidateData = $stmt->fetch(PDO::FETCH_ASSOC);
-        //     return $candidateData;
-        // }
 
         public function getObjection($id)
         {

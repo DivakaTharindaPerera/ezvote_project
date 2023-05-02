@@ -164,5 +164,12 @@ class Party extends Controller{
             echo "Something went wrong :".$e->getMessage();
         }
     }
+
+    public function getElectionParties(){
+        $this->db->query("SELECT * FROM electionparty;");
+// var_dump($this->db->query);
+// exit;
+        return $this->db->resultSet();
+    }
 }
 

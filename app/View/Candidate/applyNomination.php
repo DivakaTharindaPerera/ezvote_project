@@ -5,7 +5,6 @@
 
     <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light" style=" margin-top:60px; ">
         <form action="/ezvote/Candidates/nomination_apply" method="POST" enctype='multipart/form-data' >
-        <!-- enctype="multipart/form-data" -->
         
     <h2 class="text-center">Apply Nominations</h2>
     <br>
@@ -39,39 +38,41 @@
 
 <!-- Election Name -->
 <label for="election">Election<span class="text-danger">*</span> :</label>
-<input type="text" name="election_name" id="election_name" placeholder="Election you wish to contest...">
-<em class="text-danger"><?php if(isset($data['election_err'])){ echo $data['election_err']; } ?></em>
 
+<select name="election_name" class="border-1 border-dark w-25">
+        <?php foreach ($names as $name){ ?>
+<option value="<?php echo $name->Title ?>"><?php echo $name->Title ?></option>
+        <?php } ?> 
+</select>
 <br><br>
 
 <!-- Position -->
 <label for="positions">Select position<span class="text-danger">*</span> :</label>
 
 <select name="position" id="position" class="border-1 border-dark w-25">
-  <option value="">Select...</option>
-  <option value="president">President</option>
-  <option value="wise president">Wise President</option>
-  <option value="secretary">Secretary</option>
-  <option value="Treasurer">Treasurer</option>
+        <?php foreach ($positions as $position){ ?>
+<option value="<?php echo $position->positionName ?>"><?php echo $position->positionName ?></option>
+        <?php } ?> 
 </select>
-<em class="text-danger"><?php if(isset($data['position_err'])){ echo $data['position_err']; } ?></em>
-
 <br><br>
 
+<!-- party name --> 
 <label for="party-names">Party Name<span class="text-danger">*</span> :</label>
 
+<select name="party_name" id="party_name" class="border-1 border-dark w-25">
+        <?php foreach ($parties as $party){ ?>
+<option value="<?php echo $party->partyName ?>"><?php echo $party->partyName ?></option>
+        <?php } ?> 
+</select>
+<br><br>
 
-<!-- party name -->
-    <input type="text" class="new_party" name="party_name" id="party_name" placeholder="Party Name..."><br><br>
-    <em class="text-danger"><?php if(isset($data['party_err'])){ echo $data['party_err']; } ?></em>
-    <br>
 <div class="d-flex">
 
 <!-- profile picture -->
     <div class="column">
         <p>Upload Profile Picture<span class="text-danger">*</span> :
-          <input type="file" id="imgfile" style="color: transparent;"name="imgfile"/></p>
-          <em class="text-danger"><?php if(isset($data['profilepic_err'])){ echo $data['profilepic_err']; } ?></em>
+        <input type="file" id="imgfile" style="color: transparent;"name="imgfile"/></p>
+        <em class="text-danger"><?php if(isset($data['profilepic_err'])){ echo $data['profilepic_err']; } ?></em>
     </div>
 
 <!-- upload identity proof -->

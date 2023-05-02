@@ -78,6 +78,13 @@
                         <span class="item">Edit profile</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="<?php echo urlroot; ?>/Candidates/partyRequests">
+                        <span class="icon"><i class="fas fa-handshake-simple"></i></span>
+                        <span class="item">Party Requests</span>
+                    </a>
+                </li>
             </ul>
         </div>
 
