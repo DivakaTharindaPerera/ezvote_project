@@ -24,6 +24,7 @@ class Candidates extends Controller
         }else{
         if (isset($_POST['save'])) {
 
+
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             // var_dump($_POST);
             $elect_id = $this->nominateModel->getElect_Id($_POST['election_name']);
@@ -438,4 +439,3 @@ exit;
     // }
 
 }
-

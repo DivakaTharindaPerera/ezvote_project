@@ -46,6 +46,23 @@ class Objection extends Model
 //        }
 //        $this->db->execute();
 //    }
+
+    public function insertObjection($data){
+        $this->db->query('INSERT INTO objection (Subject,Description,ElectionID,CandidateID,VoterID) VALUES (:Subject,:Description,:ElectionID,:CandidateID,:VoterID)');
+        $this->db->bind(':Subject',$data['subject']);
+        $this->db->bind(':Description',$data['description']);
+        $this->db->bind(':ElectionID',$data['electionId']);
+        $this->db->bind(':CandidateID',$data['candidateId']);
+        $this->db->bind(':VoterID',$data['voterId']);
+
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function DeleteObjection($id)
     {
         $this->db->query('DELETE FROM objection WHERE ObjectionID=:ObjectionID');
