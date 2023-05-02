@@ -21,6 +21,7 @@ class Votings extends Controller
         $this->partyModel = $this->model('Party');
         $this->encryptModel = $this->model('userEncrypt');
         $this->voteModel = $this->model('Vote');
+        $this->userModel=$this->model('user');
     }
 
     public function otpVerify()
@@ -37,6 +38,7 @@ class Votings extends Controller
             $partyRow = $this->partyModel->getPartiesByElectionId($eid);
 
             $voterRow = $this->voterModel->getVoterByUserIdAndElectionId($_SESSION['UserId'], $eid);
+            $users=$this->userModel->getUsers();
 
             $voteData = [
                 'vid' => $row->voterId,
@@ -46,7 +48,8 @@ class Votings extends Controller
                 'election' => $electionRow,
                 'parties' => $partyRow,
                 'voter' => $voterRow,
-                'stat' => 0
+                'stat' => 0,
+                'users'=>$users
             ];
 
             if($electionRow->StatVisibality == 1){

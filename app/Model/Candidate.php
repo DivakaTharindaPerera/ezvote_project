@@ -129,6 +129,7 @@ class Candidate extends Controller
 
     public function deleteCandidate($id)
     {
+
         $this->db->query(
             "DELETE FROM Candidate
             WHERE candidateId = :1
@@ -251,10 +252,12 @@ class Candidate extends Controller
         return $candidate;
     }
 
+
     public function getCandidateProfile($candidate_id)
     {
 
         $this->db->query("SELECT * FROM Candidate WHERE userId = $candidate_id");
+
         try {
             $this->db->execute();
             return $this->db->resultSet();
@@ -262,6 +265,7 @@ class Candidate extends Controller
             echo "Something went wrong :" . $e->getMessage();
         }
     }
+
 
     public function updateCandidateProfile($data)
     {
@@ -282,3 +286,4 @@ class Candidate extends Controller
         }
     }
 }
+

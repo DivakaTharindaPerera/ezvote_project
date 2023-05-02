@@ -71,6 +71,7 @@ class Conference extends Model
             "exp" => time() + 3600 //60 seconds as suggested
 
         );
+
         $getJWTKey = JWT::encode($token, API_SECRET);
         $headers = array(
             "authorization: Bearer " . $getJWTKey,
@@ -81,7 +82,6 @@ class Conference extends Model
         $fieldsArr = json_encode($createMeetingArr);
 //        Remove \ from the $fieldsArr
         $fieldsArr = str_replace("\\", "", $fieldsArr);
-//        print_r($fieldsArr);
 
         $ch = curl_init();
         curl_setopt_array($ch, array(
@@ -97,10 +97,12 @@ class Conference extends Model
         ));
 
         $result = curl_exec($ch);
+
         $err = curl_error($ch);
         curl_close($ch);
         if (!$result)
         {
+
             return $err;
         }
         return json_decode($result);

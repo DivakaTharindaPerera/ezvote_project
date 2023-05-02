@@ -63,7 +63,7 @@ class Controller
                     $_SESSION["fname"] = $user->Fname;
                     $_SESSION["lname"] = $user->Lname;
                     $_SESSION["email"] = $user->Email;
-
+                    $_SESSION["profile_picture"] = $user->ProfilePicture;
                     // header('location: '.urlroot.'/Pages/dashboard');
                     redirect('Pages/dashboard');
                 } else {

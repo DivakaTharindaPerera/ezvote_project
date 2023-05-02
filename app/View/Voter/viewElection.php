@@ -7,7 +7,7 @@ require approot . '/View/inc/sidebar-new.php';
 ?>
 
 <div class="main-container">
-    <div id="Election" class="w-95 align-center d-flex flex-column p-1 " style="min-height: 92%">
+    <div id="Election" class="w-95 align-center d-flex flex-column p-1 ">
         <div class="d-flex flex-column w-75 justify-content-start align-items-center">
             <div class="title"><?= $data['election']->Title ?></div>
             <div id="desc-reg" class="w-50 d-flex flex-column px-1 align-items-center bg-white border-radius-2">
@@ -32,7 +32,7 @@ require approot . '/View/inc/sidebar-new.php';
                 </div>
             </div>
         </div>
-        <div id="content" class="flex-column w-80 ">
+        <div id="content" class="flex-column w-100 ">
             <div id="scheduled" class="mt-1 d-flex justify-content-evenly">
                 <div id="from" class="card">
                     <div class="justify-content-center sub-title mb-1">Commencing</div>
@@ -91,6 +91,7 @@ require approot . '/View/inc/sidebar-new.php';
                 <div class="title">
                     Candidates
                 </div>
+
                 <div id="competitors" class="d-flex flex-wrap w-100">
                     <?php foreach ($data['positions'] as $position) {
                         $position_id = $position->ID; ?>
@@ -113,6 +114,7 @@ require approot . '/View/inc/sidebar-new.php';
                                                                                             ?>
                                                 <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View</button>
                                             </div>
+
                                         </div>
                                     <?php } ?>
                                 <?php } ?>
