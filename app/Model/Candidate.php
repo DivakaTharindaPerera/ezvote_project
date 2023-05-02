@@ -222,5 +222,23 @@ class Candidate extends Controller{
         }
     }
 
+    public function updateCandidateProfile($data) {
+        // var_dump($data);
+        // exit;
+        $this->db->query("UPDATE `candidate` SET candidateName=:candidateName, `description`=:description, vision=:vision WHERE userId = :candidateId");
+        $this->db->bind(':candidateId',$data['candidateId']);
+        $this->db->bind(':candidateName',$data['candidateName']);
+        // $this->db->bind(':image_url',$profile_picture);
+        // $this->db->bind(':file_urls',$data['identity_proof']);
+        $this->db->bind(':description',$data['description']);
+        $this->db->bind(':vision',$data['vision']);
+        if($this->db->execute()){
+            
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }

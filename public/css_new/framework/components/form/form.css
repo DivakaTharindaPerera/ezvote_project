@@ -66,4 +66,29 @@ input[type="checkbox"]{
     border: none;
 }
 
+input::file-selector-button {
+    background-image: linear-gradient(
+      to right,
+      #0f0e0e,
+      #319197 100%,
+      #319197 200%
+    );
+    /* background-position-x: 0%; */
+    background-size: 200%;
+    border: 0;
+    border-radius: 8px;
+    color: #ffff;
+    padding: 0.5rem 1rem;
+    text-shadow: 0 1px 1px #333;
+    transition: all 0.25s;
+    padding-left: 20px;
+  }
+  input::file-selector-button:hover {
+    background-position-x: 100%;
+    transform: scale(1.1);
+  }
+  
+  input[type='file'] {
+    color: rgba(0, 0, 0, 0)
+  }
 
