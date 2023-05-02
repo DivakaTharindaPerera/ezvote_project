@@ -161,4 +161,20 @@ class Conference extends Model
         $this->db->query("SELECT * FROM Conferences WHERE SupervisorID = $userID");
         return $this->db->resultSet();
     }
+
+    public function getCandidatesByConferenceId($conferenceID)
+    {
+        $this->db->query("SELECT candidateID FROM conference_candidate WHERE conferenceID = :ConferenceID");
+        $this->db->bind(':ConferenceID',$conferenceID);
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
+
+    public function getConferencesByCandidateId($candidateid)
+    {
+        $this->db->query("SELECT * FROM conference INNER JOIN conference_candidate cc ON cc.conferenceID=conference.conferenceID WHERE cc.candidateID= :CandidateID");
+        $this->db->bind(':CandidateID',$candidateid);
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
 }

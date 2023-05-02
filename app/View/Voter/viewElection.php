@@ -123,6 +123,7 @@ require approot . '/View/inc/sidebar-new.php';
             </div>
         </div>
     </div>
+
     <div class="popup-window-1 bg-secondary text-center border-1 border-radius-2" id="popupSubmission">
         <div class="popup-window-1-content bg-light border-radius-2 p-2 d-flex flex-column w-75">
             <div class="title">Make Objection</div>
@@ -148,6 +149,7 @@ require approot . '/View/inc/sidebar-new.php';
         </div>
     </div>
     <a href="/ezvote/Pages/addConference/<?= $data['election']->ElectionId ?>">Schedule a meeting</a>
+
 </div>
 <script>
     function makeObjection(id = null) {

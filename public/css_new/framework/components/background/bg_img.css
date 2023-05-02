@@ -15,7 +15,8 @@
     height: 600px;
     background-position: center; 
     background-repeat: no-repeat; 
-    width: 94rem;
+    min-width: 105rem;
+    max-width: 105rem;
   }
 
   .bg_pricing {
@@ -24,7 +25,7 @@
     height: 600px;
     background-position: center; 
     background-repeat: no-repeat; 
-    width: 100rem;
+    min-width: 100%;
     filter: brightness(70%);
   }
 
@@ -34,7 +35,9 @@
     height: 600px;
     background-position: center; 
     background-repeat: no-repeat; 
-    width: 94rem;
+    min-width: 102rem;
+    max-width: 102rem;
+
   }
 
 .bg_services {
@@ -55,9 +58,10 @@
     height: 600px;
     background-position: center; 
     background-repeat: no-repeat; 
-    width: 94rem;
+    min-width: 106rem;
+    max-width: 106rem;
     filter: brightness(70%);
-    margin-top: 30px;
+    /*margin-top: 30px;*/
   }
 
   .bg_imgs {

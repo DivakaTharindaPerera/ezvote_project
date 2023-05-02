@@ -119,6 +119,7 @@ class Candidate extends Controller{
         }
     }
 
+
     public function deleteCandidate($id){
         $this->db->query(
             "DELETE FROM Candidate
@@ -153,6 +154,7 @@ class Candidate extends Controller{
             echo "Something went wrong :".$e->getMessage();
         }
     }
+
 
     public function updateCandidateWithUser($data){
         $this->db->query(
@@ -225,5 +227,25 @@ class Candidate extends Controller{
             $email->sendEmail($data);
     }
 
+
+    public function getCandidateIDByUserId()
+    {
+        $this->db->query('SELECT candidateId FROM candidate WHERE userId = :user_id');
+        $this->db->bind(':user_id', $_SESSION['user_id']);
+        $this->db->execute();
+        $candidate = $this->db->resultSet();
+        return $candidate;
+
+    public function getCandidateProfile($candidate_id){
+       
+        $this->db->query("SELECT * FROM candidate WHERE userId = $candidate_id");
+        try {
+            $this->db->execute();
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+
+    }
 
 }

@@ -179,8 +179,10 @@ class Election extends Controller{
     public function getCandidatesByElectionId($id)
     {
         $election_Id = $id;
-        $this->db->query("SELECT * FROM Candidate WHERE electionid ='" . $election_Id . "' order by positionid");
+        $this->db->query("SELECT * FROM candidate WHERE electionid ='" . $election_Id . "' order by positionid");
         $row = $this->db->resultSet();
+//        var_dump($row);
+//        exit();
         return $row;
 
     }
@@ -256,6 +258,7 @@ class Election extends Controller{
     }
 
 
+
     public function getVotersByElectionID($id)
     {
         $election_Id = $id;
@@ -273,6 +276,21 @@ class Election extends Controller{
         } catch (Exception $e) {
             echo $e;
         }
+
+    }      
+    public function findelectNameById($id){
+        $this->db->query("SELECT * FROM election WHERE electionid=$id");
+    try {
+        $this->db->execute();
+        return $this->db->resultSet(); // return object
+    } catch (Exception $e) {
+        echo "Something went wrong :".$e->getMessage();
+    }
+
+}
+
+}
+
     }  
     
     public function getElectionIdByVoterId($id){

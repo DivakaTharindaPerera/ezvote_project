@@ -7,6 +7,12 @@ class Candidates extends Controller
         $this->nominateModel = $this->model('Nomination');
         $this->objectModel = $this->model('Objection');
         $this->discussionModel = $this->model('discussion');
+        $this->candidateModel = $this->model('candidate');
+        $this->electModel = $this->model('Election');
+        $this->positionModel = $this->model('electionPositions');
+        $this->partyModel = $this->model('Party');
+
+        
     }
 
 
@@ -314,6 +320,21 @@ class Candidates extends Controller
         if (!isset($_SESSION["UserId"])) {
             header("Location: " . urlroot . "/View/Login");
             exit;
+        }else{
+           
+            
+            $candidate_id=$_SESSION["UserId"];
+            
+            
+            $res = $this->candidateModel->getCandidateProfile($candidate_id);
+            
+            $elect= $this->electModel->findelectNameById($res[0]->electionid);
+            $position= $this->positionModel->findPositionNameById($res[0]->positionId);
+            $party= $this->partyModel->findPartyNameById($res[0]->partyId);
+            // var_dump($party);
+            // die();
+            $this->view('Candidate/candidateProfile', ['res' => $res,'elect' => $elect, 'party' => $party, 'position' => $position]);
+            
         }
         echo "<h3> Welcome " . htmlspecialchars($_SESSION["fname"]) . " " . htmlspecialchars($_SESSION["lname"]) . "</h3>";
         // $r=$this->nominateModel->RetrieveAll();
@@ -625,6 +646,15 @@ class Candidates extends Controller
 
     //             }
     //         }
+
+
+    // public function viewprofile($candidateId)
+    // {
+    //     $candidateData = Nomination::getById($candidateId);
+    //     $view = new View('candidate/profile');
+    //     $view->setData('candidateData', $candidateData);
+    //     $view->render();
+    // }
 
 
     public function viewprofile($candidateId)
