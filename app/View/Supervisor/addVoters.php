@@ -21,7 +21,19 @@
                <button id="addsinglevoter" class="mx-1 btn btn-primary" onclick="addSingleVoter()">ADD VOTER</button>
            </div>
 <!--           <br>-->
-           <div class="d-flex align-items-center justify-content-center mx-1 my-1 btn btn-info">
+           <div class="d-flex align-items-center justify-content-center mx-1 my-1 btn btn-info flex-column text-center">
+                <div class="text-xl text-danger mb-1">
+                    <i class="fas fa-info-circle"></i>
+                    Very important
+                    <p>
+                        Please provide the voters list in a text file with the following format: <br>
+                            * use the format 'name'-'email'-'value of the vote'<br>
+                            * each voter in a new line <br>
+                            * the file should be in .txt format <br>
+                            * do not provide empty lines <br>
+                    </p>
+                    
+                </div>
                <input type="file" name="csvupload" id="csvupload"  accept=".txt">
                <!-- format :'name'-'email'-'value of the vote' -->
            </div>
