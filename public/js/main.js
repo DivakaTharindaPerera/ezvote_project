@@ -290,3 +290,4 @@ function savingDetails(){
     console.log("saving details")
     window.location.href="/ezvote/pages/editProfile";
 }
+

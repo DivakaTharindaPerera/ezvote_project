@@ -11,7 +11,7 @@
 
 
 <label for="fullname">Name:</label>
-<input type="text" name="candidateName" placeholder="Name...">
+<input type="text" name="candidateName" placeholder="Name..." value="">
 
 <br><br>
 

@@ -618,6 +618,7 @@ class Pages extends Controller
             foreach ($data as $candidateID){
                 $row=$this->conferenceModel->getConferencesByCandidateId($candidateID);
                 $data2[]=$row;
+
             }
 
 //            var_dump($data);

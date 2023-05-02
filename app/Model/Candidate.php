@@ -225,6 +225,7 @@ class Candidate extends Controller{
             $email->sendEmail($data);
     }
 
+
     public function getCandidateIDByUserId()
     {
         $this->db->query('SELECT candidateId FROM candidate WHERE userId = :user_id');
@@ -234,4 +235,15 @@ class Candidate extends Controller{
         return $candidate;
     }
 
+    public function getCandidateProfile($candidate_id){
+
+        $this->db->query("SELECT * FROM candidate WHERE userId = $candidate_id");
+        try {
+            $this->db->execute();
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+
+    }
 }
