@@ -9,6 +9,8 @@ class Elections extends Controller
     private $candidateModel;
     private $emailModel;
     private $logModel;
+    private $objectionModel;
+    private $removedCandidateModel;
 
     public function __construct()
     {
@@ -20,6 +22,8 @@ class Elections extends Controller
         $this->partyModel = $this->model('Party');
         $this->candidateModel = $this->model('Candidate');
         $this->logModel = $this->model('log');
+        $this->objectionModel = $this->model('Objection');
+        $this->removedCandidateModel = $this->model('removedCandidate');
     }
 
     public function sendEmail()
@@ -237,6 +241,10 @@ class Elections extends Controller
         }
     }
 
+    public function addParty(){
+        
+    }
+
     public function insertParty()
     {
         if (!$this->isLoggedIN()) {
@@ -251,7 +259,6 @@ class Elections extends Controller
                 for ($k = 0; $k < $count; $k++) {
                     echo $electionId . "-" . trim($_POST[$k . "party"]) . "-" . trim($_POST[$k . "name"]) . "-" . trim($_POST[$k . "email"]) . "-" . trim($_POST[$k . "position"]) . "<br>";
                 }
-
                 for ($i = 0; $i < $partyCount; $i++) {
                     $data = [
                         'electionId' => $electionId,
@@ -1048,6 +1055,60 @@ class Elections extends Controller
 
             }
 
+        }
+    }
+
+    public function objectionSeen($id){
+        $dataset = json_decode(file_get_contents('php://input'), true);
+        $status = $this->objectionModel->setObjectionSeen($dataset['id']);
+        if($status == 20){
+            $data['msg'] = 'success';
+        }else{
+            $data['msg'] = $status;
+        }
+        echo json_encode($data);
+        return;
+    }
+
+    public function removeCanidateFromObjections(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $cid = trim($_POST['cid']);
+            $objections = $this->objectionModel->getObjectionsByCandidateId($cid);
+            foreach($objections as $objection){
+                $action = $this->objectionModel->setActionOnObjection($objection->ObjectionID, "Candidate has been removed from the election");
+                if($action == '1'){
+                    continue;
+                }else{
+                    die($action);
+                }
+            }
+            $candidate = $this->candidateModel->getCandidateByCandidateId($cid);
+            $data =[
+                'id'=>$cid,
+                'email'=>$candidate->candidateEmail,
+                'name'=>$candidate->candidateName,
+                'eid'=>$candidate->electionid,
+                'pid'=>$candidate->positionId
+            ];
+            $electionRow = $this->electionModel->getElectionByElectionId($data['eid']);
+            if($this->removedCandidateModel->addRemovedCandidate($data)){
+                if($this->candidateModel->deleteCandidate($cid)){
+                    $logDesc = "Candidate " . $data['name'] . " has been removed from the election " . $electionRow->electionName. " due to objections";
+                    $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
+                    $emailData = [
+                        'email'=>$candidate->candidateEmail,
+                        'subject'=> "Alert from ".$electionRow->ElectionName,
+                        'body'=> "You have been removed from the election ".$electionRow->ElectionName." due to objections. Please contact the election supervisor for more details."
+                    ];
+                    $this->emailModel->sendEmail($emailData);
+                    redirect('Pages/viewObjections/' . $data['eid']);
+                }else{
+                    die('Something went wrong');
+                }            
+            }else{
+                die('Something went wrong');
+            }
         }
     }
 }
