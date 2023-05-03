@@ -8,7 +8,7 @@ class Candidates extends Controller
         $this->nominateModel = $this->model('Nomination');
         $this->objectModel = $this->model('Objection');
         $this->discussionModel = $this->model('discussion');
-        $this->candidateModel = $this->model('candidate');
+        $this->candidateModel = $this->model('Candidate');
         $this->electModel = $this->model('Election');
         $this->positionModel = $this->model('electionPositions');
         $this->partyModel = $this->model('Party');
@@ -166,7 +166,7 @@ class Candidates extends Controller
         $this->view('Candidate/candidateProfile');
     }
 
-    public function update_candidate_profile()
+   /* public function update_candidate_profile()
     {
 
         //        if(!$this->isLoggedIn()){
@@ -220,7 +220,7 @@ class Candidates extends Controller
                 }
             }
         }
-    }
+    }*/
 
 //     public function update_candidate_profile()
 //     {
@@ -644,12 +644,12 @@ exit;
     //         }
 
 
-    public function viewprofile($candidateId)
-    {
-        $candidateData = Nomination::getById($candidateId);
-        $view = new View('candidate/profile');
-        $view->setData('candidateData', $candidateData);
-        $view->render();
-    }
+    // public function viewprofile($candidateId)
+    // {
+    //     $candidateData = Nomination::getById($candidateId);
+    //     $view = new View('candidate/profile');
+    //     $view->setData('candidateData', $candidateData);
+    //     $view->render();
+    // }
 
 }
