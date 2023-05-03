@@ -23,7 +23,8 @@
 
            <div class="profile d-flex flex-column">
                <img src="<?php echo urlroot; ?>/public/img/sys_manager.png" alt="profile_picture">
-               <div class="mt-1 white-title text-center">
+               <!-- <img <?php //echo $_SESSION["profile_image"];?>/> -->
+               <div class="mt-1 white-title text-center text-uppercase">
                <p><?php echo $_SESSION["name"];?></p>
                </div>
                <!-- <p>Blogger</p> -->
@@ -33,7 +34,8 @@
 
            <ul>
                <li>
-                   <a href="<?php echo urlroot; ?>/Pages/home" id="home" class="active">
+                    <a id="home" href="#" class="active">
+                   <!-- <a href="<?php //echo urlroot; ?>/Pages/home" id="home" class="active"> -->
                        <span class="icon"><i class="fas fa-home"></i></span>
                        <span class="item">Home</span>
                    </a>

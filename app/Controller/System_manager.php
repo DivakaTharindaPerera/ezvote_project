@@ -48,7 +48,6 @@ class System_manager extends Controller
 
     public function dashboard(){
         if($this->isLoggedIn()){
-            // print_r('login');
             $man_name = $this->ManagerModel->getManagerName($_SESSION['manager_ID']);
             $_SESSION['name'] = $man_name[0]->name;
             
@@ -57,17 +56,16 @@ class System_manager extends Controller
             $this->view('Sys_manager/sysmanager_dashboard', $data);
 
         } else {
-            // print_r('no-login');
             $email = $_POST['email'];
             $pwd = $_POST['pwd'];
             
             $hashed = $this->ManagerModel->verifyLogin($email, $pwd);
 
             if (password_verify($pwd, $hashed)) {
-                $sub_plans = $this->ManagerModel->getSubscriptionPlan($_SESSION['manager_ID']);
                 $_SESSION['UserId'] = $_SESSION['manager_ID'];
                 $man_name = $this->ManagerModel->getManagerName($_SESSION['manager_ID']);
                 $_SESSION['name'] = $man_name[0]->name;
+                $sub_plans = $this->ManagerModel->getSubscriptionPlan($_SESSION['manager_ID']);
                 $data = [$sub_plans];
                 $this->view('Sys_manager/sysmanager_dashboard', $data);
             } else {
@@ -111,15 +109,55 @@ class System_manager extends Controller
         }
     }
 
+
     public function announcements(){
         if (!isset($_SESSION["UserId"])) {
             redirect('System_manager/login');
         } else {
-            $this->view('Sys_manager/sysmanager_announcements');
+            // print_r($_POST);die();
+            
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $data['subject'] = $_POST['head'];
+                $data['body'] = $_POST['body'];
+                $mails = array();
+                $mail_count =0;
 
-            // $voter = $_POST['Email'];
-            // $supervisor = $_POST['supervisor'];
-            // $candidate = $_POST['candidateEmail'];
+                $radio = isset($_POST['user']) ? $_POST['user'] : null;
+                
+                if($radio == 'alluser'){
+                    $res = $this->ManagerModel->getUserEmail();
+                    $mails = $res;
+
+                } else if($radio == 'specificuser') {
+                    if(isset($_POST['Supervisors'])){
+                        $res = $this->ManagerModel->getSupervisorEmail();
+                        $mails = array_merge($mails,$res);
+                    } 
+                    if(isset($_POST['Voters'])){
+                        $res = $this->ManagerModel->getVoterEmail();
+                        $mails = array_merge($mails,$res);
+                    }
+                    if(isset($_POST['Candidates'])){
+                        $res = $this->ManagerModel->getCandidateEmail();
+                        $mails = array_merge($mails,$res);
+                    }
+                }
+                $mail_count = count($mails);
+                // print_r($mail_count);die();
+                // print_r($mails[0]->Email);die();
+                try {
+                    for ($i=0; $i < $mail_count; $i++) { 
+                        $data['email'] = $mails[$i]->Email;
+                        $this->mail->sendEmail($data);
+    
+                    }
+                    $this->view('Sys_manager/sysmanager_announcements');
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Please try again later.";
+                }
+                
+            }
+            $this->view('Sys_manager/sysmanager_announcements');
         }
     }
 

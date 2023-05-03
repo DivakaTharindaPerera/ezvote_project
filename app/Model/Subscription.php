@@ -92,6 +92,32 @@ class Subscription{
         return $this->db->resultSet();
     }
 
+    public function enabledSubscriptionPlan($plan) {
+        $this->db->query('UPDATE subscription_plan SET plan_status= :status WHERE PlanID = :PlanID');
+
+        $this->db->bind(':PlanID', $plan);
+        $this->db->bind(':status', '1');
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function disabledSubscriptionPlan($plan) {
+        $this->db->query('UPDATE subscription_plan SET plan_status= :status WHERE PlanID = :PlanID');
+
+        $this->db->bind(':PlanID', $plan);
+        $this->db->bind(':status', '0');
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function deleteSubscriptionPlan($plan){
         $this->db->query('DELETE FROM subscription_plan WHERE PlanID = :PlanID');
 
@@ -100,8 +126,15 @@ class Subscription{
         return $this->db->resultSet();
     }
 
+    public function planPricing($managerid){
+        $this->db->query('SELECT PlanName, Price FROM subscription_plan WHERE ManagerID=:ManagerID');
+        $this->db->bind(':ManagerID',$managerid);
+
+        return $this->db->resultSet();
+    }
+
     public function addChanges($plan, $cur_Date, $cur_Time, $description){
-        // print_r($description);die();
+
         $this->db->query('INSERT INTO plan_changes (PlanID, Date, Time, Description) VALUES (:PlanID, :Date, :Time, :Description)');
 
         $this->db->bind(':PlanID', $plan);
@@ -121,6 +154,7 @@ class Subscription{
 
         return $this->db->resultSet();
     }
+
 
 }
 

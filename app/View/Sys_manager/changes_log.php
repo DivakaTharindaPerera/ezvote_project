@@ -14,12 +14,12 @@ window.onload = function(){
 </script>
 
 <div class="main-container">
-    <div class="title text-center">Changes Log</div>
+    <div class="title text-center text-uppercase">Changes Log</div>
     <div class="min-w-85 min-h-85">
-        <div class="w-100 h-50 justify-content-center align-items-center">
-            <table class="table border border-primary w-90 h-50 ml-2 mt-2 overflow-scroll">
+        <div class="w-100 h-50 overflow-y overflow-x justify-content-center align-items-center">
+            <table class="table border border-primary justify-content-center align-items-center w-90 h-50 mx-3 mt-2 overflow-y">
                 <thead>
-                    <tr class="h-75">
+                    <tr>
                         <th>Plan ID</th>
                         <th>Date</th>
                         <th>Time</th>

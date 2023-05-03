@@ -13,16 +13,21 @@ window.onload = function(){
 }
 </script>
 
-
 <div class="main-container" id="text-box1">
-    <div class="title text-center">Create subscription Plan</div>
+    <div class="title text-center text-uppercase">Create Subscription Plan</div>
     <div class="min-w-85 min-h-85">
     <form class="d-flex flex-column min-w-40 py-1 mb-1 " action="./create_process" method="POST">
-        <label for="name">Name</label><br>
-        <input class="h-100 min-w-40 border border-primary" type="text" id="name" name="name" placeholder="Name of the subscription plan"><br><br>
+        <label for="name" class="font-bold">Name</label><br>
+        <select class="select border border-primary h-100 min-w-40 overflow-y overflow-x" id="name" name="name">
+        <option value="extreme plan">extreme plan</option>
+        <option value="annual plan">annual plan</option>
+        <option value="monthly plan">monthly plan</option>
+        <option value="starter plan">starter plan</option>
+        <option value="free plan">free plan</option>
+        </select><br><br>
 
-        <label for="description">Description</label><br>
-        <input class="h-100 border border-primary" type="description" id="description" name="description" placeholder="Description of the subscription plan"><br><br>
+        <label class="font-bold" for="description">Description</label><br>
+        <input class="h-100 border border-primary" type="long-text" id="description" name="description" placeholder="Description of the subscription plan" required><br><br>
 
         <div class="free-div">
             <input type="radio" id="free" name="duration" onclick="javascript:yesnoCheck();">
@@ -109,13 +114,12 @@ window.onload = function(){
 
         <div class="d-flex gap-4 justify-center-end justify-content-evenly">
             <div class="d-flex">
-            <button type="submit" class="btn btn-primary">CREATE</button>
-
+            <a href="../System_manager/dashboard">
+            <button type="button" class="btn btn-primary">CANCEL</button>
+            </a>
             </div>
             <div class="d-flex">
-            <a href="../System_manager/dashboard">
-                <button type="button" class="btn btn-primary">CANCEL</button>
-            </a>
+                <button type="submit" class="btn btn-primary">CREATE</button>
             </div>
             
 </div>

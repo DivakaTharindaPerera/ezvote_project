@@ -37,6 +37,11 @@
     color: var(--black);
 }
 
+.card .header-title-2{
+    font-size: var(--md);
+    font-weight: bolder;
+    color: var(--black);
+}
 .bg-white div{
     color: #000;
 }

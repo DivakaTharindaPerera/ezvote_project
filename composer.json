@@ -1,0 +1,17 @@
+{
+    "name": "user/ezvote",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "User\\Ezvote\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Harilakshan"
+        }
+    ],
+    "require": {
+        "stripe/stripe-php": "^10.12"
+    }
+}
