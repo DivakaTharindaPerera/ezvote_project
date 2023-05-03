@@ -8,6 +8,23 @@ function openPopup(id=null){
     let popup=document.getElementById("popup");
     popup.classList.add("open-popup");
 }
+
+function openPopupPassId(){
+     // Get the button that was clicked
+     var button = event.target;
+
+     // Get the request_id from the button's data attribute
+     var requestId = button.getAttribute("data-request_id");
+     console.log(requestId);
+     // Populate the request_id input field in the form
+     var requestIdInput = document.querySelector("#popup input[name='request_id']");
+     requestIdInput.value = requestId;
+ 
+     // Show the popup
+    let popup=document.getElementById("popup");
+    popup.classList.add("open-popup");
+}
+
 function closePopup()
 {
     // console.log("close");
@@ -150,7 +167,6 @@ exist_party.addEventListener("change",()=>{
         }
     }
 })
-
 
 // ************************************** discussion.js ********************************************************************
 

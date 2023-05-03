@@ -5,7 +5,6 @@
 
     <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light" style=" margin-top:60px; ">
         <form action="/ezvote/Candidates/nomination_apply" method="POST" enctype='multipart/form-data' >
-        <!-- enctype="multipart/form-data" -->
         
     <h2 class="text-center">Apply Nominations</h2>
     <br>
@@ -14,6 +13,7 @@
             creating the election are displayed here.
 
         <br><br>Required documents:</p>
+        <br>
         <ul>
             <li>NIC</li><br>
             <li>Self Declaration</li><br>
@@ -26,12 +26,12 @@
 <div class="d-flex">
 
 <!-- first Name -->
-<input type="text" name="firstname" id="firstname" placeholder="First Name...">
+<input type="text" name="firstname" placeholder="First Name...">
 <em class="text-danger"><?php if(isset($data['fname_err'])){ echo $data['fname_err']; } ?></em>
 
 
 <!-- last Name -->
-<input type="text" name="lastname" id="lastname" placeholder="Last Name...">
+<input type="text" name="lastname" placeholder="Last Name...">
 <em class="text-danger"><?php if(isset($data['lname_err'])){ echo $data['lname_err']; } ?></em>
 
 </div>
@@ -39,45 +39,50 @@
 
 <!-- Election Name -->
 <label for="election">Election<span class="text-danger">*</span> :</label>
-<input type="text" name="election_name" id="election_name" placeholder="Election you wish to contest...">
-<em class="text-danger"><?php if(isset($data['election_err'])){ echo $data['election_err']; } ?></em>
 
+<select name="election_name" class="w-50 selectName" style="margin-left:3rem;">
+<option value="" disabled selected>Please select...</option>
+        <?php foreach ($names as $name){ ?>
+<option value="<?php echo $name->Title ?>" class="w-75"><?php echo $name->Title ?></option>
+        <?php } ?> 
+</select>
 <br><br>
 
 <!-- Position -->
 <label for="positions">Select position<span class="text-danger">*</span> :</label>
 
-<select name="position" id="position" class="border-1 border-dark w-25">
-  <option value="">Select...</option>
-  <option value="president">President</option>
-  <option value="wise president">Wise President</option>
-  <option value="secretary">Secretary</option>
-  <option value="Treasurer">Treasurer</option>
+<select name="position" class="w-50 selectName" >
+<option value="" disabled selected>Please select...</option>
+        <?php foreach ($positions as $position){ ?>
+<option value="<?php echo $position->positionName ?>"><?php echo $position->positionName ?></option>
+        <?php } ?> 
 </select>
-<em class="text-danger"><?php if(isset($data['position_err'])){ echo $data['position_err']; } ?></em>
-
 <br><br>
 
+<!-- party name --> 
 <label for="party-names">Party Name<span class="text-danger">*</span> :</label>
 
+<select name="party_name" class="w-50 selectName" style="margin-left:1.2rem;">
+<option value="" disabled selected>Please select...</option>
+        <?php foreach ($parties as $party){ ?>
+<option value="<?php echo $party->partyName ?>"><?php echo $party->partyName ?></option>
+        <?php } ?> 
+</select>
+<br><br><br>
 
-<!-- party name -->
-    <input type="text" class="new_party" name="party_name" id="party_name" placeholder="Party Name..."><br><br>
-    <em class="text-danger"><?php if(isset($data['party_err'])){ echo $data['party_err']; } ?></em>
-    <br>
 <div class="d-flex">
 
 <!-- profile picture -->
     <div class="column">
         <p>Upload Profile Picture<span class="text-danger">*</span> :
-          <input type="file" id="imgfile" style="color: transparent;"name="imgfile"/></p>
-          <em class="text-danger"><?php if(isset($data['profilepic_err'])){ echo $data['profilepic_err']; } ?></em>
+        <input type="file" style="color: transparent;" name="imgfile"/></p>
+        <em class="text-danger"><?php if(isset($data['profilepic_err'])){ echo $data['profilepic_err']; } ?></em>
     </div>
 
 <!-- upload identity proof -->
     <div class="column">
         <p>Upload Identity Proof<span class="text-danger">*</span> :
-        <input type="file" name="file" id="files" style="color: transparent;" multiple></p>
+        <input type="file" name="file" style="color: transparent;" multiple></p>
         <em class="text-danger"><?php if(isset($data['identityproof_err'])){ echo $data['identityproof_err']; } ?></em>
     </div>
 </div>
@@ -85,23 +90,23 @@
 
 <!-- candidate description -->
     <label for="candidateDescription">Candidate Description<span class="text-danger">*</span> :
-    <input type="text" name="candidateDescription" id="candidateDescription" placeholder="Candidate description...">
+    <input type="text" name="candidateDescription" placeholder="Candidate description...">
     <em class="text-danger"><?php if(isset($data['description_err'])){ echo $data['description_err']; } ?></em>
 <br><br>
 
     </label>
 <!-- msg to the voters -->
     <label for="candidate vision">Candidate Vision<span class="text-danger">*</span> :    
-    <input type="text" name="msg" id="msg" placeholder="Message to the voters...">
+    <input type="text" name="msg" placeholder="Message to the voters...">
     <em class="text-danger"><?php if(isset($data['msg_err'])){ echo $data['msg_err']; } ?></em>
 
 <br><br></label>
 
 <!-- cancel -->
-    <button type="submit" id="btn" name="cancel" class="btn bg-primary m-1 w-10"><a href="<?php echo urlroot; ?>/Candidates/applyNomination" class="text-white">Cancel</a></button>
+    <button type="submit" name="cancel" class="btn bg-primary m-1 w-10"><a href="<?php echo urlroot; ?>/Candidates/applyNomination" class="text-white">Cancel</a></button>
 
 <!-- save -->
-    <button type="submit" id="btn" name="save" class="btn bg-primary text-white m-1 w-10">Save</button>
+    <button type="submit" name="save" class="btn bg-primary text-white m-1 w-10">Save</button>
     <br><br>
     
 </form>

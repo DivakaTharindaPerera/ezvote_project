@@ -22,7 +22,7 @@
                 <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
             <div class="profile mr-1">
-                <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" style="object-fit: cover" alt="profile_picture"><br>
+                <img src="<?php echo $_SESSION['profile_picture']?>" style="object-fit: cover" alt="profile_picture"><br>
                 <h3 class="text-center text-md text-white mr-1"><?= $_SESSION['fname']." ".$_SESSION['lname']?></h3>
 <!--                <p>Blogger</p>-->
             </div>
@@ -65,7 +65,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<?php echo urlroot; ?>/Candidates/discussionForum">
                         <span class="icon"><i class="fa-brands fa-wpforms"></i></span>
                         <span class="item">Discussion Forum</span>
                     </a>
@@ -89,12 +89,20 @@
                         <span class="item">Edit profile</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="<?php echo urlroot; ?>/Candidates/applyNomination">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Apply Nomination</span>
+                    </a>
+                </li>
                 <li>
                     <a href="<?php echo urlroot; ?>/Candidates/candidateProfile">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Candidate</span>
                     </a>
                 </li>
+
             </ul>
         </div>
 

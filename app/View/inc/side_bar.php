@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo urlroot; ?>/Candidates/viewElections">
+                    <a href="<?php echo urlroot; ?>/Pages/dashboard">
                         <span class="icon"><i class="fas fa-desktop"></i></span>
                         <span class="item">My Dashboard</span>
                     </a>
@@ -76,6 +76,13 @@
                     <a href="<?php echo urlroot; ?>/Candidates/update_profile">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Edit profile</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?php echo urlroot; ?>/Candidates/partyRequests">
+                        <span class="icon"><i class="fas fa-handshake-simple"></i></span>
+                        <span class="item">Party Requests</span>
                     </a>
                 </li>
             </ul>
