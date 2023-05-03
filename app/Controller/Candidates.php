@@ -322,7 +322,7 @@ class Candidates extends Controller
             $this->view('Candidate/candidateProfile', ['res' => $res,'elect' => $elect, 'party' => $party, 'position' => $position]);
 
         }
-        echo "<h3> Welcome " . htmlspecialchars($_SESSION["fname"]) . " " . htmlspecialchars($_SESSION["lname"]) . "</h3>";
+        // echo "<h3>" . htmlspecialchars($_SESSION["fname"]) . " " . htmlspecialchars($_SESSION["lname"]) . "</h3>";
         // $r=$this->nominateModel->RetrieveAll();
         // $this->view('Candidate/candidateProfile',['r'=>$r]);
 
