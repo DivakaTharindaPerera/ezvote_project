@@ -885,7 +885,7 @@ class Pages extends Controller
                 }
                 $data=[
                     'id'=>$_SESSION['UserId'],
-                    'profile_pic'=>$_FILES['profilePhoto'],
+//                    'profile_pic'=>$_FILES['profilePhoto'],
                     'fname'=>trim($_POST['fname']),
                     'lname'=>trim($_POST['lname']),
                     'email'=>trim($_POST['email']),
@@ -915,7 +915,6 @@ class Pages extends Controller
                     if(empty($data['old_password'])){
                         $data=[
                             'id'=>$_SESSION['UserId'],
-                            'profile_pic'=>$_POST['profilePhoto'],
                             'fname'=>trim($_POST['fname']),
                             'lname'=>trim($_POST['lname']),
                             'email'=>trim($_POST['email']),

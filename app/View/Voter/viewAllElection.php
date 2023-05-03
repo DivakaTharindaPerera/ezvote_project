@@ -10,9 +10,9 @@ require approot.'/View/inc/sidebar-new.php';
     <div id="Elections" class="w-95 d-flex flex-column mt-3 mb-1" style="z-index: 2">
         <div id="ongoingElections" class="d-flex flex-column mb-3 border border-primary border-3 border-radius-2" style="justify-content: center;align-items: center">
             <div class="sub-title dark-title ">ONGOING ELECTIONS</div>
-            <div class="d-flex mx-auto flex-wrap justify-content-center align-items-center">
+            <div class="d-flex mx-auto  justify-content-center align-items-center">
 
-                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-50 mb-2">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-25 mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center my-1">Supervising Elections</div>
                     <div class="d-flex justify-content-center align-items-center mb-1 mx-1">
                         <?php if ($data['data1'] == null){?>
@@ -46,7 +46,7 @@ require approot.'/View/inc/sidebar-new.php';
                         }?>
                     </div>
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-50 mb-2">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-25 mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center my-1">Elections for Voting</div>
                     <div class="d-flex justify-content-center align-items-center mb-1 mx-1">
                     <?php if ($data['data4']== null){?>
@@ -99,7 +99,7 @@ require approot.'/View/inc/sidebar-new.php';
                 ?>
                     </div>
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-50 mb-2">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-25 mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center my-1">Elections as Candidates</div>
                     <div class="d-flex justify-content-center align-items-center mb-1 mx-1">
                         <?php if ($data['data7'] == null){?>
@@ -138,8 +138,8 @@ require approot.'/View/inc/sidebar-new.php';
 <!--        <hr class="w-100 h-10" style="color: var(--primary)">-->
         <div id="ongoingElections" class="d-flex flex-column mb-3 border border-primary border-3 border-radius-2" style="justify-content: center;align-items: center">
             <div class="sub-title dark-title">UPCOMING ELECTIONS</div>
-            <div class="d-flex mx-auto flex-wrap justify-content-center align-items-center">
-                <div class="d-flex flex-column flex-wrap justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-50 mb-2">
+            <div class="d-flex mx-auto justify-content-center align-items-center">
+                <div class="d-flex flex-column flex-wrap justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-25 mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center my-1">Supervising Elections</div>
                     <div class="d-flex justify-content-center align-items-center mb-1 mx-1">
                     <?php if ($data['data2'] == null ){?>
@@ -170,7 +170,7 @@ require approot.'/View/inc/sidebar-new.php';
                     }?>
                     </div>
                 </div>
-                <div class="d-flex flex-column flex-wrap justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-50 mb-2">
+                <div class="d-flex flex-column flex-wrap justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-25 mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center my-1">Elections as Voter</div>
                     <div class="d-flex justify-content-center align-items-center mb-1 mx-1">
                     <?php if ($data['data5']==null  ){?>
@@ -201,7 +201,7 @@ require approot.'/View/inc/sidebar-new.php';
                     }?>
                     </div>
                 </div>
-                <div class="d-flex flex-column flex-wrap justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-50 mb-2">
+                <div class="d-flex flex-column flex-wrap justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-37vh min-w-25 max-w-25 mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center my-1">Elections as candidates</div>
                     <div class="d-flex justify-content-center align-items-center mb-1 mx-1">
                         <?php if ($data['data8'] == null ){?>
@@ -237,7 +237,7 @@ require approot.'/View/inc/sidebar-new.php';
 <!--        <hr class="w-100">-->
         <div id="ongoingElections" class="d-flex flex-column mb-3 border border-primary border-3 border-radius-2" style="justify-content: center;align-items: center">
             <div class="sub-title dark-title ">COMPLETED ELECTIONS</div>
-            <div class="d-flex flex-wrap justify-content-center align-items-center">
+            <div class="d-flex  justify-content-center align-items-center">
                 <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-60vh max-h-60vh min-w-25 max-w-50 mb-2">
                     <div class="d-flex text-xl justify-content-center align-items-center mt-1 text-center">Supervised Elections</div>
                     <div class="d-flex justify-content-center align-items-center mb-1 mx-1 flex-wrap">
@@ -258,7 +258,7 @@ require approot.'/View/inc/sidebar-new.php';
                     }?>
                     </div>
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-60vh max-h-60vh min-w-25 max-w-50 mb-2">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-60vh max-h-60vh min-w-25 max-w-25 mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center mt-1">Elections as Voter</div>
                     <div class="d-flex justify-content-center align-items-center flex-wrap mb-1 mx-1">
                         <?php if ($data['data6'] == null){?>
@@ -298,7 +298,7 @@ require approot.'/View/inc/sidebar-new.php';
                         }?>
                     </div>
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-60vh max-h-60vh min-w-25 max-w-50 mb-2">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mx-2 min-h-60vh max-h-60vh min-w-25 max-w-25 mb-2 ">
                         <div class="d-flex text-xl justify-content-center align-items-center my-1 text-center">Elections as Candidates</div>
                         <div class="d-flex justify-content-center align-items-center mb-1 mx-1 flex-wrap">
                             <?php if ($data['data9'] == null){?>
