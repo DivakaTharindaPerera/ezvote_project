@@ -8,6 +8,11 @@ class Voters extends Controller
         $this->elecModel = $this->model('Election');
         $this->voterModel = $this->model('Voter');
         $this->objectionModel = $this->model('Objection');
+        $this->partyModel = $this->model('Party');
+        $this->candidateModel = $this->model('Candidate');
+        $this->voteModel = $this->model('Vote');
+        $this->encryptModel = $this->model('userEncrypt');
+        $this->userModel = $this->model('User');
     }
     public function submitObjections()
     {
@@ -150,35 +155,40 @@ class Voters extends Controller
         $data_1 = $this->elecModel->getElectionByElectionId($id);
         $data_2 = $this->elecModel->getPositionsByElectionId($id);
         $data_3 = $this->elecModel->getCandidatesByElectionId($id);
-        //        $data_4=$this->voterModel->temporaryVoting();
+        $data_4 = $this->userModel->getUsers();
         $this->view('Voter/votingBallot', [
             'election' => $data_1,
             'positions' => $data_2,
             'candidates' => $data_3,
-            'id' => $id
+            'id' => $id,
+            'users'=>$data_4
         ]);
     }
 
-    public function summary($id)
+    public function summary($electionId)
     {
-        $data_1 = $this->elecModel->getElectionByElectionId($id);
-        //        $data_2=$this->elecModel->getWinnersDetails($id);
-        //        print_r($data_2);
-        //        exit();
-        //        $i=0;
-        //        foreach ($data_2 as $winner){
-        //            $candidateId=$winner->candidateID;
-        ////            echo $candidateId;
-        ////            exit();
-        //            $data_3=$this->elecModel->getWinnersNames($candidateId);
-        //            $i=$i+1;
-        //        }
-        $this->view('Voter/electionSummary', [
-            'election' => $data_1,
-            //           'winners'=>$data_2,
-            //           'party'=>$data_3
-        ]);
+        if($this->isLoggedIn()){
+            $election = $this->elecModel->getElectionByElectionId($electionId);
+            $candidates = $this->candidateModel->getCandidatesByElectionId($electionId);
+            $positions = $this->elecModel->getPositionsByElectionId($electionId);
+            $voters = $this->voterModel->getVotersByElectionId($electionId);
+            $parties = $this->partyModel->getPartiesByElectionId($electionId);
+            $votes=$this->calculateVotes($electionId);
+            $this->view('Voter/electionSummary', [
+                'election' => $election,
+                'positions' => $positions,
+                'voters' => $voters,
+                'candidates' => $candidates,
+                'parties' => $parties,
+                'votes' => $votes
+            ]);
+        }
+        else{
+            $this->view('login');
+        }
+        return true;
     }
+
     public function temporaryVotes()
     {
         $data_1 = $this->voterModel->temporaryVoting();
@@ -206,5 +216,36 @@ class Voters extends Controller
                 die('Something went wrong');
             }
         }
+    }
+
+    public function calculateVotes($eid)
+    {
+        $candidates = array();
+        $voters = $this->voterModel->getVotersByElectionId($eid);
+        $candidateRows = $this->candidateModel->getCandidatesByElectionId($eid);
+        foreach ($candidateRows as $candidateRow) {
+            $candidates[$candidateRow->candidateId] = 0;
+        }
+        foreach ($voters as $voter) {
+            // echo $voter->voterId."<br>";
+            $encryption = $this->encryptModel->getKeyAndIv($voter->voterId);
+            $votes = $this->voteModel->retrieveVotes($voter->voterId);
+            foreach ($votes as $vote) {
+                $candidate = $this->decrypt($vote->candidate, $encryption->Key, $encryption->Iv);
+                // echo $candidate."<br>";
+                if ($this->verifyCandidate($eid, $candidate)) {
+                    $candidates[$candidate] += $voter->value;
+                }
+            }
+        }
+
+        // $keys = array_keys($candidates);
+
+        // echo "Candidates : Votes <br>";
+        // foreach($keys as $key){
+        //     echo $key . " : " . $candidates[$key] . "<br>";
+        // }
+
+        return $candidates;
     }
 }

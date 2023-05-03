@@ -11,8 +11,11 @@
 
     <div class="title justify-content-center mt-1"><?php echo $data['election']->Title ?><br>By <?php echo $data['election']->OrganizationName ?></div>
     <div class="justify-content-center">
-        <p class="text-xl"><?php echo $data['election']->Description; ?></p>
-        <?php 
+        <div class="border border-radius-2 border-white border-2 p-1">
+            <div class="justify-content-center align-items-center text-center text-xl mb-1">Description & Regulation</div>
+            <p class="text-lg"><?php echo $data['election']->Description; ?></p>
+        </div>
+        <?php
             if($data['stat']==1){
                 echo "status visible";
             }
@@ -25,7 +28,7 @@
             $position_id = $position->ID;
         ?>
             <div class="d-flex flex-column" id="<?php echo $position_id; ?>">
-                <div class="title w-100 bg-blue-10 p-1" style="color: white;"><?php echo $position->positionName . '-' . $position_id; ?></div>
+                <div class="title w-100 bg-info p-1" style="color: white;"><?php echo $position->positionName . '-' . $position_id; ?></div>
                 <div class="text-danger text-center text-2xl">
                     <span class="optionCounts">
                         <?php
@@ -37,6 +40,17 @@
                 </div>
                 <div class="d-flex justify-content-center flex-wrap">
                     <?php foreach ($data['candidates'] as $candidates) {
+                        $user_id = $candidates->userId;
+                        foreach ($data['users'] as $user){
+//                            echo '<pre>';
+//                            var_dump($user);
+//                            var_dump($user_id);
+//                            exit();
+                            if($user->UserId==$user_id){
+                                $profile_picture=$user->ProfilePicture;
+                                break;
+                            }
+                        }
                         if ($candidates->positionId == $position_id) {
                             $i = $i + 1; ?>
                             <div class="card" id="card-<?php echo $candidates->candidateId; ?>">
@@ -44,7 +58,7 @@
                                     <div class="sub-title">
                                         <?php echo $candidates->candidateName . '-' . $candidates->candidateId; ?>
                                     </div>
-                                    <div><img src="/ezvote/public/img/profile.jpg" style="max-height:50px;max-width: 50px" alt="profile photo"></div>
+                                    <div><img src="<?= $profile_picture?>" style="max-height:50px;max-width: 50px" alt="profile photo"></div>
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <div class="text-lg">
@@ -86,7 +100,7 @@
     </div>
     <div id="confirmDiv" class="w-100" style="display: none;">
         <div class="">
-            <div class="title w-100 p-1" style="color: blue;">Confirm Your Votes</div>
+            <div class="title w-100 " style="color: blue;">Confirm Your Votes</div>
             <div class="title w-100 p-1"><span id="optionsRemaining" class="my-1" style="color: red;"></span></div>
             <div id="finalVotes">
                 <?php

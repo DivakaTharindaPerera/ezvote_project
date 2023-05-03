@@ -3,4 +3,6 @@
 /.vscode/
 .env
 
-/vendor/
+./public/upload/
+/public/upload/profile_pictures/
+
