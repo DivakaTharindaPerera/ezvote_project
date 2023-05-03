@@ -204,11 +204,15 @@ function addSingleVoter() {
     const nameelement = document.createElement('td');
     const emailelement = document.createElement('td');
     const valueelement = document.createElement('td');
+    const btnelement = document.createElement('td');
 
     const del = document.createElement('button');
     del.setAttribute('onclick', 'del(this.id)');
     del.setAttribute('id', count);
     del.innerHTML = 'DELETE';
+    del.classList.add('btn');
+    del.classList.add('btn-danger');
+    btnelement.appendChild(del);
 
     nameelement.innerHTML = name;
     emailelement.innerHTML = email;
@@ -217,7 +221,9 @@ function addSingleVoter() {
     row.appendChild(nameelement);
     row.appendChild(emailelement);
     row.appendChild(valueelement);
-    row.appendChild(del);
+    row.appendChild(btnelement);
+    // row.appendChild(del);
+
 
     list.appendChild(row);
 

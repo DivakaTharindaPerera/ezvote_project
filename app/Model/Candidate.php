@@ -227,6 +227,15 @@ class Candidate extends Controller{
             $email->sendEmail($data);
     }
 
+
+    public function getCandidateIDByUserId()
+    {
+        $this->db->query('SELECT candidateId FROM candidate WHERE userId = :user_id');
+        $this->db->bind(':user_id', $_SESSION['user_id']);
+        $this->db->execute();
+        $candidate = $this->db->resultSet();
+        return $candidate;
+
     public function getCandidateProfile($candidate_id){
        
         $this->db->query("SELECT * FROM candidate WHERE userId = $candidate_id");
@@ -236,6 +245,7 @@ class Candidate extends Controller{
         } catch (Exception $e) {
             echo "Something went wrong :".$e->getMessage();
         }
+
     }
 
     public function updateCandidateProfile($data) {

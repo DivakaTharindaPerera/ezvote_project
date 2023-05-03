@@ -12,9 +12,9 @@
     <title>ezVote</title>
 </head>
 <body>
-<div class="overflow-y" style="overflow-x:hidden;">
+<!--<div class="overflow-y" style="overflow-x:hidden;">-->
 
-    <div class="nav-bar" style="height:2.5vh;">
+    <div class="nav-bar" style="height:7vh;">
         <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
         <div class="links">
             <a href="/ezvote/Pages/home">Home</a>
@@ -39,6 +39,7 @@
 
         </div>
     </div>
+    <div class="d-flex flex-column overflow-y" style="overflow-x:hidden;">
 
 <div class="bg_pricing">
      <div class="p-1 m-2">
