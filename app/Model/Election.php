@@ -287,16 +287,8 @@ class Election extends Controller{
 
 }
 
-// public function getAllElectionNames(){
-//     $this->db->query("SELECT * FROM election");
-//     $electionName=$this->db->resultSet();
-//     return $electionName;
-// }
 
-}
 
-    }  
-    
     public function getElectionIdByVoterId($id){
         $this->db->query("SELECT electionId FROM Voter WHERE userid = :id");
         $this->db->bind(':id', $id);

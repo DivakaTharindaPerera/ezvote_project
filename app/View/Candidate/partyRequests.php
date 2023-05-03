@@ -2,23 +2,23 @@
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/side_bar.php'; ?>
 
-<div class="w-75 overflow-y p-4" style="padding-left:40vh; scrollbar-width: none; ">
+<div class="w-100 overflow-y p-4" style="padding-left:40vh; scrollbar-width: none; ">
 <table>
     <tr>
         <th style="background: rgb(5, 68, 104);">RequestNo</th>
-        <th>Candidate Name</th>
+        <th class="w-25">Candidate Name</th>
         <th>Candidate Vision</th>
         <th>Identity Proof</th>
-        <th>Request Accept/Reject</th>
+        <th class="w-25">Request Accept/Reject</th>
     </tr>   
 <?php 
     foreach ($request as $value){
 ?>
     <tr class="comment">
         <td><?php echo $value->request_id?></td>
-        <td><?php echo $value->candidate_name?></td>
-        <td><?php echo $value->candidate_vision?></td>
-        <td><?php echo $value->identity_proof?></td>
+        <td class="text-left"><?php echo $value->candidate_name?></td>
+        <td class="text-left"><?php echo $value->candidate_vision?></td>
+        <td class="text-left"><?php echo $value->identity_proof?></td>
 
         <?php 
             if($value->status==0) {
@@ -30,11 +30,11 @@
         <?php 
             }elseif ($value->status==1) {
         ?>
-        <td>Accepted</td>
+        <td class="text-success">Accepted</td>
         <?php 
             }elseif ($value->status==2) {
         ?>
-        <td>Rejected</td>
+        <td class="text-danger">Rejected</td>
         <?php
             }
         ?>

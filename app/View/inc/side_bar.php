@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo urlroot; ?>/Candidates/viewElections">
+                    <a href="<?php echo urlroot; ?>/Pages/dashboard">
                         <span class="icon"><i class="fas fa-desktop"></i></span>
                         <span class="item">My Dashboard</span>
                     </a>
