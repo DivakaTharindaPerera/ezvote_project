@@ -13,6 +13,7 @@
             $url = $this->getURL();
 
             if(file_exists('../app/Controller/' . ucwords($url[0]) . '.php')){
+
                 //if exists, set as controller
                 $this->currentController = ucwords($url[0]);
                 //unset 0 index
@@ -21,7 +22,6 @@
 
             require_once '../app/Controller/' . $this->currentController . '.php';
             $this->currentController = new $this->currentController;
-
             if(isset($url[1])){
                 if(method_exists($this->currentController, $url[1])){
                     $this->currentMethod = $url[1];

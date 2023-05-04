@@ -147,6 +147,81 @@ class Candidates extends Controller
     }
 }
 
+
+    public function nomination_app()
+    {
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            $data=[
+                // 'objectionID'=>uniqid('obj',true),
+                'firstname' => trim($_POST['firstname']),
+                'lastname' => trim($_POST['lastname']),
+                'candidateDescription' => trim($_POST['candidateDescription']),
+                'msg' => trim($_POST['msg']),
+                'ElectionID' => 1281,
+                'ID' => 41,
+                'PartyId' => 50,
+            ];
+            $this->nominateModel->AddNomination($data);
+        }
+        $this->view('Candidate/candidateProfile');
+    }
+
+    public function update_candidate_profile()
+    {
+
+        //        if(!$this->isLoggedIn()){
+        //            echo 'log in';
+        //        }
+        //        else{
+
+
+        // if($this->IsPost()){
+
+        // $nominationID = uniqid('obj',true);
+        $candidateName = $_POST['candidateName'];
+        $candidateEmail = $_POST['candidateEmail'];
+        $position = $_POST['position'];
+        $party_name = $_POST['party_name'];
+        // // 'profile_picture'=>$_FILES['imgfile'],
+        // // 'identity_proof'=>$_FILES['file'],
+        $description = $_POST['description'];
+        $vision = $_POST['vision'];
+        if (isset($_POST['update'])) {
+
+            // $res = $this->nominateModel->updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg);
+
+            // if($res){
+            //     header("Location: ../View/Candidate/candidateProfile.php");
+            // }
+            // else{
+            //     header("Location: ../View/Candidate/candidateProfile.php");
+            // }
+
+
+            // if($this->IsPost()){
+
+            // $nominationID = uniqid('obj',true);
+            $candidateName = $_POST['candidateName'];
+            $candidateEmail = $_POST['candidateEmail'];
+            $position = $_POST['position'];
+            $party_name = $_POST['party_name'];
+            // // 'profile_picture'=>$_FILES['imgfile'],
+            // // 'identity_proof'=>$_FILES['file'],
+            $description = $_POST['description'];
+            $vision = $_POST['vision'];
+            if (isset($_POST['update'])) {
+
+                $res = $this->nominateModel->updateCandidateProfile($nominationID, $firstname, $lastname, $election_name, $position, $party_name, $candidateDescription, $msg);
+
+                if ($res) {
+                    header("Location: ../View/Candidate/candidateProfile.php");
+                } else {
+                    header("Location: ../View/Candidate/candidateProfile.php");
+                }
+            }
+        }
+    }
+
 //     public function update_candidate_profile()
 //     {
 //         if (!isset($_SESSION["UserId"])) {
@@ -201,6 +276,7 @@ class Candidates extends Controller
 // }
 // }
 
+
     public function applyNomination()
     {
         $names = $this->electModel->getUpcomingElections();
@@ -231,20 +307,20 @@ class Candidates extends Controller
             header("Location: " . urlroot . "/View/Login");
             exit;
         }else{
-           
-            
+
+
             $candidate_id=$_SESSION["UserId"];
-            
-            
+
+
             $res = $this->candidateModel->getCandidateProfile($candidate_id);
-            
+
             $elect= $this->electModel->findelectNameById($res[0]->electionid);
             $position= $this->positionModel->findPositionNameById($res[0]->positionId);
             $party= $this->partyModel->findPartyNameById($res[0]->partyId);
             // var_dump($party);
             // die();
             $this->view('Candidate/candidateProfile', ['res' => $res,'elect' => $elect, 'party' => $party, 'position' => $position]);
-            
+
         }
         // echo "<h3>" . htmlspecialchars($_SESSION["fname"]) . " " . htmlspecialchars($_SESSION["lname"]) . "</h3>";
         // $r=$this->nominateModel->RetrieveAll();
@@ -566,15 +642,6 @@ exit;
 
     //             }
     //         }
-
-
-    // public function viewprofile($candidateId)
-    // {
-    //     $candidateData = Nomination::getById($candidateId);
-    //     $view = new View('candidate/profile');
-    //     $view->setData('candidateData', $candidateData);
-    //     $view->render();
-    // }
 
 
     public function viewprofile($candidateId)

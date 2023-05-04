@@ -65,6 +65,12 @@
     
 }
 
+.wrapper .sidebar ul li.visited{
+    color: #0c7db1;
+    background:var(--secondary);
+    border-right: 2px solid rgb(5, 68, 104);
+}
+
 .wrapper .sidebar ul li a:hover,
 .wrapper .sidebar ul li a.active{
     color: #0c7db1;
