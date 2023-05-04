@@ -117,6 +117,9 @@ upload.addEventListener('change', () => {
             del.setAttribute('onclick', 'del(this.id)');
             del.setAttribute('id', count);
             del.innerHTML = 'DELETE';
+            del.classList.add('btn');
+            del.classList.add('btn-danger');
+            del.classList.add('my-auto');
 
             name.innerHTML = dataRow[0];
             email.innerHTML = dataRow[1];
@@ -167,6 +170,9 @@ function addSingleVoter() {
     document.getElementById('nameerror').innerHTML = '';
     document.getElementById('emailerror').innerHTML = '';
 
+    var nElement = document.getElementById('name');
+    var eElement = document.getElementById('email');
+    var vElement = document.getElementById('value');
 
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
@@ -231,4 +237,10 @@ function addSingleVoter() {
     if (count > 0) {
         document.getElementById('voterList').style.display = "block";
     }
+
+    nElement.value = '';
+    eElement.value = '';
+    vElement.value = 1;
+
+
 }

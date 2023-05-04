@@ -11,7 +11,7 @@
         <div class="humansDiv" id="humansDiv" class="d-flex flex-column p-1 w-100">
 
             <div class="text-center"><button onclick="createParty()" class="btn btn-primary w-50 mx-1 my-1 w-10 card-hover"><b>Create Party</b></button></div>
-            <div class="partyCreate mx-1 my-1 w-80 border-1 p-1 border-radius-2 text-center bg-green-1" id="createParty" style="display: none;">
+            <div class="partyCreate my-1 w-80 border-1 p-1 border-radius-2 text-center bg-green-1 mx-auto" id="createParty" style="display: none;">
                 <div class="my-1">
                     <input type="text" id="partyName" placeholder="Party name...." class="border-1" style="border-radius: 20px; background-color: blue;color: white; font-weight: bold;"><span id="partyNameError" class="text-danger"></span>
                 </div>
