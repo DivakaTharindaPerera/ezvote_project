@@ -133,5 +133,24 @@ $(document).ready(function() {
 
 
 
+function openPopup(id=null){
+    if(id!=null){
+        console.log(id);
+        const form=document.getElementById("objection_form");
+        const candidate_id=document.getElementById("CandidateID");
+        candidate_id.value=id;
+    }
+    let popup=document.getElementById("popup");
+    popup.classList.add("open-popup");
+}
 
+function closePopup()
+{
+    // console.log("close");
+    const button=document.getElementById("close");
+    event.preventDefault();
+    let popup=document.getElementById("popup");
+    popup.classList.remove("open-popup");
+    // window.location.href = "/Voters/election";
+}
 	

@@ -79,5 +79,5 @@
 </div>
 <script src="<?php echo urlroot; ?>/js/discussion.js"></script>
 <?php
-require approot . '/View/inc/footer.php';
+// require approot . '/View/inc/footer.php';
 ?>

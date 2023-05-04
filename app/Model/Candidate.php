@@ -235,6 +235,7 @@ class Candidate extends Controller{
         $this->db->execute();
         $candidate = $this->db->resultSet();
         return $candidate;
+    }
 
     public function getCandidateProfile($candidate_id){
        
