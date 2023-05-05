@@ -15,12 +15,14 @@ class Payment extends Controller{
         $this->PaymentsModel= $this->model('Payments');
     }
 
-    public function payment_init(){
+    public function paymentInit(){
         Stripe::setApiKey(STRIPE_API_KEY);
 
         $jsonstr = file_get_contents('php://input');
         $jsonObj = json_decode($jsonstr);
         $planPrice = 500;
+        $plan = $this->PaymentsModel->planID;
+        $name = $this->PaymentsModel->planName;
 
         if($jsonObj->request_type == 'create_payment_intent'){
             $planPriceCents = round($planPrice*100);
@@ -28,7 +30,7 @@ class Payment extends Controller{
             header('Content-Type: application/json');
 
             try {
-                $paymentIntent = \Stripe\PaymentIntent::create([
+                $paymentIntent = PaymentIntent::create([
                     'amount' => $planPriceCents,
                     'currency' => "lkr",
                     'description' => "Demo Plan",
@@ -110,7 +112,7 @@ class Payment extends Controller{
                 if(!empty($row_id)){
                     $payment_id = $row_id;
                 } else {
-                    $this->PaymentsModel->addTransaction();
+                    $this->PaymentsModel->addTransaction($payment_id,$customer->name,$customer->email,$name,$planPrice,$transaction_id,$payment_status,$plan,$customer);
                 }
 
         }
@@ -127,6 +129,15 @@ class Payment extends Controller{
     public function paymentStatus(){
         $payment_ref_id = $statusMsg = '';
         $status = 'error';
+        $name = $this->PaymentsModel->planName;
+        $txn_id = $this->PaymentsModel->transactionID;
+        $paid_amount = $this->PaymentsModel->planPrice;
+        $paid_amount_currency = 'lkr';
+        $customer_name = $this->PaymentsModel->userName;
+        $customer_email = $this->PaymentsModel->userEmail;
+        $planPrice = $this->PaymentsModel->planPrice;
+        $currency = 'lkr';
+
 
         if(!empty($_GET['pid'])){
             $payment_txn_id = base64_decode($_GET['pid']);
@@ -153,17 +164,17 @@ class Payment extends Controller{
         
         <h4>Payment Information</h4>
         <p><b>Reference Number:</b> <?php echo $payment_ref_id; ?></p>
-        <p><b>Transaction ID:</b> <?php //echo $txn_id; ?></p>
-        <p><b>Paid Amount:</b> <?php //echo $paid_amount.' '.$paid_amount_currency; ?></p>
+        <p><b>Transaction ID:</b> <?php echo $txn_id; ?></p>
+        <p><b>Paid Amount:</b> <?php echo $paid_amount.' '.$paid_amount_currency; ?></p>
         <p><b>Payment Status:</b> <?php echo $payment_status; ?></p>
         
         <h4>Customer Information</h4>
-        <p><b>Name:</b> <?php //echo $customer_name; ?></p>
-        <p><b>Email:</b> <?php //echo $customer_email; ?></p>
+        <p><b>Name:</b> <?php echo $customer_name; ?></p>
+        <p><b>Email:</b> <?php echo $customer_email; ?></p>
         
         <h4>Product Information</h4>
-        <p><b>Name:</b> <?php //echo $planName; ?></p>
-        <p><b>Price:</b> <?php //echo $planPrice.' '.$currency; ?></p>
+        <p><b>Name:</b> <?php echo $name; ?></p>
+        <p><b>Price:</b> <?php echo $planPrice.' '.$currency; ?></p>
     <?php }else{ ?>
         <h1 class="error">Your Payment been failed!</h1>
         <p class="error"><?php echo $statusMsg; ?></p>

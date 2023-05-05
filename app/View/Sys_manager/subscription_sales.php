@@ -5,7 +5,7 @@
 <script>
 
 window.onload = function(){
-    var element = document.getElementById("home");
+    var element = document.getElementById("dashboard");
     element.classList.remove("active");
 
     var element = document.getElementById("sale");

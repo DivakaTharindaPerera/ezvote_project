@@ -213,6 +213,16 @@ class Subscription_plan extends Controller
         } 
     }
 
+    public function subscribed_plan(){
+        if(!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $data = $this->SubscriptionModel->subscribedSubscriptionPlan();
+
+            $this->view('',$data);
+        }
+    }
+
 
     public function changeLog(){
         if (!isset($_SESSION["UserId"])) {
@@ -235,13 +245,6 @@ class Subscription_plan extends Controller
         }
     }
 
-    public function payment(){
-        if (!isset($_SESSION["UserId"])) {
-            redirect('System_manager/login');
-        }else{
-            $this->view('Sys_manager/plan_payment');
-        }
-    }
 
 }
 ?>

@@ -73,4 +73,11 @@ class User{
             return false;
         }
     }
+
+    public function pricingPlan(){
+        $this->db->query('SELECT DISTINCT(PlanName), Price FROM subscription_plan WHERE plan_status = :status');
+        $this->db->bind(':status',1);
+
+        return $this->db->resultSet();
+    }
 }

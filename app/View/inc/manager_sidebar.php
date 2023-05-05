@@ -34,14 +34,7 @@
 
            <ul>
                <li>
-                    <a id="home" href="#" class="active">
-                   <!-- <a href="<?php //echo urlroot; ?>/Pages/home" id="home" class="active"> -->
-                       <span class="icon"><i class="fas fa-home"></i></span>
-                       <span class="item">Home</span>
-                   </a>
-               </li>
-               <li>
-                   <a id="dashboard" href="<?php echo urlroot; ?>/System_manager/dashboard">
+                   <a id="dashboard" href="<?php echo urlroot; ?>/System_manager/dashboard" class="active">
                        <span class="icon"><i class="fas fa-desktop"></i></span>
                        <span class="item">My Dashboard</span>
                    </a>
@@ -73,7 +66,7 @@
                <li>
                    <a  id="pricing" href="<?php echo urlroot; ?>/Subscription_plan/pricing">
                        <span class="icon"><i class="fab fa-cc-amazon-pay"></i></span>
-                       <span class="item">Pricing</span>
+                       <span class="item">Plan Prices</span>
                    </a>
                </li>
                <li>

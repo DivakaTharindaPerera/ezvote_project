@@ -1,11 +1,12 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
-<?php require approot . '/View/inc/ManagerNavbar.php'; ?>
-<?php require approot . '/View/inc/manager_sidebar.php'; ?>
+<?php require approot.'/View/inc/AuthNavbar.php'; ?>
+<?php require approot.'/View/inc/sidebar-new.php'; ?>
 
 <div class="main-container">
     <div class="min-w-85 min-h-85">
         <div class="w-100 h-50 overflow-y">
             <div class="title text-center text-uppercase">Payment Details</div>
+            <form method="post" action="../Controller/Payment">
             <div class="panel">
     <div class="panel-heading">
         <h3 class="panel-title">Charge <?php echo '$'.$planPrice; ?> with Stripe</h3>
@@ -51,8 +52,9 @@
         </div>
     </div>
 </div>
+            </form>
         </div>
     </div>
 </div>
 
-<script src="js/checkout.js" STRIPE_PUBLISHABLE_KEY="<?php echo STRIPE_PUBLISHABLE_KEY; ?>" defer></script>
+<script src="js/checkout.js" STRIPE_PUBLISHABLE_KEY="<?php echo STRIPE_PUBLISHABLE_KEY;?>" defer></script>
