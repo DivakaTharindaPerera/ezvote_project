@@ -35,6 +35,9 @@
         <a href="<?php echo urlroot; ?>/Pages/addConference/<?= $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1 mr-auto">
             <div><b>Schedule a meeting</b></div>
         </a>
+        <a href="<?php echo urlroot; ?>/Pages/viewLog/<?= $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1 mr-auto">
+            <div><b>Activity Log</b></div>
+        </a>
 
 
     </div>

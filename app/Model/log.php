@@ -26,4 +26,15 @@ class log extends Controller{
         }
 
     }
+
+    public function getLogsByElectionId($eid){
+        $this->db->query('SELECT * FROM logs WHERE electionId = :eid');
+        $this->db->bind(':eid', $eid);
+
+        try {
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
