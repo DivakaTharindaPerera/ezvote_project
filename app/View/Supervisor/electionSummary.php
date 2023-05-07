@@ -6,7 +6,7 @@ require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
-<div class="main-container">
+<div class="main-container" id="printThis">
     <?php
     $partyVotes = array();
     foreach($data['parties'] as $party){
@@ -198,6 +198,7 @@ require approot . '/View/inc/VoterHeader.php'; ?>
         }
         ?>
     </div>
+    <button onclick="printThis()">PRINT</button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -252,6 +253,9 @@ require approot . '/View/inc/VoterHeader.php'; ?>
         }
     });
 
+    function printThis(){
+        window.print();
+    }
     
 </script>
 <?php require approot . '/View/inc/footer.php'; ?>

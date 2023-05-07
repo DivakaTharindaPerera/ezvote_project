@@ -590,9 +590,10 @@ class Elections extends Controller
                 $id = trim($_POST['id']);
                 $eid = trim($_POST['eid']);
                 $electionRow = $this->electionModel->findElectionById($eid);
+                $candidateRow = $this->candidateModel->getCandidateByCandidateId($id);
                 if ($this->candidateModel->deleteCandidate($id)) {
 
-                    $logDesc = "Candidate " . $id . " has been removed from the election ";
+                    $logDesc = "Candidate " . $candidateRow->candidateName . " has been removed from the election ";
                     $this->logModel->saveLog($logDesc, $eid, $_SESSION["UserId"]);
 
                     redirect('Pages/electionCandidates/' . $eid);
@@ -621,7 +622,7 @@ class Elections extends Controller
 
                 if ($this->candidateModel->updateCandidateWithUser($data)) {
 
-                    $logDesc = "Candidate " . $data['cid'] . " has been updated in the election ";
+                    $logDesc = "Candidate " . $data['cname'] . " has been updated in the election ";
                     $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
 
                     redirect('Pages/electionCandidates/' . $data['id']);
@@ -631,7 +632,7 @@ class Elections extends Controller
             } else {
                 if ($this->candidateModel->updateCandidate($data)) {
 
-                    $logDesc = "Candidate " . $data['cid'] . " has been updated in the election ";
+                    $logDesc = "Candidate " . $data['cname'] . " has been updated in the election ";
                     $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
 
                     redirect('Pages/electionCandidates/' . $data['id']);
@@ -749,9 +750,10 @@ class Elections extends Controller
                     'eid' => trim($_POST['eid'])
                 ];
                 $electionRow = $this->electionModel->findElectionById($data['eid']);
+                $positionRow = $this->positionModel->getElectionPositionById($data['id']);
                 if ($this->positionModel->deletePosition($data['id'])) {
 
-                    $logDesc = "Position " . $data['id'] . " has been deleted from the election ";
+                    $logDesc = "Position " . $positionRow->positionName . " has been deleted from the election ";
                     $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
 
                     redirect('Pages/electionCandidates/' . $data['eid']);

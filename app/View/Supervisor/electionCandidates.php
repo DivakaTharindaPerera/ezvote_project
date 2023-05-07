@@ -11,7 +11,7 @@
                 <button class="btn btn-primary ml-1 card-hover" onclick="addPositionVisible()"><b class="text-xl"><i class="mt-auto mr-1 fa-solid fa-plus"></i>Add New Position</b></button>
             </div>
 
-            <div class="m-3 w-50 ml-auto mr-auto border-1 p-1 border-radius-2" id='formForPosition' style="display: none;">
+            <div class="m-3 w-50 ml-auto mr-auto border-1 p-1 border-radius-2 text-center" id='formForPosition' style="display: none;">
                 <form action="" method="POST">
                     <input type="hidden" name="id" value="<?php echo $data['ID']; ?>">
                     <div class="m-1">
@@ -20,13 +20,13 @@
                         </span>
                     </div>
                     <div class="m-1">
-                        <input type="text" name="positionName" placeholder="Position Name..." required>
+                        <input type="text" class="w-90 border-1" name="positionName" placeholder="Position Name..." required>
                     </div>
                     <div>
-                        <textarea name="positionDesc" id="" cols="30" rows="10" placeholder="Position Description..." required></textarea>
+                        <textarea class="w-95 border-1 p-1 border-radius-1" name="positionDesc" id="" cols="30" rows="5" placeholder="Position Description..." required></textarea>
                     </div>
                     <div class="m-1">
-                        No of options: <input type="number" class="border-1 p-2" name="noOfOptions" placeholder="No of Options..." value="1" min="1">
+                        No of options: <input type="number" class="border-1 border-radius-1 w-10" name="noOfOptions" placeholder="No of Options..." value="1" min="1" style="padding-left: 5px; padding-right: 2px;">
                     </div>
 
                     <div class="text-center">
@@ -39,10 +39,12 @@
         </div>
 
         <!-- alert of successful position insertion -->
-        <div id="positionAddingSuccess" class="popup-window bg-secondary h-50 w-50 text-center border-1">
-            <div class="m-3">
-                <h3 class="text-success"></h3>
-                <button class="btn btn-primary" id="<?php echo $data['ID'] ?>" onclick="funcDone(this.id)">OK</button>
+        <div id="positionAddingSuccess" class="popup-window-1 bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
+            <div class="popup-window-1-content bg-light border-radius-2 p-1">
+                <div class="m-1">
+                    <h3 class="text-success"></h3>
+                    <button class="btn btn-primary mt-1" id="<?php echo $data['ID'] ?>" onclick="funcDone(this.id)">OK</button>
+                </div>
             </div>
         </div>
 
@@ -75,84 +77,94 @@
                 </div>
             </form>
         </div>
-        <div id="popup-d" class="popup-window bg-secondary h-50 w-50 text-center">
-            <form action="<?php echo urlroot ?>/Elections/updateCandidate" method="post">
-                <div class="d-flex flex-column">
-                    <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
-                    <input type="hidden" name="cId" id="cEditId">
-                    <div class="d-flex flex-column m-1 p-1 text-left">
-                        <label for="cName" class="text-xl">Name: </label><input type="text" name="cName" id="cEditName">
-                    </div>
-                    <div class="d-flex flex-column mb-1 p-1 text-left">
-                        <label for="cEmail" class="text-xl">Email: </label> <input type="text" name="cEmail" id="cEditEmail">
-                    </div>
-                    <div class="m-1">
-                        Party:
-                        
-                        <select name="cParty" id="cEditPartyList" class="bg-secondary border border-1 border-radius-1 w-25 text-right px-1">
-                            <?php
-                            foreach ($data['partyRow'] as $party) {
-                                echo "<option value='" . $party->partyId . "'>" . $party->partyName . "</option>";
-                            }
-                            ?>
-                        </select>
-                        
-                    </div>
-                </div>
+        <div id="popup-d" class="popup-window-1 bg-secondary h-50 w-100 text-center border-1 border-radius-2">
+            <div class="popup-window-1-content bg-light border-radius-2 p-1 w-45">
+                <form action="<?php echo urlroot ?>/Elections/updateCandidate" method="post">
+                    <div class="d-flex flex-column justify-content-center text-center">
+                        <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
+                        <input type="hidden" name="cId" id="cEditId">
+                        <div class="d-flex flex-column m-1 p-1 text-center w-100 mx-auto">
+                            <label for="cName" class="text-xl">Name</label>
+                            <input type="text" name="cName" id="cEditName" class="border-1 w-80">
+                        </div>
+                        <div class="d-flex flex-column mb-1 p-1 text-column w-100 mx-auto">
+                            <label for="cEmail" class="text-xl">Email </label>
+                            <input type="text" name="cEmail" id="cEditEmail" class="border-1 w-80">
+                        </div>
+                        <div class="m-1">
+                            Party:
 
-                <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Update</b></button>
-                <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
-            </form>
+                            <select name="cParty" id="cEditPartyList" class="bg-secondary border border-1 border-radius-1 w-25 text-right px-1">
+                                <?php
+                                foreach ($data['partyRow'] as $party) {
+                                    echo "<option value='" . $party->partyId . "'>" . $party->partyName . "</option>";
+                                }
+                                ?>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-25 h-10 m-1 p-1"><b>Update</b></button>
+                    <button type="button" onclick="popupClose()" class="btn btn-danger w-25 h-10 p-1 m-1"><b>Cancel</b></button>
+                </form>
+            </div>
         </div>
 
         <!-- to update position -->
-        <div id="popup-update-position" class="popup-window bg-primary min-h-50 w-50 text-center text-light border-1 p-1 overflow-scroll border-radius-2">
-            <form action="" method="post">
-                <div class="d-flex flex-column">
-                    <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
-                    <input type="hidden" name="pId" id="pEditId">
-                    <div class="d-flex flex-column mt-1  text-left">
-                        <span class="text-danger text-center text-xl mb-1"></span>
-                        <label for="cName" class="text-xl">Position Name: </label><input type="text" name="cName" id="pEditName" class="text-light border-black">
+        <div id="popup-update-position" class="popup-window-1 bg-secondary h-50 w-100 text-center border-1 border-radius-2">
+            <div class="popup-window-1-content bg-light border-radius-2 p-1">
+                <form action="" method="post">
+                    <div class="d-flex flex-column text">
+                        <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
+                        <input type="hidden" name="pId" id="pEditId">
+                        <div class="d-flex flex-column mt-1  text-center">
+                            <span class="text-danger text-center text-xl mb-1"></span>
+                            <label for="cName" class="text-xl">Position Name </label><input type="text" name="cName" id="pEditName" class="border-black">
+                        </div>
+                        <div class="d-flex flex-column mt-1 text-center">
+                            <label for="cEmail" class="text-xl">Position Description </label> <textarea name="" id="" cols="20" rows="5" class="border-1 border-radius-1 p-1"></textarea>
+                        </div>
+                        <div class="d-flex mt-1 text-left">
+                            <label for="noOfOptions">No of options: </label>
+                            <div class="ml-1"><input type="number" class="border-1 border-radius-1 w-20" name="noOfOptions" placeholder="No of Options..." min="1"></div>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column mt-1 text-left">
-                        <label for="cEmail" class="text-xl">Position Description: </label> <textarea name="" id="" cols="20" rows="5" class="border-1 border-radius-1"></textarea>
-                    </div>
-                    <div class="d-flex mt-1 text-left">
-                        <label for="noOfOptions">No of options: </label>
-                        <div class="ml-1"><input type="number" class="border-1 border-radius-1 text-light" name="noOfOptions" placeholder="No of Options..." min="1"></div>
-                    </div>
-                </div>
 
-                <button type="submit" class="btn btn-light w-15 h-10 m-1 p-1" id="updatePositionBtn"><b>Update</b></button>
-                <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
-            </form>
+                    <button type="submit" class="btn btn-primary w-25 h-10 m-1 p-1" id="updatePositionBtn"><b>Update</b></button>
+                    <button type="button" onclick="popupClose()" class="btn btn-danger w-25 h-10 p-1 m-1"><b>Cancel</b></button>
+                </form>
+            </div>
         </div>
 
-        <div id="popup-delete-position" class="popup-window bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
-            <form action="<?php echo urlroot; ?>/Elections/deletePosition" method="post">
-                <input type="hidden" name="id" value="">
-                <input type="hidden" name="eid" value="<?php echo $data['ID'] ?>">
-                <Span>
-                    <h3 class="mt-1"> Confirm Delete?</h3>
-                    <h3 class="text-danger ml-1 mr-1 mt-1"> You cannot undo this action after clicking 'Confirm'</h3>
-                </Span>
-                <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Confirm</b></button>
-                <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
-            </form>
+        <div id="popup-delete-position" class="popup-window-1 bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
+            <div class="popup-window-1-content bg-light border-radius-2 p-1">
+                <form action="<?php echo urlroot; ?>/Elections/deletePosition" method="post">
+                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="eid" value="<?php echo $data['ID'] ?>">
+                    <Span>
+                        <h3 class="mt-1"> Confirm Delete?</h3>
+                        <h3 class="text-danger ml-1 mr-1 mt-1"> You cannot undo this action after clicking 'Confirm'</h3>
+                    </Span>
+                    <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Confirm</b></button>
+                    <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
+                </form>
+            </div>
         </div>
 
-        <div id="popup-delete-candidate" class="popup-window bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
-            <form action="<?php echo urlroot; ?>/Elections/removeCandidate" method="post">
-                <input type="hidden" name="id" value="">
-                <input type="hidden" name="eid" value="<?php echo $data['ID'] ?>">
-                <Span>
-                    <h3 class="mt-1"> Confirm Deleting Candidate?</h3>
-                    <h3 class="text-danger ml-1 mr-1 mt-1"> You cannot undo this action after clicking 'Confirm'</h3>
-                </Span>
-                <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Confirm</b></button>
-                <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
-            </form>
+        <div id="popup-delete-candidate" class="popup-window-1 bg-secondary min-h-30 min-w-30 text-center border-1 border-radius-2">
+            <div class="popup-window-1-content bg-light border-radius-2 p-1">
+                <form action="<?php echo urlroot; ?>/Elections/removeCandidate" method="post">
+                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="eid" value="<?php echo $data['ID'] ?>">
+                    <Span>
+                        <h3 class="mt-1"> Confirm Deleting Candidate?</h3>
+                        <h3 class="text-danger ml-1 mr-1 mt-1"> You cannot undo this action after clicking 'Confirm'</h3>
+                    </Span>
+                    <button type="submit" class="btn btn-primary w-15 h-10 m-1 p-1"><b>Confirm</b></button>
+                    <button type="button" onclick="popupClose()" class="btn btn-danger w-15 h-10 p-1 m-1"><b>Cancel</b></button>
+                </form>
+            </div>
         </div>
 
         <!-- to update position -->
@@ -194,7 +206,7 @@
                                         <input type='hidden' value='" . $candidate->candidateEmail . "'>
                                         
                                         <div class='d-flex flex-column'>
-                                            <div class='sub-title text-dark' id='cName" . $candidate->candidateId . "'>" . $candidate->candidateName . "</div>
+                                            <a href='" . urlroot . "/Pages/viewCandidate/" . $candidate->candidateId . "' class='sub-title text-dark' id='cName" . $candidate->candidateId . "'>" . $candidate->candidateName . "</a>
                                             <div><img src='/ezvote/public/img/profile.jpg' style='max-height:100px;max-width: 100px' alt='profile photo'></div>
                                         </div>
                                         ";
@@ -263,7 +275,7 @@
         document.getElementById('cEditPartyList').value = cParty;
 
         document.getElementById('popup-d').style.display = "block";
-        document.getElementById('popup-d').style.filter = "none";
+        document.querySelector('body').classList.add('no-scroll-for-popup');
 
     }
 
@@ -339,6 +351,7 @@
     function addPositionVisible() {
         document.getElementById('formForPosition').style.display = "block";
         document.getElementById('formForPosition').getElementsByTagName('input')[1].focus();
+        document.querySelector('body').classList.add('no-scroll-for-popup');
     }
 
     function funcDone(id) {
