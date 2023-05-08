@@ -295,4 +295,10 @@ class Election extends Controller{
         $this->db->bind(':id', $id);
         return $this->db->resultSet();
     }
+
+    public function getElections()
+    {
+        $this->db->query('SELECT * FROM election');
+        return $this->db->resultSet();
+    }
 }

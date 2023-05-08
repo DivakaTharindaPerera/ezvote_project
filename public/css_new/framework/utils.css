@@ -37,6 +37,8 @@
 @import "components/popup/popup.css";
 /*Flex-box*/
 @import "components/flex-box/flex-box.css";
+/*Checkmark*/
+@import "components/checkmark/checkmark.css";
 
 /*Import Forms*/
 @import "components/form/form.css";
@@ -73,6 +75,9 @@
 }
 .overflow-y{
     overflow-y: auto;
+}
+.overflow-y-hidden{
+    overflow-y: hidden ;
 }
 .overflow-scroll{
     overflow: scroll;
@@ -186,6 +191,9 @@
 .max-w-8{
     max-width: 8rem !important;
 }
+.min-w-20vw{
+    min-width: 20vw;
+}
 .min-w-100{
     min-width: 100%;
 }
@@ -279,6 +287,9 @@
 .max-w-100{
     max-width: 100%;
 }
+.max-w-20vw{
+    max-width: 20vw;
+}
 /*  */
 .min-h-10{
     min-height: 10%;
@@ -289,8 +300,8 @@
 .min-h-30{
     min-height: 30%;
 }
-.min-h-37vh{
-    min-height: 37vh;
+.min-h-35vh{
+    min-height: 35vh;
 }
 .min-h-40{
     min-height: 40%;
@@ -315,6 +326,9 @@
 }
 .max-h-20{
     max-height: 20%;
+}
+.max-h-35vh{
+    max-height: 35vh;
 }
 .max-h-60vh{
     max-height: 60vh;

@@ -29,6 +29,7 @@ function viewElection($election_id){
     window.location.href="/ezvote/Voters/election/"+election_id;
 }
 
+
 function viewObjections($candidate_id,$election_id){
     const candidate_id=$candidate_id;
     const election_id=$election_id;

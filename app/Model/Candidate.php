@@ -106,7 +106,7 @@ class Candidate extends Controller{
     public function getCandidatesByElectionId($id){
 //        $id=1281;
         $this->db->query(
-            "SELECT * FROM Candidate
+            "SELECT * FROM candidate
             WHERE electionid = :1
             "
         );
@@ -205,7 +205,7 @@ class Candidate extends Controller{
         }
     }
 
-    public function sendEmail($candidateId,$data){
+    public function sendEmailCandidates($candidateId,$data){
         $this->db->query(
             "SELECT candidateEmail FROM candidate WHERE candidateId = :1");
         $this->db->bind(':1', $candidateId);
@@ -226,10 +226,10 @@ class Candidate extends Controller{
     }
 
 
-    public function getCandidateIDByUserId()
+    public function getCandidateByUserId()
     {
-        $this->db->query('SELECT candidateId FROM candidate WHERE userId = :user_id');
-        $this->db->bind(':user_id', $_SESSION['user_id']);
+        $this->db->query('SELECT * FROM candidate WHERE userId = :user_id');
+        $this->db->bind(':user_id', $_SESSION['UserId']);
         $this->db->execute();
         $candidate = $this->db->resultSet();
         return $candidate;

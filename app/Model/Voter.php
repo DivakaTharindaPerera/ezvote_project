@@ -413,5 +413,25 @@ class Voter extends Controller{
         }
     }
 
+    public function sendEmailVoters($voterId,$data){
+        $this->db->query(
+            "SELECT Email FROM voter WHERE voterId = :1");
+        $this->db->bind(':1', $voterId);
+        $this->db->execute();
+        $voter = $this->db->single();
+        $email = new Email();
+        $data = [
+            'email' => $voter->Email,
+            'subject' => 'You have a meting',
+            'body' => 'You have a meting with supervisor.<br>
+                            Topic-'.$data['topic'].'<br>
+                            Date-'.$data['start_date'].'<br>
+                            Password-'.$data['password'].'<br>
+                            Please be sure to log on ezvote platform to attend the meeting.'
+        ];
+
+        $email->sendEmail($data);
+    }
+
     
 }

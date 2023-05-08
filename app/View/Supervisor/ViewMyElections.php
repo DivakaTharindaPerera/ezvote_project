@@ -32,7 +32,7 @@
                 </div>
         </div>
     </div>
-    <div id="elections" class="d-flex flex-wrap mr-1 ml-3 min-h-100 my-2">
+    <div id="elections" class="d-flex flex-wrap mr-1 ml-3 min-h-100 my-2 bg-info px-1 py-1">
     <?php
         date_default_timezone_set('Asia/Colombo');
         $currentDate = date('Y-m-d H:i:s');

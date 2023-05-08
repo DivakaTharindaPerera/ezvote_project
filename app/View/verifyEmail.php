@@ -12,7 +12,7 @@
     <div class="form">
     <?php
     //if the code is wrong
-        echo "<div class='d-flex justify-content-center text-center text-xl'> Verification code has been sent to the email <br> <em style='color: red'>" .$data['email']." </em> </div>";
+        echo "<div class='d-flex justify-content-center text-center text-xl mx-1'> Verification code has been sent to the email <br> <em style='color: red'>" .$data['email']." </em> </div>";
     ?>
         <div class="d-flex justify-content-center">
             <form action="<?php echo urlroot ?>/users/verifyEmail" method="POST" >
