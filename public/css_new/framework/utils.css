@@ -37,8 +37,8 @@
 @import "components/popup/popup.css";
 /*Flex-box*/
 @import "components/flex-box/flex-box.css";
-/*Checkmark*/
-@import "components/checkmark/checkmark.css";
+
+
 
 /*Import Forms*/
 @import "components/form/form.css";
@@ -76,16 +76,19 @@
 .overflow-y{
     overflow-y: auto;
 }
+.overflow-overlay{
+    overflow-y: overlay;
+}
 .overflow-y-hidden{
     overflow-y: hidden ;
 }
 .overflow-scroll{
     overflow: scroll;
 }
-/*::-webkit-scrollbar{*/
-/*    width: 2rem;*/
-/*    color: var(--white);*/
-/*}*/
+::-webkit-scrollbar{
+    width: 0;
+    background:transparent;
+}
 .justify-content-center{
     justify-content: center;
 }
