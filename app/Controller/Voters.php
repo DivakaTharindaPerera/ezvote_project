@@ -229,6 +229,31 @@ class Voters extends Controller
         }
     }
 
+    public function encrypt($data, $key, $iv)
+    {
+        $encryptedData = openssl_encrypt($data, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv);
+        $encryptedData = base64_encode($encryptedData);
+        return $encryptedData;
+    }
+
+    public function decrypt($data, $key, $iv)
+    {
+        $decryptedData = base64_decode($data);
+        $decryptedData = openssl_decrypt($decryptedData, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv);
+        return $decryptedData;
+    }
+
+    public function verifyCandidate($eid, $cid)
+    {
+        $candidate = $this->candidateModel->getCandidateByCandidateId($cid);
+        $election = $this->electionModel->getElectionByElectionId($eid);
+        if ($election->ElectionId == $candidate->electionid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function calculateVotes($eid)
     {
         $candidates = array();

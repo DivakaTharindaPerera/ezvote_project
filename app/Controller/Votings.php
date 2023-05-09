@@ -21,7 +21,7 @@ class Votings extends Controller
         $this->partyModel = $this->model('Party');
         $this->encryptModel = $this->model('userEncrypt');
         $this->voteModel = $this->model('Vote');
-        $this->userModel=$this->model('user');
+        $this->userModel=$this->model('User');
     }
 
     public function otpVerify()
