@@ -48,10 +48,11 @@
             </div>
         </div>
 
-        <div class="finalForm mx-2 my-1">
+        <div class="finalForm mx-2 my-1 d-flex">
             <form action="<?php echo urlroot; ?>/Elections/insertPositions" id="form" method="POST" class="align-items-center justify-content-center">
                 <input type="hidden" name="electionId" value="<?php echo $data; ?>">
                 <button type="submit" class="btn btn-primary" >ADD POSITIONS</button>
+                <a href="" class="btn btn-danger ml-auto">SKIP</a>
             </form>
         </div>
     </div>
