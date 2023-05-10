@@ -1,9 +1,8 @@
 <?php
-//print_r($data['election']);
-//exit();
 require approot . '/View/inc/VoterHeader.php';
 require approot . '/View/inc/AuthNavbar.php';
 require approot . '/View/inc/sidebar-new.php';
+
 ?>
 
 <div class="main-container">
@@ -87,10 +86,48 @@ require approot . '/View/inc/sidebar-new.php';
                     <!--/public/img/off.png" alt="" style="max-width: 40px;max-height: 40px"> </div>-->
                 </div>
             </div>
-            <div id="candidates" class="d-flex flex-column w-100">
-                <div class="title">
-                    Candidates
-                </div>
+          
+
+<?php 
+if(!empty($result)){
+if($result[0]->status == 1){ 
+?>
+    <div class="title">
+        Apply Nomination
+    <br><br>
+    <button onclick="location.href='/ezvote/Candidates/applyNomination?id=<?= $data['election']->ElectionId ?>'" class="btn btn-primary">Apply</button>
+    </div>
+
+<?php }else{ ?>
+    <div class="title">
+        Apply Party
+    <br><br>
+    <button onclick="location.href='/ezvote/Candidates/applyParty/<?= $data['election']->ElectionId ?>'" class="btn btn-success">Apply</button>
+    </div>
+
+    <div class="title bg-danger border-radius-2">
+        <p class="text-white">You have to apply for the party first.</p>      
+    </div>
+
+<?php 
+}
+}else{ 
+?>
+    <div class="title">
+        Apply Party
+        <br><br>
+        <button onclick="location.href='/ezvote/Candidates/applyParty/<?= $data['election']->ElectionId ?>'" class="btn btn-success">Apply</button>
+    </div>
+
+    <div class="title bg-danger">
+        <p class="text-white">You have to apply for the party first.</p> 
+    </div>
+
+<?php }?>
+    <div id="candidates" class="d-flex flex-column w-100">
+        <div class="title">
+            Candidates
+        </div>
 
                 <div id="competitors" class="d-flex flex-wrap w-100">
                     <?php foreach ($data['positions'] as $position) {
@@ -102,7 +139,7 @@ require approot . '/View/inc/sidebar-new.php';
                                 foreach ($data['candidates'] as $candidate) {
                                     if ($candidate->positionId == $position_id) {
                                         $i = $i + 1; ?>
-                                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px">
+                                        <div id="candidate" class="d-flex align-center bg-white justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px; width:100vh;">
                                             <div id="can-det" class="d-flex" style="gap: 0.5rem">
                                                 <div id="can-ID" class="font-bold"><?= $i ?></div>
                                                 <div id="can-Name"><?= $candidate->candidateName ?></div>
@@ -112,7 +149,7 @@ require approot . '/View/inc/sidebar-new.php';
                                                 <button class=" btn btn-primary" onclick="makeObjection(<?= $candidate->candidateId ?>)">Make Objection</button>
                                                 <!--                                    --><?php //var_dump($candidate);
                                                                                             ?>
-                                                <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View</button>
+                                                <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View Objection</button>
                                                 <button class="btn btn-primary" onclick="location.href='/ezvote/Candidates/candidateProfile/<?= $candidate->candidateId ?>'">View</button>
 
                                             </div>
@@ -129,7 +166,7 @@ require approot . '/View/inc/sidebar-new.php';
     </div>
 
     <div class="popup-window-1 bg-secondary text-center border-1 border-radius-2" id="popupSubmission">
-        <div class="popup-window-1-content bg-light border-radius-2 p-2 d-flex flex-column w-75">
+        <div class="popup-window-1-content bg-light border-radius-2 p-2 d-flex flex-column">
             <div class="title">Make Objection</div>
             <form action="/ezvote/Voters/submitObjection" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start" id="Objection_form">
                 <input type="text" name="candidateId" value="">

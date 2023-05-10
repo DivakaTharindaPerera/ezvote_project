@@ -1,31 +1,45 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
-<?php require approot . '/View/inc/side_bar.php'; ?>
+<?php require approot . '/View/inc/sidebar-new.php'; ?>
 
-<div class="w-100 overflow-y p-4" style="padding-left:40vh; scrollbar-width: none; ">
-<table>
+<div class="main-container">
+
+<div class="bg-dark p-1 w-65" style="margin-top:5vh;">
+<label class="text-white" for="search" style=""><i class="fa-solid fa-magnifying-glass"></i> Search</label>
+<input type="search" id="search" placeholder="Type to search..." class="border-success border-6 text-white">
+</div>
+
+<div class="w-100 overflow-y p-4" style="scrollbar-width: none; ">
+<table id="table">
+<thead>
     <tr>
         <th style="background: rgb(5, 68, 104);">RequestNo</th>
+        <th class="">Election Name</th>
         <th class="w-25">Candidate Name</th>
         <th>Candidate Vision</th>
         <th>Identity Proof</th>
         <th class="w-25">Request Accept/Reject</th>
-    </tr>   
+    </tr>
+</thead>   
 <?php 
+    // var_dump($electName);
+    // exit;
     foreach ($request as $value){
 ?>
-    <tr class="comment">
+<tbody>
+    <tr class="comment table-row">
         <td><?php echo $value->request_id?></td>
+        <td class="text-left"><?php echo $electName[$value->request_id]?></td>
         <td class="text-left"><?php echo $value->candidate_name?></td>
         <td class="text-left"><?php echo $value->candidate_vision?></td>
-        <td class="text-left"><?php echo $value->identity_proof?></td>
+        <td class="text-left"><a href="<?php echo urlroot; ?>/img/candidate/proofDocuments/<?php echo $value->identity_proof?>" download><?php echo $value->identity_proof?></a></td>
 
         <?php 
             if($value->status==0) {
         ?>
         <td>
-        <button class="btn-success text-white border-radius-3 px-1" onclick="location.href='/ezvote/Candidates/acceptPartyRequest?id=<?php echo $value->request_id ?>'">Accept</button> 
-        <button class="btn-danger text-white border-radius-3 px-1" onclick="openPopupPassId()" data-request_id="<?php echo $value->request_id ?>">Reject</button>
+        <button class="btn-success text-white border-radius-3 px-1" onclick="location.href='/ezvote/Candidates/acceptPartyRequest/<?php echo $value->request_id ?>/<?php echo $value->user_id ?>'">Accept</button> 
+        <button class="btn-danger text-white border-radius-3 px-1" onclick="openPopupPassId()" data-request_id="<?php echo $value->request_id ?>" data-candidate_id="<?php echo $value->user_id ?>">Reject</button>
         </td>
         <?php 
             }elseif ($value->status==1) {
@@ -35,6 +49,7 @@
             }elseif ($value->status==2) {
         ?>
         <td class="text-danger">Rejected</td>
+</tbody>
         <?php
             }
         ?>
@@ -58,7 +73,9 @@
                                             </div>
                                             
     
-                                            <div><input type="number" style="display:none" name="request_id" value="2"> </input></div>
+                                            <div><input type="number" style="display:none" name="request_id" value=""> </input></div>
+                                            <div><input type="number" style="display:none" name="candidate_id" value=""> </input></div>
+
                                             <div class="d-flex justify-content-between my-1 w-100">
                                                 <div><button class="btn btn-danger px-1" onclick="closePopup()">Cancel</div>
                                                 <div><button class="btn btn-primary px-1" type="submit">Submit</div>
@@ -68,5 +85,6 @@
 </div>
 </table>
 </div>
-
+</div>
+<script src="<?php echo urlroot; ?>/js/partyRequest.js"></script>
 <?php require approot.'/View/inc/footer.php';?>

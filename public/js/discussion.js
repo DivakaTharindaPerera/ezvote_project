@@ -2,26 +2,31 @@
 
 // load the chat
 let http_request = new XMLHttpRequest();
+// fetch data from the server
 LoadData();
 function LoadData(){
+	var profile_picture = $('#profile_picture').val();
 
+// make an ajax call to the server
 $.ajax({
+// sets the url for the ajax request 	
 url: '/ezvote/Candidates/viewPost',
 type: "POST",
-dataType: 'json',
-success: function(data) {
+dataType: 'json', // data type of the response from server is json
+success: function(data) { // callback function that is executed if the request succeeds
+	// data =  JSON data returned by the server (array)
     console.log(data);
-    $('#MyTable tbody').empty();
+    $('#MyTable tbody').empty(); // empty the tbody element
     for (var i=0; i<data.length; i++) {
-        var commentId = data[i].id;
-        if(data[i].parent_comment == 0){
-        var row = $('<tr class="comment"><td style="text-align:left;"><b><img src="../img/welcome/avatar.jpg" width="30px" height="30px"/>' + data[i].student + ' :<i> '+ data[i].date + ':</i></b></br><p style="padding-left:80px">' + data[i].post + '</br><a data-toggle="modal" data-id="'+ commentId +'" title="Add this item" class="open-ReplyModal" href="#ReplyModal" onclick="openPopup()">Reply</a>'+'</p></td></tr>');
+        var commentId = data[i].id; // id of the current element in the data array
+        if(data[i].parent_comment == 0){ // parent_comment property of the current element of data array is 0
+        var row = $('<tr class="comment"><td style="text-align:left;"><b><img src="' + profile_picture + '" width="30px" height="30px"/>' + data[i].student + ' :<i> '+ data[i].date + ':</i></b></br><p style="padding-left:80px">' + data[i].post + '</br><a data-toggle="modal" data-id="'+ commentId +'" title="Add this item" class="open-ReplyModal" href="#ReplyModal" onclick="openPopup()">Reply</a>'+'</p></td></tr>');
         $('#record').append(row);
         for (var r = 0; (r < data.length); r++)
                 {
                     if ( data[r].parent_comment == commentId)
                     {
-                        var comments = $('<tr class="comment"><td style="padding-left:0px"><b><img src="../img/welcome/avatar.jpg" width="30px" height="30px" padding-left:80px;/>' + data[r].student + ' :<i> ' + data[r].date + ':</i></b></br><p style="padding-left:40px">'+ data[r].post +'</p></td></tr>');
+                        var comments = $('<tr class="comment"><td style="padding-left:0px"><b><img src="' + profile_picture + '" width="30px" height="30px" padding-left:80px;/>' + data[r].student + ' :<i> ' + data[r].date + ':</i></b></br><p style="padding-left:40px">'+ data[r].post +'</p></td></tr>');
                         $('#record').append(comments);
                     }
                 }
