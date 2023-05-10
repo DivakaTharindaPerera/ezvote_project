@@ -2,12 +2,8 @@
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
-
-
-
 <div class="main-container">
-
-    <div id="btn panel" class="d-flex text-center d-flex w-100 p-1 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
+    <div id="btn panel" class="d-flex text-center d-flex w-100 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); padding-bottom: 10px;">
         <a href="<?php echo urlroot; ?>/Pages/electionVoters/<?php echo $data['ID'] ?>" class="btn btn-primary ml-auto card-hover mt-1 mb-1">
             <div><b>Voters</b></div>
         </a>
@@ -34,6 +30,9 @@
         </a>
         <a href="<?php echo urlroot; ?>/Pages/addConference/<?= $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1 mr-auto">
             <div><b>Schedule a meeting</b></div>
+        </a>
+        <a href="<?php echo urlroot; ?>/Pages/viewLog/<?= $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1 mr-auto">
+            <div><b>Activity Log</b></div>
         </a>
 
 
