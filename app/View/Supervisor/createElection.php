@@ -8,11 +8,11 @@
         <form method="POST" action='<?php echo urlroot; ?>/Elections/crteelection' class="d-flex flex-column justify-content-center mx-1 mb-1">
             <div class="d-flex flex-column my-1">
                 <div>Organization name: </div>
-                <div><input type="text" id="orgName" name="orgName" class="text" required></div>
+                <div><input type="text" id="orgName" name="orgName" class="text border border-primary border-1 border-radius-1" required></div>
             </div>
             <div class="d-flex flex-column my-1">
                 <div>Election/ballot title:</div>
-                <div><input type="text" id="electionTitle" name="electionTitle" class="text" required></div>
+                <div><input type="text" id="electionTitle" name="electionTitle" class="text border border-primary border-1 border-radius-1" required></div>
             </div>
             <div class="d-flex flex-column my-1">
                 <div>Description:</div>
@@ -47,7 +47,9 @@
             <div class="d-flex flex-column justify-content-center">
                 <div class="d-flex flex-column my-1 justify-content-center text-lg">
                     <div>
-                        <input type="checkbox" id="objStatus" name="objectionstatus" value="1" onclick="ObjStatus()" class="mr-1">Allow objections against candidates
+
+                        <input type="checkbox" id="objStatus" name="objectionstatus" value="1" onclick="ObjStatus()" class="mr-1 checkmark">Allow objections against candidates
+
                     </div>
                     <div class="flex-column border-primary border-radius-1 border-2" id="objstart" style="display: none;">
                         <div class="text-center my-1"><b>Objection Period</b></div>
@@ -88,7 +90,9 @@
 
     </table> -->
                 <div class="mb-1 justify-content-center text-lg">
-                    <input type="checkbox" id="showStat" name="statVisibality" value="1" class="mr-1">Show ongoing status to the voters and candidates
+
+                    <input type="checkbox" id="showStat" name="statVisibality" value="1" class="mr-1 checkmark">Show ongoing status to the voters and candidates
+
                 </div>
                 <div class="my-1 justify-content-center text-lg">
                     <input type="checkbox" id="selfNomi" name="selfnomination" value="1" class="mr-1" onclick="Snomi()">Allow self nominations

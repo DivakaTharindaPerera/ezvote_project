@@ -309,7 +309,7 @@ class Elections extends Controller
                                             continue;
                                         } else {
                                             echo "error $i <br>";
-                                            $this->view('Supervisor/addCandidate', $data);
+                                            $this->view('Supervisor/addCandidates', $data);
                                             return;
                                         }
                                     } else {

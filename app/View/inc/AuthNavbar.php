@@ -19,7 +19,7 @@
                     <div class="mx-1 my-1 px-1 py-1 w-90 border-primary border-4 border-radius-2">
 
                     <div class="align-items-center justify-content-center mt-1">
-                        <img src="<?= $_SESSION['profile_picture']?>" alt="" class="max-h-20 max-w-20">
+                        <img src="<?= $_SESSION['profile_picture']?>" alt="" class="max-h-20 max-w-20" style="border-radius: 50%">
                     </div>
                     <div class="title">Name:<?= " ".$_SESSION['fname']." ".$_SESSION['lname']?></div>
                     <div class="sub-title">Email:<?= " ".$_SESSION['email']?></div>

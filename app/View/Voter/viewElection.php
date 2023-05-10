@@ -1,5 +1,5 @@
 <?php
-//print_r($data['election']);
+//print_r($data['conferences']);
 //exit();
 require approot . '/View/inc/VoterHeader.php';
 require approot . '/View/inc/AuthNavbar.php';
@@ -32,7 +32,7 @@ require approot . '/View/inc/sidebar-new.php';
                 </div>
             </div>
         </div>
-        <div id="content" class="flex-column w-100 ">
+        <div id="content" class="justify-content-center align-items-center flex-column w-100 ">
             <div id="scheduled" class="mt-1 d-flex justify-content-evenly">
                 <div id="from" class="card">
                     <div class="justify-content-center sub-title mb-1">Commencing</div>
@@ -108,11 +108,13 @@ require approot . '/View/inc/sidebar-new.php';
                                                 <div id="can-Name"><?= $candidate->candidateName ?></div>
                                             </div>
                                             <div id="btn-panel" class="mr-1">
-                                                <button class=" btn btn-primary">Q & A</button>
+                                                <button class=" btn btn-primary" onclick="location.href='/ezvote/Candidates/discussionForum/<?= $data['election']->ElectionId ?>'">Q & A</button>
                                                 <button class=" btn btn-primary" onclick="makeObjection(<?= $candidate->candidateId ?>)">Make Objection</button>
                                                 <!--                                    --><?php //var_dump($candidate);
                                                                                             ?>
                                                 <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View</button>
+                                                <button class="btn btn-primary" onclick="location.href='/ezvote/Candidates/candidateProfile/<?= $candidate->candidateId ?>'">View</button>
+
                                             </div>
 
                                         </div>
@@ -121,6 +123,28 @@ require approot . '/View/inc/sidebar-new.php';
                             </div>
                         </div>
                     <?php } ?>
+                </div>
+            </div>
+            <div class="d-flex flex-column bg-white-0-7  border border-primary  border-3 border-radius-2 shadow justify-content-center align-items-center mx-4 my-1 ">
+                <div class="title">Conferences as voter</div>
+                <div class="d-flex justify-content-center align-items-center flex-wrap">
+                    <?php foreach ($data['conferences'] as $conference){?>
+                        <div class="card my-1">
+                            <div class="text-xl"><?php echo $conference->ConferenceName?></div>
+                            <div class="">
+                                <img src="" alt="">
+                            </div>
+                            <div class="text-lg"><?php echo $conference->DateAndTime?></div>
+                            <!--                        <div class="sub-title">--><?php //echo $conference->ElectionID?><!--</div>-->
+                            <!--                        <div class="sub-title">--><?php //echo $conference->SupervisorID?><!--</div>-->
+                            <!--                        <div class="sub-title">--><?php //echo $conference->candidateID?><!--</div>-->
+                            <div class="btn btn-primary justify-content-center align-items-center w-50 mx-3">
+                                <a href="<?php echo $conference->ConferenceLink?>" class="text-white">Join</a>
+                                <!--                            <button class=" btn btn-primary " onclick="joinMeeting(--><?php //=$conference->ConferenceLink?>
+                                <!--                            //)">Join</button>-->
+                            </div>
+                        </div>
+                    <?php }?>
                 </div>
             </div>
         </div>

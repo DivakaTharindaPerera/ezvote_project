@@ -44,7 +44,7 @@
 
                 <!-- create election -->
                 <li>
-                    <a href="<?php echo urlroot; ?>/View/Createelection">
+                    <a href="<?php echo urlroot; ?>/pages/Createelection">
                         <span class="icon"><i class="fas fa-vote-yea"></i></span>
                         <span class="item">Create Election</span>
                     </a>
@@ -97,9 +97,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo urlroot; ?>/Candidates/candidateProfile">
+                    <a href="<?php echo urlroot; ?>/Candidates/partyrequests">
                         <span class="icon"><i class="fas fa-cog"></i></span>
-                        <span class="item">Candidate</span>
+                        <span class="item">Party Requests</span>
                     </a>
                 </li>
 
