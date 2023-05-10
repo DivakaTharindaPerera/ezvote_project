@@ -1,6 +1,6 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
-<?php require approot . '/View/inc/side_bar.php'; ?>
+<?php require approot . '/View/inc/sidebar-new.php'; ?>
 
 <div class="border-2 border-dark border-radius-5 w-65 p-2 bg-light h-75" style="margin-left:250px; overflow-y: scroll; scrollbar-width: none; margin-top:10vh;">
   <!-- Modal -->
@@ -20,8 +20,8 @@
             <form name="frm1" method="post">
               <input type="hidden" id="commentid" name="Rcommentid">
               <div class="">
-                <label for="usr">Write your name:</label>
-                <input type="text" class="form-control" name="Rname" required>
+                <!-- <label for="usr">Write your name:</label> -->
+                <input style="display:none;" type="text" class="form-control" name="Rname" value="<?= $result2[0]->candidateName ?>">
               </div>
               <div class="">
                 <label for="comment">Write your reply:</label>
@@ -44,13 +44,14 @@
 
   <div class="" style="margin-top:20px">
     <div>
-      <h3>Community forum</h3>
+      <h3>Q & A</h3>
       <hr>
       <form name="frm" method="post">
         <input type="hidden" id="commentid" name="Pcommentid" value="0">
         <div>
-          <label for="usr">Write your name:</label>
-          <input type="text" class="form-control" name="name" required>
+          <!-- <label for="usr">Write your name:</label> -->
+          <br>
+          <input style="display:none;" type="text" class="form-control" name="name" value="<?= $result->Name?>">
         </div>
         <div>
           <label for="comment">Write your question:</label>
@@ -67,6 +68,7 @@
       <div class="">
         <br>
         <h4>Recent questions</h4>
+        <input type="hidden" id="profile_picture" value="<?php echo $_SESSION['profile_picture']; ?>">
         <table class="" id="MyTable">
           <tbody id="record">
 
@@ -79,5 +81,5 @@
 </div>
 <script src="<?php echo urlroot; ?>/js/discussion.js"></script>
 <?php
-require approot . '/View/inc/footer.php';
+// require approot . '/View/inc/footer.php';
 ?>

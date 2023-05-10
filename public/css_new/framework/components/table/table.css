@@ -30,3 +30,12 @@ th, td {
 background-color:rgba(221, 235, 244, 0.921);
 color: black;
 }
+
+thead th {
+    position: sticky;
+    top: 0;
+  }
+
+tbody{
+    z-index: 5;
+}  

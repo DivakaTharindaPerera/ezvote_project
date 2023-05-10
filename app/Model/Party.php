@@ -155,7 +155,7 @@ class Party extends Controller{
 
     public function findPartyNameById($id){
 
-        $this->db->query("SELECT * FROM electionparty WHERE partyId=$id");
+        $this->db->query("SELECT * FROM ElectionParty WHERE partyId=$id");
     
         try {
             $this->db->execute();
@@ -170,6 +170,21 @@ class Party extends Controller{
 // var_dump($this->db->query);
 // exit;
         return $this->db->resultSet();
+    }
+
+    public function getPartyByEmail($email){
+        //  var_dump($email);
+        //  exit;
+        $this->db->query("SELECT * FROM `electionparty` WHERE supEmail=:email");
+        
+        $this->db->bind(':email', $email);
+
+        try {
+            $this->db->execute();
+            return $this->db->resultSet(); // return object
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
     }
 }
 

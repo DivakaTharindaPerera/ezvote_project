@@ -65,7 +65,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<?php echo urlroot; ?>/Candidates/discussionForum">
                         <span class="icon"><i class="fa-brands fa-wpforms"></i></span>
                         <span class="item">Discussion Forum</span>
                     </a>
@@ -89,6 +89,20 @@
                         <span class="item">Edit profile</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="<?php echo urlroot; ?>/Candidates/applyNomination">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Apply Nomination</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo urlroot; ?>/Candidates/partyrequests">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Party Requests</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
 

@@ -116,6 +116,23 @@ class PartyOwnerRequest extends Model
         return 'party_owner_request';
     }
 
+    public function AddPartyRequest($data){
+        $this->db->query('INSERT INTO party_owner_request (user_id,election_id,candidate_name,candidate_vision,identity_proof,partyId) VALUES (:user_id,:ElectionID,:candidateName,:msg,:file_urls,:partyId)');
+        $candidateName = $data['firstname'] . ' ' . $data['lastname'];
+        $this->db->bind(':candidateName',$candidateName);
+        $this->db->bind(':file_urls',$data['identity_proof']);
+        $this->db->bind(':msg',$data['msg']);
+        $this->db->bind(':ElectionID',$data['ElectionID']);
+        $this->db->bind(':user_id',$data['user_Id']);
+        $this->db->bind(':partyId',$data['PartyId']);
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getPartyRequests($candidate_id){
        
         $this->db->query("SELECT * FROM party_owner_request WHERE user_id = $candidate_id");
@@ -159,6 +176,27 @@ class PartyOwnerRequest extends Model
             
         }else{
             return false;
+        }
+    }
+
+    public function getNominationData($nomination_id){
+        $this->db->query("SELECT * FROM nomination WHERE nomination_id = $nomination_id");
+        try {
+            $this->db->execute();
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
+        }
+    }
+
+    public function getPartyRequestsByElectionAndUser($electionID,$userID){
+       
+        $this->db->query("SELECT * FROM party_owner_request WHERE user_id = $userID AND election_id=$electionID");
+        try {
+            $this->db->execute();
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Something went wrong :".$e->getMessage();
         }
     }
 

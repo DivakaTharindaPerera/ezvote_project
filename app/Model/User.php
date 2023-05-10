@@ -153,4 +153,11 @@ class User{
             return false;
         }
     }
+    public function getUserByUserId($id){
+        $this->db->query("SELECT * FROM `user` WHERE UserId =:userID");
+        $this->db->bind(':userID',$id);
+        $results=$this->db->resultSet();
+        return $results;
+    }  
+
 }

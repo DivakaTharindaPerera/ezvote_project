@@ -8,11 +8,16 @@ class Candidates extends Controller
         $this->nominateModel = $this->model('Nomination');
         $this->objectModel = $this->model('Objection');
         $this->discussionModel = $this->model('discussion');
-        $this->candidateModel = $this->model('candidate');
+        $this->candidateModel = $this->model('Candidate');
         $this->electModel = $this->model('Election');
         $this->positionModel = $this->model('electionPositions');
         $this->partyModel = $this->model('Party');
         $this->partyOwnerRequestModel = $this->model('PartyOwnerRequest');
+        $this->userModel = $this->model('User');
+        $this->voterModel = $this->model('Voter');
+        $this->mailModel = $this->model('Email');
+
+
   
     }
 
@@ -24,10 +29,8 @@ class Candidates extends Controller
         }else{
         if (isset($_POST['save'])) {
 
-
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            // var_dump($_POST);
-            $elect_id = $this->nominateModel->getElect_Id($_POST['election_name']);
+
             $party_id = $this->nominateModel->getParty_Id($_POST['party_name']);
             $position_id = $this->nominateModel->getPosition_Id($_POST['position']);
 
@@ -50,14 +53,9 @@ class Candidates extends Controller
             $folder2 = "../public/img/candidate/proofDocuments/" . $filename2;
             move_uploaded_file($tempname2, $folder2);
 
-            // var_dump($elect_id);
-            // var_dump($party_id);
-            // var_dump($position_id);
-
             $data = [
                 'firstname' => trim($_POST['firstname']),
                 'lastname' => trim($_POST['lastname']),
-                'ElectionID' => $elect_id,
                 'ID' => $position_id,
                 'PartyId' => $party_id,
                 'profile_picture' => $imageName,
@@ -86,10 +84,6 @@ class Candidates extends Controller
             if (empty($data['profile_picture'])) {
                 $data['profilepic_err'] = 'Please attach profile picture';
             }
-            
-            // if($imageSize > 100){
-            //     $data['profilepic_err'] ='Image size must be less than 5MB';
-            // }
 
             if (empty($data['identity_proof'])) {
                 $data['identityproof_err'] = 'Please attach identity proof documents';
@@ -112,13 +106,12 @@ class Candidates extends Controller
                     die('Something went wrong');
                 }
             } else {
-                //load view with errors
+                
                 $names = $this->electModel->getUpcomingElections();
                 $positions = $this->positionModel->getElectionPositions();
                 $parties = $this->partyModel->getElectionParties();
 
                 $this->view('Candidate/applyNomination', ['names' => $names, 'positions' => $positions, 'parties' => $parties,'data'=>$data]);
-                // $this->view('Candidate/applyNomination', $data);
             }
         } else {
             $data = [
@@ -129,166 +122,187 @@ class Candidates extends Controller
                 'identity_proof' => '',
                 'candidateDescription' => '',
                 'msg' => '',
-
-                // 'firstname_err'=>'',
-                // 'lastname_err'=>'',
-                // 'election_name_err'=>'',
-                // 'position_err'=>'',
-                // 'party_name_err'=>'',
-                // 'profile_picture_err'=>'',
-                // 'identity_proof_err'=>'',
-                // 'party_description_err'=>'',
-                // 'candidateDescription_err'=>'',
-                // 'msg_err'=>''
             ];
-            // echo "2";
             $this->view('Candidate/nomination_apply', $data);
         }
     }
 }
 
+public function party_apply()
+{
+    if (!isset($_SESSION["UserId"])) {
+        header("Location: " . urlroot . "/View/Login");
+        exit;
+    }else{
+    if (isset($_POST['save'])) {
 
-    public function nomination_app()
-    {
-        if($_SERVER['REQUEST_METHOD']==='POST'){
-            $data=[
-                // 'objectionID'=>uniqid('obj',true),
-                'firstname' => trim($_POST['firstname']),
-                'lastname' => trim($_POST['lastname']),
-                'candidateDescription' => trim($_POST['candidateDescription']),
-                'msg' => trim($_POST['msg']),
-                'ElectionID' => 1281,
-                'ID' => 41,
-                'PartyId' => 50,
-            ];
-            $this->nominateModel->AddNomination($data);
+
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        // var_dump($_POST);
+        // exit;
+        $party_id = $this->nominateModel->getParty_Id($_POST['party_name']);
+
+        $filename2 = $_FILES["file"]["name"];
+        // var_dump($filename2);
+        $tempname2 = $_FILES["file"]["tmp_name"];
+        // var_dump($tempname2);
+        $folder2 = "../public/img/candidate/proofDocuments/" . $filename2;
+        move_uploaded_file($tempname2, $folder2);
+
+        $data = [
+            'firstname' => trim($_POST['firstname']),
+            'lastname' => trim($_POST['lastname']),
+            'ElectionID' => $_POST['elect_id'],
+            // 'ID' => $position_id,
+            'PartyId' => $party_id,
+            'identity_proof' => $filename2,
+            // 'candidateDescription' => trim($_POST['candidateDescription']),
+            'msg' => trim($_POST['msg']),
+            'user_Id'=> $_SESSION['UserId'],  // user id from the form data.  probably a global variable.  probably not needed.  just using it for
+
+
+            'fname_err' => '',
+            'lname_err' => '',
+            'identityproof_err' => '',
+            'description_err' => '',
+            'msg_err' => '',
+        ];
+
+        //validate data
+
+        if (empty($data['firstname'])) {
+            $data['fname_err'] = 'Please enter first name';
         }
-        $this->view('Candidate/candidateProfile');
-    }
 
-    public function update_candidate_profile()
-    {
+        if (empty($data['lastname'])) {
+            $data['lname_err'] = 'Please enter last name';
+        }
 
-        //        if(!$this->isLoggedIn()){
-        //            echo 'log in';
-        //        }
-        //        else{
+        if (empty($data['identity_proof'])) {
+            $data['identityproof_err'] = 'Please attach identity proof documents';
+        }
 
+        if (empty($data['msg'])) {
+            $data['msg_err'] = 'Please enter msg';
+        }
 
-        // if($this->IsPost()){
-
-        // $nominationID = uniqid('obj',true);
-        $candidateName = $_POST['candidateName'];
-        $candidateEmail = $_POST['candidateEmail'];
-        $position = $_POST['position'];
-        $party_name = $_POST['party_name'];
-        // // 'profile_picture'=>$_FILES['imgfile'],
-        // // 'identity_proof'=>$_FILES['file'],
-        $description = $_POST['description'];
-        $vision = $_POST['vision'];
-        if (isset($_POST['update'])) {
-
-            // $res = $this->nominateModel->updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg);
-
-            // if($res){
-            //     header("Location: ../View/Candidate/candidateProfile.php");
-            // }
-            // else{
-            //     header("Location: ../View/Candidate/candidateProfile.php");
-            // }
-
-
-            // if($this->IsPost()){
-
-            // $nominationID = uniqid('obj',true);
-            $candidateName = $_POST['candidateName'];
-            $candidateEmail = $_POST['candidateEmail'];
-            $position = $_POST['position'];
-            $party_name = $_POST['party_name'];
-            // // 'profile_picture'=>$_FILES['imgfile'],
-            // // 'identity_proof'=>$_FILES['file'],
-            $description = $_POST['description'];
-            $vision = $_POST['vision'];
-            if (isset($_POST['update'])) {
-
-                $res = $this->nominateModel->updateCandidateProfile($nominationID, $firstname, $lastname, $election_name, $position, $party_name, $candidateDescription, $msg);
-
-                if ($res) {
-                    header("Location: ../View/Candidate/candidateProfile.php");
-                } else {
-                    header("Location: ../View/Candidate/candidateProfile.php");
-                }
+        //make sure no errors
+        if (empty($data['identityproof_err']) && empty($data['msg_err'])) {
+            //validated
+            if ($this->partyOwnerRequestModel->AddPartyRequest($data)) {
+                redirect('Candidates/applyPartySuccessful');
+            } else {
+                die('Something went wrong');
             }
+        } else {
+            $parties = $this->partyModel->getElectionParties();
+
+            $this->view('Candidate/applyParty', ['names' => $names,'parties' => $parties,'data'=>$data]);
+
         }
+    } else {
+        $data = [
+
+            'firstname' => '',
+            'lastname' => '',
+            'profile_picture' => '',
+            'identity_proof' => '',
+            'candidateDescription' => '',
+            'msg' => '',
+
+        ];
+
+        $this->view('Candidate/party_apply', $data);
     }
+}
+}
 
-//     public function update_candidate_profile()
-//     {
-//         if (!isset($_SESSION["UserId"])) {
-//             header("Location: " . urlroot . "/View/Login");
-//             exit;
-//         }else{
-//                 // if($this->IsPost()){
+    // public function update_candidate_profile()
+    // {
 
-//                         // $nominationID = uniqid('obj',true);
-//                         $candidateName = $_POST['candidateName'];
-//                         $candidateEmail = $_POST['candidateEmail'];
-//                         $position = $_POST['position'];                
-//                         $party_name = $_POST['party_name'];
-//                         // // 'profile_picture'=>$_FILES['imgfile'],
-//                         // // 'identity_proof'=>$_FILES['file'],
-//                         $description = $_POST['description'];
-//                         $vision = $_POST['vision'];
-//                         if(isset($_POST['update'])){
-
-//                         // $res = $this->nominateModel->updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg);
-   
-//                         // if($res){
-//                         //     header("Location: ../View/Candidate/candidateProfile.php");
-//                         // }
-//                         // else{
-//                         //     header("Location: ../View/Candidate/candidateProfile.php");
-//                         // }
+    //     //        if(!$this->isLoggedIn()){
+    //     //            echo 'log in';
+    //     //        }
+    //     //        else{
 
 
-//         // if($this->IsPost()){
+    //     // if($this->IsPost()){
 
-//         // $nominationID = uniqid('obj',true);
-//         $candidateName = $_POST['candidateName'];
-//         $candidateEmail = $_POST['candidateEmail'];
-//         $position = $_POST['position'];
-//         $party_name = $_POST['party_name'];
-//         // // 'profile_picture'=>$_FILES['imgfile'],
-//         // // 'identity_proof'=>$_FILES['file'],
-//         $description = $_POST['description'];
-//         $vision = $_POST['vision'];
-//         if (isset($_POST['update'])) {
+    //     // $nominationID = uniqid('obj',true);
+    //     $candidateName = $_POST['candidateName'];
+    //     $candidateEmail = $_POST['candidateEmail'];
+    //     $position = $_POST['position'];
+    //     $party_name = $_POST['party_name'];
+    //     // // 'profile_picture'=>$_FILES['imgfile'],
+    //     // // 'identity_proof'=>$_FILES['file'],
+    //     $description = $_POST['description'];
+    //     $vision = $_POST['vision'];
+    //     if (isset($_POST['update'])) {
 
-//             $res = $this->nominateModel->updateCandidateProfile($nominationID, $firstname, $lastname, $election_name, $position, $party_name, $candidateDescription, $msg);
+    //         // $res = $this->nominateModel->updateCandidateProfile($nominationID,$firstname,$lastname,$election_name,$position,$party_name,$candidateDescription,$msg);
 
-//             if ($res) {
-//                 header("Location: ../View/Candidate/candidateProfile.php");
-//             } else {
-//                 header("Location: ../View/Candidate/candidateProfile.php");
-//             }
-//         }
-//     }
-// }
-// }
+    //         // if($res){
+    //         //     header("Location: ../View/Candidate/candidateProfile.php");
+    //         // }
+    //         // else{
+    //         //     header("Location: ../View/Candidate/candidateProfile.php");
+    //         // }
 
+
+    //         // if($this->IsPost()){
+
+    //         // $nominationID = uniqid('obj',true);
+    //         $candidateName = $_POST['candidateName'];
+    //         $candidateEmail = $_POST['candidateEmail'];
+    //         $position = $_POST['position'];
+    //         $party_name = $_POST['party_name'];
+    //         // // 'profile_picture'=>$_FILES['imgfile'],
+    //         // // 'identity_proof'=>$_FILES['file'],
+    //         $description = $_POST['description'];
+    //         $vision = $_POST['vision'];
+    //         if (isset($_POST['update'])) {
+
+    //             $res = $this->nominateModel->updateCandidateProfile($nominationID, $firstname, $lastname, $election_name, $position, $party_name, $candidateDescription, $msg);
+
+    //             if ($res) {
+    //                 header("Location: ../View/Candidate/candidateProfile.php");
+    //             } else {
+    //                 header("Location: ../View/Candidate/candidateProfile.php");
+    //             }
+    //         }
+    //     }
+    // }
 
     public function applyNomination()
     {
-        $names = $this->electModel->getUpcomingElections();
-        $positions = $this->positionModel->getElectionPositions();
-        $parties = $this->partyModel->getElectionParties();
+        $query = [];
+        foreach ($_GET as $key => $value) {
+            $query[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        
+        // $names = $this->electModel->getUpcomingElections();
+        $positions = $this->positionModel->getElectionPositionByElectionId(intval($query['id']));
+        $parties = $this->partyModel->getPartiesByElectionId(intval($query['id']));
 
-        $this->view('Candidate/applyNomination', ['names' => $names, 'positions' => $positions, 'parties' => $parties]);
+        $this->view('Candidate/applyNomination', ['positions' => $positions, 'parties' => $parties]);
     }
+
+    public function applyParty($id)
+    {
+        $parties = $this->partyModel->getPartiesByElectionId(intval($id));
+
+        $this->view('Candidate/applyParty', ['parties' => $parties,'elect_id'=>$id]);
+    }
+
 
     public function nominationSuccessful()
     {
         $this->view('Candidate/nominationSuccessful');
+    }
+
+    public function applyPartySuccessful()
+    {
+        $this->view('Candidate/applyPartySuccessful');
     }
 
     // public function objections(){
@@ -300,7 +314,7 @@ class Candidates extends Controller
         $this->view('Candidate/updateProfile');
     }
 
-    public function candidateProfile()
+    public function candidateProfile($id)
     {
 
         if (!isset($_SESSION["UserId"])) {
@@ -308,49 +322,55 @@ class Candidates extends Controller
             exit;
         }else{
 
-
-            $candidate_id=$_SESSION["UserId"];
-
+            $candidate_id=$id;
 
             $res = $this->candidateModel->getCandidateProfile($candidate_id);
-
+            // var_dump($res);
+            // exit;
             $elect= $this->electModel->findelectNameById($res[0]->electionid);
             $position= $this->positionModel->findPositionNameById($res[0]->positionId);
             $party= $this->partyModel->findPartyNameById($res[0]->partyId);
             // var_dump($party);
             // die();
-            $this->view('Candidate/candidateProfile', ['res' => $res,'elect' => $elect, 'party' => $party, 'position' => $position]);
-
+            $user_id=$_SESSION["UserId"];
+            $res2 = $this->candidateModel->getCandidateByUserId($user_id);
+            // var_dump($res2);
+            // exit;
+            $res3 = $this->candidateModel->findCandidateByUserIdAndCandidateId($user_id,$candidate_id);
+            // var_dump($res3);
+            // exit;
+            $this->view('Candidate/candidateProfile', ['res' => $res,'elect' => $elect, 'party' => $party, 'position' => $position, 'res2' => $res2, 'res3' => $res3]);
+            
         }
-        echo "<h3> Welcome " . htmlspecialchars($_SESSION["fname"]) . " " . htmlspecialchars($_SESSION["lname"]) . "</h3>";
+        // echo "<h3>" . htmlspecialchars($_SESSION["fname"]) . " " . htmlspecialchars($_SESSION["lname"]) . "</h3>";
         // $r=$this->nominateModel->RetrieveAll();
         // $this->view('Candidate/candidateProfile',['r'=>$r]);
 
     }
 
-    public function objections()
+    public function objections($id,$eid)
     {
         if (!isset($_SESSION["UserId"])) {
             header("Location: " . urlroot . "/View/Login");
             exit;
         }else{
-        $candidate_id = 20;
-        // var_dump("A");
-        // die();
-        $r = $this->nominateModel->getObjection($candidate_id);
-        // $r=$this->objectModel->RetrieveAll();
+        $candidate_id=$id;
+        $election_id=$eid;
+        $r = $this->nominateModel->findObjectionBycandidateIdAndElectionId($candidate_id,$election_id);
+        // var_dump($r);
+        // exit;
         $this->view('Candidate/objections', ['r' => $r]);
     }
 }
 
-    public function respondObjection()
+    public function respondObjection($id,$eid)
     {
         if (!isset($_SESSION["UserId"])) {
             header("Location: " . urlroot . "/View/Login");
             exit;
         }else{        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+            
             $data = [
                 // 'objectionID'=>uniqid('obj',true),
                 'Respond' => $_POST['Description'],
@@ -362,9 +382,10 @@ class Candidates extends Controller
             ];
             $this->nominateModel->respondToObjection($data);
         }
-        $this->view('Candidate/objections');
+        redirect('Candidates/objections/' .$id.'/'.$eid);
     }
     }
+
     
     public function createPost()
     {
@@ -394,9 +415,17 @@ class Candidates extends Controller
         echo json_encode($data);
     }
 
-    public function discussionForum()
+    public function discussionForum($electionId)
     {
-        $this->view('Candidate/discussionForum');
+        $user_id=$_SESSION['UserId'];
+       
+        $result = $this->voterModel->findVoterByUserIdAndElectionId($user_id,$electionId);
+        // var_dump($result);
+        // exit;
+        $result2 = $this->candidateModel->findCandidateByUserIdAndElectionId($user_id,$electionId);
+        // var_dump($result2);
+        // exit;
+        $this->view('Candidate/discussionForum',['result' => $result,'result2' => $result2]);
     }
 
     public function viewElections()
@@ -425,32 +454,79 @@ class Candidates extends Controller
 
             $data = [
                 'request_id' => $_POST['request_id'],
+                'candidate_id' => $_POST['candidate_id'],
                 'reason' => $_POST['reason'],
             ];
 
             $this->partyOwnerRequestModel->partyRejected($data);
+            $user=$this->userModel->getUserByUserId($_SESSION['UserId']);
+
+            $subject = "Party Request Rejected";
+            $msg = "Your party request is rejected because " . $data['reason'];
+                
+            $emailData = [
+                'email' => $user[0]->Email,
+                'subject' => $subject,
+                'body' => $msg
+                ];
+            try {
+                $this->mailModel->sendEmail($emailData);
+            } catch (Exception $e) {
+                echo "Message could not be sent. Please try again later.";
+            }
             redirect('Candidates/partyRequests');
-          
+
         }
         else{
-            // $partyRequest=new PartyOwnerRequests();//object creation/instantiation for class object.
+
+            $res = $this->userModel->getUserByUserId($_SESSION["UserId"]);
+            
+            $res2 = $this->partyModel->getPartyByEmail($res[0]->Email);
+
+            // var_dump();
+            // exit;
+            if(!empty($res2)){
             $requests=$this->partyOwnerRequestModel->getPartyRequests($_SESSION["UserId"]);
             // var_dump($requests);
             // exit;
-            $this->view('Candidate/partyRequests', ['request' => $requests]);
+            
+            $election=[];
+            foreach ($requests as $row){
+                $election_id= $row->election_id;
+                // var_dump($election_id);
+                // exit;
+                $elect=$this->electModel->findelectNameById($election_id);
+                // var_dump($row->request_id);
+                // exit;
+                $election[$row->request_id]=$elect[0]->OrganizationName.$elect[0]->Title;
+            }
+
+            $this->view('Candidate/partyRequests', ['request' => $requests, 'electName' => $election]);
+            }else{
+                redirect('pages/dashboard');
+            }
         }
-        
     }
-    public function acceptPartyRequest()
+
+    public function acceptPartyRequest($request_id,$candidate_id)
     {
-        $query = [];
-        foreach ($_GET as $key => $value) {
-            $query[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
-        }
-        $request_id=$query['id'];      
+        $user=$this->userModel->getUserByUserId($_SESSION['UserId']);
         $this->partyOwnerRequestModel->partyAccepted($request_id);
-        // var_dump("hello");
-        // exit;
+        $subject = "Party Request is Accepted";
+        $msg = "Your party request is accepted.
+                Please log into <a href='" . urlroot . "'>ezvote</a> and apply for the nomination.";
+        
+        $emailData = [
+            'email' => $user[0]->Email,
+            'subject' => $subject,
+            'body' => $msg
+        ];
+
+        try {
+            $this->mailModel->sendEmail($emailData);
+        } catch (Exception $e) {
+            echo "Message could not be sent. Please try again later.";
+        }
         redirect('Candidates/partyRequests');
     }
 
@@ -467,189 +543,87 @@ class Candidates extends Controller
             exit;
         }else{
              
-        $candidate_id=$_SESSION["UserId"];
-            // var_dump($candidate_id);
-            // exit;
-        $res = $this->candidateModel->getCandidateProfile($candidate_id);
+        // $candidate_id=$_SESSION["UserId"];
+        //     // var_dump($candidate_id);
+        //     // exit;
+        // $res = $this->candidateModel->getCandidateProfileByUserId($candidate_id);
+        // // var_dump($res);
+        // //     exit;
+        // $elect= $this->electModel->findelectNameById($res[0]->electionid);
+        // // var_dump($elect);
+        // //     exit;
+        // $position= $this->positionModel->findPositionNameById($res[0]->positionId);
         
-        $elect= $this->electModel->findelectNameById($res[0]->electionid);
-        
-        $position= $this->positionModel->findPositionNameById($res[0]->positionId);
-        
-        $party= $this->partyModel->findPartyNameById($res[0]->partyId);
-   
-        $this->view('Candidate/updateProfile', ['res' => $res,'elect' => $elect, 'party' => $party, 'position' => $position]);
+        // $party= $this->partyModel->findPartyNameById($res[0]->partyId);
+        // // var_dump($party);
+        // // exit;
+
+        // $this->view('Candidate/updateProfile', ['res' => $res,'elect' => $elect, 'party' => $party, 'position' => $position]);
         // $this->view('Candidate/updateProfile');
+        // redirect('Candidates/update_profile');
+
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+            
             $data = [
-                'candidateId' => $candidate_id,
+                'candidateId' => $_POST['candidateid'],
                 'candidateName' => $_POST['candidateName'],
                 'description' => $_POST['description'],
                 'vision' => $_POST['vision'],
             ];
-            // var_dump($data);
-            // exit;
+            
             $this->candidateModel->updateCandidateProfile($data);
-            // redirect('Candidates/update_profile');
+            // var_dump($data['candidateId']);
+            // exit;
+            $id=intval($data['candidateId']);
+            redirect('Candidates/candidateProfile/'.$id);
         }
         // $this->view('Candidate/updateProfile');
-
+        // redirect('Candidates/candidateProfile');
         } 
     }
 
     public function showElectionNames(){
         $names = $this->electModel->getUpcomingElections();
         $this->view('Candidate/applyNomination', ['names' => $names]);
-var_dump($names);
-exit;
     }
 
-    // public function showImage()
-    // {
-    //     $image = $_GET['image'];
-
-    //     // Display image
-    //     echo '<img src="uploads/' . $image . '">';
-    // }
-
-
-    /***************************************view image(above)************************************************ */
-
-
-
-
-    // public function discussion_forum(){
-
-    //     //        if(!$this->isLoggedIn()){
-    //     //            echo 'log in';
-    //     //        }
-    //     //        else{
-
-    //             // if($this->IsPost()){
-    //                 if(isset($_POST['save'])){
-
-    //                 $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-    //                 $data=[
-
-    //                     /************************************************/
-    //                     'nominationID'=>uniqid('obj',true),
-    //                     'firstname'=>trim($_POST['firstname']),
-    //                     'lastname'=>trim($_POST['lastname']),
-    //                     'election_name'=>trim($_POST['election_name']),
-    //                     'position'=>trim($_POST['position']),                
-    //                     'party_name'=>trim($_POST['party_name']),
-    //                     // 'profile_picture'=>$_FILES['imgfile'],
-    //                     // 'identity_proof'=>$_FILES['file'],
-    //                     'candidateDescription'=>trim($_POST['candidateDescription']),
-    //                     'msg'=>trim($_POST['msg']),
-
-    //                     'firstname_err'=>'',
-    //                     'lastname_err'=>'',
-    //                     'election_name_err'=>'',
-    //                     'position_err'=>'',                
-    //                     'party_name_err'=>'',
-    //                     'profile_picture_err' =>'',
-    //                     'candidateDescription_err'=>'',
-    //                     'msg_err'=>''
-
-    //                 ];
-    //         //Check whether all the fields are filled properly
-    //         if(!$_POST['firstname'] && !$_POST['lastname'] && !$_POST['election_name'] && !$_POST['position'] && !$_POST['party_name'] && !$_POST['imgfile'] && !$_POST['file'] && !$_POST['candidateDescription'] && !$_POST['msg']){
-    //                     $data['firstname_err'] =  "*This field is Required";
-    //                     $data['lastname_err'] = "*This field is Required";
-    //                     $data['election_name_err'] = "*This field is Required";
-    //                     $data['position_err'] = "*This field is Required";
-    //                     $data['party_name_err'] = "*This field is Required";
-    //                     $data['profile_picture_err'] = "*This field is Required";
-    //                     $data['identity_proof_err'] = "*This field is Required";
-    //                     $data['candidateDescription_err'] = "*This field is Required";
-    //                     $data['msg_err'] = "*This field is Required";
-    //                 }
-
-    //     /*****************************************************************************/
-
-    //                 $filename = $_FILES["imgfile"]["name"];
-    //                 $tempname = $_FILES["imgfile"]["tmp_name"];
-    //                 $folder = urlroot."/img/welcome/" . $filename;
-    //                 move_uploaded_file($tempname, $folder);
-
-    //                 $filename2 = $_FILES["file"]["name"];
-    //                 $tempname2 = $_FILES["file"]["tmp_name"];
-    //                 $folder2 = urlroot."/img/welcome/" . $filename2;
-    //                 move_uploaded_file($tempname2, $folder2);
-
-    //     $validatedData = [
-    //         'firstname' => $data['firstname'],
-    //         'lastname' => $data['lastname'],
-    //         'election_name' => $data['election_name'],
-    //         'position' => $data['position'],
-    //         'party_name' => $data['party_name'],
-    //         'profile_picture' => $filename,
-    //         'identity_proof' => $filename2,
-    //         'candidateDescription' => $data['candidateDescription'],
-    //         'msg' => $data['msg']
-    //     ];
-
-    //     /****************************************************************************************************************/
-    //                 //make sure no errors
-    //                 if(empty($data['firstname_err']) && empty($data['lastname_err']) && empty($data['election_name_err']) && empty($data['position_err'])
-    //                 && empty($data['party_name_err']) && empty($data['profile_picture_err']) && empty($data['identity_proof_err'])&& empty($data['party_description_err'])   
-    //                 && empty($data['msg_err'])){
-    //                     //validated
-    //                     if($this->nominateModel->AddNomination($validatedData)){
-    //                             // echo "2";
-    //                             // redirect('candidates/nominationSuccessful');
-    //                             redirect('/Candidates/nominationSuccessful');
-    //                     }
-    //                     // else{
-    //                     //     die('Something went wrong');
-    //                     // }
-    //                 }else{
-    //                     //load view with errors
-    //                     // echo "2";
-    //                     $this->view('Candidate/applyNomination',$data);
-    //                 }
-    //             }
-    //             else {
-    //                 $data = [
-
-    //                     'firstname'=>'',
-    //                     'lastname'=>'',
-    //                     'election_name'=>'',
-    //                     'position'=>'',
-    //                     'checkbox'=>'',
-    //                     'party_name'=>'',
-    //                     'profile_picture'=>'',
-    //                     'identity_proof'=>'',
-    //                     'candidateDescription'=>'',
-    //                     'msg'=>'',
-
-    //                     'firstname_err'=>'',
-    //                     'lastname_err'=>'',
-    //                     'election_name_err'=>'',
-    //                     'position_err'=>'',
-    //                     'party_name_err'=>'',
-    //                     'profile_picture_err'=>'',
-    //                     'identity_proof_err'=>'',
-    //                     'party_description_err'=>'',
-    //                     'candidateDescription_err'=>'',
-    //                     'msg_err'=>''
-    //                 ];
-    //                 // echo "2";
-    //                 $this->view('Candidate/nomination_apply', $data);
-
-    //             }
-    //         }
-
-
-    public function viewprofile($candidateId)
+    public function election($election_id,$candidate_id = null)
     {
-        $candidateData = Nomination::getById($candidateId);
-        $view = new View('candidate/profile');
-        $view->setData('candidateData', $candidateData);
-        $view->render();
+        if ($this->isLoggedIn()) {
+            $data_1 = $this->electModel->getElectionByElectionId($election_id);
+            $data_2 = $this->electModel->getPositionsByElectionId($election_id);
+            $data_3 = $this->electModel->getCandidatesByElectionId($election_id);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $user_id = $_SESSION['UserId'];
+                $voter_id = $this->voterModel->getVoterByUserId($user_id)->voterId;
+                $candidate_id = $_POST['CandidateID'];
+                $data = [
+                    'objectionID' => uniqid('obj', true),
+                    'Subject' => $_POST['Subject'],
+                    'Description' => $_POST['Description'],
+                    'Respond' => '',
+                    'Action' => '',
+                    'ElectionID' => $election_id,
+                    'CandidateID' => $candidate_id,
+                    'VoterID' => $voter_id
+                ];
+                $this->objModel->AddObjection($data);
+                redirect('candidates/election/' . $election_id);
+            } else {
+                $result = $this->partyOwnerRequestModel->getPartyRequestsByElectionAndUser($election_id,$_SESSION['UserId']);
+                // var_dump($result);
+                // exit;
+                
+                $this->view('Candidate/viewCandidateElection', [
+                    'election' => $data_1,
+                    'positions' => $data_2,
+                    'candidates' => $data_3,
+                    'result' => $result,
+                ]);
+            }
+        } else {
+            $this->view('login');
+        }
     }
-
 }

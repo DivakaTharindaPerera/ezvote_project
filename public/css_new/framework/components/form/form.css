@@ -100,3 +100,15 @@ input::file-selector-button {
     color: rgba(0, 0, 0, 0)
   }
 
+  .selectName{
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #c0bebe;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: transparent;
+  }
+

@@ -413,6 +413,7 @@ class Voter extends Controller{
         }
     }
 
+
     public function sendEmailVoters($voterId,$data){
         $this->db->query(
             "SELECT Email FROM voter WHERE voterId = :1");
@@ -422,8 +423,8 @@ class Voter extends Controller{
         $email = new Email();
         $data = [
             'email' => $voter->Email,
-            'subject' => 'You have a meting',
-            'body' => 'You have a meting with supervisor.<br>
+            'subject' => 'You have a meeting',
+            'body' => 'You have a meeting with supervisor.<br>
                             Topic-'.$data['topic'].'<br>
                             Date-'.$data['start_date'].'<br>
                             Password-'.$data['password'].'<br>
@@ -431,6 +432,51 @@ class Voter extends Controller{
         ];
 
         $email->sendEmail($data);
+
+    public function findRegVoterByVoterIdAndElectionId($vid,$eid){
+        $this->db->query(
+            "SELECT * FROM Voter
+            WHERE voterId = :1 AND ElectionId = :2"
+        );
+
+        $this->db->bind(':1', $vid);
+        $this->db->bind(':2', $eid);
+
+        try {
+            $row= $this->db->single();
+            if( $this->db->rowCount() > 0){
+                //voter exists
+                return true;
+            }else{
+                //voter not exists
+                return false;
+            }
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            die();
+        }
+    }
+
+    public function findVoterByUserIdAndElectionId($uid,$eid){
+        // var_dump($uid);
+        // var_dump($eid);
+        // exit;
+        $this->db->query(
+            "SELECT * FROM Voter
+            WHERE userId = :1 AND ElectionId = :2"
+        );
+
+        $this->db->bind(':1', $uid);
+        $this->db->bind(':2', $eid);
+
+        try {
+            $row= $this->db->single();
+            return $row;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            die();
+        }
+
     }
 
     
