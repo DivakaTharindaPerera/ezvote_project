@@ -108,11 +108,13 @@ require approot . '/View/inc/sidebar-new.php';
                                                 <div id="can-Name"><?= $candidate->candidateName ?></div>
                                             </div>
                                             <div id="btn-panel" class="mr-1">
-                                                <button class=" btn btn-primary">Q & A</button>
+                                                <button class=" btn btn-primary" onclick="location.href='/ezvote/Candidates/discussionForum/<?= $data['election']->ElectionId ?>'">Q & A</button>
                                                 <button class=" btn btn-primary" onclick="makeObjection(<?= $candidate->candidateId ?>)">Make Objection</button>
                                                 <!--                                    --><?php //var_dump($candidate);
                                                                                             ?>
                                                 <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View</button>
+                                                <button class="btn btn-primary" onclick="location.href='/ezvote/Candidates/candidateProfile/<?= $candidate->candidateId ?>'">View</button>
+
                                             </div>
 
                                         </div>

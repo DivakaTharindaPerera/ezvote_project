@@ -413,5 +413,50 @@ class Voter extends Controller{
         }
     }
 
+    public function findRegVoterByVoterIdAndElectionId($vid,$eid){
+        $this->db->query(
+            "SELECT * FROM Voter
+            WHERE voterId = :1 AND ElectionId = :2"
+        );
+
+        $this->db->bind(':1', $vid);
+        $this->db->bind(':2', $eid);
+
+        try {
+            $row= $this->db->single();
+            if( $this->db->rowCount() > 0){
+                //voter exists
+                return true;
+            }else{
+                //voter not exists
+                return false;
+            }
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            die();
+        }
+    }
+
+    public function findVoterByUserIdAndElectionId($uid,$eid){
+        // var_dump($uid);
+        // var_dump($eid);
+        // exit;
+        $this->db->query(
+            "SELECT * FROM Voter
+            WHERE userId = :1 AND ElectionId = :2"
+        );
+
+        $this->db->bind(':1', $uid);
+        $this->db->bind(':2', $eid);
+
+        try {
+            $row= $this->db->single();
+            return $row;
+        } catch (Exception $e) {
+            echo "Something went wrong ".$e->getMessage();
+            die();
+        }
+    }
+
     
 }

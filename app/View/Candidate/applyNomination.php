@@ -1,9 +1,12 @@
-<?php require approot . '/View/inc/VoterHeader.php'; ?>
-<?php require approot . '/View/inc/AuthNavbar.php'; ?>
+<?php
+require approot . '/View/inc/VoterHeader.php';
+require approot . '/View/inc/AuthNavbar.php';
+require approot . '/View/inc/sidebar-new.php';
+?>
 
-<!-- <div class="overflow-y"> -->
+<div class="main-container">
 
-    <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light" style=" margin-top:60px; ">
+    <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light">
         <form action="/ezvote/Candidates/nomination_apply" method="POST" enctype='multipart/form-data' >
         
     <h2 class="text-center">Apply Nominations</h2>
@@ -38,7 +41,7 @@
 <br>
 
 <!-- Election Name -->
-<label for="election">Election<span class="text-danger">*</span> :</label>
+<!-- <label for="election">Election<span class="text-danger">*</span> :</label>
 
 <select name="election_name" class="w-50 selectName" style="margin-left:3rem;">
 <option value="" disabled selected>Please select...</option>
@@ -46,7 +49,7 @@
 <option value="<?php echo $name->Title ?>" class="w-75"><?php echo $name->Title ?></option>
         <?php } ?> 
 </select>
-<br><br>
+<br><br> -->
 
 <!-- Position -->
 <label for="positions">Select position<span class="text-danger">*</span> :</label>
@@ -103,13 +106,13 @@
 <br><br></label>
 
 <!-- cancel -->
-    <button type="submit" name="cancel" class="btn bg-primary m-1 w-10"><a href="<?php echo urlroot; ?>/Candidates/applyNomination" class="text-white">Cancel</a></button>
+    <button type="submit" name="cancel" class="btn bg-blue-10 m-1 w-10"><a href="<?php echo urlroot; ?>/Candidates/applyNomination" class="text-white">Cancel</a></button>
 
 <!-- save -->
-    <button type="submit" name="save" class="btn bg-primary text-white m-1 w-10">Save</button>
+    <button type="submit" name="save" class="btn bg-blue-10 text-white m-1 w-10">Save</button>
     <br><br>
     
 </form>
 </div>
-<!-- </div> -->
+</div>
 <?php require approot.'/View/inc/footer.php';?>
