@@ -23,6 +23,9 @@
             <a href="<?php echo urlroot; ?>/Pages/electionNominations/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
                 <div><b>Nominations</b></div>
             </a>
+            <a href="<?php echo urlroot; ?>/Pages/electionNominations/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
+                <div><b>Nomination Link</b></div>
+            </a>
         <?php
         }
         ?>
@@ -160,7 +163,7 @@
     </div>
     <div class="text-center d-flex bg-blue-2 w-100 p-1" id="buttonContainer" style="border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.4);">
         <input type="hidden" name="" value="<?php echo $data['ID']; ?>" id="electionId">
-        <button type="button" onclick="edit()" class="btn btn-primary w-30 ml-auto card-hover" id="editBtn"><b>EDIT</b></button>
+        <button type="button" onclick="edit()" class="btn btn-primary ml-auto card-hover" id="editBtn"><b>EDIT</b></button>
         <button class="btn btn-danger ml-1 mr-auto card-hover" onclick="deletePopup()" id="electionDelBtn"><b>Delete Election</b></button>
     </div>
 </div>

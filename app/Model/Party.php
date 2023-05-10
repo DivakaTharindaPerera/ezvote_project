@@ -155,7 +155,7 @@ class Party extends Controller{
 
     public function findPartyNameById($id){
 
-        $this->db->query("SELECT * FROM electionparty WHERE partyId=$id");
+        $this->db->query("SELECT * FROM ElectionParty WHERE partyId=$id");
     
         try {
             $this->db->execute();

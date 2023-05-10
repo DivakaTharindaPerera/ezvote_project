@@ -8,7 +8,7 @@ class Candidates extends Controller
         $this->nominateModel = $this->model('Nomination');
         $this->objectModel = $this->model('Objection');
         $this->discussionModel = $this->model('discussion');
-        $this->candidateModel = $this->model('candidate');
+        $this->candidateModel = $this->model('Candidate');
         $this->electModel = $this->model('Election');
         $this->positionModel = $this->model('electionPositions');
         $this->partyModel = $this->model('Party');

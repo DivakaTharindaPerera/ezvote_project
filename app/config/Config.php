@@ -18,7 +18,7 @@
     //  define('API_SECRET',$_ENV['ZOOM_API_SECRET']);
     //  define('EMAIL_ID',$_ENV['ZOOM_EMAIL_ID']);
 
-     //Encryption configuration
+    //  //Encryption configuration
     //  define('ENCRYPTION_KEY',$_ENV['ENCRYPTION_KEY']);
     //  define('ENCRYPTION_IV',$_ENV['ENCRYPTION_IV']);
     //  define('ENCRYPTION_ALGORITHM',$_ENV['ENCRYPTION_ALGORITHM']);
