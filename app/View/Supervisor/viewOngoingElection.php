@@ -41,9 +41,9 @@ require approot.'/View/inc/VoterHeader.php'; ?>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex my-1">
-                    <div class="btn btn-primary">END ELECTION</div>
-                </div>
+<!--                <div class="d-flex my-1">-->
+<!--                    <div class="btn btn-primary">END ELECTION</div>-->
+<!--                </div>-->
             </div>
         </div>
         <div class="d-flex flex-column mx-1 my-1">

@@ -611,16 +611,37 @@ class Pages extends Controller
     public function viewAllConferences()
     {
         if ($this->isLoggedIn()) {
-
             $data1=$this->conferenceModel->getConferencesByUserID($_SESSION["UserId"]);
-            $data=$this->candidateModel->getCandidateIDByUserId();
-            $data2=[];
-            foreach ($data as $candidateID){
-                $row=$this->conferenceModel->getConferencesByCandidateId($candidateID);
-                $data2[]=$row;
-
+            $data2=$this->conferenceModel->getNotSupervisingConferences($_SESSION['UserId']);
+            $data4=[];
+            $data5=[];
+            foreach ($data2 as $nSConference){
+                $electionId=$nSConference->ElectionID;
+                $candiList=$this->electionModel->getCandidatesByElectionId($electionId);
+                foreach ($candiList as $candi){
+                    if($candi->userId==$_SESSION['UserId']){
+                        $data4[]=$this->conferenceModel->getConferenceByConferenceID($nSConference->conferenceID);
+                    }
+                }
             }
-
+            foreach ($data2 as $nSConference){
+                $electionId=$nSConference->ElectionID;
+                $votList=$this->voterModel->getVotersByElectionId($electionId);
+                foreach ($votList as $vot){
+                    if($vot->userId==$_SESSION['UserId']){
+                        $data5[]=$this->conferenceModel->getConferenceByConferenceID($nSConference->conferenceID);
+                    }
+                }
+            }
+//            $data4=$this->conferenceModel->getCandidatesByElectionID($_SESSION["UserId"]);
+//            $data5=$this->conferenceModel->getVotersByElectionID($_SESSION["UserId"]);
+            $data=$this->candidateModel->getCandidateByUserId();
+//            $data2=[];
+//            foreach ($data as $candidate){
+//                $row=$this->conferenceModel->getConferencesByCandidateId($candidate->candidateId);
+//                $data2[]=$row;
+//
+//            }
 //            var_dump($data);
 //            exit();
             //get current time
@@ -651,13 +672,16 @@ class Pages extends Controller
 //                }
 //            }
             $data3=$this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
+            $data6=$this->electionModel->getElections();
             $this->view('Supervisor/viewAllConference',
                 [
                     'supervising_conferences'=>$data1,
-                    'candidating_conferences'=>$data2,
+                    'candidating_conferences'=>$data4,
+                    'voting_conferences'=>$data5,
 //                    'ongoing_conferences'=>$data1,
 //                    'upcoming_conferences'=>$data2,
-                    'elections'=>$data3
+                    'elections'=>$data3,
+                    'all_elections'=>$data6
                 ]);
         }
         else{
@@ -673,17 +697,26 @@ class Pages extends Controller
 //        $electionID=1281;
         if($this->isLoggedIn()){
             if($_SERVER['REQUEST_METHOD']==="POST"){
-
-                $candidates = $_POST['candidate'];
-                if (empty($candidates)) {
-                    $data['candidateError'] = "Please select at least one candidate";
+                $candidates=false;
+                $voters=false;
+                if(isset($_POST['candidate'])){
+                    $candidates=true;
                 }
+                if(isset($_POST['voter'])){
+                    $voters=true;
+                }
+//                $candidates = $_POST['candidate'];
+//                if (empty($candidates)) {
+//                    $data['candidateError'] = "Please select at least one candidate";
+//                }
                 $data = [
                     'topic' => trim($_POST['conferenceName']),
                     'date' => trim($_POST['date']),
                     'time' => trim($_POST['time']),
                     'supervisorId' => $_SESSION["UserId"],
-                    'electionId' => $electionID
+                    'electionId' => $electionID,
+                    'candidates' => $candidates,
+                    'voters' => $voters
                 ];
                 $data['start_date'] = $data['date'] . " " . $data['time'];
                 unset($data['date']);
@@ -701,21 +734,21 @@ class Pages extends Controller
                 if (empty($_POST['date'])) {
                     $data['dateAndTimeError'] = "Please enter date and time";
                 }
-
                 if(empty($data['conferenceNameError']) && empty($data['candidateError']) && empty($data['dateAndTimeError'])){
                     $data['conferenceID']=uniqid('conf_');
-                    if($this->conferenceModel->addConference($data,$candidates)){
-//
-
-
-                        $this->conferenceModel->AddCandidateToConference($data['conferenceID'],$candidates);
-                        foreach ($candidates as $candidate){
-                            $this->candidateModel->sendEMail($candidate,$data);
-                            var_dump($candidate);
+                    if($this->conferenceModel->addConference($data)){
+                        $candidatesList = [];
+                        $votersList = [];
+                        $candidatesList[]=$this->candidateModel->getCandidatesByElectionId($electionID);
+                        $votersList[]=$this->electionModel->getVotersByElectionID($electionID);
+                        foreach ($candidatesList[0] as $candidate){
+                            $this->candidateModel->sendEMailCandidates($candidate->candidateId,$data);
+                        }
+                        foreach ($votersList[0] as $voter){
+                            $this->voterModel->sendEMailVoters($voter->voterId,$data);
                         }
 
-
-                        redirect('pages/viewAllConferences');
+                        redirect('pages/addConference');
                     }
                     else{
 
@@ -728,11 +761,13 @@ class Pages extends Controller
 
 
             $candidates=$this->candidateModel->getCandidatesByElectionId($electionID);
+            $data1=$this->conferenceModel->getConferencesByUserIDAndElectionID($_SESSION["UserId"],$electionID);
             $this->view('Supervisor/scheduleConference',
 
                 [
                     'electionID' => $electionID,
-                    'candidates' => $candidates
+                    'candidates' => $candidates,
+                    'supervisingConferences'=>$data1
                 ]
             );
         } else {
@@ -885,7 +920,7 @@ class Pages extends Controller
                 }
                 $data=[
                     'id'=>$_SESSION['UserId'],
-                    'profile_pic'=>$_FILES['profilePhoto'],
+//                    'profile_pic'=>$_FILES['profilePhoto'],
                     'fname'=>trim($_POST['fname']),
                     'lname'=>trim($_POST['lname']),
                     'email'=>trim($_POST['email']),
@@ -915,7 +950,6 @@ class Pages extends Controller
                     if(empty($data['old_password'])){
                         $data=[
                             'id'=>$_SESSION['UserId'],
-                            'profile_pic'=>$_POST['profilePhoto'],
                             'fname'=>trim($_POST['fname']),
                             'lname'=>trim($_POST['lname']),
                             'email'=>trim($_POST['email']),
