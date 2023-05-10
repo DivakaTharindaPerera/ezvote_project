@@ -582,7 +582,7 @@ class Pages extends Controller
                 $voters = $this->voterModel->getVotersByElectionId($electionId);
                 $candidates = $this->candidateModel->getCandidatesByElectionId($electionId);
                 $parties = $this->partyModel->getPartiesByElectionId($electionId);
-
+                $supervisor = $this->userModel->getUserById($data1->Supervisor);
                 $votes = $this->calculateVotes($electionId);
 
                 $this->view(
@@ -593,7 +593,8 @@ class Pages extends Controller
                         'voters' => $voters,
                         'candidates' => $candidates,
                         'parties' => $parties,
-                        'votes' => $votes
+                        'votes' => $votes,
+                        'supervisor' => $supervisor
                     ]
                 );
             } else {
