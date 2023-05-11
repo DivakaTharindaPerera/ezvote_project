@@ -77,6 +77,10 @@
 .overflow-scroll{
     overflow: scroll;
 }
+
+.overflow-auto{
+    overflow: auto;
+}
 /*::-webkit-scrollbar{*/
 /*    width: 2rem;*/
 /*    color: var(--white);*/
@@ -134,6 +138,9 @@
 }
 .w-65{
     width: 65%;
+}
+.w-60{
+    width: 60%;
 }
 .w-50{
     width: 50%;
