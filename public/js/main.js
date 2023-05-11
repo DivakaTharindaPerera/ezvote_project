@@ -15,14 +15,65 @@ function openPopupPassId(){
 
      // Get the request_id from the button's data attribute
      var requestId = button.getAttribute("data-request_id");
-     console.log(requestId);
+     var candidateId = button.getAttribute("data-candidate_id");
+    //  console.log(requestId);
+    console.log(candidateId);
      // Populate the request_id input field in the form
      var requestIdInput = document.querySelector("#popup input[name='request_id']");
      requestIdInput.value = requestId;
+
+     var candidateIdInput = document.querySelector("#popup input[name='candidate_id']");
+     candidateIdInput.value = candidateId;
  
      // Show the popup
     let popup=document.getElementById("popup");
     popup.classList.add("open-popup");
+}
+
+function openPopupPassObjectionId(){
+    // Get the button that was clicked
+    var button = event.target;
+
+    // Get the request_id from the button's data attribute
+    var objectionId = button.getAttribute("data-objection_id");
+    // var respond = button.getAttribute("respond");
+   
+    // Populate the request_id input field in the form
+    var objectionIdInput = document.querySelector("#popup input[name='ObjectionID']");
+    objectionIdInput.value = objectionId;  
+
+    // Show the popup
+   let popup=document.getElementById("popup");
+   popup.classList.add("open-popup");
+}
+
+function openPopupUsingId(id){
+    // Get the button that was clicked
+    var button = event.target;
+
+    // Get the request_id from the button's data attribute
+    var objectionId = button.getAttribute("data-objection_id");
+    var respond = button.getAttribute("data-respond");
+    // console.log(respond);
+    // Populate the request_id input field in the form
+    var objrespond = document.querySelector(".objrespond");
+    objrespond.innerHTML= respond;  
+
+    let popup=document.getElementById(id);
+    popup.classList.add("open-popup");
+
+
+
+}
+
+function closePopupUsingId(id)
+{
+    // console.log("close");
+    const button=document.getElementById("close");
+    event.preventDefault();
+    let popup=document.getElementById(id);
+    popup.classList.remove("open-popup");
+    // window.location.href = "/Voters/election";
 }
 
 function closePopup()
@@ -44,6 +95,12 @@ function vote($election_id){
 function viewElection($election_id){
     const election_id=$election_id;
     window.location.href="/ezvote/Voters/election/"+election_id;
+}
+
+
+function viewCandidateElection($election_id){
+    const election_id=$election_id;
+    window.location.href="/ezvote/Candidates/election/"+election_id;
 }
 
 
