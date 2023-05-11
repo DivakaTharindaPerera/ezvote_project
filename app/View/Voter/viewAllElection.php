@@ -233,7 +233,7 @@ require approot.'/View/inc/sidebar-new.php';
                                             echo $interval->format("%h hours, %i minutes");
                                             ?>
                                         </div>
-                                        <button class="btn btn-primary" onclick="viewElection(<?=$id?>)">View</button>
+                                        <button class="btn btn-primary" onclick="viewCandidateElection(<?=$id?>)">View</button>
                                     </div>
                                 </div>
                             <?php }

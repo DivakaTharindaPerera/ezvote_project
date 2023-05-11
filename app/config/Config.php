@@ -14,6 +14,7 @@
     define('siteroot', 'EzVote');
 
 //    API configuration
+
       define('API_KEY',$_ENV['ZOOM_API_KEY']);
       define('API_SECRET',$_ENV['ZOOM_API_SECRET']);
       define('EMAIL_ID',$_ENV['ZOOM_EMAIL_ID']);
