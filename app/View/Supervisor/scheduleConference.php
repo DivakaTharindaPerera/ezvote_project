@@ -8,7 +8,7 @@ require approot.'/View/inc/sidebar-new.php';
 ?>
 <div class="main-container">
     <div class="title">My Conferences</div>
-    <div class="d-flex flex-wrap justify-content-evenly my-1 border border-white border-radius-2 border-5 min-w-80 max-w-80 bg-info">
+    <div class="d-flex flex-wrap justify-content-evenly my-1 border border-white border-radius-2 border-5 min-w-80 max-w-80 bg-info py-1">
         <?php
         if (!empty($data['supervisingConferences'])):
             foreach ($data['supervisingConferences'] as $conference){?>
@@ -29,7 +29,7 @@ require approot.'/View/inc/sidebar-new.php';
                 </div>
             <?php }
         else:?>
-            <div class="text-xl text-primary mb-1">No Conferences</div>
+            <div class="justify-content-center align-items-center text-xl text-white my-1">No Conferences</div>
         <?php endif;?>
     </div><div class="title">SCHEDULE CONFERENCE</div>
     <div class="justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow w-50 mb-2">

@@ -58,7 +58,7 @@
                 <!-- view elections -->
 
                 <li>
-                    <a href="<?php echo urlroot; ?>/View/ViewMyElections">
+                    <a href="<?php echo urlroot; ?>/Pages/ViewMyElections">
                         <span class="icon"><i class="fas fa-clipboard"></i></span>
                         <span class="item">View My Elections</span>
                     </a>

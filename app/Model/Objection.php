@@ -87,6 +87,15 @@ class Objection extends Model
         return $row;
     }
 
+    public function getCandidateByCandidateID($id)
+    {
+        $this->db->query('SELECT * FROM candidate WHERE CandidateID=:CandidateID');
+        $this->db->bind(':CandidateID',$id);
+        $row=$this->db->single();
+        return $row;
+    }
+
+
     /**
      * @return mixed
      */
