@@ -32,4 +32,17 @@ class Vote extends Controller{
             echo $e->getMessage();
         }
     }
+
+    public function getVoterConferencesByElectionID($electionID, $voterID){
+        $this->db->query('SELECT * FROM conference_voter WHERE electionId = :electionId AND voterId = :voterId');
+        $this->db->bind(':electionId', $electionID);
+        $this->db->bind(':voterId', $voterID);
+        try{
+            $row = $this->db->resultSet();
+            return $row;
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
 }

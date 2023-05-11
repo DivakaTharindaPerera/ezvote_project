@@ -160,7 +160,7 @@ require approot . '/View/inc/sidebar-new.php'; ?>
                 label: '# of Votes',
                 data: [<?php echo json_encode($votedCount), json_encode($votersCount-$votedCount)?>],
                 borderWidth: 1,
-                backgroundColor:['#10558d','#ec8a93']
+                backgroundColor:['#10558d','red']
             }]
         },
         options: {

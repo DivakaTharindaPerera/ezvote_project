@@ -44,7 +44,7 @@
 
                 <!-- create election -->
                 <li>
-                    <a href="<?php echo urlroot; ?>/View/Createelection">
+                    <a href="<?php echo urlroot; ?>/pages/Createelection">
                         <span class="icon"><i class="fas fa-vote-yea"></i></span>
                         <span class="item">Create Election</span>
                     </a>

@@ -59,11 +59,19 @@ input[type="password"]{
     box-sizing: border-box;
 }
 input[type="checkbox"]{
-    width: 20px;
-    height: 20px;
-    outline: 2px solid #10558d;
-    filter:hue-rotate(12deg);
-    border: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid #fff;
+    background: #fff;
+    position: relative;
+    margin-right: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
 }
 
 input::file-selector-button {

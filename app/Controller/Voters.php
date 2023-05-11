@@ -1,7 +1,6 @@
 <?php
 class Voters extends Controller
 {
-
     public function __construct()
     {
         $this->objModel = $this->model('Objection');
@@ -13,6 +12,8 @@ class Voters extends Controller
         $this->voteModel = $this->model('Vote');
         $this->encryptModel = $this->model('userEncrypt');
         $this->userModel = $this->model('User');
+        $this->votingModel = $this->model('Voting');
+        $this->conferenceModel = $this->model('Conference');
     }
     public function submitObjections()
     {
@@ -73,6 +74,14 @@ class Voters extends Controller
             $data_1 = $this->elecModel->getElectionByElectionId($election_id);
             $data_2 = $this->elecModel->getPositionsByElectionId($election_id);
             $data_3 = $this->elecModel->getCandidatesByElectionId($election_id);
+            $data_4 = $this->votingModel->getVoterByUidAndEid($_SESSION['UserId'],$election_id);
+            $vID=$data_4->voterId;
+            $data_5 = $this->conferenceModel->getConferencesByVoterIDAndElectionID($vID,$election_id);
+            $data_6=[];
+            foreach ($data_5 as $conference){
+                $con_id=$conference->conferenceID;
+                $data_6[]=$this->conferenceModel->getConferenceByConferenceID($con_id);
+            }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user_id = $_SESSION['UserId'];
                 $voter_id = $this->voterModel->getVoterByUserId($user_id)->voterId;
@@ -89,11 +98,13 @@ class Voters extends Controller
                 ];
                 $this->objModel->AddObjection($data);
                 redirect('voters/election/' . $election_id);
-            } else {
+            }
+            else {
                 $this->view('Voter/viewElection', [
                     'election' => $data_1,
                     'positions' => $data_2,
                     'candidates' => $data_3,
+                    'conferences' => $data_6
                 ]);
             }
         } else {
@@ -273,4 +284,6 @@ class Voters extends Controller
 
         return $candidates;
     }
+
+
 }
