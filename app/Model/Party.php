@@ -166,7 +166,7 @@ class Party extends Controller{
     }
 
     public function getElectionParties(){
-        $this->db->query("SELECT * FROM electionparty;");
+        $this->db->query("SELECT * FROM ElectionParty;");
 // var_dump($this->db->query);
 // exit;
         return $this->db->resultSet();

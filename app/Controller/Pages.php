@@ -11,6 +11,7 @@ class Pages extends Controller
     private $objectionModel;
     private $encryptModel;
     private $voteModel;
+    private $logModel;
 
     private $conferenceModel;
 
@@ -34,6 +35,7 @@ class Pages extends Controller
 
         $this->userModel = $this->model('User');
         $this->mail = $this->model('Email');
+        $this->logModel = $this->model('log');
     }
 
     public function index()
@@ -287,7 +289,7 @@ class Pages extends Controller
     public function login()
     {
         if ($this->isLoggedIn()) {
-            $this->view('Voter/viewAllElection');
+            redirect('Pages/dashboard');
         } else {
             $data = [];
             $this->view('login', $data);
@@ -298,7 +300,7 @@ class Pages extends Controller
     public function signing($email = '', $password = '')
     {
         if ($this->isLoggedIn()) {
-            $this->view('Voter/viewAllElection');
+            redirect('Pages/dashboard');
         } else {
             if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 $email = $_POST['email'];
@@ -580,7 +582,7 @@ class Pages extends Controller
                 $voters = $this->voterModel->getVotersByElectionId($electionId);
                 $candidates = $this->candidateModel->getCandidatesByElectionId($electionId);
                 $parties = $this->partyModel->getPartiesByElectionId($electionId);
-
+                $supervisor = $this->userModel->getUserById($data1->Supervisor);
                 $votes = $this->calculateVotes($electionId);
 
                 $this->view(
@@ -591,7 +593,8 @@ class Pages extends Controller
                         'voters' => $voters,
                         'candidates' => $candidates,
                         'parties' => $parties,
-                        'votes' => $votes
+                        'votes' => $votes,
+                        'supervisor' => $supervisor
                     ]
                 );
             } else {
@@ -1005,6 +1008,23 @@ class Pages extends Controller
             ];
             $this->userModel->uploadProfileImage($data);
             echo json_encode(['status'=>true,'message'=>'Profile picture uploaded successfully']);
+        }
+    }
+
+    public function viewLog($id){
+        if(!$this->isLoggedIn()){
+            redirect('View/login');
+        }else{
+          $electionRow = $this->electionModel->getElectionByElectionId($id);
+          if($electionRow->Supervisor == $_SESSION['UserId']){
+            $data=[
+                'electionRow' => $electionRow,
+                'logs' => $this->logModel->getLogsByElectionId($id)
+            ];
+            $this->view('Supervisor/electionLog',$data);
+          } else{
+            $this->view('Supervisor/forbiddenPage');
+          } 
         }
     }
 
