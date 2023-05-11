@@ -231,7 +231,7 @@ class Candidate extends Controller
         $data = [
             'email' => $candidate->candidateEmail,
             'subject' => 'You have a meting',
-            'body' => 'You have a meting with supervisor.<br>
+            'body' => 'You have a meeting with supervisor.<br>
                             Topic-' . $data['topic'] . '<br>
                             Date-' . $data['start_date'] . '<br>
                             Password-' . $data['password'] . '<br>
