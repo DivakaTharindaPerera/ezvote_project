@@ -35,6 +35,9 @@
         <a href="<?php echo urlroot; ?>/Pages/addConference/<?= $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1 mr-auto">
             <div><b>Schedule a meeting</b></div>
         </a>
+        <a href="<?php echo urlroot; ?>/Pages/viewLog/<?= $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1 mr-auto">
+            <div><b>Activity Log</b></div>
+        </a>
 
 
     </div>
@@ -117,11 +120,11 @@
             if ($data['electionRow']->ObjectionStatus == 1) {
                 echo "
 
-                    <div id='objDateAndTime' class='d-flex flex-column justify-content-center align-items-center'>
-                    <div id='objTopic' class='text-center text-lg text-primary'>
+                    <div id='objDateAndTime' class='d-flex flex-column'>
+                    <div id='objTopic' class='text-center'>
                        <h4> Objection Duration</h4>
                     </div>
-                    <div class='d-flex justify-content-evenly w-65'>
+                    <div class='d-flex'>
                     <div class='card'>
                             <div> <img src='" . urlroot . "/public/img/start.png' alt='' style='max-height: 40px;max-width:40px'></div>
                             <div class='justify-content-center text-lg mb-1'>Begin</div>

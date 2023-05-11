@@ -120,19 +120,17 @@
             ?>
 
                     <div class="card text-center">
-                        <div>
+                        <div class="mt-1">
                             <h4><?php echo $voter->Name ?></h4>
                         </div>
-                        <div class="max-w-95 mb-1">
-                            <label class="Email"><?php echo $voter->Email ?></label>
-                        </div>
-                        <div>
+                        
+                        <div class="mt-auto">
                             <div><img src='/ezvote/public/img/profile.jpg' style='max-height:50px;max-width: 50px' alt='profile photo'></div>
                         </div>
                         <div>
 
                         </div>
-                        <div class="buttons mb-1">
+                        <div class="buttons mb-1 mt-auto">
                             <!-- for the action butttons -->
                             <input type="hidden" name="" value="<?php echo  $voter->Name; ?>">
                             <input type="hidden" name="" value="<?php echo  $voter->Email; ?>">

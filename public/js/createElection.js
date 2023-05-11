@@ -29,10 +29,10 @@ function ObjStatus(){
 
 function Snomi(){
     if(document.getElementById("selfNomi").checked){
-        document.getElementById("nomi-description").disabled = false;
+        document.getElementById('nomiBox').style.display = "block";
         document.getElementById("nomi-description").setAttribute("required", "");
     }else{
-        document.getElementById("nomi-description").disabled = true;
+        document.getElementById('nomiBox').style.display = "none";
         document.getElementById("nomi-description").removeAttribute("required");
     }
 }
@@ -88,7 +88,7 @@ function timeCheckO(){
 
     // document.getElementById("out").innerHTML = s+" | "+e;
     if(s > e){
-        document.getElementById("out1").innerHTML = "Objection ending time should be after the starting time "+s+" | "+e;
+        document.getElementById("out1").innerHTML = "Objection ending time should be after the starting time ";
         document.getElementById("sbmit").disabled = true;
     }else if(s == e){
         document.getElementById("out1").innerHTML = "Objection ending time should be after the starting time";
@@ -155,4 +155,8 @@ function deletePopup(){
 
     const body = document.querySelector('body');
     body.classList.add('no-scroll-for-popup');
+}
+
+function goBack(){
+    history.back();
 }

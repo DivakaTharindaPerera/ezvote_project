@@ -6,11 +6,23 @@ require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
-<div class="main-container">
+<div class="main-container" id="printThis">
+    <!-- <button  onclick="printThis()">PRINT</button> -->
+    <!-- <button id="printBtn">PRINT</button> -->
     <?php
     $partyVotes = array();
-    foreach($data['parties'] as $party){
+    foreach ($data['parties'] as $party) {
         $partyVotes[$party->partyName] = 0;
+    }
+
+    $positionVotes = array();
+    foreach ($data['positions'] as $position) {
+        $positionVotes[$position->ID] = 0;
+        foreach ($data['candidates'] as $candidate) {
+            if ($candidate->positionId == $position->ID) {
+                $positionVotes[$position->ID] += $data['votes'][$candidate->candidateId];
+            }
+        }
     }
 
     $keys = array_keys($data['votes']);
@@ -28,6 +40,15 @@ require approot . '/View/inc/VoterHeader.php'; ?>
         }
     }
     ?>
+
+    <div id="taskbar" class="d-flex flex-column w-100 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);" >
+        <div class="d-flex w-100">
+            <div id="buttons" class="m-1 w-100 d-flex">
+                <a href="<?php echo urlroot?>/Pages/ViewMyElections" class="btn btn-danger card-hover min-h-90 mr-auto"><i class="fa-solid fa-angles-left"></i><span class="ml-1">Back</span></a>
+                <button class="btn btn-primary min-h-90 card-hover ml-auto mr-2" id="printBtn"><b>PRINT</b></button>
+            </div>
+        </div>         
+    </div>
 
     <input type="hidden" name="" id="votersCount" value="<?php echo $c ?>">
     <input type="hidden" name="" id="votedCount" value="<?php echo $voted ?>">
@@ -92,7 +113,7 @@ require approot . '/View/inc/VoterHeader.php'; ?>
         <!--                        <div class="btn btn-primary">END ELECTION</div>-->
         <!--                    </div>-->
         <div class="d-flex flex-column mt-1 min-w-50 justify-content-center">
-            <div class="d-flex sub-title justify-content-center align-items-center w-100">Selected Candidates</div>
+            <div class="d-flex sub-title justify-content-center align-items-center w-100">Candidates</div>
             <div class="d-flex flex-wrap justify-content-center">
                 <?php
                 $candidatesForCheck = [];
@@ -140,14 +161,18 @@ require approot . '/View/inc/VoterHeader.php'; ?>
                                 foreach ($keys as $key) {
                                     foreach ($data['candidates'] as $candidate) {
                                         if ($candidate->candidateId == $key && $candidate->positionId == $position->ID) {
+                                            $perc = 0;
+                                            if ($positionVotes[$position->ID] != 0) {
+                                                $perc = $data['votes'][$key] / $positionVotes[$position->ID] * 100;
+                                            }
                                             echo "<tr>
                                                         <td>$candidate->candidateName</td>
-                                                        <td>" . $data['votes'][$key] . "</td>";
+                                                        <td>" . $data['votes'][$key] . " [" . $perc . "%]</td>";
                                             if ($candidate->partyId == NULL) {
                                                 echo "<td>No Party</td>";
                                             } else {
                                                 foreach ($data['parties'] as $party) {
-                                                    if ($candidate->partyId == $party->partyId){
+                                                    if ($candidate->partyId == $party->partyId) {
                                                         $partyVotes[$party->partyName] += $data['votes'][$key];
                                                         echo "<td>$party->partyName</td>";
                                                     }
@@ -168,9 +193,71 @@ require approot . '/View/inc/VoterHeader.php'; ?>
 
         </div>
     </div>
+    <div id="printContent" class="d-flex flex-column border-1 w-100" style="display: none;">
+        <div class="d-flex flex-column text-center mb-auto">
+            <div class="sub-title"><b><?php echo $data['election']->Title; ?></b></div>
+            <div class="sub-title">By</div>
+            <div class="sub-title"><b><?php echo $data['election']->OrganizationName; ?></b></div>
+        </div>
+        <div class="text-left d-flex w-100 flex-column mt-1">
+            <div class="text-x">Election Supervisor</div>
+            <div class="text-x text-primary"><?php echo $data['supervisor']->Fname . " " . $data['supervisor']->Lname; ?></div>
+            <div class="text-x text-primary"><?php echo $data['supervisor']->Email; ?></div>
+        </div>
+
+        <div class="w-100 d-flex">
+            <div class="mt-1 d-flex flex-column w-45 p-2">
+                <div class="text-xl mb-1 text-center w-100">Votes</div>
+                <ol type="1" style="list-style-type: decimal;">
+                    <?php foreach ($data['positions'] as $position) { ?>
+                        <li class="mt-1">
+                            <?php echo $position->positionName; ?>
+                            <ul type='disc'>
+                                <?php foreach ($data['candidates'] as $candidate) {
+                                    if ($candidate->positionId == $position->ID) {
+                                        $perc = 0;
+                                        if ($positionVotes[$position->ID] != 0) {
+                                            $perc = $data['votes'][$candidate->candidateId] / $positionVotes[$position->ID] * 100;
+                                        }
+                                        if ($candidate->partyId == null) {
+                                            echo "<li class='mt-1'> " . $candidate->candidateName . " - No Party - " . $data['votes'][$candidate->candidateId] . " vote(s) - " . $perc . "%";
+                                        } else {
+                                            foreach ($data['parties'] as $party) {
+                                                if ($party->partyId == $candidate->partyId) {
+                                                    echo "<li class='mt-1'> " . $candidate->candidateName . " - " . $party->partyName . "- " . $data['votes'][$candidate->candidateId] . " vote(s) - " . $perc . "%";
+                                                }
+                                            }
+                                        }
+                                    }
+                                } ?>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                </ol>
+            </div>
+            <div class="mt-1 d-flex flex-column w-45 p-2 ml-auto">
+                <div class="text-xl mb-1 text-center w-100">Election parties</div>
+                <?php if ($data['parties'] == null) {
+                    echo "<div class='text-center text-danger'>No parties in this election</div>";
+                } else {
+                ?>
+                    <div>
+                        <ol type="1" style="list-style-type: decimal;">
+                            <?php foreach ($data['parties'] as $party) {
+                                echo "<li class='mt-1'>" . $party->partyName . " - " . $partyVotes[$party->partyName] . "</li>";
+                            } ?>
+                        </ol>
+                    </div>
+                <?php
+                } ?>
+            </div>
+        </div>
+
+
+    </div>
     <div style="display:none;">
-        <?php 
-            $jsonData = json_encode($partyVotes);
+        <?php
+        $jsonData = json_encode($partyVotes);
         ?>
 
 
@@ -200,7 +287,10 @@ require approot . '/View/inc/VoterHeader.php'; ?>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/ezvote/public/js/printThis.js"></script>
 <script>
     //for party comparison
     var votesInOrder = [];
@@ -208,7 +298,7 @@ require approot . '/View/inc/VoterHeader.php'; ?>
     console.log(partyVotes);
     let keys = Object.keys(partyVotes);
 
-    for(let key of keys){
+    for (let key of keys) {
         votesInOrder.push(partyVotes[key]);
     }
     //end
@@ -252,6 +342,23 @@ require approot . '/View/inc/VoterHeader.php'; ?>
         }
     });
 
-    
+    function printThis() {
+        document.getElementById('printContent').style.display = 'block';
+        html2canvas(document.querySelector('#printContent')).then((canvas) => {
+            let base64img = canvas.toDataURL('image/png');
+            let pdf = new jsPDF('p', 'px', 'a4');
+            pdf.addImage(base64img, 'PNG', 2, 2, 595, 89);
+            pdf.save('report.pdf');
+        });
+        document.getElementById('printContent').style.display = 'none';
+
+    }
+
+    $(document).ready(function() {
+        $('#printBtn').click(function() {
+            $('#printContent').css('display', 'block');
+            $('#printContent').printThis();
+        });
+    });
 </script>
 <?php require approot . '/View/inc/footer.php'; ?>

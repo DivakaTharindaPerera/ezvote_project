@@ -19,7 +19,7 @@
                     <div><label for="email">Password</label></div>
                     <div>
                         <input type="password" name="password" id="password" placeholder="password....">
-                        <em id="error"><?php if(isset($data['error'])){ echo $data['error']; } ?></em>
+                        <em id="error" class="mt-1 text-danger"><?php if(isset($data['error'])){ echo $data['error']; } ?></em>
                     </div>
                 </div>
                 <div class="text-s mx-1">
@@ -33,7 +33,7 @@
 <!--                        <img src="--><?php //echo urlroot;?><!--/public/img/google.png" alt="" style="max-width: 30px; max-height: 30px" class="mx-1">SIGN IN WITH GOOGLE</button>-->
 <!--                </div>-->
                 <div class="justify-content-center my-1">
-                    <p class="text-center">Don't have an account? <a href="ezvote/pages/register" class="nav-link-text">SignUp</a>
+                    <p class="text-center">Don't have an account? <a href="<?php echo urlroot; ?>/Pages/register" class="nav-link-text">SignUp</a>
                 </div>
         </form>
         </div>
