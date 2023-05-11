@@ -22,7 +22,7 @@
             </div>
             <div class="positiondesc mx-1 my-1">
                 <label for="positionDesc">Position Description: </label><br>
-                <textarea name="positionDesc" id="positionDesc" class="border-primary border-1 w-100" cols="30" rows="10"></textarea>
+                <textarea name="positionDesc" id="positionDesc" class="border-primary border-1 w-100 px-1 py-1" cols="30" rows="10"></textarea>
             </div>
             <div class="noOfOptions mx-1 my-1" id="position2">
                 <label for="noOfOptions">No of options per position: </label>

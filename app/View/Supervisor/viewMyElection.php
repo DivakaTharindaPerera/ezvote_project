@@ -7,7 +7,7 @@
 
 <div class="main-container">
 
-    <div id="btn panel" class="d-flex text-center d-flex w-100 p-1 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
+    <div id="btn panel" class="d-flex text-center d-flex w-100 p-1 bg-light" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
         <a href="<?php echo urlroot; ?>/Pages/electionVoters/<?php echo $data['ID'] ?>" class="btn btn-primary ml-auto card-hover mt-1 mb-1">
             <div><b>Voters</b></div>
         </a>
@@ -42,20 +42,20 @@
 
     <form action="<?php echo urlroot; ?>/Elections/updateElection" method="post" class="w-100  overflow-scroll p-2" id="updateForm">
         <div id="information" class="card-pane d-flex flex-column">
-            <input type="hidden" name="id" value="<?php echo $data['ID'] ?>">
-            Title: <input type='text' name="title" value="<?php echo $data['electionRow']->Title ?>" disabled>
-            Organization: <input type="text" name="org" value="<?php echo $data['electionRow']->OrganizationName; ?>" disabled>
+            <input type="hidden" name="id" value="<?php echo $data['ID'] ?>" class="border border-1 border-radius-1 border-primary">
+            Title: <input type='text' name="title" value="<?php echo $data['electionRow']->Title ?>" class="border border-1 border-radius-1 border-primary" disabled>
+            Organization: <input type="text" name="org" value="<?php echo $data['electionRow']->OrganizationName; ?>" class="border border-1 border-radius-1 border-primary" disabled>
             <div>
                 <div class="text-lg mb-1">Description</div>
                 <textarea name="desc" id="" cols="30" rows="10" class="border-1 w-100 border-radius-1" disabled>
                 <?php echo $data['electionRow']->Description; ?>
                 </textarea>
             </div>
-            <div class="d-flex flex-column text-center" id="electionDateAndTime">
-                <div id="elecTopic" class="text-center text-xl text-info">
+            <div class="d-flex flex-column text-center justify-content-center align-items-center" id="electionDateAndTime">
+                <div id="elecTopic" class="text-center text-xl text-primary">
                     Election Duration
                 </div>
-                <div class="d-flex justify-content-evenly">
+                <div class="d-flex justify-content-evenly w-65">
                     <div class="card">
                         <div> <img src="<?php echo urlroot; ?>/public/img/start.png" alt="" style="max-height: 40px;max-width:40px"></div>
                         <div class="justify-content-center text-lg mb-1">Commencing</div>
@@ -117,11 +117,11 @@
             if ($data['electionRow']->ObjectionStatus == 1) {
                 echo "
 
-                    <div id='objDateAndTime' class='d-flex flex-column'>
-                    <div id='objTopic' class='text-center'>
+                    <div id='objDateAndTime' class='d-flex flex-column justify-content-center align-items-center'>
+                    <div id='objTopic' class='text-center text-lg text-primary'>
                        <h4> Objection Duration</h4>
                     </div>
-                    <div class='d-flex'>
+                    <div class='d-flex justify-content-evenly w-65'>
                     <div class='card'>
                             <div> <img src='" . urlroot . "/public/img/start.png' alt='' style='max-height: 40px;max-width:40px'></div>
                             <div class='justify-content-center text-lg mb-1'>Begin</div>
@@ -161,7 +161,7 @@
             </div>
         </div>
     </div>
-    <div class="text-center d-flex bg-blue-2 w-100 p-1" id="buttonContainer" style="border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.4);">
+    <div class="text-center d-flex bg-light w-100 p-1" id="buttonContainer" style="border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.4);">
         <input type="hidden" name="" value="<?php echo $data['ID']; ?>" id="electionId">
         <button type="button" onclick="edit()" class="btn btn-primary ml-auto card-hover" id="editBtn"><b>EDIT</b></button>
         <button class="btn btn-danger ml-1 mr-auto card-hover" onclick="deletePopup()" id="electionDelBtn"><b>Delete Election</b></button>

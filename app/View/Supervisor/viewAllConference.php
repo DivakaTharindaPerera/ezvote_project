@@ -30,8 +30,8 @@ require approot.'/View/inc/sidebar-new.php';
 <!--        </div>-->
 <!--    </div>-->
     <div class="d-flex flex-column bg-secondary justify-content-center align-items-center mx-1 mb-2 mt-1">
-        <div class="d-flex flex-column bg-white-0-7 border-radius-2 shadow justify-content-center align-items-center mx-1 my-1 w-80">
-            <div class="sub-title mx-1 my-1">SUPERVISING CONFERENCES</div>
+        <div class="d-flex flex-column bg-white-0-7 border-radius-2 shadow justify-content-center align-items-center mx-1 my-1 w-100">
+            <div class="sub-title mx-1 my-1 text-center">SUPERVISING CONFERENCES</div>
 <!--            `<div class="d-flex flex-wrap justify-content-evenly my-1">-->
 <!--                --><?php
 //                if (isset($data['ongoing_conferences']) and !empty($data['ongoing_conferences'])):
@@ -85,8 +85,8 @@ require approot.'/View/inc/sidebar-new.php';
                 <?php endif;?>
             </div>
         </div>
-        <div class="d-flex flex-column bg-white-0-7 border-radius-2 shadow justify-content-center align-items-center mx-1 my-1 w-80">
-            <div class="sub-title mt-1 mx-1">CONFERENCES AS CANDIDATES</div>
+        <div class="d-flex flex-column bg-white-0-7 border-radius-2 shadow justify-content-center align-items-center mx-1 my-1 w-100">
+            <div class="sub-title mt-1 mx-1 text-center">CONFERENCES AS CANDIDATES</div>
             <div class="d-flex my-1">
                 <?php
                 if(isset($data['candidating_conferences']) and !empty($data['candidating_conferences'])):
@@ -137,8 +137,8 @@ require approot.'/View/inc/sidebar-new.php';
 <!--                --><?php //endif;?>
 <!--            </div>-->
 <!--        </div>-->
-        <div class="d-flex flex-column bg-white-0-7 border-radius-2 shadow justify-content-center align-items-center mx-1 my-1 w-80">
-            <div class="sub-title mt-1 mx-1">CONFERENCES AS Voters</div>
+        <div class="d-flex flex-column bg-white-0-7 border-radius-2 shadow justify-content-center align-items-center mx-1 my-1 w-100">
+            <div class="sub-title mt-1 mx-1 text-center">CONFERENCES AS Voters</div>
             <div class="d-flex my-1">
                 <?php
                 if(isset($data['voting_conferences']) and !empty($data['voting_conferences'])):

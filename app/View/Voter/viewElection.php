@@ -1,5 +1,5 @@
 <?php
-//print_r($data['conferences']);
+//print_r($data['election']);
 //exit();
 require approot . '/View/inc/VoterHeader.php';
 require approot . '/View/inc/AuthNavbar.php';
@@ -10,7 +10,7 @@ require approot . '/View/inc/sidebar-new.php';
     <div id="Election" class="w-95 align-center d-flex flex-column p-1 ">
         <div class="d-flex flex-column w-75 justify-content-start align-items-center">
             <div class="title"><?= $data['election']->Title ?></div>
-            <div id="desc-reg" class="w-50 d-flex flex-column px-1 align-items-center bg-white border-radius-2">
+            <div id="desc-reg" class="w-50 d-flex flex-column px-1 align-items-center bg-white border-radius-2 py-1">
                 <div class="sub-title">
                     Description & Regulation
                 </div>
@@ -56,7 +56,7 @@ require approot . '/View/inc/sidebar-new.php';
                     <!--                To : <span>01/02/2023   20.30 </span>-->
                 </div>
             </div>
-            <div id="data" class="d-flex flex-column justify-content-center align-items-center mt-1 border-primary border-2 border-radius-1 mx-5">
+            <div id="data" class="d-flex flex-column justify-content-center align-items-center mt-1 border-primary border-2 border-radius-1 mx-5 py-1">
                 <div id="self-nomination" class="d-flex text-lg text-center">
                     <div class="text-center">Self Nomination :</div>
                     <div class="d-flex text-lg text-primary">
@@ -87,7 +87,7 @@ require approot . '/View/inc/sidebar-new.php';
                     <!--/public/img/off.png" alt="" style="max-width: 40px;max-height: 40px"> </div>-->
                 </div>
             </div>
-            <div id="candidates" class="d-flex flex-column w-100">
+            <div id="candidates" class="d-flex flex-column w-100 justify-content-center align-items-center">
                 <div class="title">
                     Candidates
                 </div>
@@ -96,7 +96,7 @@ require approot . '/View/inc/sidebar-new.php';
                     <?php foreach ($data['positions'] as $position) {
                         $position_id = $position->ID; ?>
                         <div id="positions" class="d-flex w-100 flex-wrap mb-2" style="gap: 2rem">
-                            <div id="president" class="d-flex flex-column w-45" style="gap: 0.2rem">
+                            <div id="president" class="d-flex flex-column w-90 ml-5" style="gap: 0.2rem">
                                 <div class="sub-title"><?= $position->positionName ?></div>
                                 <?php $i = 0;
                                 foreach ($data['candidates'] as $candidate) {
@@ -109,7 +109,16 @@ require approot . '/View/inc/sidebar-new.php';
                                             </div>
                                             <div id="btn-panel" class="mr-1">
                                                 <button class=" btn btn-primary">Q & A</button>
+                                                <?php
+                                                $dates = date("Y-m-d");
+                                                $times = date("H:i:s");
+                                                if ($data['election']->ObjectionStatus == 1 && (($data['election']->ObjectionEndDate=$dates && $data['election']->ObjectionEndTime>$times) || ($data['election']->ObjectionEndDate>$dates))) { ?>
                                                 <button class=" btn btn-primary" onclick="makeObjection(<?= $candidate->candidateId ?>)">Make Objection</button>
+                                                <?php }
+                                                else{ ?>
+                                                    <button class=" btn btn-primary" onclick="restrictObjection()">Make Objection</button>
+                                                <?php } ?>
+
                                                 <!--                                    --><?php //var_dump($candidate);
                                                                                             ?>
                                                 <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View</button>
@@ -123,7 +132,7 @@ require approot . '/View/inc/sidebar-new.php';
                     <?php } ?>
                 </div>
             </div>
-            <div class="d-flex flex-column bg-white-0-7  border border-primary  border-3 border-radius-2 shadow justify-content-center align-items-center mx-4 my-1 ">
+            <div class="d-flex flex-column bg-white-0-7  border border-primary  border-3 border-radius-2 shadow justify-content-center align-items-center mx-5 my-1 ">
                 <div class="title">Conferences as voter</div>
                 <div class="d-flex justify-content-center align-items-center flex-wrap">
                     <?php foreach ($data['conferences'] as $conference){?>
@@ -152,15 +161,15 @@ require approot . '/View/inc/sidebar-new.php';
         <div class="popup-window-1-content bg-light border-radius-2 p-2 d-flex flex-column w-75">
             <div class="title">Make Objection</div>
             <form action="/ezvote/Voters/submitObjection" method="POST" class="d-flex flex-column my-1 px-1 align-items-flex-start" id="Objection_form">
-                <input type="text" name="candidateId" value="">
-                <input type="text" name="electionId" value="<?php echo $data['election']->ElectionId; ?>">
+                <input type="text" name="candidateId" value="" hidden="">
+                <input type="text" name="electionId" value="<?php echo $data['election']->ElectionId; ?>" hidden="">
                 <div class="d-flex flex-column justify-content-center my-1 w-100">
                     <label for="Subject" class="mr-1 text-left text-md">Subject</label>
                     <input id="Subject" type="text" class="border-1" style="width:100%" name="Subject" required>
                 </div>
                 <div class="d-flex flex-column my-1 w-100">
                     <label for="Description" class="mr-1 text-left text-md">Description</label>
-                    <textarea id="Description" class="border-1" name="Description" style="height: 150px;width: 100%" required></textarea>
+                    <textarea id="Description" class="border-1 px-1 py-1" name="Description" style="height: 150px;width: 100%" required></textarea>
                 </div>
                 <!--                                                <div>-->
                 <input type="hidden" name="CandidateID" value="" id="CandidateID">
@@ -172,7 +181,20 @@ require approot . '/View/inc/sidebar-new.php';
             </form>
         </div>
     </div>
-    <a href="/ezvote/Pages/addConference/<?= $data['election']->ElectionId ?>">Schedule a meeting</a>
+
+    <div class="popup-window-1 bg-secondary text-center border-1 border-radius-2" id="restrictObjection">
+        <div class="popup-window-1-content bg-light border-radius-2 p-2 d-flex flex-column w-50">
+            <div class="d-flex justify-content-end mb-1">
+                <a href="/ezvote/voters/election/<?=$data['election']->ElectionId?>"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            <div class="d-flex flex-column justify-content-center align-items-center w-100 border border-primary border-3 border-radius-1">
+            <div class="title">
+                Objection period is over or objections are not allowed for this election
+            </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 <script>
@@ -187,6 +209,17 @@ require approot . '/View/inc/sidebar-new.php';
             document.querySelector('body').classList.remove('no-scroll-for-popup');
         }
         console.log(id);
+    }
+
+    function restrictObjection() {
+        var rPopup = document.getElementById('restrictObjection');
+        if (rPopup.style.display == "none" || rPopup.style.display == "") {
+            rPopup.style.display = "block";
+            document.querySelector('body').classList.add('no-scroll-for-popup');
+        }else{
+            rPopup.style.display = "none";
+            document.querySelector('body').classList.remove('no-scroll-for-popup');
+        }
     }
 </script>
 <?php require approot . '/View/inc/footer.php'; ?>

@@ -3,7 +3,7 @@
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
 <div class="main-container">
-    <div id="taskbar" class="d-flex flex-column w-100 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);" >
+    <div id="taskbar" class="d-flex flex-column w-100 bg-light" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);" >
         <div class="d-flex">
             <div id="buttons" class="m-1 mr-auto">
                 <a href="<?php echo urlroot?>/Pages/ViewMyElection/<?php echo $data['ID'] ?>" class="btn btn-danger card-hover min-h-90"><i class="fa-solid fa-angles-left"></i><span class="ml-1">Back</span></a>

@@ -4,7 +4,7 @@
 
     <div class="main-container">
         <div class="h-100 overflow-scroll w-100" >
-            <div class="d-flex flex-column bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
+            <div class="d-flex flex-column bg-light" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
                 <div class="d-flex m-1">
                     <input type="hidden" name="" id="electionId" value="<?php echo $data['ID']; ?>">
                     <a href="<?php echo urlroot; ?>/Pages/viewMyElection/<?php echo $data['ID'];?>" class="btn btn-danger text-xl card-hover"><i class="fa-solid fa-angles-left"></i><span class="ml-1">Back</span></a>

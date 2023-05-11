@@ -46,7 +46,7 @@
                     <div>
                         <input type="checkbox"  id="objStatus" name="objectionstatus" value="1" onclick="ObjStatus()" class="mr-1 checkmark">Allow objections against candidates
                     </div>
-                    <div class="flex-column border-primary border-radius-1 border-2" id="objstart" style="display: none;">
+                    <div class="flex-column border-primary border-radius-1 border-2 mt-1" id="objstart" style="display: none;">
                         <div class="text-center my-1">Objection Period</div>
                         <div class="d-flex justify-content-evenly mb-1" >
                             <div class="d-flex flex-column">
@@ -63,7 +63,7 @@
                                         End date: <input type="date" id="OendDate" name="OendDate" class="date" onchange="dateCheckO()" disabled> &emsp14;
                                     </div>
                                     <div>
-                                        Time: <input type="time" id="OendTime" name="OendTime" class="time" onchange="timeCheckO()" disabled>
+                                        Time: <input type="time" id="OendTime" name="OendTime" class="time" onchange="timeCheckO()" disabled><br>
                                         <em id="out1" style="color:red;"></em>
                                     </div>
                                 </div>
