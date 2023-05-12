@@ -638,7 +638,7 @@ class Pages extends Controller
             }
 //            $data4=$this->conferenceModel->getCandidatesByElectionID($_SESSION["UserId"]);
 //            $data5=$this->conferenceModel->getVotersByElectionID($_SESSION["UserId"]);
-            $data=$this->candidateModel->getCandidateByUserId();
+            $data=$this->candidateModel->getCandidatesByUserId();
 //            $data2=[];
 //            foreach ($data as $candidate){
 //                $row=$this->conferenceModel->getConferencesByCandidateId($candidate->candidateId);

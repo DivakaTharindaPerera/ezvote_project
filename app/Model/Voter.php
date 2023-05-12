@@ -432,6 +432,7 @@ class Voter extends Controller{
         ];
 
         $email->sendEmail($data);
+    }
 
     public function findRegVoterByVoterIdAndElectionId($vid,$eid){
         $this->db->query(

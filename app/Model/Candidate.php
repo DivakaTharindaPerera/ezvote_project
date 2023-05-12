@@ -113,7 +113,7 @@ class Candidate extends Controller
     {
         //        $id=1281;
         $this->db->query(
-            "SELECT * FROM candidate
+            "SELECT * FROM Candidate
             WHERE electionid = :1
             "
         );
@@ -283,7 +283,7 @@ class Candidate extends Controller
         }
     }
 
-    public function getCandidateByUserId($user_id)
+    public function getCandidatesByUserId($user_id)
     {
         // var_dump($candidate_id);
         // exit;

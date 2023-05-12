@@ -135,7 +135,7 @@ public function party_apply()
         exit;
     }else{
     if (isset($_POST['save'])) {
-
+        // $names = 0;
 
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         // var_dump($_POST);
