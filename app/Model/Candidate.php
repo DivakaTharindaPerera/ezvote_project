@@ -367,5 +367,32 @@ class Candidate extends Controller
         return $candidate;
     }
 
+    public function insertIntoCandidateWithUser($data){
+        $this->db->query(
+            "INSERT INTO Candidate 
+            (candidateName, candidateEmail, positionId, description, 
+            electionid, userId, partyId, profilePic, identityProof)
+            VALUES
+            (:1,:2,:3,:4,:5,:6,:7,:8,:9)"
+        );
+
+        $this->db->bind(':1', $data['name']);
+        $this->db->bind(':2', $data['email']);
+        $this->db->bind(':3', $data['position']);
+        $this->db->bind(':4', $data['desc']);
+        $this->db->bind(':5', $data['eid']);
+        $this->db->bind(':6', $data['uid']);
+        $this->db->bind(':7', $data['party']);
+        $this->db->bind(':8', $data['profilePic']);
+        $this->db->bind(':9', $data['idProof']);
+
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
 }
 
