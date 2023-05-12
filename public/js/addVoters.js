@@ -98,7 +98,7 @@ upload.addEventListener('change', () => {
             var dataRow = lines[i].split('-');
             if(check_for_duplicates(dataRow[1])){
                 const duplicate = document.createElement('span');
-                duplicate.innerHTML = 'Duplicate email: ' + dataRow[1];
+                duplicate.innerHTML = 'Duplicate email: ' + dataRow[1] +' [duplicate record has been removed]';
                 const brk = document.createElement('br');
                 document.getElementById('duplicateentries').appendChild(duplicate);
                 document.getElementById('duplicateentries').appendChild(brk);

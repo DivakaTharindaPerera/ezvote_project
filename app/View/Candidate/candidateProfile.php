@@ -5,42 +5,54 @@ require approot . '/View/inc/sidebar-new.php';
 
 
 ?>
+<div class="main-container">
 
 <!-- <h2 class="m-2" style="">My candidate profile</h2> -->
 <br>
 
-<div class="d-flex shadow border-radius-1 p-2 bg-light" style="margin-left:35vh; ">    
+<!-- <div class="d-flex shadow border-radius-1 bg-light" style="margin-left:15vh; margin-top:10vh;">     -->
+<div class="shadow border-radius-5 bg-light w-75 py-3" style="overflow: hidden;">
 
-    <div class="py-4" style="">       
-        <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" alt="" class="w-50 h-50" style="border-radius:10px;"  />        
+    <div class="" style="width: 40%; float: left;">       
+        <img src="<?php echo urlroot; ?>/img/candidate/profileImages/<?php echo $res2[0]->profile_picture?>" alt="" class="w-50" style="border-radius:55vh; height:25vh; "/>        
     </div>
 
-    <div class="w-75 p-2 text-dark" style="">
+    <div class="w-60" style="float: left;">
 
         <!-- Candidate Name -->
-        <h1 name="first-name" id="full-name"  readonly class="w-75" style="overflow:hidden; resize: none; margin-left:15px; width:18rem;"><?php echo $res[0]->candidateName?></h1>
+        <h1 name="first-name" id="full-name"  readonly class="w-75 overflow-auto" style="resize: none; margin-left:15px; width:18rem;"><?php echo $res[0]->candidateName?></h1>
         <br><br>
 
         <!-- Election Name -->
+        <div class="d-flex p-1">
         <label for="tre">Election:</label> 
-        <textarea name="tre" id="tre"  readonly class="w-75" style="overflow:hidden; resize: none; margin-left:30px;"><?php echo $elect[0]->OrganizationName.''.$elect[0]->Title; ?></textarea><br><br>
+        <textarea name="tre" id="tre"  readonly class="w-75 overflow-auto" style="resize: none; margin-left:30px;"><?php echo $elect[0]->OrganizationName.''.$elect[0]->Title; ?></textarea><br><br>
+        </div>
 
         <!-- Party Name -->
+        <div class="d-flex p-1">
         <label for="party">Party:</label> 
-        <textarea name="party" id="party"  readonly class="w-75" style="overflow:hidden; resize: none; margin-left:50px;"><?php echo $party[0]->partyName; ?></textarea><br><br>
+        <textarea name="party" id="party"  readonly class="w-75 overflow-auto" style="resize: none; margin-left:50px;"><?php echo $party[0]->partyName; ?></textarea><br><br>
+        </div>
 
         <!-- Position Name -->
+        <div class="d-flex p-1">
         <label for="position">Position:</label> 
-        <textarea name="position" id="position" readonly class="w-75" style="overflow:hidden; resize: none; margin-left:30px;"><?php echo $position[0]->positionName; ?></textarea><br><br>
+        <textarea name="position" id="position" readonly class="w-75 overflow-auto" style="resize: none; margin-left:30px;"><?php echo $position[0]->positionName; ?></textarea><br><br>
+        </div>
 
         <!-- Candidate Description -->
-        <label for="about">About: 
-        <textarea name="about" id="about" readonly  class="w-75" style="overflow:hidden; resize: none; margin-left:44px;"><?php echo $res[0]->description; ?></textarea><br><br>
-       
+        <div class="d-flex p-1">
+        <label for="about">About:</label>  
+        <textarea name="about" id="about" readonly  class="w-75 overflow-auto" style="resize: none; margin-left:44px;"><?php echo $res[0]->description; ?></textarea><br><br>
+        </div>
+
         <!-- Candidate Vision -->
+        <div class="d-flex p-1">
         <label for="vision">Vision:</label>    
-        <textarea name="vision" id="vision" readonly class="w-75" style="overflow:hidden; resize: none; margin-left:42px;"><?php echo $res[0]->vision; ?></textarea><br><br>
-            
+        <textarea name="vision" id="vision" readonly class="w-75 overflow-auto" style="resize: none; margin-left:42px;"><?php echo $res[0]->vision; ?></textarea><br><br>
+        </div>
+    
         <?php 
         if(!empty($res2)){ 
         ?>
@@ -55,7 +67,7 @@ require approot . '/View/inc/sidebar-new.php';
         <?php } ?>
         </div>
     </div>
-
+</div>
     <div class="dialog-box-outer" id="popup">
     <div class="form border-1 border-dark p-1 text-1xl bg-light" style="margin-top:60px; margin-left:15rem;">
 
@@ -93,6 +105,10 @@ require approot . '/View/inc/sidebar-new.php';
     <input type="text" value="<?php echo $position[0]->positionName?>" readonly>
 </div>
 <br>
+<input type="text" name="profile" style="display:none;" value="<?php echo $res2[0]->profile_picture?>" readonly>
+<input type="text" name="identity" style="display:none;" value="<?php echo $res2[0]->identity_proof?>" readonly>
+
+
 <div class="d-flex">
 <!-- profile picture -->
     <div class="column">
