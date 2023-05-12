@@ -1,5 +1,6 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
+
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
     <div class="main-container">
@@ -9,7 +10,7 @@
                     <input type="hidden" name="" id="electionId" value="<?php echo $data['ID']; ?>">
                     <a href="<?php echo urlroot; ?>/Pages/viewMyElection/<?php echo $data['ID'];?>" class="btn btn-danger text-xl card-hover"><i class="fa-solid fa-angles-left"></i><span class="ml-1">Back</span></a>
                     <button class="btn btn-primary ml-1 card-hover" onclick="addPositionVisible()"><b class="text-xl"><i class="mt-auto mr-1 fa-solid fa-plus"></i>Add New Position</b></button>
-                </div>  
+                </div>
 
             <div class="m-3 w-50 ml-auto mr-auto border-1 p-1 border-radius-2 text-center" id='formForPosition' style="display: none;">
                 <form action="" method="POST">
