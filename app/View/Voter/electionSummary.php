@@ -117,6 +117,9 @@ require approot . '/View/inc/sidebar-new.php'; ?>
             }
         }
         ?>
+<!--        --><?php //echo json_encode($votedCount);
+//        echo json_encode($votersCount-$votedCount);
+//        exit();?>
     </div>
     </div>
     <div class="d-flex justify-content-end my-2 mr-3 p-2 w-75">
@@ -151,6 +154,8 @@ require approot . '/View/inc/sidebar-new.php'; ?>
         }
     });
 
+    var votedCount = <?php echo json_encode($votedCount);?>;
+    var votersCount = <?php echo json_encode($votersCount);?>;
     const ctx2 = document.getElementById('voters');
     new Chart(ctx2, {
         type: 'pie',
@@ -158,9 +163,9 @@ require approot . '/View/inc/sidebar-new.php'; ?>
             labels: ['Voted', 'Not Voted'],
             datasets: [{
                 label: '# of Votes',
-                data: [<?php echo json_encode($votedCount), json_encode($votersCount-$votedCount)?>],
+                data: [votedCount, votersCount-votedCount],
                 borderWidth: 1,
-                backgroundColor:['#10558d','red']
+                backgroundColor:['#10558d','#ec8a93']
             }]
         },
         options: {

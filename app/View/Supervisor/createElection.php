@@ -51,6 +51,7 @@
                         <input type="checkbox" id="objStatus" name="objectionstatus" value="1" onclick="ObjStatus()" class="mr-1 checkmark">Allow objections against candidates
 
                     </div>
+
                     <div class="flex-column border-primary border-radius-1 border-2" id="objstart" style="display: none;">
                         <div class="text-center my-1"><b>Objection Period</b></div>
                         <div class="d-flex justify-content-evenly mb-1">
@@ -59,11 +60,13 @@
                                 <div class="justify-content-center text-lg mb-1">Starting</div>
                                 <div class="my-auto">
                                     Date <input type="date" id="OstartDate" name="OstartDate" class="date" onchange="dateCheckO()" disabled>
+
                                 </div>
                                 <div class="my-1">
                                     Time <input type="time" id="OstartTime" name="OstartTime" class="time" onchange="timeCheckO()" disabled>
                                 </div>
                             </div>
+
                             <div class="card d-flex flex-column" id="objend" style="display: none;">
                                 <div class="mt-1"> <img src="<?php echo urlroot; ?>/public/img/endtime.png" alt="" style="max-height: 40px;max-width:40px"></div>
                                 <div class="justify-content-center text-lg mb-1">Ending</div>
@@ -72,6 +75,7 @@
                                 </div>
                                 <div class="my-1">
                                     Time <input type="time" id="OendTime" name="OendTime" class="time" onchange="timeCheckO()" disabled>
+
                                 </div>
                             </div>
 

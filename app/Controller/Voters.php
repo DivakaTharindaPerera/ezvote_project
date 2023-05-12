@@ -76,12 +76,18 @@ class Voters extends Controller
             $data_3 = $this->elecModel->getCandidatesByElectionId($election_id);
             $data_4 = $this->votingModel->getVoterByUidAndEid($_SESSION['UserId'],$election_id);
             $vID=$data_4->voterId;
-            $data_5 = $this->conferenceModel->getConferencesByVoterIDAndElectionID($vID,$election_id);
-            $data_6=[];
+            $data_5 = $this->conferenceModel->getConferencesByElectionID($election_id);
             foreach ($data_5 as $conference){
-                $con_id=$conference->conferenceID;
-                $data_6[]=$this->conferenceModel->getConferenceByConferenceID($con_id);
+                if($conference->ParticipantsV==1){
+                    $data_6[]=$conference;
+                };
             }
+//            $data_5 = $this->conferenceModel->getConferencesByVoterIDAndElectionID($vID,$election_id);
+//            $data_6=[];
+//            foreach ($data_5 as $conference){
+//                $con_id=$conference->conferenceID;
+//                $data_6[]=$this->conferenceModel->getConferenceByConferenceID($con_id);
+//            }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user_id = $_SESSION['UserId'];
                 $voter_id = $this->voterModel->getVoterByUserId($user_id)->voterId;
@@ -116,7 +122,9 @@ class Voters extends Controller
     {
         //        $r=$this->objModel->RetrieveAll();
         $data_1 = $this->objModel->showObjectionsByElectionAndCandidateId($election_id, $candidate_id);
-        $data_2 = $this->objModel->getCandidateName($candidate_id);
+//        $data_2 = $this->objModel->getCandidateName($candidate_id);
+        $data_2=$this->objModel->getCandidateByCandidateID($candidate_id);
+        $data_3=$this->userModel->getUserById($data_2->userId);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $this->objModel->DeleteObjection($id);
@@ -125,7 +133,8 @@ class Voters extends Controller
         $this->view('Voter/viewObjections', [
             //            'r'=>$r,
             'objections' => $data_1,
-            'candidate' => $data_2
+            'candidate' => $data_2,
+            'user'=>$data_3
         ]);
     }
 
@@ -246,7 +255,7 @@ class Voters extends Controller
     public function verifyCandidate($eid, $cid)
     {
         $candidate = $this->candidateModel->getCandidateByCandidateId($cid);
-        $election = $this->electionModel->getElectionByElectionId($eid);
+        $election = $this->elecModel->getElectionByElectionId($eid);
         if ($election->ElectionId == $candidate->electionid) {
             return true;
         } else {
@@ -283,6 +292,11 @@ class Voters extends Controller
         // }
 
         return $candidates;
+    }
+
+    public function qAndA()
+    {
+        //todo
     }
 
 

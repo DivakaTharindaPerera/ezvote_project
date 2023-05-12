@@ -30,6 +30,7 @@ class Conference extends Model
 
     private function createMeeting($data = array())
     {
+
         $post_time = $data['start_date'];
         $start_time = gmdate("Y-m-d\TH:i:s", strtotime($post_time));
 
@@ -212,6 +213,14 @@ class Conference extends Model
     public function getNotSupervisingConferences($userID)
     {
         $this->db->query("SELECT * FROM Conferences WHERE SupervisorID != $userID");
+        return $this->db->resultSet();
+    }
+
+    public function getConferencesByElectionID($electionID)
+    {
+        $this->db->query("SELECT * FROM conferences WHERE electionID= :ElectionID");
+        $this->db->bind(':ElectionID',$electionID);
+        $this->db->execute();
         return $this->db->resultSet();
     }
 
