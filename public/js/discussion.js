@@ -5,12 +5,17 @@ let http_request = new XMLHttpRequest();
 // fetch data from the server
 LoadData();
 function LoadData(){
-	var profile_picture = $('#profile_picture').val();
+	const urlParams = window.location.pathname.split('/');
+	const id1 = urlParams[urlParams.length - 3];
+	const id2 = urlParams[urlParams.length - 2];
+	const id3 = urlParams[urlParams.length - 1];
 
+	var profile_picture = $('#profile_picture').val();
+		
 // make an ajax call to the server
 $.ajax({
 // sets the url for the ajax request 	
-url: '/ezvote/Candidates/viewPost',
+url: '/ezvote/Candidates/viewPost/'+ id1 +'/'+ id2,
 type: "POST",
 dataType: 'json', // data type of the response from server is json
 success: function(data) { // callback function that is executed if the request succeeds
@@ -57,12 +62,16 @@ $(document).ready(function() {
 		var id = document.forms["frm"]["Pcommentid"].value;
 		var name = document.forms["frm"]["name"].value;
 		var msg = document.forms["frm"]["msg"].value;
+		const urlParams = window.location.pathname.split('/');
+		const id1 = urlParams[urlParams.length - 3];
+		const id2 = urlParams[urlParams.length - 2];
+		const id3 = urlParams[urlParams.length - 1];
         // console.log(id);
         // console.log(name);
         // console.log(msg);
 		if(name!="" && msg!=""){
 			$.ajax({
-				url: "/ezvote/Candidates/createPost",
+				url: '/ezvote/Candidates/createPost/'+ id1 +'/'+ id2+'/'+id3,
 				type: "POST",
 				data: {
 					id: id,
@@ -71,6 +80,8 @@ $(document).ready(function() {
 				},
 				cache: false,
 				success: function(dataResult){
+					console.log(dataResult)
+					
 					var dataResult = JSON.parse(dataResult);
 					if(dataResult.statusCode==200){
 						$("#butsave").removeAttr("disabled");
@@ -99,13 +110,17 @@ $(document).ready(function() {
 		var id = document.forms["frm1"]["Rcommentid"].value;
 		var name = document.forms["frm1"]["Rname"].value;
 		var msg = document.forms["frm1"]["Rmsg"].value;
+		const urlParams = window.location.pathname.split('/');
+		const id1 = urlParams[urlParams.length - 3];
+		const id2 = urlParams[urlParams.length - 2];
+		const id3 = urlParams[urlParams.length - 1];
         console.log(id);
         console.log(name);
         console.log(msg);
        
 		if(name!="" && msg!=""){
 			$.ajax({
-				url: "/ezvote/Candidates/createPost",
+				url: '/ezvote/Candidates/createPost/'+ id1 +'/'+ id2 +'/'+id3,
 				type: "POST",
 				data: {
 					id: id,
@@ -114,6 +129,7 @@ $(document).ready(function() {
 				},
 				cache: false,
 				success: function(dataResult){
+					console.log(dataResult)
 					var dataResult = JSON.parse(dataResult);
 					if(dataResult.statusCode==200){
 						$("#btnreply").removeAttr("disabled");

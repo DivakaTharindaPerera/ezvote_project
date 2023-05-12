@@ -751,7 +751,7 @@ class Pages extends Controller
                             $this->voterModel->sendEMailVoters($voter->voterId,$data);
                         }
 
-                        redirect('pages/addConference');
+                        redirect('Pages/addConference/'.$electionID.'?success=1');
                     }
                     else{
 
@@ -761,8 +761,6 @@ class Pages extends Controller
                     $this->view('Supervisor/scheduleConference', $data);
                 }
             }
-
-
             $candidates=$this->candidateModel->getCandidatesByElectionId($electionID);
             $data1=$this->conferenceModel->getConferencesByUserIDAndElectionID($_SESSION["UserId"],$electionID);
             $this->view('Supervisor/scheduleConference',

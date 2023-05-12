@@ -58,18 +58,18 @@
                 <!-- view elections -->
 
                 <li>
-                    <a href="<?php echo urlroot; ?>/View/ViewMyElections">
+                    <a href="<?php echo urlroot; ?>/Pages/ViewMyElections">
                         <span class="icon"><i class="fas fa-clipboard"></i></span>
                         <span class="item">View My Elections</span>
                     </a>
                 </li>
 
-                <li>
+                <!-- <li>
                     <a href="<?php echo urlroot; ?>/Candidates/discussionForum">
                         <span class="icon"><i class="fa-brands fa-wpforms"></i></span>
                         <span class="item">Discussion Forum</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="<?php echo urlroot; ?>/Pages/viewAllConferences">
                         <span class="icon"><i class="fa-solid fa-users"></i></span>
@@ -83,7 +83,7 @@
                         <span class="icon"><i class="fas fa-dollar-sign"></i></span>
                         <span class="item">Subscription Plans</span>
                     </a>
-                <li>
+                <!-- <li>
                     <a href="<?php echo urlroot; ?>/Candidates/candidateProfile">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Edit profile</span>
@@ -95,7 +95,7 @@
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Apply Nomination</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="<?php echo urlroot; ?>/Candidates/partyrequests">
                         <span class="icon"><i class="fas fa-cog"></i></span>

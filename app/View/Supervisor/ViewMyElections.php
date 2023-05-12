@@ -4,7 +4,7 @@
 
 <div class="main-container">
     <div class="d-flex justify-content-center align-items-center title">Created Elections</div>
-    <div class="d-flex mt-1 justify-content-end  ">
+    <div class="d-flex mt-1 justify-content-end min-w-80 max-w-80 ">
         <div id="search" class="d-flex justify-content-end mx-1 justify-content-end">
             <input type="text" id="searchInput" placeholder="Search for elections" onkeyup="searchElection()" class="border-primary border-3">
         </div>

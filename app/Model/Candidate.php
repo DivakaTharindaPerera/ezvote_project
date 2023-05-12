@@ -231,7 +231,7 @@ class Candidate extends Controller
         $data = [
             'email' => $candidate->candidateEmail,
             'subject' => 'You have a meting',
-            'body' => 'You have a meting with supervisor.<br>
+            'body' => 'You have a meeting with supervisor.<br>
                             Topic-' . $data['topic'] . '<br>
                             Date-' . $data['start_date'] . '<br>
                             Password-' . $data['password'] . '<br>
@@ -301,20 +301,26 @@ class Candidate extends Controller
 
     public function updateCandidateProfile($data)
     {
-        // var_dump($data);
         
-        $this->db->query("UPDATE `Candidate` SET candidateName=:candidateName, `description`=:description, vision=:vision WHERE candidateId = :candidateId");
+        if (empty($data['profilePicture'])) {
+            $data['profilePicture']=$data['profile'];
+        }
+        if (empty($data['identityProof'])) {
+            $data['identityProof']=$data['identity'];
+        }
+
+        $this->db->query("UPDATE `Candidate` SET candidateName=:candidateName, `description`=:description, `profile_picture`=:image_url,`identity_proof`=:file_url,vision=:vision WHERE candidateId = :candidateId");
         $this->db->bind(':candidateId', $data['candidateId']);
         $this->db->bind(':candidateName', $data['candidateName']);
-        // $this->db->bind(':image_url',$profile_picture);
-        // $this->db->bind(':file_urls',$data['identity_proof']);
+        $this->db->bind(':image_url',$data['profilePicture']);
+        $this->db->bind(':file_url',$data['identityProof']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':vision', $data['vision']);
         if ($this->db->execute()) {
-
-            return true;
-        } else {
-            return false;
+               return true; 
+        }
+        else{
+         	return false;
         }
     }
 
