@@ -283,8 +283,8 @@ class Candidate extends Controller
         }
     }
 
-    public function getCandidateByUserId($user_id)
-    {
+    public function getCandidateByUser($user_id)
+    {   
         // var_dump($candidate_id);
         // exit;
 
@@ -302,29 +302,24 @@ class Candidate extends Controller
     public function updateCandidateProfile($data)
     {
         
-        $this->db->query("UPDATE `Candidate` SET candidateName=:candidateName, `description`=:description, `profile_picture`=:image_url,vision=:vision WHERE candidateId = :candidateId");
+        if (empty($data['profilePicture'])) {
+            $data['profilePicture']=$data['profile'];
+        }
+        if (empty($data['identityProof'])) {
+            $data['identityProof']=$data['identity'];
+        }
+
+        $this->db->query("UPDATE `Candidate` SET candidateName=:candidateName, `description`=:description, `profile_picture`=:image_url,`identity_proof`=:file_url,vision=:vision WHERE candidateId = :candidateId");
         $this->db->bind(':candidateId', $data['candidateId']);
         $this->db->bind(':candidateName', $data['candidateName']);
         $this->db->bind(':image_url',$data['profilePicture']);
+        $this->db->bind(':file_url',$data['identityProof']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':vision', $data['vision']);
         if ($this->db->execute()) {
-            if (!empty($data['identityProof'])) { 
-                
-                $this->db->query("UPDATE `Candidate` SET `identity_proof`=:file_url WHERE candidateId = :candidateId");
-                $this->db->bind(':file_url',$data['identityProof']);
-                $this->db->bind(':candidateId', $data['candidateId']);
-                if ($this->db->execute()) {
-                    
-                    return true;
-                } else {
-                    return false;
-                }
-            }else{
-                return true;
-            }
-            
-        }else{
+               return true; 
+        }
+        else{
          	return false;
         }
     }

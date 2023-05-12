@@ -53,12 +53,12 @@
           <br>
           <input style="display:none;" type="text" class="form-control" name="name" value="<?= $result->Name?>">
         </div>
-        <div>
+        <!-- <div>
           <label for="comment">Write your question:</label>
           <input type="text" class="form-control m-1" rows="5" name="msg" style="height:10vh;" required>
-        </div>
+        </div> -->
         <br>
-        <input type="button" id="butsave" name="save" class="btn btn-primary" value="Send">
+        <!-- <input type="button" id="butsave" name="save" class="btn btn-primary" value="Send"> -->
       </form>
     </div>
     <!-- </div> -->
@@ -68,6 +68,7 @@
       <div class="">
         <br>
         <h4>Recent questions</h4>
+        <br>
         <input type="hidden" id="profile_picture" value="<?php echo $_SESSION['profile_picture']; ?>">
         <table class="" id="MyTable">
           <tbody id="record">

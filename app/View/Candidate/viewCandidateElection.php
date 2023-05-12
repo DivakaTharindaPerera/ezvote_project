@@ -106,6 +106,7 @@ if($result[0]->status == 1){
     </div>
 
     <div class="title bg-danger border-radius-2">
+    <i class="fas fa-info-circle"></i>
         <p class="text-white">You have to apply for the party first.</p>      
     </div>
 
@@ -145,7 +146,7 @@ if($result[0]->status == 1){
                                                 <div id="can-Name"><?= $candidate->candidateName ?></div>
                                             </div>
                                             <div id="btn-panel" class="mr-1">
-                                                <button class=" btn btn-primary" onclick="location.href='/ezvote/Candidates/discussionForum/<?= $data['election']->ElectionId ?>'">Q & A</button>
+                                                <button class=" btn btn-primary" onclick="location.href='/ezvote/Candidates/discussionForum/<?= $data['election']->ElectionId ?>/<?= $candidate->candidateId ?>/<?= $voter_id ?>'">Q & A</button>
                                                 <button class=" btn btn-primary" onclick="makeObjection(<?= $candidate->candidateId ?>)">Make Objection</button>
                                                 <!--                                    --><?php //var_dump($candidate);
                                                                                             ?>
