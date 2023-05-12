@@ -26,7 +26,7 @@
                         <img src="/ezvote/public/img/profile.jpg" style="max-height:50px;max-width: 50px" alt="profile photo">
                     </div>
                     <div class="text-xl mb-1">
-                        <?php echo $candidate->candidateId; ?>
+                        
                         <?php echo $candidate->candidateName; ?>
                     </div>
                     <div class="text-xs mb-1">
@@ -41,11 +41,7 @@
     }
     ?>
     </div>
-    <div class="justify-content-center d-flex bg-light w-100 p-1 mb-auto" id="buttonContainer" style="border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.4);">
-<!--        <a href="--><?php //echo urlroot;?><!--/Pages/dashboard" class="btn btn-danger mx-1 my-1"><b>HOME</b></a>-->
-        <button class="btn btn-primary mx-1 my-1" onclick="printThis()"><b>PRINT</b></button>
-
-    </div>
+    
 </div>
 </div>
 <script>

@@ -53,7 +53,7 @@ class Database{
             $this->stmt->execute();
             return true;
          }
-         catch(e){
+         catch(Exception $e){
             echo $e->getMessage();
             return false;
          }
