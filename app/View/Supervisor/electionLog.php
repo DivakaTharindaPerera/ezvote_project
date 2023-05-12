@@ -3,26 +3,25 @@
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
 <div class="main-container">
-    <div>
-        
+<!--    <div>-->
+<!--        -->
+<!--    </div>-->
+    <div class="title">
+        Election logs
     </div>
-    <div class="mt-2 text-center">
-        <div class="title">
-            <?php 
-                echo $data['electionRow']->Title;
-            ?>
-        </div>
-        <div class="title">
-            By
-        </div>
-        <div class="title">
+    <div class="mt-1 text-center">
+        <div class="sub-title">
             <?php 
                 echo $data['electionRow']->OrganizationName;
             ?>
         </div>
         <div class="sub-title">
-            Election logs
+            By
+            <?php
+            echo $data['electionRow']->Title;
+            ?>
         </div>
+
     </div>
     <div class="w-90 mt-2">
         <table>

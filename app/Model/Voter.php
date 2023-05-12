@@ -414,7 +414,8 @@ class Voter extends Controller{
     }
 
 
-    public function sendEmailVoters($voterId,$data){
+    public function sendEmailVoters($voterId,$data)
+    {
         $this->db->query(
             "SELECT Email FROM voter WHERE voterId = :1");
         $this->db->bind(':1', $voterId);
@@ -425,13 +426,14 @@ class Voter extends Controller{
             'email' => $voter->Email,
             'subject' => 'You have a meeting',
             'body' => 'You have a meeting with supervisor.<br>
-                            Topic-'.$data['topic'].'<br>
-                            Date-'.$data['start_date'].'<br>
-                            Password-'.$data['password'].'<br>
+                            Topic-' . $data['topic'] . '<br>
+                            Date-' . $data['start_date'] . '<br>
+                            Password-' . $data['password'] . '<br>
                             Please be sure to log on ezvote platform to attend the meeting.'
         ];
 
         $email->sendEmail($data);
+    }
 
     public function findRegVoterByVoterIdAndElectionId($vid,$eid){
         $this->db->query(
@@ -477,6 +479,16 @@ class Voter extends Controller{
             die();
         }
 
+    }
+
+    public function insertQuestion()
+    {
+        $this->db->query("INSERT INTO discussion1 (question, electionId,candidateId)VALUES (:1, :2,:3)");
+        $this->db->bind(':1', $_POST['question']);
+        $this->db->bind(':2', $_POST['electionId']);
+        $this->db->bind(':3', $_POST['candidateId']);
+        $this->db->execute();
+        return true;
     }
 
     

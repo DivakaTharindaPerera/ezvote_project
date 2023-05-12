@@ -1,21 +1,22 @@
 <?php
 
-class Contact extends Model
-{
-        public $name;
-        public $email;
-        public $subject;
-        public $message;
-      
-        public function AddContactUs($name, $email, $subject, $message) {
-          $this->name = $name;
-          $this->email = $email;
-          $this->subject = $subject;
-          $this->message = $message;
-        }
-      
-
-    
+//    class Contact extends Model
+//{
+//        public $name;
+//        public $email;
+//        public $subject;
+//        public $message;
+//
+//
+//        public function AddContactUs($name, $email, $subject, $message) {
+//          $this->name = $name;
+//          $this->email = $email;
+//          $this->subject = $subject;
+//          $this->message = $message;
+//        }
+//
+//
+//
 
 
 
@@ -55,5 +56,5 @@ class Contact extends Model
     //         return false;
     //     }
     // }
- }
+// }
     

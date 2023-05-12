@@ -283,7 +283,7 @@ class Candidate extends Controller
         }
     }
 
-    public function getCandidateByUserId($user_id)
+    public function getCandidateByUser($user_id)
     {
         // var_dump($candidate_id);
         // exit;

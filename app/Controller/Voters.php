@@ -294,9 +294,32 @@ class Voters extends Controller
         return $candidates;
     }
 
-    public function qAndA()
+    public function qAndA($electionId,$candidateId)
     {
-        //todo
+        if($this->isLoggedIn()){
+            if($_SERVER['REQUEST_METHOD']=='POST'){
+                $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+                $data=[
+                    'question'=>trim($_POST['question']),
+                    'electionId'=>$electionId,
+                    'candidateId'=>$candidateId,
+                ];
+                if($this->voterModel->insertQuestion($data)){
+                    redirect('Voters/election/'.$electionId);
+                }else{
+                    die('Something went wrong');
+                }
+            }
+        }
+        $user_id=$_SESSION['UserId'];
+
+        $result = $this->voterModel->findVoterByUserIdAndElectionId($user_id,$electionId);
+        // var_dump($result);
+        // exit;
+        $result2 = $this->candidateModel->findCandidateByUserIdAndElectionId($user_id,$electionId);
+        // var_dump($result2);
+        // exit;
+        $this->view('Voter/questioning',['result' => $result,'result2' => $result2]);
     }
 
 

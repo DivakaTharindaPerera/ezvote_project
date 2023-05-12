@@ -108,7 +108,7 @@ require approot . '/View/inc/sidebar-new.php';
                                                 <div id="can-Name"><?= $candidate->candidateName ?></div>
                                             </div>
                                             <div id="btn-panel" class="mr-1">
-                                                <button class=" btn btn-primary">Q & A</button>
+                                                <button class=" btn btn-primary" onclick="questioning(<?=$candidate->candidateId?>)">Q & A</button>
                                                 <?php
                                                 $dates = date("Y-m-d");
                                                 $times = date("H:i:s");
@@ -220,6 +220,11 @@ require approot . '/View/inc/sidebar-new.php';
             rPopup.style.display = "none";
             document.querySelector('body').classList.remove('no-scroll-for-popup');
         }
+    }
+    function questioning(candidateId){
+        console.log(candidateId)
+        console.log("questioning")
+        window.location.href = "/ezvote/voters/qAndA/<?=$data['election']->ElectionId?>/"+candidateId;
     }
 </script>
 <?php require approot . '/View/inc/footer.php'; ?>
