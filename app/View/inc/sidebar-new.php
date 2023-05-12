@@ -22,7 +22,7 @@
                 <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
 
             <div class="profile mr-1">
-                <img src="<?php echo urlroot; ?>/img/welcome/boy.jpg" style="object-fit: cover" alt="profile_picture"><br>
+                <img src="<?php echo $_SESSION['profile_picture']?>" style="object-fit: cover" alt="profile_picture"><br>
                 <h3 class="text-center text-md text-white mr-1"><?= $_SESSION['fname']." ".$_SESSION['lname']?></h3>
 <!--                <p>Blogger</p>-->
             </div>
@@ -44,7 +44,7 @@
 
                 <!-- create election -->
                 <li>
-                    <a href="<?php echo urlroot; ?>/View/Createelection">
+                    <a href="<?php echo urlroot; ?>/pages/Createelection">
                         <span class="icon"><i class="fas fa-vote-yea"></i></span>
                         <span class="item">Create Election</span>
                     </a>
@@ -58,18 +58,18 @@
                 <!-- view elections -->
 
                 <li>
-                    <a href="<?php echo urlroot; ?>/View/ViewMyElections">
+                    <a href="<?php echo urlroot; ?>/Pages/ViewMyElections">
                         <span class="icon"><i class="fas fa-clipboard"></i></span>
                         <span class="item">View My Elections</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
+                <!-- <li>
+                    <a href="<?php echo urlroot; ?>/Candidates/discussionForum">
                         <span class="icon"><i class="fa-brands fa-wpforms"></i></span>
                         <span class="item">Discussion Forum</span>
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="<?php echo urlroot; ?>/Pages/viewAllConferences">
                         <span class="icon"><i class="fa-solid fa-users"></i></span>
@@ -83,12 +83,26 @@
                         <span class="icon"><i class="fas fa-dollar-sign"></i></span>
                         <span class="item">Subscription Plans</span>
                     </a>
-                <li>
+                <!-- <li>
                     <a href="<?php echo urlroot; ?>/Candidates/candidateProfile">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Edit profile</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="<?php echo urlroot; ?>/Candidates/applyNomination">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Apply Nomination</span>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="<?php echo urlroot; ?>/Candidates/partyrequests">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Party Requests</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
 

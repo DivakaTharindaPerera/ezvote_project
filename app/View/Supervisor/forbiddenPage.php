@@ -4,7 +4,6 @@
 //exit();
 require approot . '/View/inc/VoterHeader.php'; ?>
 
-
     <div class="text-6xl text-danger">
         <b>FORBIDDEN ACCESS!</b>
     </div>
@@ -17,7 +16,7 @@ require approot . '/View/inc/VoterHeader.php'; ?>
         let countdown = document.getElementById('countdown');
         let count = parseInt(countdown.innerText);
         if(count == 0){
-            window.location.href = "<?php echo urlroot; ?>/Pages/dashboard";
+            history.back();
         }
         countdown.innerText = count - 1;
     },1000);

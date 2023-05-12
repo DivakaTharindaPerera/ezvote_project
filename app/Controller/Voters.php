@@ -1,13 +1,19 @@
 <?php
 class Voters extends Controller
 {
-
     public function __construct()
     {
         $this->objModel = $this->model('Objection');
         $this->elecModel = $this->model('Election');
         $this->voterModel = $this->model('Voter');
         $this->objectionModel = $this->model('Objection');
+        $this->partyModel = $this->model('Party');
+        $this->candidateModel = $this->model('Candidate');
+        $this->voteModel = $this->model('Vote');
+        $this->encryptModel = $this->model('userEncrypt');
+        $this->userModel = $this->model('User');
+        $this->votingModel = $this->model('Voting');
+        $this->conferenceModel = $this->model('Conference');
     }
     public function submitObjections()
     {
@@ -68,6 +74,20 @@ class Voters extends Controller
             $data_1 = $this->elecModel->getElectionByElectionId($election_id);
             $data_2 = $this->elecModel->getPositionsByElectionId($election_id);
             $data_3 = $this->elecModel->getCandidatesByElectionId($election_id);
+            $data_4 = $this->votingModel->getVoterByUidAndEid($_SESSION['UserId'],$election_id);
+            $vID=$data_4->voterId;
+            $data_5 = $this->conferenceModel->getConferencesByElectionID($election_id);
+            foreach ($data_5 as $conference){
+                if($conference->ParticipantsV==1){
+                    $data_6[]=$conference;
+                };
+            }
+//            $data_5 = $this->conferenceModel->getConferencesByVoterIDAndElectionID($vID,$election_id);
+//            $data_6=[];
+//            foreach ($data_5 as $conference){
+//                $con_id=$conference->conferenceID;
+//                $data_6[]=$this->conferenceModel->getConferenceByConferenceID($con_id);
+//            }
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user_id = $_SESSION['UserId'];
                 $voter_id = $this->voterModel->getVoterByUserId($user_id)->voterId;
@@ -84,11 +104,13 @@ class Voters extends Controller
                 ];
                 $this->objModel->AddObjection($data);
                 redirect('voters/election/' . $election_id);
-            } else {
+            }
+            else {
                 $this->view('Voter/viewElection', [
                     'election' => $data_1,
                     'positions' => $data_2,
                     'candidates' => $data_3,
+                    'conferences' => $data_6
                 ]);
             }
         } else {
@@ -100,7 +122,9 @@ class Voters extends Controller
     {
         //        $r=$this->objModel->RetrieveAll();
         $data_1 = $this->objModel->showObjectionsByElectionAndCandidateId($election_id, $candidate_id);
-        $data_2 = $this->objModel->getCandidateName($candidate_id);
+//        $data_2 = $this->objModel->getCandidateName($candidate_id);
+        $data_2=$this->objModel->getCandidateByCandidateID($candidate_id);
+        $data_3=$this->userModel->getUserById($data_2->userId);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $this->objModel->DeleteObjection($id);
@@ -109,7 +133,8 @@ class Voters extends Controller
         $this->view('Voter/viewObjections', [
             //            'r'=>$r,
             'objections' => $data_1,
-            'candidate' => $data_2
+            'candidate' => $data_2,
+            'user'=>$data_3
         ]);
     }
 
@@ -150,35 +175,40 @@ class Voters extends Controller
         $data_1 = $this->elecModel->getElectionByElectionId($id);
         $data_2 = $this->elecModel->getPositionsByElectionId($id);
         $data_3 = $this->elecModel->getCandidatesByElectionId($id);
-        //        $data_4=$this->voterModel->temporaryVoting();
+        $data_4 = $this->userModel->getUsers();
         $this->view('Voter/votingBallot', [
             'election' => $data_1,
             'positions' => $data_2,
             'candidates' => $data_3,
-            'id' => $id
+            'id' => $id,
+            'users'=>$data_4
         ]);
     }
 
-    public function summary($id)
+    public function summary($electionId)
     {
-        $data_1 = $this->elecModel->getElectionByElectionId($id);
-        //        $data_2=$this->elecModel->getWinnersDetails($id);
-        //        print_r($data_2);
-        //        exit();
-        //        $i=0;
-        //        foreach ($data_2 as $winner){
-        //            $candidateId=$winner->candidateID;
-        ////            echo $candidateId;
-        ////            exit();
-        //            $data_3=$this->elecModel->getWinnersNames($candidateId);
-        //            $i=$i+1;
-        //        }
-        $this->view('Voter/electionSummary', [
-            'election' => $data_1,
-            //           'winners'=>$data_2,
-            //           'party'=>$data_3
-        ]);
+        if($this->isLoggedIn()){
+            $election = $this->elecModel->getElectionByElectionId($electionId);
+            $candidates = $this->candidateModel->getCandidatesByElectionId($electionId);
+            $positions = $this->elecModel->getPositionsByElectionId($electionId);
+            $voters = $this->voterModel->getVotersByElectionId($electionId);
+            $parties = $this->partyModel->getPartiesByElectionId($electionId);
+            $votes=$this->calculateVotes($electionId);
+            $this->view('Voter/electionSummary', [
+                'election' => $election,
+                'positions' => $positions,
+                'voters' => $voters,
+                'candidates' => $candidates,
+                'parties' => $parties,
+                'votes' => $votes
+            ]);
+        }
+        else{
+            $this->view('login');
+        }
+        return true;
     }
+
     public function temporaryVotes()
     {
         $data_1 = $this->voterModel->temporaryVoting();
@@ -207,4 +237,67 @@ class Voters extends Controller
             }
         }
     }
+
+    public function encrypt($data, $key, $iv)
+    {
+        $encryptedData = openssl_encrypt($data, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv);
+        $encryptedData = base64_encode($encryptedData);
+        return $encryptedData;
+    }
+
+    public function decrypt($data, $key, $iv)
+    {
+        $decryptedData = base64_decode($data);
+        $decryptedData = openssl_decrypt($decryptedData, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv);
+        return $decryptedData;
+    }
+
+    public function verifyCandidate($eid, $cid)
+    {
+        $candidate = $this->candidateModel->getCandidateByCandidateId($cid);
+        $election = $this->elecModel->getElectionByElectionId($eid);
+        if ($election->ElectionId == $candidate->electionid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function calculateVotes($eid)
+    {
+        $candidates = array();
+        $voters = $this->voterModel->getVotersByElectionId($eid);
+        $candidateRows = $this->candidateModel->getCandidatesByElectionId($eid);
+        foreach ($candidateRows as $candidateRow) {
+            $candidates[$candidateRow->candidateId] = 0;
+        }
+        foreach ($voters as $voter) {
+            // echo $voter->voterId."<br>";
+            $encryption = $this->encryptModel->getKeyAndIv($voter->voterId);
+            $votes = $this->voteModel->retrieveVotes($voter->voterId);
+            foreach ($votes as $vote) {
+                $candidate = $this->decrypt($vote->candidate, $encryption->Key, $encryption->Iv);
+                // echo $candidate."<br>";
+                if ($this->verifyCandidate($eid, $candidate)) {
+                    $candidates[$candidate] += $voter->value;
+                }
+            }
+        }
+
+        // $keys = array_keys($candidates);
+
+        // echo "Candidates : Votes <br>";
+        // foreach($keys as $key){
+        //     echo $key . " : " . $candidates[$key] . "<br>";
+        // }
+
+        return $candidates;
+    }
+
+    public function qAndA()
+    {
+        //todo
+    }
+
+
 }

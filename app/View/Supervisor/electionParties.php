@@ -4,7 +4,7 @@
 
 <div class="main-container">
     <div id="taskbar" class="d-flex p-1 flex-column w-100 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
-        <div class="d-flex mr-auto">
+        <div class="d-flex mr-auto justify-content-end">
             <input type="hidden" name="" id="electionId" value="<?php echo $data['ID']; ?>">
             <a href="<?php echo urlroot; ?>/Pages/viewMyElection/<?php echo $data['ID']; ?>" class="btn btn-danger text-xl card-hover"><i class="fa-solid fa-angles-left"></i><span class="ml-1">Back</span></a>
             <button class="btn btn-primary ml-1 card-hover" onclick="addPartyVisible()"><b class="text-xl"><i class="mt-auto mr-1 fa-solid fa-plus"></i>Add New Party</b></button>

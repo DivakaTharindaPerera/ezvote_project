@@ -1,0 +1,21 @@
+{
+    "name": "vendor_name/ezvote",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+      {
+        "name": "Isurika Arunodi",
+        "email": "email@example.com"
+      }
+    ],
+    "require": {
+      "vlucas/phpdotenv": "^5.5",
+      "firebase/php-jwt": "^6.4",
+      "ext-openssl": "*",
+      "ext-curl": "*",
+      "ext-pdo": "*",
+      "brick/date-time": "^0.4.1",
+        "dompdf/dompdf": "^0.6.2"
+    }
+  }

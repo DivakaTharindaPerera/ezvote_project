@@ -9,6 +9,9 @@ class Elections extends Controller
     private $candidateModel;
     private $emailModel;
     private $logModel;
+    private $objectionModel;
+    private $removedCandidateModel;
+    private $nominationModel;
 
     public function __construct()
     {
@@ -20,6 +23,9 @@ class Elections extends Controller
         $this->partyModel = $this->model('Party');
         $this->candidateModel = $this->model('Candidate');
         $this->logModel = $this->model('log');
+        $this->objectionModel = $this->model('Objection');
+        $this->removedCandidateModel = $this->model('removedCandidate');
+        $this->nominationModel = $this->model('Nomination');
     }
 
     public function sendEmail()
@@ -142,7 +148,7 @@ class Elections extends Controller
                         $data['id'] = $user->UserId;
                         if ($this->voterModel->insertIntoRegVoters($data)) {
 
-                            $logDesc = "Voter " . $data['name'] . " has been added to the election " . $ElectionData->Title;
+                            $logDesc = "Voter " . $data['name'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                             $data1 = [
@@ -158,7 +164,7 @@ class Elections extends Controller
                         }
                     } else {
                         if ($this->voterModel->insertIntoUnregVoters($data)) {
-                            $logDesc = "Voter " . $data['name'] . " has been added to the election " . $ElectionData->Title;
+                            $logDesc = "Voter " . $data['name'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                             $data1 = [
@@ -221,7 +227,7 @@ class Elections extends Controller
 
                     if ($id = $this->positionModel->insertIntoElectionPositions($data)) {
 
-                        $logDesc = "Position " . $data['position'] . " has been added to the election " . $data['electionId'];
+                        $logDesc = "Position " . $data['position'] . " has been added to the election ";
                         $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                         array_push($positionData["positionName"], $data['position']);
@@ -235,6 +241,10 @@ class Elections extends Controller
                 redirect('Pages/wayToAddCandidates/' . $data['electionId']);
             }
         }
+    }
+
+    public function addParty()
+    {
     }
 
     public function insertParty()
@@ -251,7 +261,6 @@ class Elections extends Controller
                 for ($k = 0; $k < $count; $k++) {
                     echo $electionId . "-" . trim($_POST[$k . "party"]) . "-" . trim($_POST[$k . "name"]) . "-" . trim($_POST[$k . "email"]) . "-" . trim($_POST[$k . "position"]) . "<br>";
                 }
-
                 for ($i = 0; $i < $partyCount; $i++) {
                     $data = [
                         'electionId' => $electionId,
@@ -267,7 +276,7 @@ class Elections extends Controller
 
                         if ($partyId = $this->partyModel->insertIntoParty2($data)) {
 
-                            $logDesc = "Party " . $data['partyName'] . " has been added to the election " . $data['electionId'];
+                            $logDesc = "Party " . $data['partyName'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                             $data1 = [
@@ -288,25 +297,27 @@ class Elections extends Controller
                                         'userId' => ""
                                     ];
 
+                                    $data1['electionRow'] = $this->electionModel->getElectionByElectionId($data1['electionId']);
+
                                     if ($this->userModel->findUserByEmail($data1['candidateEmail'])) {
                                         $user = $this->userModel->getUserByEmail($data1['candidateEmail']);
                                         $data1['userId'] = $user->UserId;
                                         if ($id = $this->candidateModel->insertRegCandidate($data1)) {
 
-                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election " . $data1['electionId'];
+                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election ";
                                             $this->logModel->saveLog($logDesc, $data1['electionId'], $_SESSION["UserId"]);
 
                                             echo "success" . $id . "<br>";
                                             continue;
                                         } else {
                                             echo "error $i <br>";
-                                            $this->view('Supervisor/addCandidate', $data);
+                                            $this->view('Supervisor/addCandidates', $data);
                                             return;
                                         }
                                     } else {
                                         if ($id = $this->candidateModel->insertUnregCandidate($data1)) {
 
-                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election " . $data1['electionId'];
+                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election ";
                                             $this->logModel->saveLog($logDesc, $data1['electionId'], $_SESSION["UserId"]);
 
                                             echo "success" . $id . "<br>";
@@ -332,7 +343,7 @@ class Elections extends Controller
                                         $data1['userId'] = $user->UserId;
                                         if ($id = $this->candidateModel->insertRegCandidate($data1)) {
 
-                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election " . $data1['electionId'];
+                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election ";
                                             $this->logModel->saveLog($logDesc, $data1['electionId'], $_SESSION["UserId"]);
 
                                             echo "success" . $id . "<br>";
@@ -345,7 +356,7 @@ class Elections extends Controller
                                     } else {
                                         if ($id = $this->candidateModel->insertUnregCandidate($data1)) {
 
-                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election " . $data1['electionId'];
+                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election ";
                                             $this->logModel->saveLog($logDesc, $data1['electionId'], $_SESSION["UserId"]);
 
                                             echo "success" . $id . "<br>";
@@ -367,7 +378,7 @@ class Elections extends Controller
                     } else {
                         if ($partyId = $this->partyModel->insertIntoParty1($data)) {
 
-                            $logDesc = "Party " . $data['partyName'] . " has been added to the election " . $data['electionId'];
+                            $logDesc = "Party " . $data['partyName'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                             $data1 = [
@@ -393,7 +404,7 @@ class Elections extends Controller
                                         $data1['userId'] = $user->UserId;
                                         if ($id = $this->candidateModel->insertRegCandidate($data1)) {
 
-                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election " . $data1['electionId'];
+                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election ";
                                             $this->logModel->saveLog($logDesc, $data1['electionId'], $_SESSION["UserId"]);
 
                                             $data2 = [
@@ -411,7 +422,7 @@ class Elections extends Controller
                                     } else {
                                         if ($id = $this->candidateModel->insertUnregCandidate($data1)) {
 
-                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election " . $data1['electionId'];
+                                            $logDesc = "Candidate " . $data1['candidateName'] . " has been added to the election ";
                                             $this->logModel->saveLog($logDesc, $data1['electionId'], $_SESSION["UserId"]);
 
                                             $data2 = [
@@ -471,7 +482,7 @@ class Elections extends Controller
 
         if ($this->electionModel->updateElection($data)) {
 
-            $logDesc = "Election " . $data['title'] . " has been updated";
+            $logDesc = "Election has been updated";
             $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
 
             redirect('Pages/viewMyElection/' . $data['id']);
@@ -504,7 +515,7 @@ class Elections extends Controller
                         $data['userId'] = $user->UserId;
                         if ($id = $this->candidateModel->insertRegCandidatePartyNull($data)) {
 
-                            $logDesc = "Candidate " . $data['candidateName'] . " has been added to the election " . $data['electionId'];
+                            $logDesc = "Candidate " . $data['candidateName'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                             $data2 = [
@@ -519,7 +530,7 @@ class Elections extends Controller
                     } else {
                         if ($id = $this->candidateModel->insertUnregCandidatePartyNull($data)) {
 
-                            $logDesc = "Candidate " . $data['candidateName'] . " has been added to the election " . $data['electionId'];
+                            $logDesc = "Candidate " . $data['candidateName'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                             $data2 = [
@@ -538,7 +549,7 @@ class Elections extends Controller
                         $data['userId'] = $user->UserId;
                         if ($id = $this->candidateModel->insertRegCandidate($data)) {
 
-                            $logDesc = "Candidate " . $data['candidateName'] . " has been added to the election " . $data['electionId'];
+                            $logDesc = "Candidate " . $data['candidateName'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                             $data2 = [
@@ -553,7 +564,7 @@ class Elections extends Controller
                     } else {
                         if ($id = $this->candidateModel->insertUnregCandidate($data)) {
 
-                            $logDesc = "Candidate " . $data['candidateName'] . " has been added to the election " . $data['electionId'];
+                            $logDesc = "Candidate " . $data['candidateName'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                             $data2 = [
@@ -580,9 +591,11 @@ class Elections extends Controller
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $id = trim($_POST['id']);
                 $eid = trim($_POST['eid']);
+                $electionRow = $this->electionModel->findElectionById($eid);
+                $candidateRow = $this->candidateModel->getCandidateByCandidateId($id);
                 if ($this->candidateModel->deleteCandidate($id)) {
 
-                    $logDesc = "Candidate " . $id . " has been removed from the election " . $eid;
+                    $logDesc = "Candidate " . $candidateRow->candidateName . " has been removed from the election ";
                     $this->logModel->saveLog($logDesc, $eid, $_SESSION["UserId"]);
 
                     redirect('Pages/electionCandidates/' . $eid);
@@ -604,14 +617,14 @@ class Elections extends Controller
                 "cemail" => trim($_POST['cEmail']),
                 "cparty" => trim($_POST['cParty']),
             ];
-
+            $electionRow = $this->electionModel->findElectionById($data['id']);
             if ($this->userModel->findUserByEmail($data['cemail'])) {
                 $user = $this->userModel->getUserByEmail($data['cemail']);
                 $data['cuser'] = $user->UserId;
 
                 if ($this->candidateModel->updateCandidateWithUser($data)) {
 
-                    $logDesc = "Candidate " . $data['cid'] . " has been updated in the election " . $data['id'];
+                    $logDesc = "Candidate " . $data['cname'] . " has been updated in the election ";
                     $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
 
                     redirect('Pages/electionCandidates/' . $data['id']);
@@ -621,7 +634,7 @@ class Elections extends Controller
             } else {
                 if ($this->candidateModel->updateCandidate($data)) {
 
-                    $logDesc = "Candidate " . $data['cid'] . " has been updated in the election " . $data['id'];
+                    $logDesc = "Candidate " . $data['cname'] . " has been updated in the election ";
                     $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
 
                     redirect('Pages/electionCandidates/' . $data['id']);
@@ -657,7 +670,7 @@ class Elections extends Controller
                         'electionId' => $dataset['electionId'],
                         'noOfOptions' => $dataset['noOfOptions'],
                     ];
-
+                    $electionRow = $this->electionModel->findElectionById($data['id']);
                     $positionList = $this->positionModel->getElectionPositionByElectionId($data['id']);
 
                     foreach ($positionList as $position) {
@@ -670,7 +683,7 @@ class Elections extends Controller
 
                     if ($this->positionModel->insertIntoElectionPositions($data)) {
 
-                        $logDesc = "Position " . $data['name'] . " has been added to the election " . $data['id'];
+                        $logDesc = "Position " . $data['name'] . " has been added to the election ";
                         $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
 
                         echo json_encode($data);
@@ -700,7 +713,7 @@ class Elections extends Controller
                     'desc' => $dataset['pDesc'],
                     'noOfOptions' => $dataset['pNoOfOptions']
                 ];
-
+                $electionRow = $this->electionModel->findElectionById($data['eid']);
                 $positionList = $this->positionModel->getElectionPositionByElectionId($data['eid']);
                 foreach ($positionList as $position) {
                     if ($position->positionName == $data['name']) {
@@ -711,7 +724,7 @@ class Elections extends Controller
                 }
                 if ($this->positionModel->updatePosition($data)) {
 
-                    $logDesc = "Position " . $data['name'] . " has been updated in the election " . $data['eid'];
+                    $logDesc = "Position " . $data['name'] . " has been updated in the election ";
                     $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
 
                     echo json_encode($data);
@@ -738,10 +751,11 @@ class Elections extends Controller
                     'id' => trim($_POST['id']),
                     'eid' => trim($_POST['eid'])
                 ];
-
+                $electionRow = $this->electionModel->findElectionById($data['eid']);
+                $positionRow = $this->positionModel->getElectionPositionById($data['id']);
                 if ($this->positionModel->deletePosition($data['id'])) {
 
-                    $logDesc = "Position " . $data['id'] . " has been deleted from the election " . $data['eid'];
+                    $logDesc = "Position " . $positionRow->positionName . " has been deleted from the election ";
                     $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
 
                     redirect('Pages/electionCandidates/' . $data['eid']);
@@ -766,7 +780,7 @@ class Elections extends Controller
                     'email' => $dataset['email'],
                     'value' => $dataset['value'],
                 ];
-
+                $electionRow = $this->electionModel->findElectionById($data['electionId']);
                 if ($this->voterModel->findDuplicateVoters($data['email'], $data['electionId'])) {
                     $data['msg'] = 'A voter with this email already registered for this election';
                     echo json_encode($data);
@@ -778,7 +792,7 @@ class Elections extends Controller
 
                         if ($this->voterModel->insertIntoRegVoters($data)) {
 
-                            $logDesc = "Voter " . $data['name'] . " has been added to the election " . $data['electionId'];
+                            $logDesc = "Voter " . $data['name'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
                             echo json_encode($data);
                             return;
@@ -790,7 +804,7 @@ class Elections extends Controller
                     } else {
                         if ($this->voterModel->insertIntoUnregVoters($data)) {
 
-                            $logDesc = "Voter " . $data['name'] . " has been added to the election " . $data['electionId'];
+                            $logDesc = "Voter " . $data['name'] . " has been added to the election ";
                             $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                             echo json_encode($data);
@@ -821,12 +835,12 @@ class Elections extends Controller
                     'eid' => trim($_POST['eid']),
                     'id' => trim($_POST['voterId'])
                 ];
-
+                $electionRow = $this->electionModel->findElectionById($data['eid']);
                 $voterName = $this->voterModel->getVoterByVoterId($data['id'])->Name;
 
                 if ($this->voterModel->deleteVoterByVoterId($data['id'])) {
 
-                    $logDesc = "Voter " . $voterName . " has been deleted from the election " . $data['eid'];
+                    $logDesc = "Voter " . $voterName . " has been deleted from the election ";
                     $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
 
                     redirect('Pages/electionVoters/' . $data['eid']);
@@ -849,7 +863,7 @@ class Elections extends Controller
             'value' => $dataset['value'],
             'oldEmail' => $dataset['oldEmail']
         ];
-
+        $electionRow = $this->electionModel->findElectionById($data['eid']);
         if ($data['email'] != $data['oldEmail'] && $this->voterModel->findDuplicateVoters($data['email'], $data['eid'])) {
             $data['msg'] = "A voter with this email is already registered for this election";
             echo json_encode($data);
@@ -862,7 +876,7 @@ class Elections extends Controller
 
                 if ($this->voterModel->editVoterWithUser($data)) {
 
-                    $logDesc = "Voter " . $data['name'] . " has been edited in the election " . $data['eid'];
+                    $logDesc = "Voter " . $data['name'] . " has been edited in the election ";
                     $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
 
                     echo json_encode($data);
@@ -875,7 +889,7 @@ class Elections extends Controller
             } else {
                 if ($this->voterModel->editVoterWithoutUser($data)) {
 
-                    $logDesc = "Voter " . $data['name'] . " has been edited in the election " . $data['eid'];
+                    $logDesc = "Voter " . $data['name'] . " has been edited in the election ";
                     $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
 
                     echo json_encode($data);
@@ -908,7 +922,7 @@ class Elections extends Controller
                 'supName' => $dataset['supervisorName'],
                 'supEmail' => $dataset['supervisorEmail']
             ];
-
+            $electionRow = $this->electionModel->findElectionById($data['electionId']);
             if ($this->partyModel->findDuplicateParty($data['electionId'], $data['partyName'])) {
                 $data['msg'] = 'A party with the same name already exists. Try a different name.';
                 echo json_encode($data);
@@ -920,7 +934,7 @@ class Elections extends Controller
 
                     if ($this->partyModel->insertIntoParty2($data)) {
 
-                        $logDesc = "Party " . $data['partyName'] . " has been added to the election " . $data['electionId'];
+                        $logDesc = "Party " . $data['partyName'] . " has been added to the election ";
                         $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                         echo json_encode($data);
@@ -933,7 +947,7 @@ class Elections extends Controller
                 } else {
                     if ($this->partyModel->insertIntoParty1($data)) {
 
-                        $logDesc = "Party " . $data['partyName'] . " has been added to the election " . $data['electionId'];
+                        $logDesc = "Party " . $data['partyName'] . " has been added to the election ";
                         $this->logModel->saveLog($logDesc, $data['electionId'], $_SESSION["UserId"]);
 
                         echo json_encode($data);
@@ -966,7 +980,7 @@ class Elections extends Controller
                 'supEmail' => $dataset['supervisorEmail'],
                 'oldPartyName' => $dataset['oldPartyName']
             ];
-
+            $electionRow = $this->electionModel->findElectionById($data['eid']);
             if ($data['partyName'] != $data['oldPartyName'] && $this->partyModel->findDuplicateParty($data['eid'], $data['partyName'])) {
                 $data['msg'] = 'A party with the same name already exists. Try a different name.';
                 echo json_encode($data);
@@ -978,7 +992,7 @@ class Elections extends Controller
 
                     if ($this->partyModel->editPartyWithUser($data)) {
 
-                        $logDesc = "Party " . $data['partyName'] . " has been edited in the election " . $data['eid'];
+                        $logDesc = "Party " . $data['partyName'] . " has been edited in the election ";
                         $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
 
                         echo json_encode($data);
@@ -991,7 +1005,7 @@ class Elections extends Controller
                 } else {
                     if ($this->partyModel->editPartyWithoutUser($data)) {
 
-                        $logDesc = "Party " . $data['partyName'] . " has been edited in the election " . $data['eid'];
+                        $logDesc = "Party " . $data['partyName'] . " has been edited in the election ";
                         $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
 
                         echo json_encode($data);
@@ -1018,11 +1032,12 @@ class Elections extends Controller
                 'eid' => trim($_POST['electionId']),
                 'id' => trim($_POST['partyId'])
             ];
+            $electionRow = $this->electionModel->findElectionById($data['eid']);
 
             if ($this->partyModel->deletePartyByPartyId($data['id'])) {
                 $partyName = $this->partyModel->getPartyById($data['id'])->partyName;
 
-                $logDesc = "Party " . $partyName . " has been removed from the election " . $data['eid'];
+                $logDesc = "Party " . $partyName . " has been removed from the election ";
                 $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
 
                 redirect('Pages/electionParties/' . $data['eid']);
@@ -1032,23 +1047,161 @@ class Elections extends Controller
         }
     }
 
-    public function removeElection($eid){
-        if(!$this->isLoggedIn()){
+    public function removeElection($eid)
+    {
+        if (!$this->isLoggedIn()) {
             $this->view('login');
-        }else{
+        } else {
             $election = $this->electionModel->getElectionByElectionId($eid);
-            if($election->Supervisor == $_SESSION['UserId']){
-                if($this->electionModel->deleteElection($eid)){
-                    $logDesc = "Election " . $election->ElectionName . " has been removed";
+            if ($election->Supervisor == $_SESSION['UserId']) {
+                if ($this->electionModel->deleteElection($eid)) {
+                    $logDesc = "Election " . $election->Title . " has been removed";
                     $this->logModel->saveLog($logDesc, $eid, $_SESSION["UserId"]);
                     redirect('Pages/viewMyElections');
-                }else{
+                } else {
                     die('Something went wrong');
                 }
-
             }
-
         }
     }
-}
 
+    public function objectionSeen($id)
+    {
+        $dataset = json_decode(file_get_contents('php://input'), true);
+        $status = $this->objectionModel->setObjectionSeen($dataset['id']);
+        if ($status == 20) {
+            $data['msg'] = 'success';
+        } else {
+            $data['msg'] = $status;
+        }
+        echo json_encode($data);
+        return;
+    }
+
+    public function removeCanidateFromObjections()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $cid = trim($_POST['cid']);
+            $objections = $this->objectionModel->getObjectionsByCandidateId($cid);
+            foreach ($objections as $objection) {
+                $action = $this->objectionModel->setActionOnObjection($objection->ObjectionID, "Candidate has been removed from the election");
+                if ($action == '1') {
+                    continue;
+                } else {
+                    die($action);
+                }
+            }
+            $candidate = $this->candidateModel->getCandidateByCandidateId($cid);
+            $data = [
+                'id' => $cid,
+                'email' => $candidate->candidateEmail,
+                'name' => $candidate->candidateName,
+                'eid' => $candidate->electionid,
+                'pid' => $candidate->positionId
+            ];
+            $electionRow = $this->electionModel->getElectionByElectionId($data['eid']);
+            if ($this->removedCandidateModel->addRemovedCandidate($data)) {
+                if ($this->candidateModel->deleteCandidate($cid)) {
+                    $logDesc = "Candidate " . $data['name'] . " has been removed from the election due to objections";
+                    $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
+                    $emailData = [
+                        'email' => $candidate->candidateEmail,
+                        'subject' => "Alert from " . $electionRow->ElectionName,
+                        'body' => "You have been removed from the election " . $electionRow->ElectionName . " due to objections. Please contact the election supervisor for more details."
+                    ];
+                    $this->emailModel->sendEmail($emailData);
+                    redirect('Pages/viewObjections/' . $data['eid']);
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                die('Something went wrong');
+            }
+        }
+    }
+
+    public function acceptNomination()
+    {
+        $dataset = json_decode(file_get_contents('php://input'), true);
+        $nomination = $this->nominationModel->getNominationById($dataset['nominationId']);
+        $election = $this->electionModel->getElectionByElectionId($nomination->ElectionId);
+        $user = $this->userModel->getUserByEmail($nomination->email);
+        $data = [
+            'name' => $nomination->firstname . " " . $nomination->lastname,
+            'email' => $nomination->email,
+            'profilePic' => $nomination->profile_picture,
+            'idProof' => $nomination->identity_proof,
+            'desc' => $nomination->candidateDescription,
+            'position' => $nomination->ID,
+            'eid' => $nomination->ElectionId,
+            'party' => $nomination->partyId,
+            'uid' => $user->UserId
+        ];
+
+        if ($this->candidateModel->insertIntoCandidateWithUser($data)) {
+            $emailData = [
+                'email' => $data['email'],
+                'subject' => "Nomination Accepted!",
+                'body' => "Your nomination for the election " . $election->Title . " has been accepted. Please login to the system to see more."
+            ];
+
+            $this->emailModel->sendEmail($emailData);
+
+            $logDesc = "Nomination of " . $data['name'] . " has been accepted";
+            $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
+
+            $logDesc = "Candidate " . $data['name'] . " has been added to the election";
+            $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
+
+            $this->nominationModel->deleteNomination($dataset['nominationId']);
+
+            $data1['msg'] = 'success';
+            $data1['name'] = $data['name'];
+            echo json_encode($data1);
+        }else{
+            $data1['msg'] = 'error';
+            echo json_encode($data1);
+        }
+        return;
+    }
+
+    public function rejectNomination(){
+        $dataset = json_decode(file_get_contents('php://input'), true);
+        $nomination = $this->nominationModel->getNominationById($dataset['nominationId']);
+        $election = $this->electionModel->getElectionByElectionId($nomination->ElectionId);
+        $user = $this->userModel->getUserByEmail($nomination->email);
+        $data = [
+            'name' => $nomination->firstname . " " . $nomination->lastname,
+            'email' => $nomination->email,
+            'profilePic' => $nomination->profile_picture,
+            'idProof' => $nomination->identity_proof,
+            'desc' => $nomination->candidateDescription,
+            'position' => $nomination->ID,
+            'eid' => $nomination->ElectionId,
+            'party' => $nomination->partyId,
+            'uid' => $user->UserId
+        ];
+
+        if ($this->nominationModel->deleteNomination($dataset['nominationId'])) {
+            $emailData = [
+                'email' => $data['email'],
+                'subject' => "Nomination Rejected!",
+                'body' => "Your nomination for the election " . $election->Title . " has been Rejected. Please contact election supervisor for more details."
+            ];
+
+            // $this->emailModel->sendEmail($emailData);
+
+            $logDesc = "Nomination of " . $data['name'] . " has been rejected";
+            $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
+
+            $data1['msg'] = 'success';
+            $data1['name'] = $data['name'];
+            echo json_encode($data1);
+        }else{
+            $data1['msg'] = 'error';
+            echo json_encode($data1);
+        }
+        return;
+    }
+}

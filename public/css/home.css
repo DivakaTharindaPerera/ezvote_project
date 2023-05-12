@@ -57,6 +57,10 @@ a{
     text-decoration: none;
 
 }
+.nav-bar .links a:active, .nav-bar .links a:visited{
+    color: var(--primary) !important;
+    text-decoration: underline;
+}
 
 .nav-end{
     display: flex;
@@ -204,8 +208,8 @@ a{
     display: flex;
     /* background-color: rgb(222, 241, 241); */
     /* border: 3px solid rgb(50, 64, 70); */
-    border-radius: 10rem;
-    margin: 50px;
+    border-radius: 20rem;
+    margin: 2vh;
     /* border: 1px solid black; */
     /* box-shadow: 5px 5px rgb(3, 15, 22); */
         /* transform: scaleX(-1); */
@@ -415,6 +419,8 @@ ul{
 .footer-col ul li a:hover{
 	color: #ffffff;
 	padding-left: 8px;
+    padding-right:8px ;
+    padding-bottom: 8px;
 }
 .footer-col .social-links a{
 	display: inline-block;

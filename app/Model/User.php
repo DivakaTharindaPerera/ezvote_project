@@ -113,4 +113,51 @@ class User{
 
         return true;
     }
+
+    public function updateProfile($data)
+    {
+        $this->db->query('UPDATE user SET Fname = :fname, Lname = :lname, Email = :email,Password= :password WHERE UserId = :id');
+        $this->db->bind(':fname', $data['fname']);
+        $this->db->bind(':lname', $data['lname']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':password', $data['new_password']);
+        $this->db->bind(':id', $data['id']);
+        try{
+            $this->db->execute();
+        }
+        catch (Exception $e){
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+        return true;
+    }
+
+    public function uploadProfileImage($data)
+    {
+        $path = approot."/../public/upload/profile_pictures/";
+
+        $fileName="profile_pic_".time()."_".$data['id'].".".pathinfo($data['profile_pic']['name'],PATHINFO_EXTENSION);
+        $target_file = $path . basename($fileName);
+        move_uploaded_file($data['profile_pic']['tmp_name'], $target_file);
+        $sql = "UPDATE user SET ProfilePicture = :photo WHERE UserId = :id";
+        $fileUrl = "/ezvote/public/upload/profile_pictures/".$fileName;
+        $this->db->query($sql);
+        $this->db->bind(':photo', $fileUrl);
+        $this->db->bind(':id', $data['id']);
+        try{
+            $this->db->execute();
+            $_SESSION['profile_picture'] = $fileUrl;
+        }
+        catch (Exception $e){
+            echo "Something went wrong ".$e->getMessage();
+            return false;
+        }
+    }
+    public function getUserByUserId($id){
+        $this->db->query("SELECT * FROM `user` WHERE UserId =:userID");
+        $this->db->bind(':userID',$id);
+        $results=$this->db->resultSet();
+        return $results;
+    }  
+
 }

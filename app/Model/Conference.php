@@ -25,11 +25,12 @@ class Conference extends Model
 
     public function tableName(): string
     {
-        return 'conference';
+        return 'conferences';
     }
 
     private function createMeeting($data = array())
     {
+
         $post_time = $data['start_date'];
         $start_time = gmdate("Y-m-d\TH:i:s", strtotime($post_time));
 
@@ -71,6 +72,7 @@ class Conference extends Model
             "exp" => time() + 3600 //60 seconds as suggested
 
         );
+
         $getJWTKey = JWT::encode($token, API_SECRET);
         $headers = array(
             "authorization: Bearer " . $getJWTKey,
@@ -81,7 +83,6 @@ class Conference extends Model
         $fieldsArr = json_encode($createMeetingArr);
 //        Remove \ from the $fieldsArr
         $fieldsArr = str_replace("\\", "", $fieldsArr);
-//        print_r($fieldsArr);
 
         $ch = curl_init();
         curl_setopt_array($ch, array(
@@ -97,10 +98,12 @@ class Conference extends Model
         ));
 
         $result = curl_exec($ch);
+
         $err = curl_error($ch);
         curl_close($ch);
         if (!$result)
         {
+
             return $err;
         }
         return json_decode($result);
@@ -115,7 +118,7 @@ class Conference extends Model
         $conferenceLink=$msg->join_url;
         $conferencePassword=openssl_encrypt($msg->password,ENCRYPTION_ALGORITHM,ENCRYPTION_KEY,0,ENCRYPTION_IV);
         $hostID=$msg->host_id;
-        $sql= "INSERT INTO conferences (ConferenceID,ConferenceName, ElectionID, SupervisorID, ConferenceLink, ConferencePassword,HostID,DateAndTime) VALUES (:ConferenceID,:ConferenceName, :ElectionID, :SupervisorID, :ConferenceLink, :ConferencePassword,:HostID,:DateAndTime)";
+        $sql= "INSERT INTO conferences (ConferenceID,ConferenceName, ElectionID, SupervisorID, ConferenceLink, ConferencePassword,HostID,DateAndTime,ParticipantsC,ParticipantsV) VALUES (:ConferenceID,:ConferenceName, :ElectionID, :SupervisorID, :ConferenceLink, :ConferencePassword,:HostID,:DateAndTime,:ParticipantsC,:ParticipantsV)";
         $this->db->query($sql);
         $this->db->bind(':ConferenceID',$data['conferenceID']);
         $this->db->bind(':ConferenceName',$conferenceTopic);
@@ -125,6 +128,8 @@ class Conference extends Model
         $this->db->bind(':ConferencePassword',$conferencePassword);
         $this->db->bind(':HostID',$hostID);
         $this->db->bind(':DateAndTime',$data['start_date']);
+        $this->db->bind(':ParticipantsC',$data['candidates']);
+        $this->db->bind(':ParticipantsV',$data['voters']);
         try{
             $this->db->execute();
             return true;
@@ -135,12 +140,13 @@ class Conference extends Model
         }
     }
 
-    public function AddCandidateToConference(string $conferenceID,array $candidates): bool
+    public function AddCandidateToConference(string $conferenceID,int $electionID,array $candidates): bool
     {
         if (!empty($candidates)){
             foreach ($candidates as $candidate){
-                $this->db->query("INSERT INTO conference_candidate (ConferenceID, CandidateID) VALUES (:ConferenceID, :CandidateID)");
+                $this->db->query("INSERT INTO conference_candidate (ConferenceID, CandidateID,ElectionID) VALUES (:ConferenceID, :ElectionID :CandidateID)");
                 $this->db->bind(':ConferenceID',$conferenceID);
+                $this->db->bind(':ElectionID',$electionID);
                 $this->db->bind(':CandidateID',$candidate);
                 try {
                     $this->db->execute();
@@ -161,4 +167,61 @@ class Conference extends Model
         $this->db->query("SELECT * FROM Conferences WHERE SupervisorID = $userID");
         return $this->db->resultSet();
     }
+
+    public function getConferencesByUserIDAndElectionID($userID,$electionID)
+    {
+        $this->db->query("SELECT * FROM Conferences WHERE SupervisorID = $userID AND ElectionID = $electionID");
+        return $this->db->resultSet();
+    }
+
+    public function getCandidatesByConferenceId($conferenceID)
+    {
+        $this->db->query("SELECT candidateID FROM conference_candidate WHERE conferenceID = :ConferenceID");
+        $this->db->bind(':ConferenceID',$conferenceID);
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
+
+    public function getConferencesByCandidateId($candidateid)
+    {
+        $this->db->query("SELECT * FROM conference INNER JOIN conference_candidate cc ON cc.conferenceID=conference.conferenceID WHERE cc.candidateID= :CandidateID");
+        $this->db->bind(':CandidateID',$candidateid);
+        $this->db->execute();
+//        echo '<pre>';
+//        var_dump('hello');
+//        exit();
+        return $this->db->resultSet();
+    }
+
+    public function getConferencesByVoterIDAndElectionID($voterID,$electionID)
+    {
+        $this->db->query("SELECT * FROM conference_voter WHERE voterID= :VoterID AND electionID= :ElectionID");
+        $this->db->bind(':VoterID',$voterID);
+        $this->db->bind(':ElectionID',$electionID);
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
+
+    public function getConferenceByConferenceID($confID)
+    {
+        $this->db->query("SELECT * FROM conferences WHERE conferenceID= :ConferenceID");
+        $this->db->bind(':ConferenceID',$confID);
+        $this->db->execute();
+        return $this->db->single();
+    }
+
+    public function getNotSupervisingConferences($userID)
+    {
+        $this->db->query("SELECT * FROM Conferences WHERE SupervisorID != $userID");
+        return $this->db->resultSet();
+    }
+
+    public function getConferencesByElectionID($electionID)
+    {
+        $this->db->query("SELECT * FROM conferences WHERE electionID= :ElectionID");
+        $this->db->bind(':ElectionID',$electionID);
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
+
 }

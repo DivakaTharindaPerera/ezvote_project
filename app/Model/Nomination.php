@@ -17,36 +17,19 @@ class Nomination extends Model
     protected $Description='';
 
     public function AddNomination($data){
-        // $this->db->query('INSERT INTO nomination (firstname,lastname,election_name,position,party_name,profile_picture,identity_proof,candidateDescription,msg) VALUES (:firstname,:lastname,:election_name,:position,:party_name,:image_url,:file_urls,:candidateDescription,:msg)');
-        // var_dump($data);
-        // die();//die();//die();//die();//die();//die();//die();//die();//die();//die(
-        $this->db->query('INSERT INTO nomination1 (firstname,lastname,profile_picture,identity_proof,candidateDescription,msg,ElectionID,ID,partyId) VALUES (:firstname,:lastname,:image_url,:file_urls,:candidateDescription,:msg,:ElectionID,:ID,:partyId)');
+        $this->db->query('INSERT INTO nomination (firstname,lastname,profile_picture,identity_proof,candidateDescription,msg,ID,partyId) VALUES (:firstname,:lastname,:image_url,:file_urls,:candidateDescription,:msg,:ID,:partyId)');
         //bind values
-        // $this->db->bind(':nominationID',$data['nominationID']);
+
         $this->db->bind(':firstname',$data['firstname']);
         $this->db->bind(':lastname',$data['lastname']);
-        // $this->db->bind(':election_name',$data['election_name']);
-        // $this->db->bind(':position',$data['position']);
-        // $this->db->bind(':party_names',$data['party_names']);
-        // $this->db->bind(':party_name',$data['party_name']);
-        // $this->db->bind(':party_description',$data['party_description']);
         $this->db->bind(':image_url',$data['profile_picture']);
         $this->db->bind(':file_urls',$data['identity_proof']);
         $this->db->bind(':candidateDescription',$data['candidateDescription']);
         $this->db->bind(':msg',$data['msg']);
-        $this->db->bind(':ElectionID',$data['ElectionID']);
         $this->db->bind(':ID',$data['ID']);
         $this->db->bind(':partyId',$data['PartyId']);
         //execute
 
-        // try {
-        //     $this->db->execute();
-        //     return true;
-
-        // } catch (\Throwable $th) {
-        //     echo $th;
-        //     return false;
-        // }
         if($this->db->execute()){
             return true;
         }else{
@@ -83,22 +66,6 @@ class Nomination extends Model
     {
         $this->firstname = $firstname;
     }
-/***************************************************************************************/
-     /**
-     * @return string
-     */
-    // public function getElectionName(): string
-    // {
-    //     return $this->election_name;
-    // }
-
-    /**
-     * @param string $election_name
-     */
-    // public function setElectionName(string $election_name): void
-    // {
-    //     $this->election_name = $election_name;
-    // }
 
     public function getElectionID()
     {
@@ -115,8 +82,7 @@ class Nomination extends Model
 
 
     public function getElect_Id($electName){
-        // var_dump($electName);
-        // print_r("SELECT ElectionId FROM `election` WHERE `Title`=$electName");
+
         $this->db->query("SELECT ElectionId FROM `election` WHERE `Title`='$electName'");
         $elect_id=$this->db->resultSet();
 
@@ -132,41 +98,20 @@ class Nomination extends Model
 
 
     public function getParty_Id($partyName){
-        // var_dump($partyName);
-        // print_r("SELECT partyId FROM `electionparty` WHERE `partyName`='$partyName'");
+
         $this->db->query("SELECT partyId FROM `electionparty` WHERE `partyName`='$partyName'");
         $party_id=$this->db->resultSet();
-        var_dump($party_id);
 
         return $party_id[0]->partyId;
     }
 
     public function getPosition_Id($positionName){
-        // var_dump($positionName);
-        // print_r("SELECT partyId FROM `electionparty` WHERE `partyName`='$partyName'");
+
         $this->db->query("SELECT ID FROM `electionposition` WHERE `positionName`='$positionName'");
         $position_id=$this->db->resultSet();
-        // var_dump($position_id);
     
         return $position_id[0]->ID;
     }
-/***************************************************************************************/
-
-    /**
-     * @return string
-     */
-    // public function getPosition(): string
-    // {
-    //     return $this->position;
-    // }
-
-    // /**
-    //  * @param string $position
-    //  */
-    // public function setPosition(string $position): void
-    // {
-    //     $this->position = $position;
-    // }
 
     public function getID()
     {
@@ -180,22 +125,6 @@ class Nomination extends Model
     {
         $this->ID = $ID;
     }
-/***************************************************************************************/
-    /**
-     * @return mixed
-     */
-    // public function getPartyNames()
-    // {
-    //     return $this->party_names;
-    // }
-
-    // /**
-    //  * @param mixed $existing_party
-    //  */
-    // public function setPartyNames($party_names): void
-    // {
-    //     $this->party_names = $party_names;
-    // }
 
     public function getpartyId()
     {
@@ -278,33 +207,13 @@ class Nomination extends Model
     }
 
 
-    /***************************************************************************************/
-    // protected $Action;
-    // protected $CandidateID;
-    // protected $ElectionID;
-    // protected $VoterID;
-
-
     public function Attributes(): array
     {
         return [
-            // 'ObjectionID',
-            // 'Subject',
-            // 'Description',
-            // 'Respond',
-            // 'Action',
-            // 'CandidateID',
-            // 'ElectionID',
-            // 'VoterID'
 
             'nominationID',
             'firstname',
             'lastname',
-            // 'election_name',
-            // 'position',
-            // 'party_names',
-            // 'party_name',
-            // 'party_description',
             'candidateDescription',
             'msg'
         ];
@@ -314,48 +223,6 @@ class Nomination extends Model
     {
         return 'nomination';
     }
-
-
-    // public function getNominationDetails() {
-    //     $query = "SELECT * FROM nomination";
-    //     $result = $this->db->query($query);
-
-    //     return $result->fetchAll();
-    // }
-
-    // public function getNominationDetails($id) {
-    //     $query = "SELECT * FROM nomination WHERE nominationID = :id LIMIT 1";
-    //     $stmt = $this->db->prepare($query);
-    //     $stmt->execute(array(':id' => $id));
-    //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    //     return $row;
-    // }
-
-    public function updateCandidateProfile($data) {
-        // public function updateSubscriptionplan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
-            $this->db->query('UPDATE candidate SET candidateName=:candidateName,candidateEmail=:candidateEmail,description=:description, vision=:vision WHERE candidateId = :candidateId');
-    
-            // $this->db->bind(':nominationID',$data['nominationID']);
-            $this->db->bind(':candidateName',$candidateName);
-            $this->db->bind(':candidateEmail',$candidateEmail);
-            // $this->db->bind(':election_name',$election_name);
-            // $this->db->bind(':position',$position);
-        // $this->db->bind(':party_names',$data['party_names']);
-            // $this->db->bind(':party_name',$party_name);
-        // $this->db->bind(':party_description',$data['party_description']);
-            // $this->db->bind(':image_url',$profile_picture);
-            // $this->db->bind(':file_urls',$data['identity_proof']);
-            $this->db->bind(':description',$description);
-            $this->db->bind(':vision',$vision);
-            // $this->db->bind(':nominationID',$nominationID);
-
-    
-            if($this->db->execute()){
-                return true;
-            }else{
-                return false;
-            }
-        }
 
         public function getCandidateId($id)
         {
@@ -370,22 +237,6 @@ class Nomination extends Model
             return $obj;
         }
 
-
-        // public function getById($candidateId)
-        // {
-        //     $this->$db = Database::getInstance();
-        //     $this->db->query('SELECT candidateName,Title,partyName,positionName,description,vision
-        //             FROM candidate
-        //             JOIN election ON candidate.electionid = election.ElectionId
-        //             JOIN electionparty ON candidate.partyId = elctionparty.partyId
-        //             JOIN electionposition ON candidate.positionId = electionposition.ID
-        //             WHERE candidate.candidateId = :candidateId');
-        //     $stmt = $this->$db->prepare($this->db->query);
-        //     $stmt->execute([':candidateId' => $candidateId]);
-        //     $candidateData = $stmt->fetch(PDO::FETCH_ASSOC);
-        //     return $candidateData;
-        // }
-
         public function getObjection($id)
         {
             // var_dump($id);
@@ -397,6 +248,22 @@ class Nomination extends Model
             // $this->db->execute();
             $obj=$this->db->resultSet();
             return $obj;
+        }
+
+        public function findObjectionBycandidateIdAndElectionId($cid, $eid)
+        {
+            $this->db->query(
+                "SELECT * FROM objection
+                WHERE CandidateID = :1 AND ElectionID = :2
+                "
+            );
+            $this->db->bind(':1', $cid);
+            $this->db->bind(':2', $eid);
+            try {
+                return $this->db->resultSet();
+            } catch (Exception $e) {
+                echo "Something went wrong :" . $e->getMessage();
+            }
         }
 
     public function respondToObjection($data){
@@ -440,5 +307,26 @@ class Nomination extends Model
     {
         $this->ObjectionID = $ObjectionID;
     }
+    
+    public function getNominationsByElectionId($eid){
+        $this->db->query("SELECT * FROM nomination WHERE ElectionId=$eid");
+        $nominations=$this->db->resultSet();
+        return $nominations;
     }
+
+    public function getNominationById($id){
+        $this->db->query("SELECT * FROM nomination WHERE nominationID=$id");
+        return $this->db->single();
+    }
+
+    public function deleteNomination($id){
+        $this->db->query("DELETE FROM `nomination` WHERE `nominationID`=$id");
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+}
     
