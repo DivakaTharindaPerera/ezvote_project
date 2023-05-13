@@ -15,6 +15,8 @@ class Candidates extends Controller
     private $userModel;
     private $voterModel;
     private $mailModel;
+    private $conferenceModel;
+    
 
     public function __construct()
     {

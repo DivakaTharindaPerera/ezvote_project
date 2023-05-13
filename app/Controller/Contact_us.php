@@ -1,6 +1,7 @@
 <?php
 class Contact_us extends Controller
 {
+    private $contactModel;
 
     public function __construct()
     {
