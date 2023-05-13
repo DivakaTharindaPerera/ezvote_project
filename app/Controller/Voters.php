@@ -523,7 +523,7 @@ public function party_apply()
         } else {
             $parties = $this->partyModel->getElectionParties();
 
-            $this->view('Candidate/applyParty', ['names' => $names,'parties' => $parties,'data'=>$data]);
+            $this->view('Candidate/applyParty', ['parties' => $parties,'data'=>$data]);
 
         }
     } else {
