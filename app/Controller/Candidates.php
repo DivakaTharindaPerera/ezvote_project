@@ -16,13 +16,13 @@ class Candidates extends Controller
     private $voterModel;
     private $mailModel;
     private $conferenceModel;
-    
+
 
     public function __construct()
     {
         $this->nominateModel = $this->model('Nomination');
         $this->objModel = $this->model('Objection');
-        $this->discussionModel = $this->model('discussion');
+        $this->discussionModel = $this->model('Discussion');
         $this->candidateModel = $this->model('Candidate');
         $this->electModel = $this->model('Election');
         $this->positionModel = $this->model('electionPositions');

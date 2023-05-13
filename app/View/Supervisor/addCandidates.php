@@ -16,12 +16,12 @@
                     <input type="text" id="partyName" placeholder="Party name...." class="border-1" style="border-radius: 20px;"><span id="partyNameError" class="text-danger"></span>
                 </div>
 
-                <div id="partySup" class=" p-1 text-center border-radius-2 shadow">
+                <div id="partySup" class=" p-1 text-center border-radius-2">
                     <div class="mb-1">
                         <label for="partySup"><b>Party Supervisor</b></label><br>
                     </div>
                     <div class="mb-1">
-                        <input type="email" id="partySupEmail" placeholder="Email...." class="border-1" style="border-radius: 20px;"> <span id="supEmailError" class="text-danger"></span><br>
+                        <input type="email" id="partySupEmail" placeholder="Email...." class="border-1" style="border-radius: 20px; background-color: white;"> <span id="supEmailError" class="text-danger"></span><br>
                     </div>
                     <div class="mb-1">
                         <input type="text" id="partySupName" placeholder="Name...." class="border-1" style="border-radius: 20px;"> <span id="supNameError" class="text-danger"></span><br>
@@ -54,7 +54,6 @@
 
 
             <div id="addCandidate" class="addCandidate mx-1 my-1">
-            2
 
                 <label for="cPosition" class="my-1">Election Position: </label>
                 <select name="" id="positionListCandidate" class="border-1  text-right border-radius-2">
