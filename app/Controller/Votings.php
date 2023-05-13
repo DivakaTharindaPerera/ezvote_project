@@ -10,6 +10,7 @@ class Votings extends Controller
     private $partyModel;
     private $encryptModel;
     private $voteModel;
+    private $userModel;
 
     public function __construct()
     {

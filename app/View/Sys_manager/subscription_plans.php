@@ -29,15 +29,15 @@ window.onload = function(){
 
 <div class="w-100">
     <div class="d-flex flex-column">
-    <div class="d-flex justify-content-evenly ">
-        <div class="justify-content-center border border-primary my-3 mr-1 min-w-50">
+    <div class="d-flex ml-5">
+        <div class="justify-content-center align-items-center border border-primary my-3 mr-1 min-w-60 ml-3">
         <input type="text" id="searchInput" onchange="myFunction(this.value)" placeholder="Search Plan......" class="w-100 h-100">
         </div>
-        <div class="my-3 d-flex mr-5">
+        <div class="my-3 d-flex mr-1 ml-1">
         <a href="#">
-            <div class="btn btn-primary">SEARCH</div></a>
-            <div class="d-flex text-center align-items-center text-md ml-3">FILTER
-            </div>
+            <div class="btn btn-primary mr-1 ml-2">SEARCH</div></a>
+            <!-- <div class="d-flex text-center align-items-center text-md ml-3">FILTER
+            </div> -->
         </div>
     </div>
     </div>

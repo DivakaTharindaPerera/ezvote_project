@@ -7,6 +7,7 @@
     require 'PHPMailer/src/Exception.php';
     require 'PHPMailer/src/PHPMailer.php';
     require 'PHPMailer/src/SMTP.php';
+ 
     class Email{
         private $mail;
         public function __construct(){
@@ -20,7 +21,7 @@
             $this->mail->Port = 465;
             $this->mail->SMTPKeepAlive = true;
 
-            // $this->mail->SMTPDebug = 2;
+    
 
         }
         public function sendEmail($data){

@@ -76,8 +76,16 @@ class User{
 
 
     public function pricingPlan(){
-        $this->db->query('SELECT DISTINCT(PlanName), Price FROM subscription_plan WHERE plan_status = :status');
+        $this->db->query('SELECT  DISTINCT(PlanName), PlanID, Price FROM subscription_plan WHERE plan_status = :status');
         $this->db->bind(':status',1);
+
+        return $this->db->resultSet();
+    }
+
+    public function enabledplanbyID($plan){
+        $this->db->query('SELECT Price FROM subscription_plan WHERE plan_status = :status AND PlanID = :PlanID');
+        $this->db->bind(':status',1);
+        $this->db->bind(':PlanID',$plan);
 
         return $this->db->resultSet();
     }

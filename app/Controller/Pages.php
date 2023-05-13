@@ -442,7 +442,14 @@ class Pages extends Controller
 
     public function subscriptionPlans()
     {
-        $this->view('Supervisor/subscriptionPlans');
+        if (!$this->isLoggedIn()) {
+            redirect('View/login');
+        } else {
+            $data = [
+                'plans' => $this->planModel->getSubscriptionPlans()
+            ];
+            $this->view('Supervisor/subscriptionPlans',$data);
+        }
     }
 
     public function electionCandidates($id)
@@ -620,10 +627,12 @@ class Pages extends Controller
     }
 
     public function payment(){
+        $plan = $_GET['plan_id'];
         if (!isset($_SESSION["UserId"])) {
             redirect('View/login');
         }else{
-            $this->view('userPayment');
+            $data = $this->postModel->enabledplanbyID($plan);
+            $this->view('userPayment',$data);
         }
     }
 

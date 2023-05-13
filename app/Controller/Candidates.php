@@ -3,10 +3,25 @@
 class Candidates extends Controller
 {
 
+    private $nominateModel;
+    private $objModel;
+    private $discussionModel;
+    private $candidateModel;
+    private $electModel;
+    private $positionModel;
+
+    private $partyModel;
+    private $partyOwnerRequestModel;
+    private $userModel;
+    private $voterModel;
+    private $mailModel;
+    private $conferenceModel;
+    
+
     public function __construct()
     {
         $this->nominateModel = $this->model('Nomination');
-        $this->objectModel = $this->model('Objection');
+        $this->objModel = $this->model('Objection');
         $this->discussionModel = $this->model('discussion');
         $this->candidateModel = $this->model('Candidate');
         $this->electModel = $this->model('Election');
@@ -21,8 +36,6 @@ class Candidates extends Controller
 
   
     }
-
-
 
     // public function objections(){
     //     $this->view('Candidate/objections');

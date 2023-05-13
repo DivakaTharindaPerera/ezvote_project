@@ -46,7 +46,7 @@
                    </a>
                </li>
                <li>
-                   <a id="sale" href="<?php echo urlroot; ?>/subscription_plan/sales_subscription">
+                   <a id="sale" href="<?php echo urlroot; ?>/subscription_plan/view_sales_subscription">
                        <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
                        <span class="item">Subscription Sales</span>
                    </a>

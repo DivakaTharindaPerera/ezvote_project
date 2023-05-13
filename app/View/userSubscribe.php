@@ -3,26 +3,31 @@
 <?php require approot.'/View/inc/sidebar-new.php'; ?>
 
 <script>
-
-window.onload = function(){
-    var element = document.getElementById("home");
-    element.classList.remove("active");
-
-    var element = document.getElementById("pricing");
-    element.classList.add("active");
-}
-</script>
-<script>
     const p1 = '<span class="my-1">Self Nomination</span><br> <span class="my-1">Unlimited Number of Users</span><br> <span class="my-1">Unlimited Number of Elections</span><br> <span class="my-1">Conference Options</span><br> <span class="my-1">Objection Submission</span><br>';
-    const p2 = '<span class="my-1">Limited Number of Voters</span><br> <span class="my-1">Limited Number of Candidates</span><br> <span class="my-1">Limited Number of Elections</span><br> <span class="my-1">Conference Options</span><br> <span class="my-1">Objection Submission</span><br>';
+    const p2 = '<span class="my-1">Self Nomination</span><br> <span class="my-1">Limited Number of Voters up to 300</span><br> <span class="my-1">Limited Number of Candidates up to 100</span><br> <span class="my-1">Limited Number of Elections up to 10</span><br> <span class="my-1">Objection Submission</span><br>';
+    const p3 = '<span class="my-1">Self Nomination</span><br> <span class="my-1">Limited Number of Voters up to 50</span><br> <span class="my-1">Limited Number of Candidates up to 10</span><br> <span class="my-1">Limited Number of Elections up to 2</span><br> <span class="my-1">Objection Submission</span><br>';
 </script>
 
 <div class="main-container">
 <div class="min-w-85 min-h-85">
 <div class="w-100 h-50 overflow-y overflow-x ">
     <div class="title text-center text-uppercase">Subscribing Plans</div>
+
+    <?php
+
+                    if(isset($_SESSION['plan'])) {
+                        echo '<h3 class="text-center">You are currently subscribed to '.$_SESSION['plan'].' plan</h3>';
+                    } else {
+                        echo '<h3 class="text-center text-danger">You are currently not subscribed to any plan</h3>';
+                    }
+
+                    ?>
+                </div>
+
+                <div class="text-xl text-center">Choose a plan from below that suits you</div>
+            </div>
        
-    <div class="w-100 h-50 d-flex flex-wrap justify-content-center align-items-center overflow-y overflow-x">
+            <div class="w-100 h-50 d-flex flex-wrap justify-content-center align-items-center overflow-y overflow-x">
                     
                         <?php
 
@@ -34,7 +39,7 @@ window.onload = function(){
                         <div class="card">
                         <div class="header-title text-uppercase">'.$data[$x]-> PlanName.'</div>
                         <div class="mt-1 d-flex flex-column">
-                            Price: '."$ ".' '.$data[$x]-> Price .' '; ?>
+                            Price: '."Rs ".' '.$data[$x]-> Price .' '; ?>
 
                            
                                 <div class="dialog-box-outer" id="popup">
@@ -49,7 +54,7 @@ window.onload = function(){
                                                 <button type="button" class="btn btn-primary">CANCEL</button>
                                             </div>
                                             <div class="justify-content-evenly">
-                                                <div><a href="./payment"><button type="button" class="btn btn-primary ml-5">SUBSCRIBE</button></a></div>
+                                                <div><a id="link" href=""><button type="button" class="btn btn-primary ml-5">SUBSCRIBE</button></a></div>
                                                 
                                             </div>
                                         </div>
@@ -61,12 +66,21 @@ window.onload = function(){
                             document.getElementById('pop-up-content').innerHTML=p1;
                        <?php } ?>
 
-                       <?php if ($data[$x]-> PlanName != 'extreme plan') { ?>
+                       <?php if ($data[$x]-> PlanName == 'premium plan') { ?>
                             document.getElementById('pop-up-content').innerHTML=p2;
+                       <?php } ?>
+
+                       <?php if ($data[$x]-> PlanName == 'basic plan') { ?>
+                            document.getElementById('pop-up-content').innerHTML=p3;
+                       <?php } ?>
+
+                       <?php if ($data[$x]-> PlanName != 'extreme plan' AND $data[$x]-> PlanName != 'premium plan' AND $data[$x]-> PlanName != 'basic plan') { ?>
+                            document.getElementById('pop-up-content').innerHTML=p3;
                        <?php } ?>
                        
                        document.getElementById('price').innerHTML='<?php echo '$ '?> <?php echo $data[$x]-> Price ?> <?php echo '/ Month'?> '; 
-                       document.getElementById('plan2').innerHTML='<?php echo $data[$x]-> PlanName ?>'; openPopup();">More Details</button>
+                       document.getElementById('plan2').innerHTML='<?php echo $data[$x]-> PlanName ?>';
+                       document.getElementById('link').href='./payment?plan_id=<?php echo $data[$x]-> PlanID ?>'; openPopup();">More Details</button>
                     </div>
     </div> <?php } ?>       
 

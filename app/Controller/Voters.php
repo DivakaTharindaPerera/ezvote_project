@@ -1,6 +1,22 @@
 <?php
 class Voters extends Controller
 {
+    private $objModel;
+    private $elecModel;
+    private $voterModel;
+    private $objectionModel;
+    private $partyModel;
+    private $candidateModel;
+    private $voteModel;
+    private $encryptModel;
+    private $userModel;
+    private $votingModel;
+    private $conferenceModel;
+    private $nominateModel;
+    private $partyOwnerRequestModel;
+    private $positionModel;
+    private $discussionModel;
+    
     public function __construct()
     {
         $this->objModel = $this->model('Objection');
