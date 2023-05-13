@@ -1,4 +1,4 @@
-<?php //require approot . '/View/inc/header.php'; 
+<?php //require approot . '/View/inc/header.php';
 ?>
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
@@ -9,7 +9,7 @@
 <!--    <div class="top_nav_bar">-->
 <!--        --><?php
                 //            require_once(approot."/View/topnavbar.php");
-                //        
+                //
                 ?>
 <!--    </div>-->
 <div class="main-container">
@@ -23,9 +23,7 @@
             </div>
             <div class="positiondesc mx-1 my-1">
                 <label for="positionDesc">Position Description: </label><br>
-
-                <textarea name="positionDesc" id="positionDesc" class="border-primary border-1 w-100 p-1" cols="30" rows="10"></textarea>
-
+                <textarea name="positionDesc" id="positionDesc" class="border-primary border-1 w-100 px-1 py-1" cols="30" rows="10"></textarea>
             </div>
             <div class="noOfOptions mx-1 my-1" id="position2">
                 <label for="noOfOptions">No of options per position: </label>

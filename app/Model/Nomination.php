@@ -308,5 +308,26 @@ class Nomination extends Model
     {
         $this->ObjectionID = $ObjectionID;
     }
+    
+    public function getNominationsByElectionId($eid){
+        $this->db->query("SELECT * FROM nomination WHERE ElectionId=$eid");
+        $nominations=$this->db->resultSet();
+        return $nominations;
     }
+
+    public function getNominationById($id){
+        $this->db->query("SELECT * FROM nomination WHERE nominationID=$id");
+        return $this->db->single();
+    }
+
+    public function deleteNomination($id){
+        $this->db->query("DELETE FROM `nomination` WHERE `nominationID`=$id");
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+}
     

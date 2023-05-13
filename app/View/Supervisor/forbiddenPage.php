@@ -4,7 +4,6 @@
 //exit();
 require approot . '/View/inc/VoterHeader.php'; ?>
 
-
     <div class="text-6xl text-danger">
         <b>FORBIDDEN ACCESS!</b>
     </div>

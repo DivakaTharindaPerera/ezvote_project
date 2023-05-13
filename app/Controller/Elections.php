@@ -11,6 +11,7 @@ class Elections extends Controller
     private $logModel;
     private $objectionModel;
     private $removedCandidateModel;
+    private $nominationModel;
 
     public function __construct()
     {
@@ -24,6 +25,7 @@ class Elections extends Controller
         $this->logModel = $this->model('log');
         $this->objectionModel = $this->model('Objection');
         $this->removedCandidateModel = $this->model('removedCandidate');
+        $this->nominationModel = $this->model('Nomination');
     }
 
     public function sendEmail()
@@ -241,8 +243,8 @@ class Elections extends Controller
         }
     }
 
-    public function addParty(){
-        
+    public function addParty()
+    {
     }
 
     public function insertParty()
@@ -1045,77 +1047,161 @@ class Elections extends Controller
         }
     }
 
-    public function removeElection($eid){
-        if(!$this->isLoggedIn()){
+    public function removeElection($eid)
+    {
+        if (!$this->isLoggedIn()) {
             $this->view('login');
-        }else{
+        } else {
             $election = $this->electionModel->getElectionByElectionId($eid);
-            if($election->Supervisor == $_SESSION['UserId']){
-                if($this->electionModel->deleteElection($eid)){
+            if ($election->Supervisor == $_SESSION['UserId']) {
+                if ($this->electionModel->deleteElection($eid)) {
                     $logDesc = "Election " . $election->Title . " has been removed";
                     $this->logModel->saveLog($logDesc, $eid, $_SESSION["UserId"]);
                     redirect('Pages/viewMyElections');
-                }else{
+                } else {
                     die('Something went wrong');
                 }
-
             }
-
         }
     }
 
-    public function objectionSeen($id){
+    public function objectionSeen($id)
+    {
         $dataset = json_decode(file_get_contents('php://input'), true);
         $status = $this->objectionModel->setObjectionSeen($dataset['id']);
-        if($status == 20){
+        if ($status == 20) {
             $data['msg'] = 'success';
-        }else{
+        } else {
             $data['msg'] = $status;
         }
         echo json_encode($data);
         return;
     }
 
-    public function removeCanidateFromObjections(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function removeCanidateFromObjections()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $cid = trim($_POST['cid']);
             $objections = $this->objectionModel->getObjectionsByCandidateId($cid);
-            foreach($objections as $objection){
+            foreach ($objections as $objection) {
                 $action = $this->objectionModel->setActionOnObjection($objection->ObjectionID, "Candidate has been removed from the election");
-                if($action == '1'){
+                if ($action == '1') {
                     continue;
-                }else{
+                } else {
                     die($action);
                 }
             }
             $candidate = $this->candidateModel->getCandidateByCandidateId($cid);
-            $data =[
-                'id'=>$cid,
-                'email'=>$candidate->candidateEmail,
-                'name'=>$candidate->candidateName,
-                'eid'=>$candidate->electionid,
-                'pid'=>$candidate->positionId
+            $data = [
+                'id' => $cid,
+                'email' => $candidate->candidateEmail,
+                'name' => $candidate->candidateName,
+                'eid' => $candidate->electionid,
+                'pid' => $candidate->positionId
             ];
             $electionRow = $this->electionModel->getElectionByElectionId($data['eid']);
-            if($this->removedCandidateModel->addRemovedCandidate($data)){
-                if($this->candidateModel->deleteCandidate($cid)){
+            if ($this->removedCandidateModel->addRemovedCandidate($data)) {
+                if ($this->candidateModel->deleteCandidate($cid)) {
                     $logDesc = "Candidate " . $data['name'] . " has been removed from the election due to objections";
                     $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
                     $emailData = [
-                        'email'=>$candidate->candidateEmail,
-                        'subject'=> "Alert from ".$electionRow->ElectionName,
-                        'body'=> "You have been removed from the election ".$electionRow->ElectionName." due to objections. Please contact the election supervisor for more details."
+                        'email' => $candidate->candidateEmail,
+                        'subject' => "Alert from " . $electionRow->ElectionName,
+                        'body' => "You have been removed from the election " . $electionRow->ElectionName . " due to objections. Please contact the election supervisor for more details."
                     ];
                     $this->emailModel->sendEmail($emailData);
                     redirect('Pages/viewObjections/' . $data['eid']);
-                }else{
+                } else {
                     die('Something went wrong');
-                }            
-            }else{
+                }
+            } else {
                 die('Something went wrong');
             }
         }
     }
-}
 
+    public function acceptNomination()
+    {
+        $dataset = json_decode(file_get_contents('php://input'), true);
+        $nomination = $this->nominationModel->getNominationById($dataset['nominationId']);
+        $election = $this->electionModel->getElectionByElectionId($nomination->ElectionId);
+        $user = $this->userModel->getUserByEmail($nomination->email);
+        $data = [
+            'name' => $nomination->firstname . " " . $nomination->lastname,
+            'email' => $nomination->email,
+            'profilePic' => $nomination->profile_picture,
+            'idProof' => $nomination->identity_proof,
+            'desc' => $nomination->candidateDescription,
+            'position' => $nomination->ID,
+            'eid' => $nomination->ElectionId,
+            'party' => $nomination->partyId,
+            'uid' => $user->UserId
+        ];
+
+        if ($this->candidateModel->insertIntoCandidateWithUser($data)) {
+            $emailData = [
+                'email' => $data['email'],
+                'subject' => "Nomination Accepted!",
+                'body' => "Your nomination for the election " . $election->Title . " has been accepted. Please login to the system to see more."
+            ];
+
+            $this->emailModel->sendEmail($emailData);
+
+            $logDesc = "Nomination of " . $data['name'] . " has been accepted";
+            $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
+
+            $logDesc = "Candidate " . $data['name'] . " has been added to the election";
+            $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
+
+            $this->nominationModel->deleteNomination($dataset['nominationId']);
+
+            $data1['msg'] = 'success';
+            $data1['name'] = $data['name'];
+            echo json_encode($data1);
+        }else{
+            $data1['msg'] = 'error';
+            echo json_encode($data1);
+        }
+        return;
+    }
+
+    public function rejectNomination(){
+        $dataset = json_decode(file_get_contents('php://input'), true);
+        $nomination = $this->nominationModel->getNominationById($dataset['nominationId']);
+        $election = $this->electionModel->getElectionByElectionId($nomination->ElectionId);
+        $user = $this->userModel->getUserByEmail($nomination->email);
+        $data = [
+            'name' => $nomination->firstname . " " . $nomination->lastname,
+            'email' => $nomination->email,
+            'profilePic' => $nomination->profile_picture,
+            'idProof' => $nomination->identity_proof,
+            'desc' => $nomination->candidateDescription,
+            'position' => $nomination->ID,
+            'eid' => $nomination->ElectionId,
+            'party' => $nomination->partyId,
+            'uid' => $user->UserId
+        ];
+
+        if ($this->nominationModel->deleteNomination($dataset['nominationId'])) {
+            $emailData = [
+                'email' => $data['email'],
+                'subject' => "Nomination Rejected!",
+                'body' => "Your nomination for the election " . $election->Title . " has been Rejected. Please contact election supervisor for more details."
+            ];
+
+            // $this->emailModel->sendEmail($emailData);
+
+            $logDesc = "Nomination of " . $data['name'] . " has been rejected";
+            $this->logModel->saveLog($logDesc, $data['eid'], $_SESSION["UserId"]);
+
+            $data1['msg'] = 'success';
+            $data1['name'] = $data['name'];
+            echo json_encode($data1);
+        }else{
+            $data1['msg'] = 'error';
+            echo json_encode($data1);
+        }
+        return;
+    }
+}

@@ -49,5 +49,32 @@ class Manager{
         }
     }
 
+    public function getUserEmail(){
+        $this->db->query('SELECT Email from user');
+
+        return $this->db->resultSet();
+
+    }
+
+    public function getVoterEmail(){
+        $this->db->query('SELECT DISTINCT(user.Email) FROM user INNER JOIN voter ON voter.userId = user.UserId');
+
+        return $this->db->resultSet();
+
+    }
+
+    public function getCandidateEmail(){
+        $this->db->query('SELECT DISTINCT(user.Email) FROM user INNER JOIN candidate ON candidate.userId = user.UserId');
+
+        return $this->db->resultSet();
+    }
+
+    public function getSupervisorEmail(){
+        $this->db->query('SELECT DISTINCT(user.Email) FROM user INNER JOIN election ON election.Supervisor = user.UserId');
+
+        return $this->db->resultSet();
+    }
+
+
 
 }

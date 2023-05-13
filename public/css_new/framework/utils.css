@@ -187,8 +187,14 @@
 .h-98{
     height: 98%;
 }
+.h-80{
+    height: 80%;
+}
 .h-75{
     height: 75%;
+}
+.h-70{
+    height: 70%;
 }
 .h-50{
     height: 50%;
@@ -205,8 +211,8 @@
 .max-w-8{
     max-width: 8rem !important;
 }
-.min-w-20vw{
-    min-width: 20vw;
+.min-w-35vw{
+    min-width: 35vw;
 }
 .min-w-100{
     min-width: 100%;
@@ -301,8 +307,8 @@
 .max-w-100{
     max-width: 100%;
 }
-.max-w-20vw{
-    max-width: 20vw;
+.max-w-35vw{
+    max-width: 35vw;
 }
 /*  */
 .min-h-10{
