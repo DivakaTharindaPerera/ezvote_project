@@ -3,7 +3,7 @@
         'name' => 'vendor_name/ezvote',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '054c2ed4756009c7ead79f178b534400b9c1bc12',
+        'reference' => '4fe1c35fd804861980f3abea61fc7c7c07dc92f3',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -76,7 +76,7 @@
         'vendor_name/ezvote' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '054c2ed4756009c7ead79f178b534400b9c1bc12',
+            'reference' => '4fe1c35fd804861980f3abea61fc7c7c07dc92f3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -23,7 +23,8 @@
 
            <div class="profile d-flex flex-column">
                <img src="<?php echo urlroot; ?>/public/img/sys_manager.png" alt="profile_picture">
-               <div class="mt-1 white-title text-center">
+               <!-- <img <?php //echo $_SESSION["profile_image"];?>/> -->
+               <div class="mt-1 white-title text-center text-uppercase">
                <p><?php echo $_SESSION["name"];?></p>
                </div>
                <!-- <p>Blogger</p> -->
@@ -33,13 +34,7 @@
 
            <ul>
                <li>
-                   <a href="<?php echo urlroot; ?>/Pages/home" id="home" class="active">
-                       <span class="icon"><i class="fas fa-home"></i></span>
-                       <span class="item">Home</span>
-                   </a>
-               </li>
-               <li>
-                   <a id="dashboard" href="<?php echo urlroot; ?>/System_manager/dashboard">
+                   <a id="dashboard" href="<?php echo urlroot; ?>/System_manager/dashboard" class="active">
                        <span class="icon"><i class="fas fa-desktop"></i></span>
                        <span class="item">My Dashboard</span>
                    </a>
@@ -71,7 +66,7 @@
                <li>
                    <a  id="pricing" href="<?php echo urlroot; ?>/Subscription_plan/pricing">
                        <span class="icon"><i class="fab fa-cc-amazon-pay"></i></span>
-                       <span class="item">Pricing</span>
+                       <span class="item">Plan Prices</span>
                    </a>
                </li>
                <li>

@@ -74,6 +74,14 @@ class User{
         }
     }
 
+
+    public function pricingPlan(){
+        $this->db->query('SELECT DISTINCT(PlanName), Price FROM subscription_plan WHERE plan_status = :status');
+        $this->db->bind(':status',1);
+
+        return $this->db->resultSet();
+    }
+
     public function userIdAutoFill($id,$email){
         //updating voter table
         $this->db->query("UPDATE Voter SET userId = :id WHERE Email = :email");
@@ -159,5 +167,6 @@ class User{
         $results=$this->db->resultSet();
         return $results;
     }  
+
 
 }

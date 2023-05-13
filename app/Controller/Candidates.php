@@ -115,6 +115,8 @@ class Candidates extends Controller
     public function createPost($id1,$id2,$id3)
     {
 
+        $voter=$this->voterModel->getVoterByUserIdAndElectionId($_SESSION["UserId"],$id2);
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // $data - associative array(contains key-value pairs for the data)
@@ -123,11 +125,13 @@ class Candidates extends Controller
                 'id' => $_POST['id'],
                 'name' => $_POST['name'],
                 'msg' => $_POST['msg'],
-                'elect_id'=>$id1,
-                'candidate_id'=>$id2,
-                'voter_id'=>$id3
+                'elect_id'=>$id2,
+                'candidate_id'=>$id3,
+                'voter_id'=>$voter->voterId,
             ];
+
             //call insertPost method of the $discussionModel object
+
             if ($this->discussionModel->insertPost($data)) {
                 //If the insertion is successful, a JSON-encoded response with the key statusCode set to 200 is echoed. 
                 echo json_encode(['statusCode' => 200]);
@@ -148,7 +152,21 @@ class Candidates extends Controller
         $result = $this->discussionModel->viewDiscussion($id1,$id2);
         $data = $result;
 
+
         //json_encode function is called to convert the $data array into a JSON string
+
+        $voter=$this->voterModel->findVoterByUserIdAndElectionId($_SESSION["UserId"],$id1);
+        $voterDiscussion=$this->discussionModel->viewDiscussionForVoter($id1,$id2,$voter->voterId);
+        $idarray=array();
+        foreach($voterDiscussion as $voterDiscussion){
+            array_push($idarray,$voterDiscussion->id);
+        }
+        $replies=array();
+        foreach($idarray as $id){
+            array_push($replies,$this->discussionModel->getReplies($id));
+        }
+        header('Content-Type: application/json');
+
         echo json_encode($data);
     }
 

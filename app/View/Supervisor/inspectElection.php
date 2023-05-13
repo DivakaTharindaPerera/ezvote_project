@@ -51,15 +51,13 @@
                     $voterCount++;
                 ?>
                     <div class="w-100 mb-1 bg-blue-10 p-1 border-radius-1 d-flex">
-                        <div class="text-xl mr-auto">[<?php echo $voter->voterId; ?>] <?php echo $voter->Name; ?></div>
-                        <div class="text-xl mx-auto"><?php echo $voter->Email; ?></div>
+                        <div class="text-xl mr-auto"><?php echo $voter->Name; ?></div>
+                        <div class="text-xl ml-auto"><?php echo $voter->Email; ?></div>
                         <?php if ($voter->cast == 1) {
                             $votedCount++;
                         ?>
-                            <div class="text-xl ml-auto">VOTED</i></div>
-                        <?php } else { ?>
-                            <div class="text-xl ml-auto" style="color: rgb(255, 51, 51);">NOT YET VOTED</i></div>
-                        <?php } ?>
+                            
+                        <?php }?>
                     </div>
                 <?php } ?>
             </div>
@@ -93,7 +91,7 @@
                     if ($candidate->positionId == $positon->ID) {
                 ?>
                         <div class="w-100 mb-1 bg-blue-10 p-1 border-radius-1 d-flex">
-                            <div class="text-xl">[<?php echo $candidate->candidateId; ?>] <?php echo $candidate->candidateName; ?></div>
+                            <div class="text-xl"><?php echo $candidate->candidateName; ?></div>
                             <div id="<?php echo $candidate->candidateId; ?>" class="text-xl ml-auto">
                                 <?php
                                 foreach ($keys as $key) {
