@@ -95,7 +95,7 @@
     </div>
     <div id="confirmDiv" class="w-100" style="display: none;">
         <div class="">
-            <div class="title w-100 " style="color: blue;">Confirm Your Votes</div>
+            <div class="title w-100 " style="color: red;">Confirm Your Votes</div>
             <div class="title w-100 p-1"><span id="optionsRemaining" class="my-1" style="color: red;"></span></div>
             <div id="finalVotes">
                 <?php
