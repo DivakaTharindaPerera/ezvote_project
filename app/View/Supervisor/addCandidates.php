@@ -18,7 +18,7 @@
 
                 <div id="partySup" class=" p-1 text-center border-radius-2">
                     <div class="mb-1">
-                        <label for="partySup"><b>Party Supervisor</b></label><br>
+                        <label for="partySup" class="text-xl"><b>Party Supervisor</b></label><br>
                     </div>
                     <div class="mb-1">
                         <input type="email" id="partySupEmail" placeholder="Email...." class="border-1" style="border-radius: 20px; background-color: white;"> <span id="supEmailError" class="text-danger"></span><br>
@@ -56,7 +56,7 @@
             <div id="addCandidate" class="addCandidate mx-1 my-1">
 
                 <label for="cPosition" class="my-1">Election Position: </label>
-                <select name="" id="positionListCandidate" class="border-1  text-right border-radius-2">
+                <select name="" id="positionListCandidate" class="border-1 text-right border-radius-2 w-20 px-1">
 
                     <?php
                     $c = 0;
@@ -81,9 +81,8 @@
                         <input type="email" id="cEmail" placeholder="Candidate email...." class="border-1" style="border-radius: 20px;"><span id="cEmailError" class="text-danger"></span><br>
                     </div>
                     <div class="d-flex mb-1">
-                        <label for="cParty">Candidate Party: </label>
-                        <select name="" id="partyListCandidate" class="border-1 px-1 text-right border-radius-2 ml-1">
-
+                        <label for="cParty" class="my-auto">Candidate Party: </label>
+                        <select name="" id="partyListCandidate" class="border-1 px-1 text-right border-radius-2 ml-1 w-20">
                         </select>
                     </div>
 
