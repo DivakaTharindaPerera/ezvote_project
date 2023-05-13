@@ -87,6 +87,45 @@ require approot . '/View/inc/sidebar-new.php';
                     <!--/public/img/off.png" alt="" style="max-width: 40px;max-height: 40px"> </div>-->
                 </div>
             </div>
+
+            <?php 
+if(!empty($result)){
+if($result[0]->status == 1){ 
+?>
+    <div class="title">
+        Apply Nomination
+    <br><br>
+    <button onclick="location.href='/ezvote/Voters/applyNomination?id=<?= $data['election']->ElectionId ?>'" class="btn btn-primary">Apply</button>
+    </div>
+
+<?php }else{ ?>
+    <div class="title">
+        Apply Party
+    <br><br>
+    <button onclick="location.href='/ezvote/Voters/applyParty/<?= $data['election']->ElectionId ?>'" class="btn btn-success">Apply</button>
+    </div>
+
+    <div class="title bg-danger border-radius-2">
+    <i class="fas fa-info-circle"></i>
+        <p class="text-white">You have to apply for the party first.</p>      
+    </div>
+
+<?php 
+}
+}else{ 
+?>
+    <div class="title">
+        Apply Party
+        <br><br>
+        <button onclick="location.href='/ezvote/Voters/applyParty/<?= $data['election']->ElectionId ?>'" class="btn btn-success">Apply</button>
+    </div>
+
+    <div class="title bg-danger">
+        <p class="text-white">You have to apply for the party first.</p> 
+    </div>
+
+<?php }?>
+
             <div id="candidates" class="d-flex flex-column w-100 justify-content-center align-items-center">
                 <div class="title">
                     Candidates
@@ -122,6 +161,8 @@ require approot . '/View/inc/sidebar-new.php';
                                                 <!--                                    --><?php //var_dump($candidate);
                                                                                             ?>
                                                 <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View</button>
+                                                <button class="btn btn-primary" onclick="location.href='/ezvote/Candidates/candidateProfile/<?= $candidate->candidateId ?>'">View Profile</button>
+
                                             </div>
 
                                         </div>

@@ -29,7 +29,7 @@
               </div>
               <br>
               <input type="button" id="btncancel" name="btncancel" class="btn btn-danger" value="Cancel" onclick="closePopup()">
-              <input type="button" id="btnreply" name="btnreply" class="btn btn-primary" value="Reply">
+              <input type="button" id="btnreply" name="btnreply" class="btn btn-primary" value="Send">
 
             </form>
           </div>

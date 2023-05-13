@@ -9,8 +9,9 @@
 <input type="search" id="search" placeholder="Type to search..." class="border-success border-6 text-white">
 </div>
 
-<div class="w-100 p-4 overflow-y" style="scrollbar-width: none; z-index:1;">
+<div class="w-100 p-4" style="scrollbar-width: none; z-index:1;">
 <table id="table">
+
 <thead class="border-2 border-dark">
     <tr>
         <th class="border-2 border-white" style="background: rgb(5, 68, 104);">RequestNo</th>
@@ -21,6 +22,7 @@
         <th class="border-2 border-white w-25">Request Accept/Reject</th>
     </tr>
 </thead>   
+
 <?php 
     // var_dump($electName);
     // exit;
