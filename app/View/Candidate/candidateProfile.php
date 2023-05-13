@@ -11,10 +11,10 @@ require approot . '/View/inc/sidebar-new.php';
 <br>
 
 <!-- <div class="d-flex shadow border-radius-1 bg-light" style="margin-left:15vh; margin-top:10vh;">     -->
-<div class="shadow border-radius-5 bg-light w-75 py-3" style="overflow: hidden;">
+<div class="shadow border-radius-5 bg-light w-50 py-3" style="overflow: hidden;">
 
-    <div class="" style="width: 40%; float: left;">       
-        <img src="<?php echo urlroot; ?>/img/candidate/profileImages/<?php echo $res2[0]->profile_picture?>" alt="" class="w-50" style="border-radius:55vh; height:25vh; "/>        
+    <div class="" style="width:40%; float: left;">       
+        <img src="<?php echo $res4->ProfilePicture?>" alt="" class="w-50" style="border-radius:55vh; height:25vh; "/>        
     </div>
 
     <div class="w-60" style="float: left;">
@@ -69,7 +69,7 @@ require approot . '/View/inc/sidebar-new.php';
     </div>
 </div>
     <div class="dialog-box-outer" id="popup">
-    <div class="form border-1 border-dark p-1 text-1xl bg-light" style="margin-top:60px; margin-left:15rem;">
+    <div class="form border-1 border-dark p-1 text-1xl bg-light w-50" style="margin-top:60px; margin-left:15rem;">
 
 <form action="/ezvote/Candidates/update_profile/" method="POST" enctype='multipart/form-data' >
 

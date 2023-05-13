@@ -1001,18 +1001,23 @@ class Pages extends Controller
                 if (isset($_FILES['profilePhoto'])) {
                     $image = $_FILES['profilePhoto']['name'];
                 }
-                $data = [
-                    'id' => $_SESSION['UserId'],
-                    //                    'profile_pic'=>$_FILES['profilePhoto'],
-                    'fname' => trim($_POST['fname']),
-                    'lname' => trim($_POST['lname']),
-                    'email' => trim($_POST['email']),
-                    'old_password' => trim($_POST['old_password']),
-                    'new_password' => trim($_POST['new_password']),
-                    'confirmPassword' => trim($_POST['confirmed_password']),
-                    'old_passwordError' => '',
-                    'new_passwordError' => '',
-                    'confirmPasswordError' => ''
+                else{
+                    $image=$this->userModel->getUserById($_SESSION['UserId'])->ProfilePicture;
+                    // echo $image;exit();//echo the image name.  this is for testing only.  it is not part of the actual code.  it is just
+                }
+                $data=[
+                    'id'=>$_SESSION['UserId'],
+//                    'profile_pic'=>$_FILES['profilePhoto'],
+                    // 'profile_pic'=>$image,
+                    'fname'=>trim($_POST['fname']),
+                    'lname'=>trim($_POST['lname']),
+                    'email'=>trim($_POST['email']),
+                    'old_password'=>trim($_POST['old_password']),
+                    'new_password'=>trim($_POST['new_password']),
+                    'confirmPassword'=>trim($_POST['confirmed_password']),
+                    'old_passwordError'=>'',
+                    'new_passwordError'=>'',
+                    'confirmPasswordError'=>''
                 ];
                 //                else{
                 //                    if($this->userModel->findUserByEmail($data['email'])){
