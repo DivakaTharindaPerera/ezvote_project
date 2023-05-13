@@ -2,9 +2,11 @@
 class Subscription_plan extends Controller
 {
     private $SubscriptionModel;
+    private $PaymentsModel;
 
     public function __construct(){
         $this->SubscriptionModel = $this->model('Subscription');
+        $this->PaymentsModel = $this->model('Payments');
     }
 
     public function index()
@@ -13,7 +15,7 @@ class Subscription_plan extends Controller
         if (!isset($_SESSION["UserId"])) {
             redirect('Sys_manager/login');
         } else {
-            $data[0] = $this->SubscriptionModel ->getSubscriptionPlan($_SESSION['UserId']);
+            $data[0] = $this->SubscriptionModel->getSubscriptionPlan($_SESSION['UserId']);
             
             $this->view('Sys_manager/subscription_plans',$data );
         }
@@ -32,6 +34,7 @@ class Subscription_plan extends Controller
             }else{
                 $price = "FREE";
             }
+            $discount = $_POST['discount'];
 
             $time = $_POST['time'];
             $day = $_POST['day'];
@@ -63,7 +66,7 @@ class Subscription_plan extends Controller
             $cur_Date = date("Y-m-d");
             $manager_ID = $_SESSION['manager_ID'];
 
-            $res = $this->SubscriptionModel->insertSubscriptionPlan($name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID);
+            $res = $this->SubscriptionModel->insertSubscriptionPlan($name,$description, $cur_Date, $day, $month, $year, $price, $discount, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID);
     
             if($res){
                 header("Location: /ezvote/System_manager/dashboard");
@@ -90,6 +93,7 @@ class Subscription_plan extends Controller
             }else{
                 $price = "FREE";
             }
+            $discount = $_POST['discount'];
 
             $time = $_POST['time'];
             $day = $_POST['day'];
@@ -124,7 +128,7 @@ class Subscription_plan extends Controller
             $manager_ID = $_SESSION['manager_ID'];
 
             $res1 = $this->SubscriptionModel->addChanges($plan, $cur_Date, $cur_Time, $description);
-            $res = $this->SubscriptionModel->updateSubscriptionPlan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID);
+            $res = $this->SubscriptionModel->updateSubscriptionPlan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $discount, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID);
 
             if($res && $res1){
                 header("Location: /ezvote/System_manager/dashboard");
@@ -136,23 +140,23 @@ class Subscription_plan extends Controller
         }
     }
 
-    public function edit_process($plan){
-        if(!$this->isLoggedIn()){
-            $this->view('Sys_manager/Sysmanager_login');
-        }else{
+    // public function edit_process($plan){
+    //     if(!$this->isLoggedIn()){
+    //         $this->view('Sys_manager/Sysmanager_login');
+    //     }else{
             
-            $discount = $_POST['Discount'];
+    //         $discount = $_POST['Discount'];
 
-            $res = $this->SubscriptionModel->editSubscriptionDiscount($plan,$discount);
+    //         $res = $this->SubscriptionModel->editSubscriptionDiscount($plan,$discount);
 
-            if($res){
-                header("Location: /ezvote/Subscription_plan/sales_subscription");
-            }
-            else{
-                header("Location: /ezvote/Subscription_plan/edit_process");
-            }
-        }
-    }
+    //         if($res){
+    //             header("Location: /ezvote/System_manager/dashboard");
+    //         }
+    //         else{
+    //             header("Location: /ezvote/Subscription_plan/edit_process");
+    //         }
+    //     }
+    // }
 
     public function create_subscription(){
         if (!isset($_SESSION["UserId"])) {
@@ -203,24 +207,16 @@ class Subscription_plan extends Controller
         }
     }
 
-    public function sales_subscription(){
+
+    public function view_sales_subscription(){
         if (!isset($_SESSION["UserId"])) {
             redirect('System_manager/login');
         } else {
-            $data = $this->SubscriptionModel ->saleSubscriptionPlan();
+            $data = $this->SubscriptionModel ->selectSaleSubscription();
+            // $data = $this->PaymentsModel->selectSaleDetails();
             
             $this->view('Sys_manager/subscription_sales',$data);    
         } 
-    }
-
-    public function subscribed_plan(){
-        if(!isset($_SESSION["UserId"])) {
-            redirect('System_manager/login');
-        } else {
-            $data = $this->SubscriptionModel->subscribedSubscriptionPlan();
-
-            $this->view('',$data);
-        }
     }
 
 

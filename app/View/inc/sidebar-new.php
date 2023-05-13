@@ -78,13 +78,20 @@
                 </li>
 
                 <!-- subscription plans -->
-                <li>
-                    <a href="<?php echo urlroot; ?>/View/subscriptionPlans">
+                <!-- <li>
+                    <a href="<?php //echo urlroot; ?>/View/subscriptionPlans">
                         <span class="icon"><i class="fas fa-dollar-sign"></i></span>
                         <span class="item">Subscription Plans</span>
                     </a>
-                <!-- <li>
-                    <a href="<?php echo urlroot; ?>/Candidates/candidateProfile">
+                </li> -->
+                <li>
+                    <a  id="pricing" href="<?php echo urlroot; ?>/Pages/planpricing">
+                        <span class="icon"><i class="fas fa-dollar-sign"></i></span>
+                        <span class="item">Subscription Plans</span>
+                    </a>
+               </li>
+               <li>
+                    <a href="#">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Edit profile</span>
                     </a>
@@ -95,7 +102,7 @@
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Apply Nomination</span>
                     </a>
-                </li> -->
+                </li> 
                 <li>
                     <a href="<?php echo urlroot; ?>/Candidates/partyrequests">
                         <span class="icon"><i class="fas fa-cog"></i></span>

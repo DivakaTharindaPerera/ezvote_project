@@ -627,10 +627,12 @@ class Pages extends Controller
     }
 
     public function payment(){
+        $plan = $_GET['plan_id'];
         if (!isset($_SESSION["UserId"])) {
             redirect('View/login');
         }else{
-            $this->view('userPayment');
+            $data = $this->postModel->enabledplanbyID($plan);
+            $this->view('userPayment',$data);
         }
     }
 

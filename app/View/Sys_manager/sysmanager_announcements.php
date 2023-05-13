@@ -14,18 +14,19 @@ window.onload = function(){
 </script>
 
 <div class="main-container">
-    <div class="d-flex flex-column w-80 h-50 mt-2 mb-2">
+    <div class="d-flex flex-column w-80 h-50 mt-2 mb-2 overflow-y">
 
 <div class="sysmanager">
     <div class="title text-uppercase mt-1">Announcements</div>
 </div><br>
+<div class="min-w-85 min-h-85 border border-primary border-radius-2 border-3 px-1 py-1 overflow-y">
 <form action="./announcements" method="POST">
 <div class="d-flex flex-column min-w-40">
     <div>
     <label class="font-semibold leading-loose text-xl">Head</label>
     </div>
     <div class="d-flex mr-5">
-    <input class="border border-primary min-w-40" type="text" name="head" id="head" placeholder="Enter email head here..." required>
+    <input class="border border-primary bg-primary min-w-40" type="text" name="head" id="head" placeholder="Enter email head here..." required>
 
     </div>
 </div>
@@ -96,32 +97,6 @@ window.onload = function(){
 
 <br>
 
-<!-- <div class="subscription">
-    <label class="font-bold">Subscriptions</label>
-</div> -->
-
-<!-- <div class="body-div3">
-    <div>
-        <input type="checkbox" id="plan1" name="plan1">
-        <label for="plan1" style="word-wrap: break-word;">Extreme Plan</label>
-    </div>
-    <div>
-        <input type="checkbox" id="plan2" name="plan2">
-        <label for="plan2" style="word-wrap: break-word;">Annual Plan</label>
-    </div>
-    <div>
-        <input type="checkbox" id="plan3" name="plan3">
-        <label for="plan3" style="word-wrap: break-word;">Monthly Plan</label>
-    </div>
-    <div>
-        <input type="checkbox" id="plan4" name="plan4">
-        <label for="plan4" style="word-wrap: break-word;">Starter Plan</label>
-    </div>
-    <div>
-        <input type="checkbox" id="plan5" name="plan5">
-        <label for="plan5" style="word-wrap: break-word;">Free Plan</label>
-    </div> -->
-
 <div class="d-flex justify-content-evenly">
     <div class="d-flex w-100 justify-content-evenly">
         <div class="d-flex justify-content-start">
@@ -138,17 +113,10 @@ window.onload = function(){
     
     </div>
 </div>
-</form>  
+</form> 
+</div> 
 </div>
 </div>
-
-        <script>
-            function success() {
-                alert("Notification mail sent succesfully.");
-            }
-        
-        </script>"
-
 
 <?php require approot . '/View/inc/footer.php'; ?>
 

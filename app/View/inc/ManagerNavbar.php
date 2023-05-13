@@ -5,11 +5,10 @@
             <span></span>
         </div>
         <ul class="navList d-flex px-1">
-                <li><a href="<?php echo urlroot; ?>/System_manager/dashboard" class="px-1">Dashboard</a></li>
-                <a href="<?php echo urlroot; ?>/System_manager/announcements" class="px-1">Announcements</a>
-                <a href="#" class="px-1">Profile</a>
-                <!-- <a href="<?php //echo urlroot; ?>/Subscription_plan/pricing" class="px-1">Pricing</a> -->
-                <a href="<?php echo urlroot; ?>/System_manager/logout" class="btn btn-info">Logout</a>
+                <li><a href="<?php echo urlroot; ?>/Pages/home" class="px-1">Home</a></li>
+                <!-- <a href="<?php //echo urlroot; ?>/System_manager/announcements" class="px-1">Announcements</a> -->
+                <a href="/ezvote/System_manager/managerProfile" class="px-1">Profile</a>
+                <a href="<?php echo urlroot; ?>/System_manager/logout" class="btn btn-info px-1">Logout</a>
         </ul>
     </nav>
 </header>

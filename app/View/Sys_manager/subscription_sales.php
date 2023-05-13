@@ -29,8 +29,8 @@ window.onload = function(){
         <div class="my-3 d-flex mr-4">
         <a href="#">
             <div class="btn btn-primary mr-3" >SEARCH</div></a>
-            <div class="d-flex text-center align-items-center text-md">FILTER
-            </div>
+            <!-- <div class="d-flex text-center align-items-center text-md">FILTER
+            </div> -->
         </div>
     </div>
     </div>
@@ -42,10 +42,10 @@ window.onload = function(){
             <thead>
             <tr>
                 <th>Plan Name</th>
-                <th>Price ($)</th>
+                <th>Price (Rs)</th>
                 <th>Purchased Users</th>
-                <th>Plan Income ($)</th>
-                <th>Discount Details</th>
+                <th>Discount (%)</th>
+                <th>Plan Income (Rs)</th>
                 </tr>
             </thead>
 
@@ -57,18 +57,16 @@ window.onload = function(){
 
             for($x = 0; $x < $arrlength; $x++) {
             echo '<tr>
-                <td class="td-1 w-25 text-uppercase">'.$data[$x]->planName.'</td>
+                <td class="td-1 w-25 text-uppercase">'.$data[$x]->PlanName.'</td>
                 <div class="d-flex flex-column">
                 <td class="td-2">'.$data[$x]->Price.'</td>  
                 <td class="td-3">'.$data[$x]->userCount.'</td>
-                <td class="td-4">'.$data[$x]->Price * $data[$x]->userCount.'</td>
+                <td class="td-4"> '.$data[$x]->Discount.'%</div>
+                <td class="td-5">'.($data[$x]->Price * $data[$x]->userCount) * (100 - $data[$x]->Discount) / (100).' </td>
                 </div>
-                <td class="td-5"><div class="d-flex flex-column">
-                    <div class="d-flex flex-row text-info">
-                         Discount: '.$data[$x]->Discount.'%
-                    </div> '; ?>
+                 '; ?>
 
-                    <button class="btn btn-info my-1" onclick="document.getElementById('discount-input').value = '<?php echo $data[$x]->Discount ?>';document.getElementById('update').action='./edit_process/<?php echo $data[$x]->planID; ?>'; openPopup();">EDIT</button>
+                    <!-- <button class="btn btn-info my-1" onclick="document.getElementById('discount-input').value = '<?php //echo $data[$x]->Discount ?>';document.getElementById('update').action='./edit_process/<?php //echo $data[$x]->planID; ?>'; openPopup();">EDIT</button> -->
                     <div class="dialog-box-outer" id="popup">
                     <div class="popup mx-1 my-1 px-1 py-1 min-w-20 min-h-25">
                     <div class="title text-center">Edit Discount</div>

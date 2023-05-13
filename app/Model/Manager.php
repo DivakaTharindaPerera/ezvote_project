@@ -36,6 +36,13 @@ class Manager{
 
     }
 
+    public function getManagerImg($managerid){
+        $this->db->query('SELECT Profile_image FROM system_manager WHERE ManagerID=:ManagerID');
+        $this->db->bind(':ManagerID',$managerid);
+        return $this->db->resultSet();
+
+    }
+
     public function updatePassword($email, $pwd){
         $this->db->query('UPDATE system_manager SET Password = :Password WHERE Email=:Email');
 
@@ -48,6 +55,29 @@ class Manager{
             return false;
         }
     }
+
+    public function profile($managerid){
+        $this->db->query('SELECT * FROM system_manager WHERE ManagerID=:ManagerID');
+
+        $this->db->bind(':ManagerID',$managerid);
+
+        return $this->db->resultSet();
+    }
+
+    public function editProfile($name,$email,$managerid){
+        $this->db->query('UPDATE system_manager SET Name = :Name, Email = :Email WHERE ManagerID=:ManagerID');
+        
+        $this->db->bind(':ManagerID',$managerid);
+        $this->db->bind(':Name',$name);
+        $this->db->bind(':Email',$email);
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
     public function getUserEmail(){
         $this->db->query('SELECT Email from user');
