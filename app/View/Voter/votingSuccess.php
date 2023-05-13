@@ -9,7 +9,7 @@
             <?php echo $data['election']->Title; ?>
         </div>
         <div class="sub-title text-center">
-            <?php echo $data['election']->Title; ?>
+            <?php echo $data['election']->OrganizationName; ?>
         </div>
     <?php
     foreach ($data['position'] as $position) {
