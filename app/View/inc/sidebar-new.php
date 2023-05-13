@@ -90,19 +90,7 @@
                         <span class="item">Subscription Plans</span>
                     </a>
                </li>
-               <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span>
-                        <span class="item">Edit profile</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="<?php echo urlroot; ?>/Candidates/applyNomination">
-                        <span class="icon"><i class="fas fa-cog"></i></span>
-                        <span class="item">Apply Nomination</span>
-                    </a>
-                </li> 
+                                
                 <li>
                     <a href="<?php echo urlroot; ?>/Candidates/partyrequests">
                         <span class="icon"><i class="fas fa-cog"></i></span>
