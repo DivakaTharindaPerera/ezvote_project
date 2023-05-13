@@ -51,7 +51,7 @@
                         <input type="checkbox" id="objStatus" name="objectionstatus" value="1" onclick="ObjStatus()" class="mr-1 checkmark">Allow objections against candidates
 
                     </div>
-                    <div class="flex-column border-primary border-radius-1 border-2" id="objstart" style="display: none;">
+                    <div class="flex-column border-primary border-radius-1 border-2 mt-1" id="objstart" style="display: none;">
                         <div class="text-center my-1"><b>Objection Period</b></div>
                         <div class="d-flex justify-content-evenly mb-1">
                             <div class="card d-flex flex-column">

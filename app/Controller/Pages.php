@@ -442,7 +442,14 @@ class Pages extends Controller
 
     public function subscriptionPlans()
     {
-        $this->view('Supervisor/subscriptionPlans');
+        if (!$this->isLoggedIn()) {
+            redirect('View/login');
+        } else {
+            $data = [
+                'plans' => $this->planModel->getSubscriptionPlans()
+            ];
+            $this->view('Supervisor/subscriptionPlans',$data);
+        }
     }
 
     public function electionCandidates($id)

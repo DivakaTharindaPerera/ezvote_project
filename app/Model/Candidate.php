@@ -371,22 +371,6 @@ class Candidate extends Controller
         return $candidate;
     }
 
-
-    public function getCandidateByUser($user_id)
-    {
-        // var_dump($candidate_id);
-        // exit;
-
-        $this->db->query("SELECT * FROM Candidate WHERE userId = $user_id");
-
-        try {
-            $this->db->execute();
-            return $this->db->resultSet();
-        } catch (Exception $e) {
-            echo "Something went wrong :" . $e->getMessage();
-        }
-    }
-
     public function insertIntoCandidateWithUser($data){
         $this->db->query(
             "INSERT INTO Candidate 
