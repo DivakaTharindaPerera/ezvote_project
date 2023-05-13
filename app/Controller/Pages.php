@@ -919,9 +919,14 @@ class Pages extends Controller
                 if(isset($_FILES['profilePhoto'])){
                     $image=$_FILES['profilePhoto']['name'];
                 }
+                else{
+                    $image=$this->userModel->getUserById($_SESSION['UserId'])->ProfilePicture;
+                    // echo $image;exit();//echo the image name.  this is for testing only.  it is not part of the actual code.  it is just
+                }
                 $data=[
                     'id'=>$_SESSION['UserId'],
 //                    'profile_pic'=>$_FILES['profilePhoto'],
+                    // 'profile_pic'=>$image,
                     'fname'=>trim($_POST['fname']),
                     'lname'=>trim($_POST['lname']),
                     'email'=>trim($_POST['email']),

@@ -255,7 +255,8 @@ class Candidates extends Controller
             
             // res2 is empty
         }else{
-                redirect('pages/dashboard');
+            $this->view('Candidate/partyRequestsRestrict');
+                // redirect('pages/dashboard');
             }
         }
     }
