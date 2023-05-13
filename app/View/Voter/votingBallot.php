@@ -15,11 +15,6 @@
             <div class="justify-content-center align-items-center text-center text-xl mb-1">Description & Regulation</div>
             <p class="text-lg"><?php echo $data['election']->Description; ?></p>
         </div>
-        <?php
-            if($data['stat']==1){
-                echo "status visible";
-            }
-        ?>
     </div>
     <div class="d-flex flex-column w-100" id="candidatesWithPositions">
         <?php $i = 0;
@@ -28,7 +23,7 @@
             $position_id = $position->ID;
         ?>
             <div class="d-flex flex-column" id="<?php echo $position_id; ?>">
-                <div class="title w-100 bg-info p-1" style="color: white;"><?php echo $position->positionName . '-' . $position_id; ?></div>
+                <div class="title w-100 bg-info p-1" style="color: white;"><?php echo $position->positionName; ?></div>
                 <div class="text-danger text-center text-2xl">
                     <span class="optionCounts">
                         <?php
@@ -56,7 +51,7 @@
                             <div class="card" id="card-<?php echo $candidates->candidateId; ?>">
                                 <div class="d-flex flex-column">
                                     <div class="sub-title">
-                                        <?php echo $candidates->candidateName . '-' . $candidates->candidateId; ?>
+                                        <?php echo $candidates->candidateName; ?>
                                     </div>
                                     <div><img src="<?= $profile_picture?>" style="max-height:50px;max-width: 50px" alt="profile photo"></div>
                                 </div>
@@ -107,7 +102,7 @@
                 foreach ($data['positions'] as $position) {
                 ?>
                     <div id="<?php echo $position->ID ?>-confirm">
-                        <div class="title w-100 bg-blue-10 p-1" style="color: white;"><?php echo $position->positionName . '-' . $position_id; ?></div>
+                        <div class="title w-100 bg-blue-10 p-1" style="color: white;"><?php echo $position->positionName; ?></div>
                         <div class="d-flex justify-content-center flex-wrap" id="finalCandidates-<?php echo $position->ID?>"></div>
                     </div>
 

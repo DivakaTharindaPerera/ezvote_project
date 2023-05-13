@@ -94,7 +94,7 @@
     </table> -->
                 <div class="mb-1 justify-content-center text-lg">
 
-                    <input type="checkbox" id="showStat" name="statVisibality" value="1" class="mr-1 checkmark">Show ongoing status to the voters and candidates
+                    <input type="checkbox" id="showStat" name="statVisibality" value="1" class="mr-1 checkmark">Show results to the voters and candidates
 
                 </div>
                 <div class="my-1 justify-content-center text-lg">
