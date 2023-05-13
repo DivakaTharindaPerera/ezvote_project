@@ -1,17 +1,24 @@
 {
-    "name": "user/ezvote",
-    "type": "project",
-    "autoload": {
-        "psr-4": {
-            "User\\Ezvote\\": "src/"
-        }
-    },
+
+    "name": "vendor_name/ezvote",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
     "authors": [
-        {
-            "name": "Harilakshan"
-        }
+      {
+        "name": "Isurika Arunodi",
+        "email": "email@example.com"
+      }
     ],
     "require": {
-        "stripe/stripe-php": "^10.12"
+      "vlucas/phpdotenv": "^5.5",
+      "firebase/php-jwt": "^6.4",
+      "ext-openssl": "*",
+      "ext-curl": "*",
+      "ext-pdo": "*",
+      "brick/date-time": "^0.4.1",
+        "dompdf/dompdf": "^0.6.2",
+      "stripe/stripe-php": "^10.12"
     }
-}
+  }
+

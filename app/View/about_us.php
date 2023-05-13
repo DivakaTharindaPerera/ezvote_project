@@ -15,11 +15,11 @@
 </head>
 <body>
 
-    <div class="nav-bar">
+    <div class="nav-bar" style="height:7vh;">
         <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
         <div class="links">
             <a href="/ezvote/Pages/home">Home</a>
-            <a href="#">Services</a>
+            <a href="/ezvote/Pages/services">Services</a>
             <a href="/ezvote/Pages/pricing">Pricing</a>
             <a href="/ezvote/Pages/targetUsers">Target users</a>
             <a href="/ezvote/Pages/aboutUs">About Us</a>
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-<div class="overflow-y" style="overflow-x:hidden;">
+<div class="d-flex flex-column overflow-y" style="overflow-x:hidden;">
 <div class="bg_home">
      <div class="p-1 m-2">
         <h1 class="text-center text-white " style="padding-top:10rem; font-size:150px;">A B O U T U S</h1>

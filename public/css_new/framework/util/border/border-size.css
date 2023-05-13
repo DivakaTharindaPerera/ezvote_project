@@ -26,3 +26,8 @@
 .border-bottom-1{
     border-bottom: 1px solid var(--border-color-cyan);
 }
+.border-box{
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-sizing: border-box;
+}

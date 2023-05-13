@@ -166,6 +166,13 @@ class Subscription{
     }
 
 
+    public function getSubscriptionPlans(){
+        $this->db->query('SELECT * FROM subscription_plan');
+
+        return $this->db->resultSet();
+    }
+
+
 }
 
 

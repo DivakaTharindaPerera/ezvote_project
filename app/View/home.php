@@ -12,38 +12,39 @@
     <title>ezVote</title>
 </head>
 <body>
-    <div class="nav-bar">
+
+    <div class="nav-bar" style="height: 7vh">
         <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
         <div class="links">
             <a href="/ezvote/Pages/home">Home</a>
-            <a href="#">Services</a>
+            <a href="/ezvote/Pages/services">Services</a>
             <a href="/ezvote/Pages/pricing">Pricing</a>
             <a href="/ezvote/Pages/targetUsers">Target users</a>
             <a href="/ezvote/Pages/aboutUs">About Us</a>
             <a href="/ezvote/Pages/contactUs">Contact</a>
         </div>
         <div class="nav-end">
-  <div class="dropdown">
-  <button class="dropbtn">Login</button>
-  <div class="dropdown-content">
-  <a href="<?php echo urlroot; ?>/Pages/Sysmanager">Administrator</a>
-  <a href="<?php echo urlroot; ?>/View/Login">Other Users</a>
-  </div>
-</div>
-    <a href="<?php echo urlroot; ?>/View/Register"><button class="dropbtn" style="margin-top: -6px;">Register</button></a>
+            <div class="dropdown">
+                <button class="dropbtn">Login</button>
+                <div class="dropdown-content">
+                    <a href="<?php echo urlroot; ?>/Pages/Sysmanager">Administrator</a>
+                    <a href="<?php echo urlroot; ?>/pages/Login">Other Users</a>
+                </div>
+            </div>
+            <a href="<?php echo urlroot; ?>/View/Register"><button class="dropbtn" style="margin-top: -6px;">Register</button></a>
         </div>
     </div>
-
-    <div class="bg-image">
-        <img src="<?php echo urlroot; ?>/img/welcome/bg.jpg" alt="" id="bg-image">
-           
-
-              <h1 class="h1-txt">Simple and convenient <br> online voting platform</h1>
-            <button type="submit" class="learn_more">Learn More</button>
-        </div>
+    <div class="d-flex flex-column overflow-y max-h-93">
+        <div class="min-h-90 max-h-93">
+            <div class="bg-image">
+                <img src="<?php echo urlroot; ?>/img/welcome/bg.jpg" alt="" id="bg-image">
+                <h1 class="h1-txt">Simple and convenient <br> online voting platform</h1>
+            <!-- <button type="submit" class="learn_more">Learn More</button> -->
             </div>
         </div>
-    </div>
+
+
+
 
     <!-- <svg id="opt_1" data-name="opt 1" xmlns="http://www.w3.org/2000/svg" width="1366" height="128" viewBox="0 0 1366 128" preserveAspectRatio="none">…</svg> -->
 
@@ -298,38 +299,39 @@
                 <h4>About</h4>
                 <ul>
                     <li><a href="/ezvote/Pages/aboutUs">about us</a></li>
-                    <li><a href="#">our services</a></li>
+                    <li><a href="/ezvote/Pages/services">our services</a></li>
                     <li><a href="#">privacy policy</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>My Account</h4>
                 <ul>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Support</a></li>
+                    <li><a href="/ezvote/Pages/login">Login</a></li>
+                    <li><a href="/ezvote/Pages/contactUs">Support</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Products & Features</h4>
                 <ul>
-                    <li><a href="#">Meetings</a></li>
-                    <li><a href="#">Support</a></li>
+                    <li><a href="/ezvote/Pages/viewAllConference">Meetings</a></li>
+                    <li><a href="/ezvote/Pages/contactUs">Support</a></li>
                 </ul>
             </div>
                 
             <div class="footer-col">
                 <h4>follow us</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <div class="social-links ">
+                    <a href="#" class="d-flex justify-content-center align-items-center"><i class="fab fa-facebook-f "></i></a>
+                    <a href="#" class="d-flex justify-content-center align-items-center"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="d-flex justify-content-center align-items-center"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="d-flex justify-content-center align-items-center"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             </div>
     </div>
 
 </footer>
-
+</div>
+</div>
 </body>
 </html>

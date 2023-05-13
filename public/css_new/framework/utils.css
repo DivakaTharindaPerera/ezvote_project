@@ -7,6 +7,7 @@
 @import "util/colors/base.css";
 @import "util/border/border.css";
 @import "util/animation.css";
+@import "util/images.css";
 
 /*Titles*/
 @import "components/title/title.css";
@@ -37,6 +38,8 @@
 /*Flex-box*/
 @import "components/flex-box/flex-box.css";
 
+
+
 /*Import Forms*/
 @import "components/form/form.css";
 
@@ -49,8 +52,6 @@
 @import "components/home_footer/home_footer.css";
 
 @import "components/box-shadow/box-shadow.css";
-
-
 
 /*Fonts*/
 /*@import url('/public/css_new/framework/util/fonts/static/OpenSans/OpenSans-Medium.ttf');*/
@@ -75,13 +76,27 @@
 .overflow-y{
     overflow-y: auto;
 }
+.overflow-overlay{
+    overflow-y: overlay;
+}
+.overflow-y-hidden{
+    overflow-y: hidden ;
+}
 .overflow-scroll{
     overflow: scroll;
+}
+
+.overflow-auto{
+    overflow: auto;
 }
 /*::-webkit-scrollbar{*/
 /*    width: 2rem;*/
 /*    color: var(--white);*/
 /*}*/
+::-webkit-scrollbar{
+    width: 0;
+    background:transparent;
+}
 .justify-content-center{
     justify-content: center;
 }
@@ -115,6 +130,9 @@
 .w-100{
     width: 100%;
 }
+.w-97{
+    width: 97%;
+}
 .w-95{
     width: 95%;
 }
@@ -130,6 +148,12 @@
 .w-75{
     width: 75%;
 }
+.w-65{
+    width: 65%;
+}
+.w-60{
+    width: 60%;
+}
 .w-50{
     width: 50%;
 }
@@ -141,6 +165,9 @@
 }
 .w-25{
     width: 25%;
+}
+.w-15{
+    width: 15%;
 }
 .w-10{
     width: 10%;
@@ -183,6 +210,9 @@
 }
 .max-w-8{
     max-width: 8rem !important;
+}
+.min-w-20vw{
+    min-width: 20vw;
 }
 .min-w-100{
     min-width: 100%;
@@ -244,6 +274,9 @@
 .min-w-5{
     min-width: 5%;
 }
+.max-w-20{
+    max-width: 20%;
+}
 .max-w-50{
     max-width: 50%;
 }
@@ -274,6 +307,9 @@
 .max-w-100{
     max-width: 100%;
 }
+.max-w-20vw{
+    max-width: 20vw;
+}
 /*  */
 .min-h-10{
     min-height: 10%;
@@ -283,6 +319,9 @@
 }
 .min-h-30{
     min-height: 30%;
+}
+.min-h-37vh{
+    min-height: 37vh;
 }
 .min-h-40{
     min-height: 40%;
@@ -302,8 +341,23 @@
 .min-h-85{
     min-height: 85%;
 }
+.max-h-25{
+    max-height: 25%;
+}
+.max-h-20{
+    max-height: 20%;
+}
+.max-h-37vh{
+    max-height: 37vh;
+}
+.max-h-60vh{
+    max-height: 60vh;
+}
 .max-h-85{
     max-height: 85%;
+}
+.max-h-93{
+    max-height: 93vh;
 }
 .max-h-95{
     max-height: 95%;

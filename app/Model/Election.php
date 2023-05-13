@@ -1,20 +1,25 @@
-<?php 
+<?php
 
 
 //session_start();
 
 
 
-class Election extends Controller{
+class Election extends Controller
+{
     private $db;
+    private $logModel;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->db = new Database;
+        $this->logModel = $this->model('log');
     }
 
-    public function insertIntoElection($data){
+    public function insertIntoElection($data)
+    {
         $this->db->query(
-                "INSERT INTO Election 
+            "INSERT INTO Election 
                 ( OrganizationName,Title, 
                 StartDate, EndDate, 
                 Description,StatVisibality, 
@@ -25,7 +30,7 @@ class Election extends Controller{
                 NominationDescription, 
                 Supervisor) 
                 VALUES(:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,:13,:14,:15,:16)"
-            );
+        );
 
         $this->db->bind(':1', $data['orgname']);
         $this->db->bind(':2', $data['title']);
@@ -47,95 +52,169 @@ class Election extends Controller{
         try {
             $this->db->execute();
             $data['id'] = $this->db->lastInsertId();
-            $this->view('Supervisor/addVoters', $data);
-            
+
+            $logDesc = "Created election with title " . $data['title'] . " By " . $data['orgname'] . ".";
+            $this->logModel->saveLog($logDesc, $data['id'], $_SESSION["UserId"]);
+
+            redirect('Pages/wayToAddVoters/' . $data['id']);
+            // $this->view('Supervisor/addVoters', $data);  
         } catch (Exception $e) {
             echo "Something went wrong";
-        }return false;
-
-
+        }
+        return false;
     }
-    public function findElectionById($id){
+    public function findElectionById($id)
+    {
         $this->db->query("SELECT * FROM Election WHERE ElectionId = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
         return $row;
     }
     //get all the elections created by the user.
-    public function getElectionsByUserId($id){
+    public function getElectionsByUserId($id)
+    {
         $this->db->query("SELECT * FROM Election WHERE Supervisor = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->resultSet();
         return $row;
     }
 
-    public function getElectionByElectionId($id){
+    public function getElectionByElectionId($id)
+    {
         $this->db->query("SELECT * FROM Election WHERE ElectionId = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
         return $row;
     }
 
-    public function getElectionsByUserIdSorted($id, $method){
-        
-        if($method == "asc"){
-            
+    public function getElectionsByUserIdSorted($id, $method)
+    {
+
+        if ($method == "asc") {
+
             $this->db->query("SELECT * FROM Election WHERE Supervisor = :id ORDER BY Title ASC");
             $this->db->bind(':id', $id);
             $row = $this->db->resultSet();
             return $row;
         }
-        if($method == "desc"){
-            
+        if ($method == "desc") {
+
             $this->db->query("SELECT * FROM Election WHERE Supervisor = :id ORDER BY Title DESC");
             $this->db->bind(':id', $id);
             $row = $this->db->resultSet();
             return $row;
         }
-        if($method == "Dasc"){
-            
+        if ($method == "Dasc") {
+
             $this->db->query("SELECT * FROM Election WHERE Supervisor = :id ORDER BY StartDate ASC");
             $this->db->bind(':id', $id);
             $row = $this->db->resultSet();
             return $row;
         }
-        if($method == "Ddesc"){
-            
+        if ($method == "Ddesc") {
+
             $this->db->query("SELECT * FROM Election WHERE Supervisor = :id ORDER BY StartDate DESC");
             $this->db->bind(':id', $id);
             $row = $this->db->resultSet();
             return $row;
         }
-        
     }
 
-    public function updateElection($data){
-        // $data=[
-        //     "id"=>trim($_POST['id']),
-        //     "title"=>trim($_POST['title']),
-        //     "org"=>trim($_POST['org']),
-        //     "desc"=>trim($_POST['desc']),
 
-        //     "esdate"=>trim($_POST['EstartDate']),
-        //     "eedate"=>trim($_POST['EendDate']),
-        //     "estime"=>trim($_POST['EstartTime']),
-        //     "eetime"=>trim($_POST['EendTime']),
 
-        //     "osdate"=>trim($_POST['OstartDate']),
-        //     "oedate"=>trim($_POST['OendDate']),
-        //     "ostime"=>trim($_POST['OstartTime']),
-        //     "oetime"=>trim($_POST['OendTime']),
+    public function getOngoingElections()
+    {
+        $dates = date("Y-m-d");
+        $times = date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM Election WHERE ((StartDate<'" . $dates . "' && ((EndDate='" . $dates . "' && EndTime>='" . $times . "') || (EndDate>'" . $dates . "'))) ||((StartDate='" . $dates . "' && StartTime<='" . $times . "') &&(EndDate>'" . $dates . "' || (EndDate='" . $dates . "' && EndTime>'" . $times . "'))))"
+        );
+        //        echo '<pre>';
+        //        print_r($this->db);
+        //        exit();
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong " . $e->getMessage();
+            return false;
+        }
+    }
 
-        //     "status"=>trim($_POST['stat']),
+    public function getUpcomingElections()
+    {
+        $dates = date("Y-m-d");
+        $times = date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM Election WHERE (StartDate='" . $dates . "' && StartTime>'" . $times . "') ||(StartDate>'" . $dates . "' && StartTime>='" . $times . "')|| (StartDate>'" . $dates . "' && StartTime<'" . $times . "') "
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong " . $e->getMessage();
+            return false;
+        }
+    }
+    public function getCompletedElections()
+    {
+        $dates = date("Y-m-d");
+        $times = date("H:i:s");
+        $this->db->query(
+            "SELECT * FROM Election WHERE (EndDate='" . $dates . "' && EndTime<'" . $times . "') ||(EndDate<'" . $dates . "' && EndTime>='" . $times . "') || (EndDate<'" . $dates . "' && EndTime<'" . $times . "')"
+        );
+        try {
+            $result = $this->db->resultSet();
+            return $result;
+        } catch (Exception $e) {
+            echo "Something went wrong " . $e->getMessage();
+            return false;
+        }
+    }
 
-        //     "nomi"=>trim($_POST['nomi']),
-        //     "nomidesc"=>trim($_POST['nomiDesc']),
+    public function getPositionsByElectionId($id)
+    {
+        $election_Id = $id;
+        $this->db->query("SELECT DISTINCT ID,positionName FROM ElectionPosition WHERE ElectionID ='" . $election_Id . "'");
+        $row = $this->db->resultSet();
+        return $row;
+    }
 
-        //     "ostat"=>trim($_POST['ostat'])
-        // ];
+    public function getCandidatesByElectionId($id)
+    {
+        $election_Id = $id;
+        $this->db->query("SELECT * FROM Candidate WHERE electionid ='" . $election_Id . "' order by positionid");
+        $row = $this->db->resultSet();
+        //        var_dump($row);
+        //        exit();
+        return $row;
+    }
+
+    public function getWinnersDetails($id)
+    {
+        $election_Id = 1281;
+        $this->db->query("SELECT * FROM votes WHERE electionid ='" . $election_Id . "' order by NoOfVotes Desc");
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
+    public function getWinnerNames($id)
+    {
+        $candidate_Id = $id;
+        $this->db->query("SELECT Candidate.candidateName,ElectionParty.partyName FROM Candidate where candidateId='" . $candidate_Id . "' inner join electionparty on Candidate.partyId=ElectionParty.partyId ");
+        $row = $this->db->resultSet();
+        print_r($row);
+        exit();
+        return $row;
+    }
+
+
+    public function updateElection($data)
+    {
+
 
         $this->db->query(
-                "UPDATE Election SET 
+            "UPDATE Election SET 
                 OrganizationName = :1,
                 Title = :2,
                 StartDate = :3,
@@ -152,7 +231,7 @@ class Election extends Controller{
                 ObjectionEndTime = :14,
                 NominationDescription = :15
                 WHERE ElectionId = :16"
-            );
+        );
 
         $this->db->bind(':1', $data['org']);
         $this->db->bind(':2', $data['title']);
@@ -173,13 +252,65 @@ class Election extends Controller{
 
         try {
             $this->db->execute();
-            
+
             return true;
-            
         } catch (Exception $e) {
             echo $e;
             return false;
         }
     }
-        
+
+
+
+    public function getVotersByElectionID($id)
+    {
+        $election_Id = $id;
+        $this->db->query("SELECT userId,voterId FROM Voter WHERE electionid ='" . $election_Id . "'");
+        $row = $this->db->resultSet();
+        return $row;
+    }
+
+    public function deleteElection($id)
+    {
+        $this->db->query("DELETE FROM Election WHERE ElectionId = :id");
+        $this->db->bind(':id', $id);
+        try {
+            $this->db->execute();
+            return true;
+        } catch (Exception $e) {
+            echo $e;
+        }
+    }
+    public function findelectNameById($id)
+    {
+        $this->db->query("SELECT * FROM election WHERE electionid=$id");
+        try {
+            $this->db->execute();
+            return $this->db->resultSet(); // return object
+        } catch (Exception $e) {
+            echo "Something went wrong :" . $e->getMessage();
+        }
+    }
+
+    // public function getAllElectionNames(){
+    //     $this->db->query("SELECT * FROM election");
+    //     $electionName=$this->db->resultSet();
+    //     return $electionName;
+    // }
+
+
+
+
+    public function getElectionIdByVoterId($id)
+    {
+        $this->db->query("SELECT electionId FROM Voter WHERE userid = :id");
+        $this->db->bind(':id', $id);
+        return $this->db->resultSet();
+    }
+
+    public function getElections()
+    {
+        $this->db->query('SELECT * FROM election');
+        return $this->db->resultSet();
+    }
 }

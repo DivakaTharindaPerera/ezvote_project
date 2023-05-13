@@ -24,15 +24,7 @@ window.onload = function(){
     <div class="title text-center text-uppercase">Enabled Plans Prices</div>
        
     <div class="w-100 h-50 d-flex flex-wrap justify-content-center align-items-center overflow-y overflow-x">
-                    
-                        <?php
-
-                        if(isset($_SESSION['plan'])) {
-                            echo '<h3 class="text-center">You are currently created to '.$_SESSION['plan'].' plan.</h3>';
-                        } else {
-                            echo '<h3 class="text-center text-danger">You are currently not created to any plans.</h3>';
-                        }
-                        ?>
+                    <h3 Class="text-center font-bold ">Currently these Plans Enabled by you. </h3>
                 </div>
             </div>
        

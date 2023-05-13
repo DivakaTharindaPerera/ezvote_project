@@ -12,20 +12,17 @@
     <title>ezVote</title>
 </head>
 <body>
-    <div class="nav-bar">
+    <div class="nav-bar" style="height:12vh;">
         <div class="logo"><img id="logo" src="<?php echo urlroot; ?>/img/welcome/ezvotelogo.png" alt="logo"></div>
         <div class="links">
             <a href="/ezvote/Pages/home">Home</a>
-            <a href="#">Services</a>
+            <a href="/ezvote/Pages/services">Services</a>
             <a href="/ezvote/Pages/pricing">Pricing</a>
             <a href="/ezvote/Pages/targetUsers">Target users</a>
             <a href="/ezvote/Pages/aboutUs">About Us</a>
             <a href="/ezvote/Pages/contactUs">Contact</a>
         </div>
         <div class="nav-end">
-            <!-- <a href="<?php echo urlroot; ?>/View/Login"><button type="button">Login</button></a>
-            <a href="<?php echo urlroot; ?>/View/Register"><button id="trial">Register</button></a> -->
-
             <div class="dropdown">
   <button class="dropbtn">Login</button>
   <div class="dropdown-content">
@@ -45,60 +42,82 @@
      </div>
      </div>
 
-    <form action="#" class="form border-2 border-dark text-1xl bg-dark px-5 text-white my-2" method="POST" enctype="multipart/form-data" style="margin-left:450px; width:600px">
+    <form action="#" class="form border-2 border-dark text-1xl bg-dark px-5 text-white my-3" method="POST" enctype="multipart/form-data" style="margin-left:450px; width:600px">
         
-    <h2 class="text-center">Lets Chat</h2><br>
-    
+    <h2 class="text-center my-1">Let's Chat</h2><br>
+
     <div class="d-flex">
     <div class="flex-column px-1 ">
-    <span>First Name</span><br>
-    <input type="text" name="firstname" id="firstname" class="text-white bg-primary">
+    <span>First Name<span class="text-danger">*</span></span><br>
+    <div class="bg-light">
+    <input type="text" name="firstname" id="firstname" class="text-dark">
+    </div>
+    <em class="text-danger"><?php if(isset($data['firstname_err'])){ echo $data['firstname_err']; } ?></em>
     </div>
     <div class="flex-column px-1">
-    <span>Last Name</span><br>
-    <input type="text" name="lastname" id="lastname" class="text-white">
+    <span>Last Name<span class="text-danger">*</span></span><br>
+    <div class="bg-light">
+    <input type="text" name="lastname" id="lastname" class="text-dark">
+    </div>
+    <em class="text-danger"><?php if(isset($data['lastname_err'])){ echo $data['lastname_err']; } ?></em>
     </div>
     </div>
     <br>
     
     <div class="d-flex">
     <div class="flex-column px-1">
-    <span>Email</span><br>
-    <input type="text" name="email" id="email" class="text-white">
+    <span>Email<span class="text-danger">*</span></span><br>
+    <div class="bg-light">
+    <input type="text" name="email" id="email" class="text-dark">
+    </div>
+    <em class="text-danger"><?php if(isset($data['email_err'])){ echo $data['email_err']; } ?></em>
     </div>
     <div class="flex-column px-1">
     <span>Phone number</span><br>
-    <input type="text" name="phone_number" id="phone_number" class="text-white">
+    <div class="bg-light">
+    <input type="text" name="phoneno" id="phoneno" class="text-dark">
+    </div>
     </div>
     </div>
     <br>
     
     <div class="px-1">
-    <span>Organization, Club or Union</span><br>
-    <input type="text" name="organization" id="organization" class="text-white">
+    <span>Organization, Club or Union<span class="text-danger">*</span></span><br>
+    <div class="bg-light">
+    <input type="text" name="organization" id="organization" class="text-dark">
+    </div>
+    <em class="text-danger"><?php if(isset($data['organization_err'])){ echo $data['organization_err']; } ?></em>
     </div>
     <br>
     
     <div class="d-flex">
     <div class="flex-column px-1">
-    <span>Number of Eligible Voters</span><br>
-    <input type="text" name="no_of_voters" id="no_of_voters" class="text-white">
+    <span>Number of Eligible Voters<span class="text-danger">*</span></span><br>
+    <div class="bg-light">
+    <input type="text" name="noofvoters" id="noofvoters" class="text-dark">
+    </div>
+    <em class="text-danger"><?php if(isset($data['noofvoters_err'])){ echo $data['noofvoters_err']; } ?></em>
     </div>
     <div class="flex-column px-1">
-    <span>Estimated Vote Start Date</span><br>
-    <input type="text" name="start_date" id="start_date" class="text-white">
+    <span>Vote Start Date<span class="text-danger">*</span></span><br>
+    <div class="bg-light" style="padding:1.5vh; width:25.5vh;">
+    <input type="date" name="start_date" id="start_date" class="text-dark">
+    </div>
+    <em class="text-danger"><?php if(isset($data['votingstartdate_err'])){ echo $data['votingstartdate_err']; } ?></em>
     </div>
     </div>
     <br>
     
     <div class="px-1">
     <span>Provide additional details about your voting event</span><br>
-    <input type="text" name="details" id="details" class="text-white">
+    <div class="bg-light">
+    <input type="text" name="additionaldetails" id="additionaldetails" class="text-dark">
+    </div>
     </div>
     <br>
     
     <!-- save     -->
-        <button type="submit" id="btn" name="submit" class="btn bg-red-6 text-white" style="margin-left:200px;">Submit</button>
+        <button type="submit" id="btn" name="submit" class="btn bg-red-6 text-white" style="margin-left:185px;">Submit</button>
         <br><br>
         
     </form>

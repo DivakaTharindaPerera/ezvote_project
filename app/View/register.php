@@ -1,5 +1,7 @@
 <?php require approot.'/View/inc/VoterHeader.php'; ?>
-
+    <div class="d-flex justify-content-center align-items-center my-1">
+        <a href="<?php echo urlroot; ?>/page/home" class="nav-link-text"><i class="fa-solid fa-house"></i></a>
+    </div>
     <div class="d-flex border-radius-3 min-w-60 min-h-85 border-4 border-primary">
         <div class="d-flex w-50 bg-primary justify-content-center align-items-center">
             <img src="<?php echo urlroot;?>/public/img/signup.jpg" alt="" style="min-height: 300px; max-width:400px;" > </div>
@@ -37,7 +39,7 @@
                     </div>
                 </form>
                 <div class="justify-content-center my-1">
-                    <p class="text-center">Already have an account? <a href="ezvote/pages/login" class="nav-link-text">LogIn</a>
+                    <p class="text-center">Already have an account? <a href="<?php echo urlroot; ?>/Pages/login" class="nav-link-text">LogIn</a>
                 </div>
             </div>
 
