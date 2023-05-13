@@ -1,6 +1,6 @@
 <?php require approot . '/View/inc/VoterHeader.php'; ?>
-<?php require approot . '/View/inc/ManagerNavbar.php'; ?>
-<?php require approot . '/View/inc/manager_sidebar.php'; ?>
+<?php require approot.'/View/inc/AuthNavbar.php'; ?>
+<?php require approot.'/View/inc/sidebar-new.php'; ?>
 
 <script>
 
@@ -20,7 +20,7 @@ window.onload = function(){
 <div class="main-container">
 <div class="min-w-85 min-h-85">
 <div class="w-100 h-50 overflow-y overflow-x ">
-    <div class="title text-center text-uppercase">Enabled Plans Prices</div>
+    <div class="title text-center text-uppercase">Subscribing Plans</div>
        
     <div class="w-100 h-50 d-flex flex-wrap justify-content-center align-items-center overflow-y overflow-x">
                     
@@ -45,13 +45,13 @@ window.onload = function(){
                                            
                                         </div> 
                                         <div class="d-flex flex-row mx-5 my-2">
-                                            <div class="justify-content-center align-items-center" onclick="closePopup()">
-                                                <button type="button" class="btn btn-primary mx-5">CANCEL</button>
+                                            <div class="justify-content-evenly" onclick="closePopup()">
+                                                <button type="button" class="btn btn-primary">CANCEL</button>
                                             </div>
-                                            <!-- <div class="justify-content-evenly">
+                                            <div class="justify-content-evenly">
                                                 <div><a href="./payment"><button type="button" class="btn btn-primary ml-5">SUBSCRIBE</button></a></div>
                                                 
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -92,6 +92,32 @@ class Subscription{
         return $this->db->resultSet();
     }
 
+    public function enabledSubscriptionPlan($plan) {
+        $this->db->query('UPDATE subscription_plan SET plan_status= :status WHERE PlanID = :PlanID');
+
+        $this->db->bind(':PlanID', $plan);
+        $this->db->bind(':status', '1');
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function disabledSubscriptionPlan($plan) {
+        $this->db->query('UPDATE subscription_plan SET plan_status= :status WHERE PlanID = :PlanID');
+
+        $this->db->bind(':PlanID', $plan);
+        $this->db->bind(':status', '0');
+
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function deleteSubscriptionPlan($plan){
         $this->db->query('DELETE FROM subscription_plan WHERE PlanID = :PlanID');
 
@@ -100,8 +126,22 @@ class Subscription{
         return $this->db->resultSet();
     }
 
+    public function subscribedSubscriptionPlan(){
+        $this->db->query('SELECT subscription_plan.PlanName, subscription_plan.Price, COUNT(user.Plan) as Purchased Users, subscription_plan.Discount FROM subscription_plan INNER JOIN user ON subscription_plan.PlanID = user.Plan');
+
+        return $this->db->resultSet();
+    }
+
+    public function planPricing($managerid){
+        $this->db->query('SELECT DISTINCT(PlanName), Price FROM subscription_plan WHERE plan_status = :status AND ManagerID=:ManagerID');
+        $this->db->bind(':status',1);
+        $this->db->bind(':ManagerID',$managerid);
+
+        return $this->db->resultSet();
+    }
+
     public function addChanges($plan, $cur_Date, $cur_Time, $description){
-        // print_r($description);die();
+
         $this->db->query('INSERT INTO plan_changes (PlanID, Date, Time, Description) VALUES (:PlanID, :Date, :Time, :Description)');
 
         $this->db->bind(':PlanID', $plan);
@@ -122,11 +162,13 @@ class Subscription{
         return $this->db->resultSet();
     }
 
+
     public function getSubscriptionPlans(){
         $this->db->query('SELECT * FROM subscription_plan');
 
         return $this->db->resultSet();
     }
+
 
 }
 

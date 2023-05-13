@@ -570,6 +570,26 @@ class Pages extends Controller
         $this->view('Sys_manager/Sysmanager_login');
     }
 
+
+    public function planpricing(){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('login');
+        } else {
+            $data = $this->postModel->pricingPlan();
+            
+            $this->view('userSubscribe', $data);
+        }
+    }
+
+    public function payment(){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('View/login');
+        }else{
+            $this->view('userPayment');
+        }
+    }
+
+
     public function viewOngoingElection($electionId)
     {
         if ($this->isLoggedIn()) {
@@ -1078,3 +1098,4 @@ class Pages extends Controller
         }
     }
 }
+

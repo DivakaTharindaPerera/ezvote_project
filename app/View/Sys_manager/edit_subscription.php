@@ -5,7 +5,7 @@
 <script>
 
 window.onload = function(){
-    var element = document.getElementById("home");
+    var element = document.getElementById("dashboard");
     element.classList.remove("active");
 
     var element = document.getElementById("plan");
@@ -13,16 +13,15 @@ window.onload = function(){
 }
 </script>
 
-
 <div class="main-container" id="text-box1">
-<div class="title text-center">Edit subscription Plan</div>
-<div class="min-w-85 min-h-85">
-    <form class="d-flex flex-column min-h-85 min-w-95 py-1 mb-1 " action="../update_process/<?php echo $data[0]->PlanID ;?>" method="POST">
-        <label for="name">Name</label><br>
-        <input class="h-100 border border-primary" type="text" id="name" name="name" value="<?php echo $data[0]->PlanName; ?>" placeholder="<?php echo $data[0]->PlanName ?>"><br><br>
+    <div class="title text-center text-uppercase">Edit Subscription Plan</div>
+    <div class="min-w-85 min-h-85">
+    <form class="d-flex flex-column min-w-40 py-1 mb-1" action="../update_process/<?php echo $data[0]->PlanID ;?>" method="POST">
+        <label class="font-bold" for="name">Name</label><br>
+        <input class="border border-primary" type="text" id="name" name="name" value="<?php echo $data[0]->PlanName; ?>" placeholder="<?php echo $data[0]->PlanName ?>" required><br><br>
 
-        <label for="description">Description</label><br>
-        <input class="h-100 border border-primary" type="description" id="description" value="<?php echo $data[0]->Description; ?>" name="description" placeholder="<?php echo $data[0]->Description ?>"><br><br>
+        <label class="font-bold" for="description">Description</label><br>
+        <input class="h-100 border border-primary" type="long-text" id="description" value="<?php echo $data[0]->Description; ?>" name="description" placeholder="<?php echo $data[0]->Description ?>" required><br><br>
 
         <div class="free-div">
             <input type="radio" id="free" name="duration" onclick="javascript:yesnoCheck();">
@@ -73,7 +72,7 @@ window.onload = function(){
 
         <div class="limitation" id="limitation">
             <div class="textbox-2">
-                <input type="checkbox" id="access" name="access" onclick="javascript:yesnoCheckAccess();">
+                <input type="checkbox" id="access" name="access" onclick="javascript:yesnoCheckAccess()">
                 <label id="label-3" for="fullaccess">Full access</label>
             </div>
             <div id="div-access" class="box">
@@ -108,12 +107,12 @@ window.onload = function(){
 
         <div class="d-flex gap-4 justify-content-evenly">
             <div class="d-flex">
-            <button type="submit" class="btn btn-primary">SAVE</button>
-            </div>
-            <div class="d-flex">
             <a href="../System_manager/dashboard">
-                <button type="button" class="btn btn-primary">CANCEL</button>
+            <button type="button" class="btn btn-primary">CANCEL</button>
+            </div>
             </a>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-primary">SAVE</button>
             </div>
 </div>
 </form>
