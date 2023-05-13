@@ -64,7 +64,7 @@ class Subscription_plan extends Controller
             $manager_ID = $_SESSION['manager_ID'];
 
             $res = $this->SubscriptionModel->insertSubscriptionPlan($name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID);
-
+    
             if($res){
                 header("Location: /ezvote/System_manager/dashboard");
             }
@@ -119,6 +119,7 @@ class Subscription_plan extends Controller
                 $election_limit = NULL;
             }
             $cur_Date = date("Y-m-d");
+            date_default_timezone_set("Asia/Kolkata");
             $cur_Time = date("h:i");
             $manager_ID = $_SESSION['manager_ID'];
 
@@ -172,6 +173,26 @@ class Subscription_plan extends Controller
         }
     }
 
+    public function enabled_subscription($plan){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $data = $this->SubscriptionModel ->enabledSubscriptionPlan($plan);
+
+            redirect('Subscription_plan/index');
+        }  
+    }
+
+    public function disabled_subscription($plan){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $data = $this->SubscriptionModel ->disabledSubscriptionPlan($plan);
+
+            redirect('Subscription_plan/index');
+        }  
+    }
+
     public function delete_subscription($plan){
         if (!isset($_SESSION["UserId"])) {
             redirect('System_manager/login');
@@ -192,6 +213,16 @@ class Subscription_plan extends Controller
         } 
     }
 
+    public function subscribed_plan(){
+        if(!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $data = $this->SubscriptionModel->subscribedSubscriptionPlan();
+
+            $this->view('',$data);
+        }
+    }
+
 
     public function changeLog(){
         if (!isset($_SESSION["UserId"])) {
@@ -207,8 +238,13 @@ class Subscription_plan extends Controller
         if (!isset($_SESSION["UserId"])) {
             redirect('System_manager/login');
         } else {
-            $this->view('Sys_manager/plan_pricing');
+            $manager_ID = $_SESSION['manager_ID'];
+            $data = $this->SubscriptionModel->planPricing($manager_ID);
+            
+            $this->view('Sys_manager/plan_pricing', $data);
         }
     }
+
+
 }
 ?>

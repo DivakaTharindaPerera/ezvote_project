@@ -5,7 +5,7 @@
 <script>
 
 window.onload = function(){
-    var element = document.getElementById("home");
+    var element = document.getElementById("dashboard");
     element.classList.remove("active");
 
     var element = document.getElementById("plan");
@@ -14,14 +14,14 @@ window.onload = function(){
 </script>
 
 <div class="main-container max-h-85">
-    <div class="w-75 justify-content-center align-items-center">
+    <div class="w-100 overflow-y justify-content-center align-items-center my-1">
     <div class="d-flex flex-column min-w-95"> 
-    <h2 class="title text-center">Subscription Plans</h2>
+    <div class="title text-center text-uppercase">Subscription Plans</div>
     <div class="d-flex justify-content-center align-items-center my-1">
     <a href="/ezvote/Subscription_plan/create_subscription">
-        <button class="btn btn-primary justify-content-center align-items-center" type="button">
+        <div class="btn btn-primary justify-content-center align-items-center" type="button">
             CREATE NEW PLAN
-        </button>
+</div>
     </a>
     </div>
 
@@ -35,7 +35,7 @@ window.onload = function(){
         </div>
         <div class="my-3 d-flex mr-5">
         <a href="#">
-            <button class="btn btn-primary">SEARCH</button></a>
+            <div class="btn btn-primary">SEARCH</div></a>
             <div class="d-flex text-center align-items-center text-md ml-3">FILTER
             </div>
         </div>
@@ -43,8 +43,8 @@ window.onload = function(){
     </div>
     
 
-    <div class="w-100 h-50 overflow-scroll">
-        <table id="myTable" class="table border border-primary w-100 h-35">
+    <div class="w-100 h-50 overflow-y justify-content-center align-items-center">
+        <table id="myTable" class="table border border-primary w-80 overflow-y justify-content-center align-items-center mx-5 h-35 mb-1">
                 <tbody>
 
                 <?php
@@ -55,13 +55,22 @@ window.onload = function(){
 
                 for($x = 0; $x < $arrlength-1; $x++) {
                     echo '<tr>
-                            <td class="td-1">'.$data[0][$x]->PlanName.'</td>
+                            <td class="td-1 text-uppercase font-medium">'.$data[0][$x]->PlanName.'</td>
                             <td class="td-2">
-                                    <label class="switch">
-                                    <input type="checkbox" id="toggle-'.$i.'" onclick="myFunction'.$i.'()">
+                                    <label class="switch">';
+                                    if ($data[0][$x]->plan_status == 0) { ?>
+                                        <input type="checkbox" id="toggle-<?php $i?>" onclick="location.href='./enabled_subscription/<?php echo $data[0][$x]->PlanID ?>';" >
                                         <span class="slider round"></span>
                                     </label>
-                                    <span id="myDIV-'.$i.'" class="ml-1 enabled">Disabled</span>
+                                    <span id="myDIV" class="ml-1 ">Disabled</span>
+                                    <?php } else { ?>
+                                        <input type="checkbox" id="toggle-<?php $i?>" onclick="location.href='./disabled_subscription/<?php echo $data[0][$x]->PlanID ?>';" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <span id="myDIV-" class="ml-1 ">Enabled</span>
+                                    <?php }
+                                    
+                                    echo'   
                                 </td>
                                 <td class="td-3"><a href="edit_subscription/'.$data[0][$x]->PlanID.'"> 
 
@@ -87,16 +96,6 @@ window.onload = function(){
                     $i++;
                 } ?>
 
-                <!-- <script>
-                    function toggleText() {
-                        var x = document.getElementById("myDIV");
-                        if (x.innerHTML === "Disabled") {
-                            x.innerHTML = "Enabled";
-                        } else {
-                            x.innerHTML = "Disabled";
-                        }
-                    }
-                </script> -->
                 </tbody>
         </table>
     </div>

@@ -23,9 +23,6 @@
             <a href="<?php echo urlroot; ?>/Pages/electionNominations/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
                 <div><b>Nominations</b></div>
             </a>
-            <a href="<?php echo urlroot; ?>/Pages/electionNominations/<?php echo $data['ID'] ?>" class="btn btn-primary ml-2 card-hover mt-1 mb-1">
-                <div><b>Nomination Link</b></div>
-            </a>
         <?php
         }
         ?>
@@ -88,24 +85,23 @@
 
                     <input type="checkbox" name="stat" id="" value="1" <?php if ($data['electionRow']->StatVisibality == 1) echo "checked"; ?> disabled>
                 </div>
-                <div id="nomi">
-                    Self Nomination
+                <div id="nomi" class="mx-auto">
+                    <div class="mx-auto text-center">
+                        Self Nomination <input type="checkbox" name="nomi" id="" value="1" <?php if ($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled>
+                    </div>
 
-
-                    <!--                    <img src="--><?php //echo urlroot;
-                                                            ?>
-                    <!--/public/img/tik.png" alt="" style="height: 30px;width: 30px">-->
-                    <input type="checkbox" name="nomi" id="" value="1" <?php if ($data['electionRow']->SelfNomination == 1) echo "checked"; ?> disabled>
-                    <?php
-                    if ($data['electionRow']->SelfNomination == 1) {
-                        echo "
+                    <div class="mx-auto text-center mt-1">
+                        <?php
+                        if ($data['electionRow']->SelfNomination == 1) {
+                            echo "
 
                             <textarea name='nomiDesc' id='' cols='30' rows='10' disabled>
                                 " . $data['electionRow']->NominationDescription . "
                             </textarea>
                             ";
-                    }
-                    ?>
+                        }
+                        ?>
+                    </div>
                 </div>
                 <div id="obj">
                     Objection Status

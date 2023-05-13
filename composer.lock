@@ -4,6 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+
     "content-hash": "289142ec9d31ffcd1b2787844ab07561",
     "packages": [
         {
@@ -366,10 +367,12 @@
             },
             "suggest": {
                 "ext-ctype": "For best performance"
+
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+
                     "dev-main": "1.27-dev"
                 },
                 "thanks": {
@@ -546,6 +549,7 @@
                 "classmap": [
                     "Resources/stubs"
                 ]
+
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -553,6 +557,7 @@
             ],
             "authors": [
                 {
+
                     "name": "Ion Bazan",
                     "email": "ion.bazan@gmail.com"
                 },
@@ -675,6 +680,7 @@
                 }
             ],
             "time": "2022-10-16T01:01:54+00:00"
+
         }
     ],
     "packages-dev": [],
@@ -683,11 +689,13 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
+
     "platform": {
         "ext-openssl": "*",
         "ext-curl": "*",
         "ext-pdo": "*"
     },
+
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
 }

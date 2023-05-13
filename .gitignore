@@ -1,8 +1,13 @@
 /.idea/
 /.metals/
 /.vscode/
+
+
+/vendor/
+
 .env
 
 ./public/upload/
 /public/upload/profile_pictures/
+
 
