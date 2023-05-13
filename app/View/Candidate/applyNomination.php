@@ -1,11 +1,13 @@
-<?php require approot . '/View/inc/VoterHeader.php'; ?>
-<?php require approot . '/View/inc/AuthNavbar.php'; ?>
+<?php
+require approot . '/View/inc/VoterHeader.php';
+require approot . '/View/inc/AuthNavbar.php';
+require approot . '/View/inc/sidebar-new.php';
+?>
 
-<div class="overflow-y">
+<div class="main-container">
 
-    <div class="form border-1 border-dark p-2 text-1xl bg-light" style=" margin-top:60px; ">
+    <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light">
         <form action="/ezvote/Candidates/nomination_apply" method="POST" enctype='multipart/form-data' >
-        <!-- enctype="multipart/form-data" -->
         
     <h2 class="text-center">Apply Nominations</h2>
     <br>
@@ -14,6 +16,7 @@
             creating the election are displayed here.
 
         <br><br>Required documents:</p>
+        <br>
         <ul>
             <li>NIC</li><br>
             <li>Self Declaration</li><br>
@@ -22,100 +25,94 @@
     </div>
     <br><br>
 
-<label for="fullname">Name:</label>
+<label for="fullname">Name<span class="text-danger">*</span> :</label>
 <div class="d-flex">
 
 <!-- first Name -->
-<input type="text" name="firstname" id="firstname" placeholder="First Name...">
-<!-- <div class="error" id="firstname_err"><?php echo isset($errors['firstname']) ? $errors['firstname'] : ''; ?></div> -->
+<input type="text" name="firstname" placeholder="First Name...">
+<em class="text-danger"><?php if(isset($data['fname_err'])){ echo $data['fname_err']; } ?></em>
+
 
 <!-- last Name -->
-<input type="text" name="lastname" id="lastname" placeholder="Last Name...">
-<!-- <div class="error" id="lastname_err"><?php echo isset($errors['lastname']) ? $errors['lastname'] : ''; ?></div> -->
+<input type="text" name="lastname" placeholder="Last Name...">
+<em class="text-danger"><?php if(isset($data['lname_err'])){ echo $data['lname_err']; } ?></em>
 
 </div>
 <br>
 
 <!-- Election Name -->
-<label for="election">Election:</label>
-<input type="text" name="election_name" id="election_name" placeholder="Election you wish to contest...">
-<div class="error" id="election_name_err"><?php echo isset($errors['election_name']) ? $errors['election_name'] : ''; ?></div>
+<!-- <label for="election">Election<span class="text-danger">*</span> :</label>
 
-<br><br>
+<select name="election_name" class="w-50 selectName" style="margin-left:3rem;">
+<option value="" disabled selected>Please select...</option>
+        <?php foreach ($names as $name){ ?>
+<option value="<?php echo $name->Title ?>" class="w-75"><?php echo $name->Title ?></option>
+        <?php } ?> 
+</select>
+<br><br> -->
 
 <!-- Position -->
-<label for="positions">Select position :</label>
+<label for="positions">Select position<span class="text-danger">*</span> :</label>
 
-<select name="position" id="position" class="border-1 border-dark w-25">
-  <option value="">Select...</option>
-  <option value="president">President</option>
-  <option value="wise president">Wise President</option>
-  <option value="secretary">Secretary</option>
-  <option value="tresurer">Tresurer</option>
+<select name="position" class="w-50 selectName" >
+<option value="" disabled selected>Please select...</option>
+        <?php foreach ($positions as $position){ ?>
+<option value="<?php echo $position->positionName ?>"><?php echo $position->positionName ?></option>
+        <?php } ?> 
 </select>
-<!-- <div class="error" id="position_err"><?php echo isset($errors['position']) ? $errors['position'] : ''; ?></div> -->
-
 <br><br>
 
-<!-- check if the party is existing party -->
+<!-- party name --> 
+<label for="party-names">Party Name<span class="text-danger">*</span> :</label>
 
-<!-- <div class="error" id="checkbox_err"><?php echo isset($errors['checkbox']) ? $errors['checkbox'] : ''; ?></div> -->
-<div class="check">
+<select name="party_name" class="w-50 selectName" style="margin-left:1.2rem;">
+<option value="" disabled selected>Please select...</option>
+        <?php foreach ($parties as $party){ ?>
+<option value="<?php echo $party->partyName ?>"><?php echo $party->partyName ?></option>
+        <?php } ?> 
+</select>
+<br><br><br>
 
-
-<!-- Create new party -->
-
-<label for="party-names">Party Name:</label>
-
-
-<!-- new party name -->
-    <input type="text" class="new_party" name="party_name" id="party_name" placeholder="Party Name..."><br><br>
-    <!-- <div class="error" id="party_name_err"><?php echo isset($errors['new_party']) ? $errors['new_party'] : ''; ?></div> -->
-
-<!-- new party description -->
-
-    </div>
-    <br>
 <div class="d-flex">
 
 <!-- profile picture -->
     <div class="column">
-        <p>Upload Profile Picture:
-          <input type="file" id="imgfile" style="color: transparent;"name="imgfile"/></p>
-          
+        <p>Upload Profile Picture<span class="text-danger">*</span> :
+        <input type="file" style="color: transparent;" name="imgfile"/></p>
+        <em class="text-danger"><?php if(isset($data['profilepic_err'])){ echo $data['profilepic_err']; } ?></em>
     </div>
 
 <!-- upload identity proof -->
     <div class="column">
-        <p>Upload Identity Proof:
-        <input type="file" name="file" id="files" style="color: transparent;" multiple></p>
-
+        <p>Upload Identity Proof<span class="text-danger">*</span> :
+        <input type="file" name="file" style="color: transparent;" multiple></p>
+        <em class="text-danger"><?php if(isset($data['identityproof_err'])){ echo $data['identityproof_err']; } ?></em>
     </div>
 </div>
 <br>
 
 <!-- candidate description -->
-    <label for="candidateDescription">Candidate Description:
-    <input type="text" name="candidateDescription" id="candidateDescription" placeholder="Candidate description...">
-    <!-- <div class="error" id="candidateDescription_err"><?php echo isset($errors['candidateDescription']) ? $errors['candidateDescription'] : ''; ?></div> -->
+    <label for="candidateDescription">Candidate Description<span class="text-danger">*</span> :
+    <input type="text" name="candidateDescription" placeholder="Candidate description...">
+    <em class="text-danger"><?php if(isset($data['description_err'])){ echo $data['description_err']; } ?></em>
 <br><br>
 
     </label>
 <!-- msg to the voters -->
-    <label for="candidate vision">Candidate Vision:    
-    <input type="text" name="msg" id="msg" placeholder="Message to the voters...">
-    <!-- <div class="error" id="msg_err"><?php echo isset($errors['msg']) ? $errors['msg'] : ''; ?></div> -->
+    <label for="candidate vision">Candidate Vision<span class="text-danger">*</span> :    
+    <input type="text" name="msg" placeholder="Message to the voters...">
+    <em class="text-danger"><?php if(isset($data['msg_err'])){ echo $data['msg_err']; } ?></em>
 
 <br><br></label>
 
 <!-- cancel -->
-    <button type="submit" id="btn" name="cancel" class="btn bg-primary m-1 w-10"><a href="<?php echo urlroot; ?>/Candidates/viewAllElections" class="text-white">Cancel</a></button>
+    <button type="submit" name="cancel" class="btn bg-blue-10 m-1 w-10"><a href="<?php echo urlroot; ?>/Candidates/applyNomination" class="text-white">Cancel</a></button>
 
 <!-- save -->
-    <button type="submit" id="btn" name="save" class="btn bg-primary text-white m-1 w-10">Save</button>
+    <button type="submit" name="save" class="btn bg-blue-10 text-white m-1 w-10">Save</button>
     <br><br>
-    <!-- <a href="<?php echo urlroot; ?>/Candidates/nominationSuccessful" class="text-white"> -->
+    
 </form>
 </div>
 </div>
-<!-- <?php require approot.'/View/inc/footer.php';?> -->
+<?php require approot.'/View/inc/footer.php';?>

@@ -8,7 +8,7 @@ table{
     border: 2rem;
 }
 th{
-    background-color: var(--black);
+    background-color: var(--info);
     color: var(--white);
 }
 tr{
@@ -25,3 +25,17 @@ tr:hover{
 th, td {
     padding: 15px;
 }
+
+.comment:hover{
+background-color:rgba(221, 235, 244, 0.921);
+color: black;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+  }
+
+tbody{
+    z-index: 5;
+}  

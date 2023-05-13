@@ -1,5 +1,6 @@
 .wrapper .sidebar{
     background: rgb(5, 68, 104);
+    /*background: #10558d;*/
     position: fixed;
     top: 0;
     left: 0;
@@ -8,7 +9,6 @@
     padding: 20px 0;
     transition: all 0.5s ease;
 }
-
 .wrapper .sidebar{
     margin-top: 42px;
 }
@@ -48,7 +48,8 @@
 .wrapper .sidebar ul li a{
     display: block;
     padding: 13px 30px;
-    border-bottom: 1px solid #10558d;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
     color: rgb(241, 237, 237);
     font-size: 16px;
     position: relative;
@@ -63,11 +64,17 @@
     
 }
 
+.wrapper .sidebar ul li.visited{
+    color: #0c7db1;
+    background:var(--secondary);
+    border-right: 2px solid rgb(5, 68, 104);
+}
+
 .wrapper .sidebar ul li a:hover,
 .wrapper .sidebar ul li a.active{
     color: #0c7db1;
 
-    background:white;
+    background:var(--secondary);
     border-right: 2px solid rgb(5, 68, 104);
 }
 
