@@ -91,24 +91,36 @@ class Pages extends Controller
                             $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
                             $v_ongoing_filtered[] = $row;
                         }
-                    }
-                }
-                //                    echo '<pre>';
-                //                    print_r($v_ongoing_filtered);
-                //                    exit;
 
-                foreach ($r_ongoing as $row) {
-                    $c_row = $this->electionModel->getCandidatesByElectionId($row->ElectionId);
-                    foreach ($c_row as $candidate) {
-                        if ($candidate->userId == $_SESSION["UserId"]) {
-                            $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
-                            $c_ongoing_filtered[] = $row;
+
+                        //remove duplicate entries
+                        $v_ongoing_filtered = array_unique($v_ongoing_filtered, SORT_REGULAR);
+
+                }
+//                    echo '<pre>';
+//                    print_r($v_ongoing_filtered);
+//                    exit;
+
+                foreach($r_ongoing as $row){
+                        $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                        foreach ($c_row as $candidate){
+                            if($candidate->userId==$_SESSION["UserId"]){
+                                $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                                $c_ongoing_filtered[] = $row;
+                            }
                         }
-                    }
-                    //                        if($c_row[0]->userId==$_SESSION["UserId"]){
-                    //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
-                    //                            $c_ongoing_filtered[] = $row;
-                    //                        }
+                    // Remove duplicate entries using ElectionId
+                    $c_ongoing_filtered = array_unique($c_ongoing_filtered, SORT_REGULAR);
+//                    echo '<pre>';
+//                    print_r($c_ongoing_filtered);
+//                    exit();
+//                        if($c_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $c_ongoing_filtered[] = $row;
+//                        }
+
+                }
+
 
                 }
             }
@@ -129,6 +141,15 @@ class Pages extends Controller
                             $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
                             $v_upcoming_filtered[] = $row;
                         }
+
+                        // Remove duplicate entries using ElectionId
+                        $v_upcoming_filtered = array_unique($v_upcoming_filtered, SORT_REGULAR);
+
+//                        if($v_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $v_upcoming_filtered[] = $row;
+//                        }
+
                     }
                     //                        if($v_row[0]->userId==$_SESSION["UserId"]){
                     //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
@@ -142,6 +163,15 @@ class Pages extends Controller
                             $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
                             $c_upcoming_filtered[] = $row;
                         }
+
+                        // Remove duplicate entries using ElectionId
+                        $c_upcoming_filtered = array_unique($c_upcoming_filtered, SORT_REGULAR);
+//                        if($c_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $c_upcoming_filtered[] = $row;
+//                        }
+
+
                     }
                     //                        if($c_row[0]->userId==$_SESSION["UserId"]){
                     //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
@@ -160,18 +190,22 @@ class Pages extends Controller
                     }
                 }
 
-                foreach ($r_completed as $row) {
-                    $v_row = $this->electionModel->getVotersByElectionID($row->ElectionId);
-                    foreach ($v_row as $voter) {
-                        if ($voter->userId == $_SESSION["UserId"]) {
-                            $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
-                            $v_completed_filtered[] = $row;
-                        }
+
+                foreach($r_completed as $row){
+                    $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
+                    foreach ($v_row as $voter){
+                            if($voter->userId==$_SESSION["UserId"]){
+                                $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                                $v_completed_filtered[] = $row;
+                            }
                     }
-                    //                        if($v_row[0]->userId==$_SESSION["UserId"]){
-                    //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
-                    //                            $v_completed_filtered[] = $row;
-                    //                        }
+                    // Remove duplicate entries using ElectionId
+                    $v_completed_filtered = array_unique($v_completed_filtered, SORT_REGULAR);
+//                        if($v_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $v_completed_filtered[] = $row;
+//                        }
+
                 }
                 foreach ($r_completed as $row) {
                     $c_row = $this->electionModel->getCandidatesByElectionId($row->ElectionId);
@@ -181,10 +215,14 @@ class Pages extends Controller
                             $c_completed_filtered[] = $row;
                         }
                     }
-                    //                        if($c_row[0]->userId==$_SESSION["UserId"]){
-                    //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
-                    //                            $c_completed_filtered[] = $row;
-                    //                        }
+
+                    // Remove duplicate entries using ElectionId
+                    $c_completed_filtered = array_unique($c_completed_filtered, SORT_REGULAR);
+//                        if($c_row[0]->userId==$_SESSION["UserId"]){
+//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+//                            $c_completed_filtered[] = $row;
+//                        }
+
 
                 }
             }
@@ -660,26 +698,30 @@ class Pages extends Controller
                     }
                 }
             }
-            foreach ($data2 as $nSConference) {
-                $electionId = $nSConference->ElectionID;
-                $votList = $this->voterModel->getVotersByElectionId($electionId);
-                foreach ($votList as $vot) {
-                    if ($vot->userId == $_SESSION['UserId']) {
-                        $data5[] = $this->conferenceModel->getConferenceByConferenceID($nSConference->conferenceID);
+
+
+            foreach ($data2 as $nSConference){
+                $electionId=$nSConference->ElectionID;
+                $votList=$this->voterModel->getVotersByElectionId($electionId);
+                foreach ($votList as $vot){
+                    if($vot->userId==$_SESSION['UserId']){
+                        $data5[]=$this->conferenceModel->getConferenceByConferenceID($nSConference->conferenceID);
                     }
                 }
             }
-            //            $data4=$this->conferenceModel->getCandidatesByElectionID($_SESSION["UserId"]);
-            //            $data5=$this->conferenceModel->getVotersByElectionID($_SESSION["UserId"]);
-            $data = $this->candidateModel->getCandidatesByUserId();
-            //            $data2=[];
-            //            foreach ($data as $candidate){
-            //                $row=$this->conferenceModel->getConferencesByCandidateId($candidate->candidateId);
-            //                $data2[]=$row;
-            //
-            //            }
-            //            var_dump($data);
-            //            exit();
+
+//            $data4=$this->conferenceModel->getCandidatesByElectionID($_SESSION["UserId"]);
+//            $data5=$this->conferenceModel->getVotersByElectionID($_SESSION["UserId"]);
+            $data=$this->candidateModel->getCandidateByUserId();
+//            $data2=[];
+//            foreach ($data as $candidate){
+//                $row=$this->conferenceModel->getConferencesByCandidateId($candidate->candidateId);
+//                $data2[]=$row;
+//
+//            }
+//            var_dump($data);
+//            exit();
+
             //get current time
             //            $now = new DateTime();
             //            //get ongoing conferences

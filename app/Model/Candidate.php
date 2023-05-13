@@ -283,7 +283,7 @@ class Candidate extends Controller
         }
     }
 
-    public function getCandidatesByUserId($user_id)
+    public function getCandidateByUser($user_id)
     {
         // var_dump($candidate_id);
         // exit;
@@ -317,7 +317,7 @@ class Candidate extends Controller
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':vision', $data['vision']);
         if ($this->db->execute()) {
-               return true; 
+               return true;
         }
         else{
          	return false;

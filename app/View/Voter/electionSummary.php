@@ -1,12 +1,12 @@
 <?php
 //echo '<pre>';
-//print_r($data['parties']);
+//print_r($data);
 //exit();
 require approot . '/View/inc/VoterHeader.php';
 require approot . '/View/inc/AuthNavbar.php';
 require approot . '/View/inc/sidebar-new.php'; ?>
 <div class="main-container" >
-    <div id="printJS-report" class="d-flex flex-column border border-3 border-white border-radius-2 p-2 mt-2">
+    <div id="printJS-report" class="d-flex flex-column border border-3 border-white border-radius-2 p-2 mt-2 min-w-80 max-w-80">
     <div class="title my-1">
         <?= $data['election']->Title ?><br>
         <?= $data['election']->OrganizationName ?>
@@ -27,9 +27,9 @@ require approot . '/View/inc/sidebar-new.php'; ?>
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($data['candidates'] as $candidate) { ?>
+                <?php foreach ($data['candidates'] as $candidate) {?>
                     <tr>
-                        <?php $id=$candidate->candidateId?>
+                        <?php $id=$candidate->candidateId; ?>
                         <td><?= $candidate->candidateName?></td>
 
                         <?php
@@ -89,11 +89,19 @@ require approot . '/View/inc/sidebar-new.php'; ?>
         $voteC=[];
         $candiNames=[];
         $candiVotes=[];
+        $positionName='No position';
         foreach ($data['candidates'] as $candidate) {
             $id=$candidate->candidateId;
+            $positionid=$candidate->positionId;
+            foreach ($data['positions'] as $position){
+                if ($position->ID==$positionid){
+                    $positionName=$position->positionName;
+                    break;
+                }
+            }
             foreach ($data['votes'] as $x=>$vote) {
                 if ($x == $id) {
-                    $candiNames[]=$candidate->candidateName;
+                    $candiNames[]=$candidate->candidateName."-".$positionName;
                     $candiVotes[]=$vote;
                     break;
                 }
@@ -135,14 +143,14 @@ require approot . '/View/inc/sidebar-new.php'; ?>
 
     const ctx = document.getElementById('results');
     new Chart(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
             labels: <?php echo json_encode($candiNames);?>,
             datasets: [{
                 label: '# of Votes',
                 data: <?php echo json_encode($candiVotes);?>,
                 borderWidth: 1,
-                backgroundColor:'#10558d'
+                backgroundColor:["#0074D9", "#7FDBFF", "#2ECC40", "#FF851B", "#FF4136", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"]
             }]
         },
         options: {

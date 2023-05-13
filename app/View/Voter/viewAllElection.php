@@ -12,44 +12,46 @@ require approot.'/View/inc/sidebar-new.php';
             <div class="sub-title dark-title ">ONGOING ELECTIONS</div>
             <div class="d-flex mx-auto  justify-content-center align-items-center">
 
-                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2 ">
-                    <div class="d-flex text-xl justify-content-center align-items-center mt-1">Supervising Elections</div>
-                    <div class="d-flex flex-column <?= $data['data1'] == null ?' justify-content-center':'' ?> align-items-center  mx-1 overflow-y-hidden overflow-scroll">
-                        <?php if ($data['data1'] == null){?>
-                            <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Ongoing Elections</div>
-                        <?php }
-                        else{
-                            foreach ($data['data1'] as $row){
-                                $id=$row->ElectionId;
-                                ?>
-                                <div class="d-flex flex-column bg-secondary p-1 border-radius-3 card" style="align-items: center">
-                                    <div id="election-title" class="title"><?php echo $row->Title?></div>
+<!--                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2 ">-->
+<!--                    <div class="d-flex text-xl justify-content-center align-items-center mt-1">Supervising Elections</div>-->
+<!--                    <div class="d-flex flex-column --><?php //= $data['data1'] == null ?' justify-content-center':'' ?><!-- align-items-center  mx-1 overflow-y-hidden overflow-scroll">-->
+<!--                        --><?php //if ($data['data1'] == null){?>
+<!--                            <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Ongoing Elections</div>-->
+<!--                        --><?php //}
+//                        else{
+//                            foreach ($data['data1'] as $row){
+//                                $id=$row->ElectionId;
+//                                ?>
+<!--                                <div class="d-flex flex-column bg-secondary p-1 border-radius-3 card" style="align-items: center">-->
+<!--                                    <div id="election-title" class="title">--><?php //echo $row->Title?><!--</div>-->
                                     <!--                    <div class="text-center text-lg">by</div>-->
-                                    <div id="election-title" class="sub-title"><?php echo $row->OrganizationName?></div>
-                                    <div class="d-flex flex-column justify-center align-center">
-                                        <div id="time" class="mx-1 text-info text-lg blink">
-                                            <?php
-                                            $now = new DateTime();
-                                            try {
-                                                $end_date = new DateTime($row->EndDate . " " . $row->EndTime);
-                                            } catch (Exception $e) {
-                                            }
-                                            $interval = $end_date->diff($now);
-                                            echo $interval->format("%h hours, %i minutes");
-                                            ?>
-                                        </div>
-                                        <button class="btn btn-primary"  onclick="ongoing_summaryForSupervisor('<?=$id?>')">View</button>
-                                    </div>
-
-                                </div>
-                            <?php }
-                        }?>
-                    </div>
-                    <div class="justify-content-center align-items-center"><?= $data['data1'] != null ?'<i class="fa-solid fa-angles-down"></i>':'' ?></div>
-                </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2 ">
+<!--                                    <div id="election-title" class="sub-title">--><?php //echo $row->OrganizationName?><!--</div>-->
+<!--                                    <div class="d-flex flex-column justify-center align-center">-->
+<!--                                        <div id="time" class="mx-1 text-info text-lg blink">-->
+<!--                                            --><?php
+//                                            $now = new DateTime();
+//                                            try {
+//                                                $end_date = new DateTime($row->EndDate . " " . $row->EndTime);
+//                                            } catch (Exception $e) {
+//                                            }
+//                                            $interval = $end_date->diff($now);
+//                                            echo $interval->format("%h hours, %i minutes");
+//                                            ?>
+<!--                                        </div>-->
+<!--                                        <button class="btn btn-primary"  onclick="ongoing_summaryForSupervisor('--><?php //=$id?>
+<!--                //')">-->
+<!--                View</button>-->
+<!--//                                    </div>-->
+<!--//-->
+<!--//                                </div>-->
+<!--//                            --><?php ////}
+//                        }?>
+<!--                    </div>-->
+<!--                    <div class="justify-content-center align-items-center">--><?php //= $data['data1'] != null ?'<i class="fa-solid fa-angles-down"></i>':'' ?><!--</div>-->
+<!--                </div>-->
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-35vw max-w-35vw mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center mt-1">Elections for Voting</div>
-                    <div class="d-flex flex-column <?= $data['data4'] == null ?' justify-content-center':'' ?> align-items-center mx-1 overflow-y-hidden overflow-scroll">
+                    <div class="d-flex flex-wrap <?= $data['data4'] == null ?' justify-content-center':'' ?> align-items-center mx-1 overflow-y-hidden overflow-scroll">
                     <?php if ($data['data4']== null){?>
                     <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Ongoing Elections</div>
                     <?php }
@@ -102,9 +104,9 @@ require approot.'/View/inc/sidebar-new.php';
                     <div class="justify-content-center align-items-center"><?= $data['data4'] != null ?'<i class="fa-solid fa-angles-down"></i>':'' ?></div>
 
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20w mb-2 ">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-35vw max-w-35vw mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center mt-1 ">Elections as Candidates</div>
-                    <div class="d-flex flex-column <?= $data['data7'] == null ?' justify-content-center':'' ?> align-items-center mx-1 overflow-y-hidden overflow-scroll">
+                    <div class="d-flex wrap <?= $data['data7'] == null ?' justify-content-center':'' ?> align-items-center mx-1 overflow-y-hidden overflow-scroll">
                         <?php if ($data['data7'] == null){?>
                             <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Ongoing Elections</div>
                         <?php }
@@ -144,41 +146,41 @@ require approot.'/View/inc/sidebar-new.php';
         <div id="ongoingElections" class="d-flex flex-column mb-3 border border-primary border-3 border-radius-2" style="justify-content: center;align-items: center">
             <div class="sub-title dark-title">UPCOMING ELECTIONS</div>
             <div class="d-flex mx-auto justify-content-center align-items-center">
-                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2 ">
-                    <div class="d-flex text-xl justify-content-center align-items-center mt-1 ">Supervising Elections</div>
-                    <div class="d-flex flex-column <?= $data['data2'] == null ?' justify-content-center':'' ?> align-items-center mx-1 overflow-y-hidden overflow-scroll">
-                    <?php if ($data['data2'] == null ){?>
-                        <div class="d-flex flex-column text-center text-white text-xl mx-1" style="align-items: center">No Upcoming Elections</div>
-                    <?php }
-                    else{
-                        foreach ($data['data2'] as $row){?>
-                            <?php $id=$row->ElectionId;?>
-                            <div class="d-flex bg-secondary p-1 border-radius-3 card" style="align-items: center">
-                                <div id="election-title" class="title"><?php echo $row->Title?></div>
-                                <div id="election-title" class="sub-title"><?php echo $row->OrganizationName?></div>
-                                <div class="d-flex flex-column justify-center align-center">
-                                    <div id="time" class="mx-1 text-info">
-                                        <?php
-                                        $now = new DateTime();
-                                        try {
-                                            $start_date = new DateTime($row->StartDate . " " . $row->StartTime);
-                                        } catch (Exception $e) {
-                                        }
-                                        $interval = $start_date->diff($now);
-                                        echo $interval->format("%d days %h hours, %i minutes");
-                                        ?>
-                                    </div>
-                                    <div><a href="<?=urlroot?>/Pages/ViewMyElection/<?=$id?>" class="btn btn-primary">View</a></div>
-                                </div>
-                            </div>
-                        <?php }
-                    }?>
-                    </div>
-                    <div class="justify-content-center align-items-center"><?= $data['data2'] != null ?'<i class="fa-solid fa-angles-down"></i>':'' ?></div>
-                </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2 ">
+<!--                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2 ">-->
+<!--                    <div class="d-flex text-xl justify-content-center align-items-center mt-1 ">Supervising Elections</div>-->
+<!--                    <div class="d-flex flex-column --><?php //= $data['data2'] == null ?' justify-content-center':'' ?><!-- align-items-center mx-1 overflow-y-hidden overflow-scroll">-->
+<!--                    --><?php //if ($data['data2'] == null ){?>
+<!--                        <div class="d-flex flex-column text-center text-white text-xl mx-1" style="align-items: center">No Upcoming Elections</div>-->
+<!--                    --><?php //}
+//                    else{
+//                        foreach ($data['data2'] as $row){?>
+<!--                            --><?php //$id=$row->ElectionId;?>
+<!--                            <div class="d-flex bg-secondary p-1 border-radius-3 card" style="align-items: center">-->
+<!--                                <div id="election-title" class="title">--><?php //echo $row->Title?><!--</div>-->
+<!--                                <div id="election-title" class="sub-title">--><?php //echo $row->OrganizationName?><!--</div>-->
+<!--                                <div class="d-flex flex-column justify-center align-center">-->
+<!--                                    <div id="time" class="mx-1 text-info">-->
+<!--                                        --><?php
+//                                        $now = new DateTime();
+//                                        try {
+//                                            $start_date = new DateTime($row->StartDate . " " . $row->StartTime);
+//                                        } catch (Exception $e) {
+//                                        }
+//                                        $interval = $start_date->diff($now);
+//                                        echo $interval->format("%d days %h hours, %i minutes");
+//                                        ?>
+<!--                                    </div>-->
+<!--                                    <div><a href="--><?php //=urlroot?><!--/Pages/ViewMyElection/--><?php //=$id?><!--" class="btn btn-primary">View</a></div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        --><?php //}
+//                    }?>
+<!--                    </div>-->
+<!--                    <div class="justify-content-center align-items-center">--><?php //= $data['data2'] != null ?'<i class="fa-solid fa-angles-down"></i>':'' ?><!--</div>-->
+<!--                </div>-->
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-35vw max-w-35vw mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center mt-1 ">Elections as Voter</div>
-                    <div class="d-flex flex-column <?= $data['data5'] == null ?' justify-content-center':'' ?> align-items-center mx-1 overflow-y-hidden overflow-scroll">
+                    <div class="d-flex flex-wrap <?= $data['data5'] == null ?' justify-content-center':'' ?> align-items-center mx-1 overflow-y-hidden overflow-scroll">
                     <?php if ($data['data5']==null  ){?>
                         <div class="d-flex flex-column text-center text-white text-xl mx-1" style="align-items: center">No Upcoming Elections</div>
                     <?php }
@@ -209,9 +211,9 @@ require approot.'/View/inc/sidebar-new.php';
                     <div class="justify-content-center align-items-center"><?= $data['data5'] != null ?'<i class="fa-solid fa-angles-down"></i>':'' ?></div>
 
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2 ">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-35vw max-w-35vw mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center mt-1 ">Elections as candidates</div>
-                    <div class="d-flex flex-column <?= $data['data8'] == null ?' justify-content-center':'' ?> align-items-center mx-1 overflow-y-hidden overflow-scroll">
+                    <div class="d-flex flex-wrap <?= $data['data8'] == null ?' justify-content-center':'' ?> align-items-center mx-1 overflow-y-hidden overflow-scroll">
                         <?php if ($data['data8'] == null ){?>
                             <div class="d-flex flex-column text-center text-white text-xl mx-1" style="align-items: center">No Upcoming Elections</div>
                         <?php }
@@ -247,30 +249,33 @@ require approot.'/View/inc/sidebar-new.php';
         <div id="ongoingElections" class="d-flex flex-column mb-3 border border-primary border-3 border-radius-2" style="justify-content: center;align-items: center">
             <div class="sub-title dark-title ">COMPLETED ELECTIONS</div>
             <div class="d-flex  justify-content-center align-items-center">
-                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2">
-                    <div class="d-flex text-xl justify-content-center align-items-center mt-1 text-center">Supervised Elections</div>
-                    <div class="d-flex flex-column <?= $data['data3'] == null ?' justify-content-center':'' ?>  align-items-center  mx-1 overflow-y-hidden overflow-scroll">
-                    <?php if ($data['data3'] == null){?>
-                    <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Completed Elections</div>
-                    <?php }
-                    else{
-                    foreach ($data['data3'] as $row){?>
-                    <div class="d-flex bg-secondary p-1 border-radius-3 card " style="align-items: center">
-                        <?php $id=$row->ElectionId;?>
-                        <div id="election-title" class="title"><?php echo $row->Title?></div>
-                        <div id="election-title" class="sub-title"><?php echo $row->OrganizationName?></div>
-                        <div class="d-flex flex-column justify-center align-center">
-                            <button class="btn btn-primary" onclick="viewSummaryForSupervisor('<?=$id?>')">View</button>
-                        </div>
-                    </div>
-                    <?php }
-                    }?>
-                    </div>
-                    <div class="justify-content-center align-items-center"><?= $data['data3'] != null ?'<i class="fa-solid fa-angles-down"></i>':'' ?></div>
-                </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2 ">
+<!--                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2">-->
+<!--                    <div class="d-flex text-xl justify-content-center align-items-center mt-1 text-center">Supervised Elections</div>-->
+<!--                    <div class="d-flex flex-column --><?php //= $data['data3'] == null ?' justify-content-center':'' ?><!--  align-items-center  mx-1 overflow-y-hidden overflow-scroll">-->
+<!--                    --><?php //if ($data['data3'] == null){?>
+<!--                    <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Completed Elections</div>-->
+<!--                    --><?php //}
+//                    else{
+//                    foreach ($data['data3'] as $row){?>
+<!--                    <div class="d-flex bg-secondary p-1 border-radius-3 card " style="align-items: center">-->
+<!--                        --><?php //$id=$row->ElectionId;?>
+<!--                        <div id="election-title" class="title">--><?php //echo $row->Title?><!--</div>-->
+<!--                        <div id="election-title" class="sub-title">--><?php //echo $row->OrganizationName?><!--</div>-->
+<!--                        <div class="d-flex flex-column justify-center align-center">-->
+<!--                            <button class="btn btn-primary" onclick="viewSummaryForSupervisor('--><?php //=$id?>
+<!--                '-->
+<!--                )">-->
+<!--                View</button>-->
+<!--//                        </div>-->
+<!--//                    </div>-->
+<!--//                    --><?php ////}
+//                    }?>
+<!--                    </div>-->
+<!--                    <div class="justify-content-center align-items-center">--><?php //= $data['data3'] != null ?'<i class="fa-solid fa-angles-down"></i>':'' ?><!--</div>-->
+<!--                </div>-->
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-35vw max-w-35vw mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center mt-1 text-center">Elections as Voter</div>
-                    <div class="d-flex flex-column <?= $data['data6'] == null ?' justify-content-center':'' ?> align-items-center  mx-1 overflow-y-hidden overflow-scroll">
+                    <div class="d-flex flex-wrap <?= $data['data6'] == null ?' justify-content-center':'' ?> align-items-center  mx-1 overflow-y-hidden overflow-scroll">
                         <?php if ($data['data6'] == null){?>
                             <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Completed Elections</div>
                         <?php }
@@ -310,9 +315,9 @@ require approot.'/View/inc/sidebar-new.php';
                     <div class="justify-content-center align-items-center"><?= $data['data6'] != null ?'<i class="fa-solid fa-angles-down"></i>':'' ?></div>
 
                 </div>
-                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-20vw max-w-20vw mb-2 ">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-37vh max-h-37vh min-w-35vw max-w-35vw mb-2 ">
                     <div class="d-flex text-xl justify-content-center align-items-center  mt-1 text-center">Elections as Candidates</div>
-                    <div class="d-flex flex-column <?= $data['data9'] == null ?' justify-content-center':'' ?> align-items-center  mx-1 overflow-y-hidden overflow-scroll">
+                    <div class="d-flex flex-wrap <?= $data['data9'] == null ?' justify-content-center':'' ?> align-items-center  mx-1 overflow-y-hidden overflow-scroll">
                             <?php if ($data['data9'] == null){?>
                                 <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Completed Elections</div>
                             <?php }

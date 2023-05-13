@@ -11,11 +11,12 @@ function LoadData(){
 	const id3 = urlParams[urlParams.length - 1];
 
 	var profile_picture = $('#profile_picture').val();
-		
+	console.log(id2)
+	console.log(id3)
 // make an ajax call to the server
 $.ajax({
 // sets the url for the ajax request 	
-url: '/ezvote/Candidates/viewPost/'+ id1 +'/'+ id2,
+url: '/ezvote/Candidates/viewPost/'+ id2 +'/'+ id3,
 type: "POST",
 dataType: 'json', // data type of the response from server is json
 success: function(data) { // callback function that is executed if the request succeeds
@@ -39,7 +40,7 @@ success: function(data) { // callback function that is executed if the request s
     }
 },
 error: function(jqXHR, textStatus, errorThrown){
-    alert('Error: ' + textStatus + ' - ' + errorThrown);
+	console.log('Error: ' + textStatus + ' - ' + errorThrown);
 }
 });
 }
@@ -80,15 +81,16 @@ $(document).ready(function() {
 				},
 				cache: false,
 				success: function(dataResult){
-					console.log(dataResult)
-					
 					var dataResult = JSON.parse(dataResult);
 					if(dataResult.statusCode==200){
 						$("#butsave").removeAttr("disabled");
 						document.forms["frm"]["Pcommentid"].value = "";
 						document.forms["frm"]["name"].value = "";
 						document.forms["frm"]["msg"].value = "";
-						LoadData(); 						
+						console.log("ijunnuk")
+						window.location.reload();
+						LoadData();
+
 					}
 					else if(dataResult.statusCode==201){
 					   alert("Error occured !");

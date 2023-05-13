@@ -334,16 +334,20 @@ public function party_apply()
     public function createPost($id1,$id2,$id3)
     {
 
+        $voter=$this->voterModel->getVoterByUserIdAndElectionId($_SESSION["UserId"],$id2);
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+
             $data = [
-                'id' => $_POST['id'],
+                'id' => $_POST['id'] ?? 0,
                 'name' => $_POST['name'],
                 'msg' => $_POST['msg'],
-                'elect_id'=>$id1,
-                'candidate_id'=>$id2,
-                'voter_id'=>$id3
+                'elect_id'=>$id2,
+                'candidate_id'=>$id3,
+                'voter_id'=>$voter->voterId,
             ];
+
             if ($this->discussionModel->insertPost($data)) {
                 echo json_encode(['statusCode' => 200]);
             } else {
@@ -359,7 +363,17 @@ public function party_apply()
         $data = array();
         $result = $this->discussionModel->viewDiscussion($id1,$id2);
         $data = $result;
-
+        $voter=$this->voterModel->findVoterByUserIdAndElectionId($_SESSION["UserId"],$id1);
+        $voterDiscussion=$this->discussionModel->viewDiscussionForVoter($id1,$id2,$voter->voterId);
+        $idarray=array();
+        foreach($voterDiscussion as $voterDiscussion){
+            array_push($idarray,$voterDiscussion->id);
+        }
+        $replies=array();
+        foreach($idarray as $id){
+            array_push($replies,$this->discussionModel->getReplies($id));
+        }
+        header('Content-Type: application/json');
         echo json_encode($data);
     }
 
