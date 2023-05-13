@@ -41,8 +41,8 @@
             if($value->status==0) {
         ?>
         <td>
-        <button class="btn-success text-white border-radius-3 px-1" onclick="location.href='/ezvote/Candidates/acceptPartyRequest/<?php echo $value->request_id ?>/<?php echo $value->user_id ?>'">Accept</button> 
-        <button class="btn-danger text-white border-radius-3 px-1" onclick="openPopupPassId()" data-request_id="<?php echo $value->request_id ?>" data-candidate_id="<?php echo $value->user_id ?>">Reject</button>
+        <button class="btn-success text-white border-radius-3 px-1" onclick="location.href='/ezvote/Candidates/acceptPartyRequest/<?php echo $value->request_id ?>/<?php echo $value->candidate_Id ?>'">Accept</button>
+        <button class="btn-danger text-white border-radius-3 px-1" onclick="openPopupPassId()" data-request_id="<?php echo $value->request_id ?>" data-candidate_id="<?php echo $value->candidate_Id ?>">Reject</button>
         </td>
         <?php 
             }elseif ($value->status==1) {

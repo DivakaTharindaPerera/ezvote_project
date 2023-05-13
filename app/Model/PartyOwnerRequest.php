@@ -117,7 +117,7 @@ class PartyOwnerRequest extends Model
     }
 
     public function AddPartyRequest($data){
-        $this->db->query('INSERT INTO party_owner_request (user_id,election_id,candidate_name,candidate_vision,identity_proof,partyId) VALUES (:user_id,:ElectionID,:candidateName,:msg,:file_urls,:partyId)');
+        $this->db->query('INSERT INTO party_owner_request (user_id,candidate_Id,election_id,candidate_name,candidate_vision,identity_proof,partyId) VALUES (:user_id,:candidateId,:ElectionID,:candidateName,:msg,:file_urls,:partyId)');
         $candidateName = $data['firstname'] . ' ' . $data['lastname'];
         $this->db->bind(':candidateName',$candidateName);
         $this->db->bind(':file_urls',$data['identity_proof']);
@@ -125,6 +125,7 @@ class PartyOwnerRequest extends Model
         $this->db->bind(':ElectionID',$data['ElectionID']);
         $this->db->bind(':user_id',$data['user_Id']);
         $this->db->bind(':partyId',$data['PartyId']);
+        $this->db->bind(':candidateId',$data['candidate_id']);
 
         if($this->db->execute()){
             return true;
@@ -134,7 +135,6 @@ class PartyOwnerRequest extends Model
     }
 
     public function getPartyRequests($candidate_id){
-       
         $this->db->query("SELECT * FROM party_owner_request WHERE user_id = $candidate_id ORDER BY request_id DESC;
         ");
         try {
@@ -192,7 +192,7 @@ class PartyOwnerRequest extends Model
 
     public function getPartyRequestsByElectionAndUser($electionID,$userID){
        
-        $this->db->query("SELECT * FROM party_owner_request WHERE user_id = $userID AND election_id=$electionID");
+        $this->db->query("SELECT * FROM party_owner_request WHERE candidate_id = $userID AND election_id=$electionID");
         try {
             $this->db->execute();
             return $this->db->resultSet();
