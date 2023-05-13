@@ -14,6 +14,10 @@ class Voters extends Controller
         $this->userModel = $this->model('User');
         $this->votingModel = $this->model('Voting');
         $this->conferenceModel = $this->model('Conference');
+        $this->nominateModel = $this->model('Nomination');
+        $this->partyOwnerRequestModel = $this->model('PartyOwnerRequest');
+        $this->positionModel = $this->model('electionPositions');
+
     }
     public function submitObjections()
     {
@@ -106,11 +110,13 @@ class Voters extends Controller
                 redirect('voters/election/' . $election_id);
             }
             else {
+                $result = $this->partyOwnerRequestModel->getPartyRequestsByElectionAndUser($election_id,$_SESSION['UserId']);
                 $this->view('Voter/viewElection', [
                     'election' => $data_1,
                     'positions' => $data_2,
                     'candidates' => $data_3,
-                    'conferences' => $data_6
+                    'conferences' => $data_6,
+                    'result' => $result
                 ]);
             }
         } else {
@@ -297,6 +303,252 @@ class Voters extends Controller
     public function qAndA()
     {
         //todo
+    }
+
+    public function nomination_apply()
+    {
+        if (!isset($_SESSION["UserId"])) {
+            header("Location: " . urlroot . "/View/Login");
+            exit;
+        }else{
+        if (isset($_POST['save'])) {
+
+            //form data is filtered and sanitized using filter_input_array()
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+               
+            //call getParty_Id method of the nominateModel object
+            $party_id = $this->nominateModel->getParty_Id($_POST['party_name']);
+            $position_id = $this->nominateModel->getPosition_Id($_POST['position']);
+
+            $imageName = $_FILES['imgfile']['name'];
+            // var_dump($imageName);
+            $imageTmpName = $_FILES['imgfile']['tmp_name'];
+            // var_dump($imageTmpName);
+            $imageType = $_FILES['imgfile']['type'];
+            // var_dump($imageType);
+            $imageSize = $_FILES['imgfile']['size'];
+            // var_dump($imageSize);
+            $folder1 = "../public/img/candidate/profileImages/" . $imageName;
+            move_uploaded_file($imageTmpName, $folder1);
+
+
+            $filename2 = $_FILES["file"]["name"];
+            // var_dump($filename2);
+            $tempname2 = $_FILES["file"]["tmp_name"];
+            // var_dump($tempname2);
+            $folder2 = "../public/img/candidate/proofDocuments/" . $filename2;
+            move_uploaded_file($tempname2, $folder2);
+
+            $data = [
+                'firstname' => trim($_POST['firstname']),
+                'lastname' => trim($_POST['lastname']),
+                'email' => $_SESSION["email"],
+                'ID' => $position_id,
+                'PartyId' => $party_id,
+                'profile_picture' => $imageName,
+                'identity_proof' => $filename2,
+                'candidateDescription' => trim($_POST['candidateDescription']),
+                'msg' => trim($_POST['msg']),
+
+                'fname_err' => '',
+                'lname_err' => '',
+                'profilepic_err' => '',
+                'identityproof_err' => '',
+                'description_err' => '',
+                'msg_err' => '',
+            ];
+
+            //validate data
+
+            if (empty($data['firstname'])) {
+                $data['fname_err'] = 'Please enter first name';
+            }
+
+            if (empty($data['lastname'])) {
+                $data['lname_err'] = 'Please enter last name';
+            }
+
+            if (empty($data['profile_picture'])) {
+                $data['profilepic_err'] = 'Please attach profile picture';
+            }
+
+            if (empty($data['identity_proof'])) {
+                $data['identityproof_err'] = 'Please attach identity proof documents';
+            }
+
+            if (empty($data['candidateDescription'])) {
+                $data['description_err'] = 'Please enter candidateDescription';
+            }
+
+            if (empty($data['msg'])) {
+                $data['msg_err'] = 'Please enter msg';
+            }
+
+            //make sure no errors
+            if (empty($data['fname_err']) && empty($data['lname_err']) && empty($data['profilepic_err']) &&  empty($data['identityproof_err']) && empty($data['description_err']) && empty($data['msg_err'])) {
+                //validated
+
+                //call AddNomination method of the nominateModel object
+                if ($this->nominateModel->AddNomination($data)) {
+                    // var_dump($data);
+                    // exit;
+                    redirect('Voters/nominationSuccessful');
+                } else {
+                    die('Something went wrong');
+                }
+
+                //If the form is not submitted
+            } else {
+                
+                $names = $this->electModel->getUpcomingElections();
+                $positions = $this->positionModel->getElectionPositions();
+                $parties = $this->partyModel->getElectionParties();
+
+                //renders the applyNomination view, passing the data array
+                $this->view('Candidate/applyNomination', ['names' => $names, 'positions' => $positions, 'parties' => $parties,'data'=>$data]);
+            }
+        } else {
+            //If there are no form submissions and no data, a default empty data array is created
+            $data = [
+
+                'firstname' => '',
+                'lastname' => '',
+                'profile_picture' => '',
+                'identity_proof' => '',
+                'candidateDescription' => '',
+                'msg' => '',
+            ];
+            $this->view('Candidate/nomination_apply', $data);
+        }
+    }
+}
+
+public function party_apply()
+{
+    if (!isset($_SESSION["UserId"])) {
+        header("Location: " . urlroot . "/View/Login");
+        exit;
+    }else{
+    if (isset($_POST['save'])) {
+        // $names = 0;
+
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        // var_dump($_POST);
+        // exit;
+        $party_id = $this->nominateModel->getParty_Id($_POST['party_name']);
+
+        $filename2 = $_FILES["file"]["name"];
+        // var_dump($filename2);
+        $tempname2 = $_FILES["file"]["tmp_name"];
+        // var_dump($tempname2);
+        $folder2 = "../public/img/candidate/proofDocuments/" . $filename2;
+        move_uploaded_file($tempname2, $folder2);
+
+        $data = [
+            'firstname' => trim($_POST['firstname']),
+            'lastname' => trim($_POST['lastname']),
+            'ElectionID' => $_POST['elect_id'],
+            // 'ID' => $position_id,
+            'PartyId' => $party_id,
+            'identity_proof' => $filename2,
+            // 'candidateDescription' => trim($_POST['candidateDescription']),
+            'msg' => trim($_POST['msg']),
+            'user_Id'=> $_SESSION['UserId'],  // user id from the form data.  probably a global variable.  probably not needed.  just using it for
+
+
+            'fname_err' => '',
+            'lname_err' => '',
+            'identityproof_err' => '',
+            'description_err' => '',
+            'msg_err' => '',
+        ];
+
+        //validate data
+
+        if (empty($data['firstname'])) {
+            $data['fname_err'] = 'Please enter first name';
+        }
+
+        if (empty($data['lastname'])) {
+            $data['lname_err'] = 'Please enter last name';
+        }
+
+        if (empty($data['identity_proof'])) {
+            $data['identityproof_err'] = 'Please attach identity proof documents';
+        }
+
+        if (empty($data['msg'])) {
+            $data['msg_err'] = 'Please enter msg';
+        }
+
+        //make sure no errors
+        if (empty($data['identityproof_err']) && empty($data['msg_err'])) {
+            //validated
+            if ($this->partyOwnerRequestModel->AddPartyRequest($data)) {
+                redirect('Voters/applyPartySuccessful');
+            } else {
+                die('Something went wrong');
+            }
+        } else {
+            $parties = $this->partyModel->getElectionParties();
+
+            $this->view('Candidate/applyParty', ['names' => $names,'parties' => $parties,'data'=>$data]);
+
+        }
+    } else {
+        $data = [
+
+            'firstname' => '',
+            'lastname' => '',
+            'profile_picture' => '',
+            'identity_proof' => '',
+            'candidateDescription' => '',
+            'msg' => '',
+
+        ];
+
+        $this->view('Candidate/party_apply', $data);
+    }
+}
+}
+
+    public function applyNomination()
+    {
+        $query = []; // empty array
+
+        //iterate through each element in the $_GET superglobal array
+        foreach ($_GET as $key => $value) {
+            $query[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        
+        // $names = $this->electModel->getUpcomingElections();
+
+        //call getElectionPositionByElectionId method of the positionModel object
+        $positions = $this->positionModel->getElectionPositionByElectionId(intval($query['id']));
+        $parties = $this->partyModel->getPartiesByElectionId(intval($query['id']));
+        $email = $_SESSION['email'];
+
+        //renders the applyNomination view, passing the data array including $positions, $parties, $email
+        $this->view('Candidate/applyNomination', ['positions' => $positions, 'parties' => $parties, 'email' => $email]);
+    }
+
+    public function applyParty($id)
+    {
+        $parties = $this->partyModel->getPartiesByElectionId(intval($id));
+
+        //renders the applyNomination view, passing the data array including  $parties
+        $this->view('Candidate/applyParty', ['parties' => $parties,'elect_id'=>$id]);
+    }
+
+
+    public function nominationSuccessful()
+    {
+        $this->view('Candidate/nominationSuccessful');
+    }
+
+    public function applyPartySuccessful()
+    {
+        $this->view('Candidate/applyPartySuccessful');
     }
 
 

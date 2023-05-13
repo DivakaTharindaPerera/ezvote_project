@@ -7,7 +7,7 @@ require approot . '/View/inc/sidebar-new.php';
 <div class="main-container">
 
     <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light">
-        <form action="/ezvote/Candidates/party_apply" method="POST" enctype='multipart/form-data' >
+        <form action="/ezvote/Voters/party_apply" method="POST" enctype='multipart/form-data' >
         
     <h2 class="text-center">Apply Party</h2>
     <br>
@@ -69,7 +69,7 @@ require approot . '/View/inc/sidebar-new.php';
 <br><br></label>
 
 <!-- cancel -->
-    <button type="submit" name="cancel" class="btn bg-primary m-1 w-10"><a href="<?php echo urlroot; ?>/Candidates/applyNomination" class="text-white">Cancel</a></button>
+    <button type="submit" name="cancel" class="btn bg-primary m-1 w-10"><a href="<?php echo urlroot; ?>/Voters/applyNomination" class="text-white">Cancel</a></button>
 
 <!-- save -->
     <button type="submit" name="save" class="btn bg-primary text-white m-1 w-10">Save</button>

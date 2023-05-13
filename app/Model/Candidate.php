@@ -298,7 +298,7 @@ class Candidate extends Controller
         }
     }
 
-
+    //function is defined with the parameter $data
     public function updateCandidateProfile($data)
     {
         
@@ -310,6 +310,9 @@ class Candidate extends Controller
         }
 
         $this->db->query("UPDATE `Candidate` SET candidateName=:candidateName, `description`=:description, `profile_picture`=:image_url,`identity_proof`=:file_url,vision=:vision WHERE candidateId = :candidateId");
+        
+        //bind values 
+        //helps prevent SQL injection by ensuring that the values are properly escaped before they are included in the query
         $this->db->bind(':candidateId', $data['candidateId']);
         $this->db->bind(':candidateName', $data['candidateName']);
         $this->db->bind(':image_url',$data['profilePicture']);
@@ -340,6 +343,7 @@ class Candidate extends Controller
         }
     }
     
+    
     public function findCandidateByUserIdAndElectionId($uid, $eid)
     {
         $this->db->query(
@@ -365,6 +369,21 @@ class Candidate extends Controller
         $this->db->execute();
         $candidate = $this->db->single();
         return $candidate;
+    }
+
+    public function getCandidateByUser($user_id)
+    {
+        // var_dump($candidate_id);
+        // exit;
+
+        $this->db->query("SELECT * FROM Candidate WHERE userId = $user_id");
+
+        try {
+            $this->db->execute();
+            return $this->db->resultSet();
+        } catch (Exception $e) {
+            echo "Something went wrong :" . $e->getMessage();
+        }
     }
 
 }

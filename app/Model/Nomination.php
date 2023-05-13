@@ -17,11 +17,12 @@ class Nomination extends Model
     protected $Description='';
 
     public function AddNomination($data){
-        $this->db->query('INSERT INTO nomination (firstname,lastname,profile_picture,identity_proof,candidateDescription,msg,ID,partyId) VALUES (:firstname,:lastname,:image_url,:file_urls,:candidateDescription,:msg,:ID,:partyId)');
+        $this->db->query('INSERT INTO nomination (firstname,lastname,email,profile_picture,identity_proof,candidateDescription,msg,ID,partyId) VALUES (:firstname,:lastname,:email,:image_url,:file_urls,:candidateDescription,:msg,:ID,:partyId)');
         //bind values
 
         $this->db->bind(':firstname',$data['firstname']);
         $this->db->bind(':lastname',$data['lastname']);
+        $this->db->bind(':email',$data['email']);
         $this->db->bind(':image_url',$data['profile_picture']);
         $this->db->bind(':file_urls',$data['identity_proof']);
         $this->db->bind(':candidateDescription',$data['candidateDescription']);
