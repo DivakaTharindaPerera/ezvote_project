@@ -8,7 +8,7 @@
         <div class="d-flex">
             <img src="<?php echo urlroot?>/public/img/completed.png" alt="">
         </div>
-        <a href="<?php echo urlroot?>/Pages/viewMyElections" class="btn btn-primary" style="margin-bottom: 1rem">Continue</a>
+        <a href="<?php echo urlroot?>/Pages/viewMyElections" class="btn btn-primary text-2xl mt-1" style="margin-bottom: 1rem"><b>Continue</b></a>
     </div>
 </div>
 

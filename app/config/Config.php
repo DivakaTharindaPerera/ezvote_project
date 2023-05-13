@@ -3,7 +3,7 @@
     define('dbhost', 'localhost');
     define('dbuser', 'root');
     define('dbpass', '');
-    define('dbname', 'ezVoteNew');
+    define('dbname', 'ezVote');
     
     define('approot', dirname(dirname(__FILE__)));
     define('urlroot', 'http://localhost/ezvote');
