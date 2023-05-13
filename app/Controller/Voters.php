@@ -14,6 +14,7 @@ class Voters extends Controller
         $this->userModel = $this->model('User');
         $this->votingModel = $this->model('Voting');
         $this->conferenceModel = $this->model('Conference');
+        $this->discussionModel = $this->model('Discussion');
     }
     public function submitObjections()
     {
@@ -296,26 +297,32 @@ class Voters extends Controller
 
     public function qAndA($electionId,$candidateId)
     {
+
         if($this->isLoggedIn()){
             if($_SERVER['REQUEST_METHOD']=='POST'){
                 $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+                $voterId=$this->voterModel->findVoterByUserIdAndElectionId($_SESSION['UserId'],$electionId);
                 $data=[
-                    'question'=>trim($_POST['question']),
+                    'parentQuestionId'=>$_POST['Pcommentid'],
+                    'name'=>$_POST['name'],
+                    'message'=>trim($_POST['msg']),
+                    'date'=>date('Y-m-d H:i:s'),
                     'electionId'=>$electionId,
+                    'voterId'=>$voterId->voterId,
                     'candidateId'=>$candidateId,
                 ];
-                if($this->voterModel->insertQuestion($data)){
+                if($this->discussionModel->insertQuestion($data)){
                     redirect('Voters/election/'.$electionId);
                 }else{
                     die('Something went wrong');
                 }
+
             }
         }
         $user_id=$_SESSION['UserId'];
-
+//
         $result = $this->voterModel->findVoterByUserIdAndElectionId($user_id,$electionId);
-        // var_dump($result);
-        // exit;
+
         $result2 = $this->candidateModel->findCandidateByUserIdAndElectionId($user_id,$electionId);
         // var_dump($result2);
         // exit;

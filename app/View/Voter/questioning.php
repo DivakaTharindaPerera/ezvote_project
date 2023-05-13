@@ -10,40 +10,40 @@ require approot . '/View/inc/VoterHeader.php'; ?>
   <div class="title">Discussion Forum</div>
   <div class="border-2 border-primary border-radius-5 min-w-80 max-w-80  p-2 bg-white-0-7 h-75 " style="overflow-y: scroll; scrollbar-width: none;">
   <!-- Modal -->
-  <div class="dialog-box-outer" id="popup">
-    <div id="ReplyModal" class="ReplyModal p-3 w-45" role="dialog">
-      <div class="">
-
+<!--  <div class="dialog-box-outer" id="popup">-->
+<!--    <div id="ReplyModal" class="ReplyModal p-3 w-45" role="dialog">-->
+<!--      <div class="">-->
+<!---->
         <!-- Modal content-->
         <!-- reply dialog box -->
-        <div class="">
-          <div class="">
+<!--        <div class="">-->
+<!--          <div class="">-->
             <!-- <button type="button" class=""  onclick="closePopup()">&times;</button> -->
-            <h4 class="">Reply Question</h4>
-            <br>
-          </div>
-          <div class="modal-body">
-            <form name="frm1" method="post">
-              <input type="hidden" id="commentid" name="Rcommentid">
-              <div class="">
+<!--            <h4 class="">Reply Question</h4>-->
+<!--            <br>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <form name="frm1" method="post">-->
+<!--              <input type="hidden" id="commentid" name="Rcommentid">-->
+<!--              <div class="">-->
                 <!-- <label for="usr">Write your name:</label> -->
-                <input style="display:none;" type="text" class="form-control" name="Rname" value="<?= $result2[0]->candidateName ?>">
-              </div>
-              <div class="">
-                <label for="comment">Write your reply:</label>
-                <input type="text" class="form-control" rows="5" name="Rmsg" style="height:10vh;" required>
-              </div>
-              <br>
-              <input type="button" id="btncancel" name="btncancel" class="btn btn-danger" value="Cancel" onclick="closePopup()">
-              <input type="button" id="btnreply" name="btnreply" class="btn btn-primary" value="Reply">
-
-            </form>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
+<!--                <input style="display:none;" type="text" class="form-control" name="Rname" value="--><?php //= $result2[0]->candidateName ?><!--">-->
+<!--              </div>-->
+<!--              <div class="">-->
+<!--                <label for="comment">Write your reply:</label>-->
+<!--                <input type="text" class="form-control" rows="5" name="Rmsg" style="height:10vh;" required>-->
+<!--              </div>-->
+<!--              <br>-->
+<!--              <input type="button" id="btncancel" name="btncancel" class="btn btn-danger" value="Cancel" onclick="closePopup()">-->
+<!--              <input type="button" id="btnreply" name="btnreply" class="btn btn-primary" value="Reply">-->
+<!---->
+<!--            </form>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!---->
+<!--    </div>-->
+<!--  </div>-->
 
   <!-- posting the question -->
   <!-- <div class="container"> -->

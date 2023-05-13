@@ -406,7 +406,6 @@ class Voter extends Controller{
 
         try {
             $result = $this->db->resultSet();
-            echo $this->db->rowCount();
             return $result;
         } catch (Exception $e) {
             echo "Something went wrong ".$e->getMessage();
@@ -460,9 +459,9 @@ class Voter extends Controller{
     }
 
     public function findVoterByUserIdAndElectionId($uid,$eid){
-        // var_dump($uid);
-        // var_dump($eid);
-        // exit;
+//         var_dump($uid);
+//         var_dump($eid);
+//         exit;
         $this->db->query(
             "SELECT * FROM Voter
             WHERE userId = :1 AND ElectionId = :2"
