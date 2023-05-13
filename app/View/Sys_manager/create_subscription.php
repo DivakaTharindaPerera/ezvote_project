@@ -15,16 +15,10 @@ window.onload = function(){
 
 <div class="main-container" id="text-box1">
     <div class="title text-center text-uppercase">Create Subscription Plan</div>
-    <div class="min-w-85 min-h-85">
+    <div class="min-w-85 min-h-85 border border-primary border-radius-2 border-3 px-1 py-1 overflow-y">
     <form class="d-flex flex-column min-w-40 py-1 mb-1 " action="./create_process" method="POST">
         <label for="name" class="font-bold">Name</label><br>
-        <select class="select border border-primary h-100 min-w-40 overflow-y overflow-x" id="name" name="name">
-        <option value="extreme plan">extreme plan</option>
-        <option value="annual plan">annual plan</option>
-        <option value="monthly plan">monthly plan</option>
-        <option value="starter plan">starter plan</option>
-        <option value="free plan">free plan</option>
-        </select><br><br>
+        <input class="h-100 border border-primary" type="text" id="name" name="name" placeholder="Name of the subscription plan" required><br><br>
 
         <label class="font-bold" for="description">Description</label><br>
         <input class="h-100 border border-primary" type="long-text" id="description" name="description" placeholder="Description of the subscription plan" required><br><br>
@@ -35,16 +29,23 @@ window.onload = function(){
         </div>
         <div>
             <input type="radio" id="free-2" name="duration" onclick="javascript:yesnoCheck();" checked>
-            <label id="lable-2" for="price">Price ($)</label>
-            <div class="w-10">
-            <input class="w-5 h-5 border border-primary" type="text" id="price" name="price">
+            <label id="lable-2" for="price">Price (Rs)</label>
+            <div class="w-20 border border-primary">
+            <input class="w-100 h-50 px-1" style="padding-left: 0.5rem;" type="number" id="price" name="price">
+            </div>
+
+        </div>
+            <div class="mt-2">
+            <label id="lable-2" for="price">Discount (%)</label>
+            <div class="w-20 border border-primary">
+            <input class="w-100 h-50" style="height:30%; padding-left: 0.5rem;" type="number" id="discount" name="discount">
+            </div>
             </div>
 
 
             <br>
             <hr>
             <br>
-        </div>
 
 <div class="d-flex flex-column my-1">
 <div class="time-div">
@@ -61,17 +62,17 @@ window.onload = function(){
 
         <label id="text-3" for="day">days</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary mb-1" type="number" min="0" max="31" id="day" name="day">
+        <input class="w-100 bg-primary mb-1" style="padding-left:0.5rem;" type="number" min="0" max="31" id="day" name="day">
         </div>
 
         <label id="text-4" for="month">months</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" min="0" max="12" id="month" name="month">
+        <input class="w-100 bg-primary " style="padding-left:0.5rem;" type="number" min="0" max="12" id="month" name="month">
         </div>
 
         <label id="text-5" for="year">years</label>
         <div class="border border-primary w-10">
-        <input class="w-100 bg-primary" type="number" min="0" id="year" name="year">
+        <input class="w-100 bg-primary " style="padding-left:0.5rem;" type="number" min="0" id="year" name="year">
         </div>
 
         <br>

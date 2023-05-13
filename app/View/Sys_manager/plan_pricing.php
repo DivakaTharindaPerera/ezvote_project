@@ -5,7 +5,7 @@
 <script>
 
 window.onload = function(){
-    var element = document.getElementById("home");
+    var element = document.getElementById("dashboard");
     element.classList.remove("active");
 
     var element = document.getElementById("pricing");
@@ -14,7 +14,8 @@ window.onload = function(){
 </script>
 <script>
     const p1 = '<span class="my-1">Self Nomination</span><br> <span class="my-1">Unlimited Number of Users</span><br> <span class="my-1">Unlimited Number of Elections</span><br> <span class="my-1">Conference Options</span><br> <span class="my-1">Objection Submission</span><br>';
-    const p2 = '<span class="my-1">Limited Number of Voters</span><br> <span class="my-1">Limited Number of Candidates</span><br> <span class="my-1">Limited Number of Elections</span><br> <span class="my-1">Conference Options</span><br> <span class="my-1">Objection Submission</span><br>';
+    const p2 = '<span class="my-1">Self Nomination</span><br> <span class="my-1">Limited Number of Voters up to 300</span><br> <span class="my-1">Limited Number of Candidates up to 100</span><br> <span class="my-1">Limited Number of Elections up to 10</span><br> <span class="my-1">Objection Submission</span><br>';
+    const p3 = '<span class="my-1">Self Nomination</span><br> <span class="my-1">Limited Number of Voters up to 50</span><br> <span class="my-1">Limited Number of Candidates up to 10</span><br> <span class="my-1">Limited Number of Elections up to 2</span><br> <span class="my-1">Objection Submission</span><br>';
 </script>
 
 <div class="main-container">
@@ -25,6 +26,18 @@ window.onload = function(){
     <div class="w-100 h-50 d-flex flex-wrap justify-content-center align-items-center overflow-y overflow-x">
                     
                         <?php
+
+                        if(isset($_SESSION['plan'])) {
+                            echo '<h3 class="text-center">You are currently created to '.$_SESSION['plan'].' plan.</h3>';
+                        } else {
+                            echo '<h3 class="text-center text-danger">You are currently not created to any plans.</h3>';
+                        }
+                        ?>
+                </div>
+            </div>
+       
+            <div class="w-100 h-50 d-flex flex-wrap justify-content-center align-items-center overflow-y overflow-x">
+                <?php
 
                         $arrlength = count($data, COUNT_RECURSIVE);
 
@@ -61,8 +74,16 @@ window.onload = function(){
                             document.getElementById('pop-up-content').innerHTML=p1;
                        <?php } ?>
 
-                       <?php if ($data[$x]-> PlanName != 'extreme plan') { ?>
+                       <?php if ($data[$x]-> PlanName == 'premium plan') { ?>
                             document.getElementById('pop-up-content').innerHTML=p2;
+                       <?php } ?>
+
+                       <?php if ($data[$x]-> PlanName == 'basic plan') { ?>
+                            document.getElementById('pop-up-content').innerHTML=p3;
+                       <?php } ?>
+
+                       <?php if ($data[$x]-> PlanName != 'extreme plan' AND $data[$x]-> PlanName != 'premium plan' AND $data[$x]-> PlanName != 'basic plan') { ?>
+                            document.getElementById('pop-up-content').innerHTML=p3;
                        <?php } ?>
                        
                        document.getElementById('price').innerHTML='<?php echo '$ '?> <?php echo $data[$x]-> Price ?> <?php echo '/ Month'?> '; 

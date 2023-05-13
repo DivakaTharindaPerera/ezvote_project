@@ -16,8 +16,8 @@ window.onload = function(){
 <div class="main-container">
     <div class="title text-center text-uppercase">Changes Log</div>
     <div class="min-w-85 min-h-85">
-        <div class="w-100 h-50 overflow-y overflow-x justify-content-center align-items-center">
-            <table class="table border border-primary justify-content-center align-items-center w-90 h-50 mx-3 mt-2 overflow-y">
+        <div class="w-100 h-50 overflow-y overflow-x justify-content-center align-items-center my-1">
+            <table class="table border border-primary justify-content-center align-items-center w-90 h-50 mx-3 mt-2 overflow-y my-2">
                 <thead>
                     <tr>
                         <th>Plan ID</th>

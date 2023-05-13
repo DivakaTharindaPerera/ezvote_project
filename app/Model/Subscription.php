@@ -15,9 +15,9 @@ class Subscription{
 
     }
 
-    public function insertSubscriptionPlan($name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
+    public function insertSubscriptionPlan($name,$description, $cur_Date, $day, $month, $year, $price, $discount, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
 
-        $this->db->query('INSERT INTO subscription_plan (PlanName, Description, Date, DurationDate, DurationMonth, DurationYear, Price, FullAccess, VotersLimit, CandidateLimit, ElectionLimit, ManagerID) VALUES (:PlanName, :Description, :Date, :DurationDate, :DurationMonth, :DurationYear, :Price, :FullAccess, :VotersLimit, :CandidateLimit, :ElectionLimit, :ManagerID)');
+        $this->db->query('INSERT INTO subscription_plan (PlanName, Description, Date, DurationDate, DurationMonth, DurationYear, Price, Discount, FullAccess, VotersLimit, CandidateLimit, ElectionLimit, ManagerID) VALUES (:PlanName, :Description, :Date, :DurationDate, :DurationMonth, :DurationYear, :Price, :Discount, :FullAccess, :VotersLimit, :CandidateLimit, :ElectionLimit, :ManagerID)');
         $this->db->bind(':PlanName', $name);
         $this->db->bind(':Description', $description);
         $this->db->bind(':Date', $cur_Date);
@@ -25,6 +25,7 @@ class Subscription{
         $this->db->bind(':DurationMonth', $month);
         $this->db->bind(':DurationYear', $year);
         $this->db->bind(':Price', $price);
+        $this->db->bind(':Discount', $discount);
         $this->db->bind(':FullAccess', $fullaccess);
         $this->db->bind(':VotersLimit', $voter_limit);
         $this->db->bind(':CandidateLimit', $cand_limit);
@@ -48,8 +49,8 @@ class Subscription{
             
     }
 
-    public function updateSubscriptionPlan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
-        $this->db->query('UPDATE subscription_plan SET PlanName=:PlanName,Description= :Description,Date= :Date,DurationDate= :DurationDate,DurationMonth= :DurationMonth,DurationYear= :DurationYear,Price= :Price,FullAccess= :FullAccess,VotersLimit= :VotersLimit,CandidateLimit= :CandidateLimit,ElectionLimit= :ElectionLimit,ManagerID= :ManagerID WHERE PlanID = :PlanID');
+    public function updateSubscriptionPlan($plan,$name,$description, $cur_Date, $day, $month, $year, $price, $discount, $fullaccess, $voter_limit, $cand_limit, $election_limit, $manager_ID){
+        $this->db->query('UPDATE subscription_plan SET PlanName=:PlanName,Description= :Description,Date= :Date,DurationDate= :DurationDate,DurationMonth= :DurationMonth,DurationYear= :DurationYear,Price= :Price, Discount= :Discount,FullAccess= :FullAccess,VotersLimit= :VotersLimit,CandidateLimit= :CandidateLimit,ElectionLimit= :ElectionLimit,ManagerID= :ManagerID WHERE PlanID = :PlanID');
 
         $this->db->bind(':PlanName', $name);
         $this->db->bind(':Description', $description);
@@ -58,6 +59,7 @@ class Subscription{
         $this->db->bind(':DurationMonth', $month);
         $this->db->bind(':DurationYear', $year);
         $this->db->bind(':Price', $price);
+        $this->db->bind(':Discount', $discount);
         $this->db->bind(':FullAccess', $fullaccess);
         $this->db->bind(':VotersLimit', $voter_limit);
         $this->db->bind(':CandidateLimit', $cand_limit);
@@ -73,7 +75,7 @@ class Subscription{
     }
 
     public function editSubscriptionDiscount($plan,$discount){
-        $this->db->query('UPDATE sale_subscription SET Discount=:Discount WHERE planID = :planID');
+        $this->db->query('UPDATE subscription_plan SET Discount=:Discount WHERE planID = :planID');
 
         $this->db->bind(':Discount',$discount);
         $this->db->bind(':planID', $plan);
@@ -86,7 +88,7 @@ class Subscription{
     }
 
 
-    public function saleSubscriptionPlan(){
+    public function selectSaleSubscription(){
         $this->db->query('SELECT * FROM sale_subscription');
 
         return $this->db->resultSet();
@@ -126,8 +128,9 @@ class Subscription{
         return $this->db->resultSet();
     }
 
-    public function subscribedSubscriptionPlan(){
-        $this->db->query('SELECT subscription_plan.PlanName, subscription_plan.Price, COUNT(user.Plan) as Purchased Users, subscription_plan.Discount FROM subscription_plan INNER JOIN user ON subscription_plan.PlanID = user.Plan');
+    public function selectEnabledPlan(){
+        $this->db->query('SELECT PlanName, Price, Discount FROM subscription_plan WHERE plan_status = :status');
+        $this->db->bind(':status',1);
 
         return $this->db->resultSet();
     }

@@ -57,11 +57,11 @@ class System_manager extends Controller
 
         } else {
             $email = $_POST['email'];
-            $pwd = $_POST['pwd'];
+            $password = $_POST['password'];
             
-            $hashed = $this->ManagerModel->verifyLogin($email, $pwd);
+            $hashed = $this->ManagerModel->verifyLogin($email, $password);
 
-            if (password_verify($pwd, $hashed)) {
+            if (password_verify($password, $hashed)) {
                 $_SESSION['UserId'] = $_SESSION['manager_ID'];
                 $man_name = $this->ManagerModel->getManagerName($_SESSION['manager_ID']);
                 $_SESSION['name'] = $man_name[0]->name;
@@ -69,7 +69,12 @@ class System_manager extends Controller
                 $data = [$sub_plans];
                 $this->view('Sys_manager/sysmanager_dashboard', $data);
             } else {
-                header("Location: ./login");
+                $data = [
+                    'error' => "invalid email or password",
+                    'email' => $email
+                ]; 
+                $this->view('Sys_manager/Sysmanager_login',$data);
+                
             }
         }
 
@@ -148,10 +153,9 @@ class System_manager extends Controller
                 try {
                     for ($i=0; $i < $mail_count; $i++) { 
                         $data['email'] = $mails[$i]->Email;
-                        $this->mail->sendEmail($data);
-    
+                        $this->mail->sendEmail($data);   
                     }
-                    $this->view('Sys_manager/sysmanager_announcements');
+                    $this->view('Sys_manager/dashboard');
                 } catch (Exception $e) {
                     echo "Message could not be sent. Please try again later.";
                 }
@@ -159,6 +163,45 @@ class System_manager extends Controller
             }
             $this->view('Sys_manager/sysmanager_announcements');
         }
+    }
+
+    public function managerProfile(){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $data = $this->ManagerModel->profile($_SESSION['manager_ID']);
+
+            $this->view('Sys_manager/manager_profile',$data);
+        }
+    }
+
+    public function updateProfile(){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+
+        $this->view('Sys_manager/manager_update_profile');
+    }
+}
+
+    public function updateProfileProcess($managerid){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $man_profile = $this->ManagerModel->getManagerImg($_SESSION['manager_ID']);
+            $_SESSION['profile_img'] = $man_profile[0]->name;
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $managerid = $_SESSION['manager_ID'];
+
+            $res = $this->ManagerModel->editProfile($name,$email,$managerid);
+            if($res){
+                header('Location: /ezvote/System_manager/dashboard');
+            } else {
+                header('Location: /ezvote/System_manager/updateProfileProcess');
+            }
+        }
+
     }
 
     public function logout(){

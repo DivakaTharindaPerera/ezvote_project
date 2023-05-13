@@ -10,13 +10,13 @@
             <form action='<?php echo urlroot; ?>/System_manager/dashboard' method='POST' class="d-flex flex-column" >
                 <div class="d-flex flex-column my-1 mx-1">
                     <div><label for="email">Email</label></div>
-                    <div><input type="email" name="email" id="email" value="<?= htmlspecialchars($_POST["email"] ?? "") ?>" placeholder="Email...." onclick="clickToclear()"></div>
+                    <div><input type="email" name="email" id="email" value="<?= htmlspecialchars($_POST["email"] ?? "") ?>" placeholder="Email...." onclick="clickToclear()" required></div>
                 </div>
                 <div class="d-flex flex-column my-1 mx-1">
                     <div><label for="email">Password</label></div>
                     <div>
-                        <input type="password" name="pwd" id="password" placeholder="password....">
-                        <em id="error"><?php if(isset($data['error'])){ echo $data['error']; } ?></em>
+                        <input type="password" name="password" id="password" placeholder="password...." required>
+                        <em class="text-danger" id="error"><?php if(isset($data['error'])){ echo $data['error']; } ?></em>
                     </div>
                 </div>
                 <div class="text-s mx-1">
