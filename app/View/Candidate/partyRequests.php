@@ -26,11 +26,12 @@
 <?php 
     // var_dump($electName);
     // exit;
+    $increment=1;
     foreach ($request as $value){
 ?>
 <tbody class="">
     <tr class="comment table-row">
-        <td><?php echo $value->request_id?></td>
+        <td><?php echo $increment?></td>
         <td class="text-left"><?php echo $electName[$value->request_id]?></td>
         <td class="text-left"><?php echo $value->candidate_name?></td>
         <td class="text-left"><?php echo $value->candidate_vision?></td>
@@ -59,6 +60,7 @@
         
     </tr> 
 <?php 
+    $increment++;
     } 
 ?>
 

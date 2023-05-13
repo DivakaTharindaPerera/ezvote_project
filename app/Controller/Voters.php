@@ -447,7 +447,7 @@ class Voters extends Controller
                 //If the form is not submitted
             } else {
                 
-                $names = $this->electModel->getUpcomingElections();
+                $names = $this->elecModel->getUpcomingElections();
                 $positions = $this->positionModel->getElectionPositions();
                 $parties = $this->partyModel->getElectionParties();
 
