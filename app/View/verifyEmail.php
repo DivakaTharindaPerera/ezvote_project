@@ -10,10 +10,14 @@
 <!--    </div>-->
     <div class="pagecontent d-flex flex-column border-primary border-3 bg-secondary">
     <div class="form">
-    <?php
-    //if the code is wrong
-        echo "<div class='d-flex justify-content-center text-center text-xl mx-1'> Verification code has been sent to the email <br> <em style='color: red'>" .$data['email']." </em> </div>";
-    ?>
+    <div class="m-1 text-center d-flex flex-column text-2xl">
+        <div class="text-primary">
+        Verification code has been sent to the email
+        </div>
+        <div class="text-danger">
+            <?php echo $data['email'] ;?>
+        </div>
+    </div>
         <div class="d-flex justify-content-center">
             <form action="<?php echo urlroot ?>/users/verifyEmail" method="POST" >
                 <input type="hidden" name="email" value="<?php echo $data['email']; ?>" required>

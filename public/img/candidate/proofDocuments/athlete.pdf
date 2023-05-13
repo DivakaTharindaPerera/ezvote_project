@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" href="/ezvote/public/css/style.css">-->
+<!--    <link rel="stylesheet" href="/ezvote/public/css/util.css">-->
+<!--    importing new library-->
+    <link rel="stylesheet" href="/ezvote/public/css_new/framework/utils.css">
+    <link rel="stylesheet" href="/ezvote/public/css/aditionalStyles.css">
+    <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <script src="https://printjs-4de6.kxcdn.com/print.min.css"></script>
+
+    <title>ezVote</title>
+</head>
+<body>
+<header class="bg-white text-black">
+    <script>
+    </script>
+    <nav>
+        <div class="logo">
+            <img src="/ezvote/public/img/ezvotelogo.png" width="120rem" alt="">
+            <span></span>
+        </div>
+        <ul class="navList d-flex px-1">
+                <li><a href="/ezvote/pages/home" class="px-1">Home</a></li>
+<!--                <a href="#" class="px-1">Notifications</a>-->
+                <a href="javascript:profile();" class="px-1">Profile</a>
+<!--                <br>-->
+                <div class="dialog-box-outer" id="popup2">
+                <div class="popup mx-1 my-1 p-1 max-w-50 max-h-50 border-primary border-1 border-radius-2" >
+                    <div class="d-flex justify-content-end mb-1">
+                        <a href="#" class="close-btn" onclick="closeProfile()"><i class="fa-solid fa-xmark"></i></a>
+                    </div>
+                    <div class="mx-1 my-1 px-1 py-1 w-90 border-primary border-4 border-radius-2">
+
+                    <div class="align-items-center justify-content-center mt-1">
+                        <img src="/ezvote/public/img/profile.jpg" alt="" class="max-h-20 max-w-20" style="border-radius: 50%">
+                    </div>
+                    <div class="title">Name: Kavindya Nimeshi</div>
+                    <div class="sub-title">Email: kavindyanimeshi99@gmail.com</div>
+                    <div class="d-flex justify-content-center align-items-center my-1">
+                        <button class="btn btn-primary" onclick="editingProfile()">Edit Profile</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <a href="/ezvote/Controller/logout" class="btn btn-info">Logout</a>
+        </ul>
+    </nav>
+</header>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <link rel="stylesheet" href="/ezvote/public/css-new/framework/components/sidebar-new/sidebar.css">-->
+<!--    <title>Discussion</title>-->
+<!--    <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>-->
+<!--    <script src="https://kit.fontawesome.com/ac7ec7fa10.js" crossorigin="anonymous"></script>-->
+<!--</head>-->
+<!--<body>-->
+
+
+    <div class="wrapper">
+       
+        <!--Top menu -->
+        <div class="sidebar">
+           
+           <!--profile image & text-->
+            <!--menu item-->
+                <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
+
+            <div class="profile mr-1">
+                <img src="/ezvote/public/img/profile.jpg" style="object-fit: cover" alt="profile_picture"><br>
+                <h3 class="text-center text-md text-white mr-1">Kavindya Nimeshi</h3>
+<!--                <p>Blogger</p>-->
+            </div>
+
+
+            <ul>
+<!--                <li>-->
+<!--                    <a href="--><!--/Pages/goHome" class="active">-->
+<!--                        <span class="icon"><i class="fas fa-home"></i></span>-->
+<!--                        <span class="item">Home</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+                <li>
+                    <a href="http://localhost/ezvote/Pages/dashboard">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item">My Dashboard</span>
+                    </a>
+                </li> 
+
+                <!-- create election -->
+                <li>
+                    <a href="http://localhost/ezvote/pages/Createelection">
+                        <span class="icon"><i class="fas fa-vote-yea"></i></span>
+                        <span class="item">Create Election</span>
+                    </a>
+                </li>
+<!--                <li>-->
+<!--                    <a href="--><!--/Pages/viewAllObjections">-->
+<!--                        <span class="icon"><i class="fa-solid fa-bullseye"></i></span>-->
+<!--                        <span class="item">Objections</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+                <!-- view elections -->
+
+                <li>
+                    <a href="http://localhost/ezvote/View/ViewMyElections">
+                        <span class="icon"><i class="fas fa-clipboard"></i></span>
+                        <span class="item">View My Elections</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://localhost/ezvote/Candidates/discussionForum">
+                        <span class="icon"><i class="fa-brands fa-wpforms"></i></span>
+                        <span class="item">Discussion Forum</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost/ezvote/Pages/viewAllConferences">
+                        <span class="icon"><i class="fa-solid fa-users"></i></span>
+                        <span class="item">Conferences</span>
+                    </a>
+                </li>
+
+                <!-- subscription plans -->
+                <li>
+                    <a href="http://localhost/ezvote/View/subscriptionPlans">
+                        <span class="icon"><i class="fas fa-dollar-sign"></i></span>
+                        <span class="item">Subscription Plans</span>
+                    </a>
+                <!-- <li>
+                    <a href="http://localhost/ezvote/Candidates/candidateProfile">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Edit profile</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="http://localhost/ezvote/Candidates/applyNomination">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Apply Nomination</span>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="http://localhost/ezvote/Candidates/partyrequests">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Party Requests</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+
+<!--        <div class="section">-->
+<!--            <div class="top_navbar">-->
+<!--                <div class="hamburger">-->
+<!--                    <a href="#">-->
+<!--                        <i class="fas fa-bars"></i>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--        </div>-->
+        </div>
+
+    </div>
+
+
+    <!-- Profile -->
+
+    
+    <script src="sidebar.js"></script>
+
+<!--</body>-->
+<!--</html>--><div class="main-container">
+    <div id="Elections" class="w-95 d-flex flex-column mt-3 mb-1" style="z-index: 2">
+        <div id="ongoingElections" class="d-flex flex-column mb-3 border border-primary border-3 border-radius-2" style="justify-content: center;align-items: center">
+            <div class="sub-title dark-title ">ONGOING ELECTIONS</div>
+            <div class="d-flex mx-auto  justify-content-center align-items-center">
+
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-35vh max-h-35vh min-w-20vw max-w-20vw mb-2 ">
+                    <div class="d-flex text-xl justify-content-center align-items-center mt-1">Supervising Elections</div>
+                    <div class="d-flex flex-column <br />
+<b>Warning</b>:  Undefined array key "data1" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>17</b><br />
+ justify-content-center align-items-center  mx-1 overflow-y-hidden overflow-scroll">
+                        <br />
+<b>Warning</b>:  Undefined array key "data1" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>18</b><br />
+                            <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Ongoing Elections</div>
+                                            </div>
+                    <div class="justify-content-center align-items-center"><i class="fa-solid fa-angles-down"></i></div>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-35vh max-h-35vh min-w-20vw max-w-20vw mb-2 ">
+                    <div class="d-flex text-xl justify-content-center align-items-center mt-1">Elections for Voting</div>
+                    <div class="d-flex flex-column <br />
+<b>Warning</b>:  Undefined array key "data4" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>52</b><br />
+ justify-content-center align-items-center mx-1 overflow-y-hidden overflow-scroll">
+                    <br />
+<b>Warning</b>:  Undefined array key "data4" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>53</b><br />
+                    <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Ongoing Elections</div>
+                                        </div>
+                    <div class="justify-content-center align-items-center"><i class="fa-solid fa-angles-down"></i></div>
+
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-35vh max-h-35vh min-w-20vw max-w-20w mb-2 ">
+                    <div class="d-flex text-xl justify-content-center align-items-center mt-1 ">Elections as Candidates</div>
+                    <div class="d-flex flex-column <br />
+<b>Warning</b>:  Undefined array key "data7" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>107</b><br />
+ justify-content-center align-items-center mx-1 overflow-y-hidden overflow-scroll">
+                        <br />
+<b>Warning</b>:  Undefined array key "data7" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>108</b><br />
+                            <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Ongoing Elections</div>
+                                            </div>
+                    <div class="justify-content-center align-items-center"><i class="fa-solid fa-angles-down"></i></div>
+
+                </div>
+            </div>
+        </div>
+<!--        <hr class="w-100 h-10" style="color: var(--primary)">-->
+        <div id="ongoingElections" class="d-flex flex-column mb-3 border border-primary border-3 border-radius-2" style="justify-content: center;align-items: center">
+            <div class="sub-title dark-title">UPCOMING ELECTIONS</div>
+            <div class="d-flex mx-auto justify-content-center align-items-center">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-35vh max-h-35vh min-w-20vw max-w-20vw mb-2 ">
+                    <div class="d-flex text-xl justify-content-center align-items-center ">Supervising Elections</div>
+                    <div class="d-flex flex-column <br />
+<b>Warning</b>:  Undefined array key "data2" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>149</b><br />
+ justify-content-center align-items-center mx-1 overflow-y-hidden overflow-scroll">
+                    <br />
+<b>Warning</b>:  Undefined array key "data2" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>150</b><br />
+                        <div class="d-flex flex-column text-center text-white text-xl mx-1" style="align-items: center">No Upcoming Elections</div>
+                                        </div>
+                    <div class="justify-content-center align-items-center"><i class="fa-solid fa-angles-down"></i></div>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-35vh max-h-35vh min-w-20vw max-w-20vw mb-2 ">
+                    <div class="d-flex text-xl justify-content-center align-items-center ">Elections as Voter</div>
+                    <div class="d-flex flex-column <br />
+<b>Warning</b>:  Undefined array key "data5" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>181</b><br />
+ justify-content-center align-items-center mx-1 overflow-y-hidden overflow-scroll">
+                    <br />
+<b>Warning</b>:  Undefined array key "data5" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>182</b><br />
+                        <div class="d-flex flex-column text-center text-white text-xl mx-1" style="align-items: center">No Upcoming Elections</div>
+                                        </div>
+                    <div class="justify-content-center align-items-center"><i class="fa-solid fa-angles-down"></i></div>
+
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-35vh max-h-35vh min-w-20vw max-w-20vw mb-2 ">
+                    <div class="d-flex text-xl justify-content-center align-items-center ">Elections as candidates</div>
+                    <div class="d-flex flex-column <br />
+<b>Warning</b>:  Undefined array key "data8" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>214</b><br />
+ justify-content-center align-items-center mx-1 overflow-y-hidden overflow-scroll">
+                        <br />
+<b>Warning</b>:  Undefined array key "data8" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>215</b><br />
+                            <div class="d-flex flex-column text-center text-white text-xl mx-1" style="align-items: center">No Upcoming Elections</div>
+                                            </div>
+                    <div class="justify-content-center align-items-center"><i class="fa-solid fa-angles-down"></i></div>
+                </div>
+            </div>
+        </div>
+<!--        <hr class="w-100">-->
+        <div id="ongoingElections" class="d-flex flex-column mb-3 border border-primary border-3 border-radius-2" style="justify-content: center;align-items: center">
+            <div class="sub-title dark-title ">COMPLETED ELECTIONS</div>
+            <div class="d-flex  justify-content-center align-items-center">
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-35vh max-h-35vh min-w-20vw max-w-20vw mb-2">
+                    <div class="d-flex text-xl justify-content-center align-items-center mt-1 text-center">Supervised Elections</div>
+                    <div class="d-flex flex-column <br />
+<b>Warning</b>:  Undefined array key "data3" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>252</b><br />
+ justify-content-center  align-items-center  mx-1 overflow-y-hidden overflow-scroll">
+                    <br />
+<b>Warning</b>:  Undefined array key "data3" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>253</b><br />
+                    <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Completed Elections</div>
+                                        </div>
+                    <div class="justify-content-center align-items-center"><i class="fa-solid fa-angles-down"></i></div>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-35vh max-h-35vh min-w-20vw max-w-20vw mb-2 ">
+                    <div class="d-flex text-xl justify-content-center align-items-center mt-1 text-center">Elections as Voter</div>
+                    <div class="d-flex flex-column <br />
+<b>Warning</b>:  Undefined array key "data6" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>273</b><br />
+ justify-content-center align-items-center  mx-1 overflow-y-hidden overflow-scroll">
+                        <br />
+<b>Warning</b>:  Undefined array key "data6" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>274</b><br />
+                            <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Completed Elections</div>
+                                            </div>
+                    <div class="justify-content-center align-items-center"><i class="fa-solid fa-angles-down"></i></div>
+
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center bg-info border-radius-2 shadow mx-2 min-h-35vh max-h-35vh min-w-20vw max-w-20vw mb-2 ">
+                        <div class="d-flex text-xl justify-content-center align-items-center  mt-1 text-center">Elections as Candidates</div>
+                        <div class="d-flex flex-column <br />
+<b>Warning</b>:  Undefined array key "data9" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>315</b><br />
+ justify-content-center align-items-center  mx-1 overflow-y-hidden overflow-scroll">
+                            <br />
+<b>Warning</b>:  Undefined array key "data9" in <b>C:\xampp\htdocs\ezvote\app\View\Voter\viewAllElection.php</b> on line <b>316</b><br />
+                                <div class="d-flex flex-column text-center text-white text-xl" style="align-items: center">No Completed Elections</div>
+                                                    </div>
+                    <div class="justify-content-center align-items-center"><i class="fa-solid fa-angles-down"></i></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/ezvote/public/js/dashboard.js"></script>
+    <script src="/ezvote/public/js/main.js"></script>
+</body>
+</html>

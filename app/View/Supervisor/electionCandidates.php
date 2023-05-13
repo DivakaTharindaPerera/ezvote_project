@@ -3,14 +3,14 @@
 
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
-<div class="main-container">
-    <div class="h-100 overflow-scroll w-100">
-        <div class="d-flex flex-column bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
-            <div class="d-flex m-1">
-                <input type="hidden" name="" id="electionId" value="<?php echo $data['ID']; ?>">
-                <a href="<?php echo urlroot; ?>/Pages/viewMyElection/<?php echo $data['ID']; ?>" class="btn btn-danger text-xl card-hover"><i class="fa-solid fa-angles-left"></i><span class="ml-1">Back</span></a>
-                <button class="btn btn-primary ml-1 card-hover" onclick="addPositionVisible()"><b class="text-xl"><i class="mt-auto mr-1 fa-solid fa-plus"></i>Add New Position</b></button>
-            </div>
+    <div class="main-container">
+        <div class="h-100 overflow-scroll w-100" >
+            <div class="d-flex flex-column bg-light" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
+                <div class="d-flex m-1">
+                    <input type="hidden" name="" id="electionId" value="<?php echo $data['ID']; ?>">
+                    <a href="<?php echo urlroot; ?>/Pages/viewMyElection/<?php echo $data['ID'];?>" class="btn btn-danger text-xl card-hover"><i class="fa-solid fa-angles-left"></i><span class="ml-1">Back</span></a>
+                    <button class="btn btn-primary ml-1 card-hover" onclick="addPositionVisible()"><b class="text-xl"><i class="mt-auto mr-1 fa-solid fa-plus"></i>Add New Position</b></button>
+                </div>
 
             <div class="m-3 w-50 ml-auto mr-auto border-1 p-1 border-radius-2 text-center" id='formForPosition' style="display: none;">
                 <form action="" method="POST">

@@ -88,7 +88,7 @@ require approot . '/View/inc/sidebar-new.php';
             </div>
           
 
-<?php 
+<!-- <?php 
 if(!empty($result)){
 if($result[0]->status == 1){ 
 ?>
@@ -124,7 +124,7 @@ if($result[0]->status == 1){
         <p class="text-white">You have to apply for the party first.</p> 
     </div>
 
-<?php }?>
+<?php }?> -->
     <div id="candidates" class="d-flex flex-column w-100">
         <div class="title">
             Candidates
@@ -146,12 +146,24 @@ if($result[0]->status == 1){
                                                 <div id="can-Name"><?= $candidate->candidateName ?></div>
                                             </div>
                                             <div id="btn-panel" class="mr-1">
+                                            <?php
+                                                if($candidate->candidateId == $candidate_id){
+                                                ?>
                                                 <button class=" btn btn-primary" onclick="location.href='/ezvote/Candidates/discussionForum/<?= $data['election']->ElectionId ?>/<?= $candidate->candidateId ?>/<?= $voter_id ?>'">Q & A</button>
+                                                <?php } ?>
+                                                <?php
+                                                if($candidate->candidateId != $candidate_id){
+                                                ?>
                                                 <button class=" btn btn-primary" onclick="makeObjection(<?= $candidate->candidateId ?>)">Make Objection</button>
-                                                <!--                                    --><?php //var_dump($candidate);
-                                                                                            ?>
+                                                
                                                 <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View Objection</button>
-                                                <button class="btn btn-primary" onclick="location.href='/ezvote/Candidates/candidateProfile/<?= $candidate->candidateId ?>'">View</button>
+                                                <?php 
+                                                
+                                                }else {
+                                                    
+                                                }?>
+
+                                                <button class="btn btn-primary" onclick="location.href='/ezvote/Candidates/candidateProfile/<?= $candidate->candidateId ?>'">View Profile</button>
 
                                             </div>
 
