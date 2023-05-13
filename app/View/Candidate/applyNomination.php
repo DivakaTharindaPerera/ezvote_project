@@ -2,12 +2,13 @@
 require approot . '/View/inc/VoterHeader.php';
 require approot . '/View/inc/AuthNavbar.php';
 require approot . '/View/inc/sidebar-new.php';
+
 ?>
 
 <div class="main-container">
 
     <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light">
-        <form action="/ezvote/Voters/nomination_apply" method="POST" enctype='multipart/form-data' >
+        <form action="/ezvote/Voters/nomination_apply/<?= $elect_id ?>" method="POST" enctype='multipart/form-data' >
         
     <h2 class="text-center">Apply Nominations</h2>
     <br>

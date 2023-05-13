@@ -232,7 +232,7 @@ class Candidates extends Controller
 
             //call partyRejected method of the partyOwnerRequestModel object
             $this->partyOwnerRequestModel->partyRejected($data);
-            $user=$this->userModel->getUserByUserId($_SESSION['UserId']);
+            $user=$this->userModel->getUserByUserId($_POST['candidate_id']);
 
             $subject = "Party Request Rejected";
             $msg = "Your party request is rejected because " . $data['reason'];
@@ -257,16 +257,19 @@ class Candidates extends Controller
 
             //call getUserByUserId method of the userModel object
             $res = $this->userModel->getUserByUserId($_SESSION["UserId"]);
-                        
+
+
+
             //call getPartyByEmail method of the partyModel object
             $res2 = $this->partyModel->getPartyByEmail($res[0]->Email);
-
+//            echo '<pre>';
+//            var_dump($res2);
+//            exit;
             if(!empty($res2)){
                             
             //call getPartyRequests method of the partyOwnerRequestModel object
             $requests=$this->partyOwnerRequestModel->getPartyRequests($_SESSION["UserId"]);
-            // var_dump($requests);
-            // exit;
+
             
             $election=[]; // $election - array
 
@@ -296,7 +299,8 @@ class Candidates extends Controller
     public function acceptPartyRequest($request_id,$candidate_id)
     {
         //call getUserByUserId method of the userModel object
-        $user=$this->userModel->getUserByUserId($_SESSION['UserId']);
+//        $user=$this->userModel->getUserByUserId($_SESSION['UserId']);
+        $user=$this->userModel->getUserByUserId($candidate_id);
 
         //call partyAccepted method of the partyOwnerRequestModel object
         $this->partyOwnerRequestModel->partyAccepted($request_id);
