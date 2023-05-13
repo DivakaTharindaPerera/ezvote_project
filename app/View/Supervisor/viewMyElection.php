@@ -120,7 +120,7 @@
                     <div id='objTopic' class='text-center'>
                        <h4> Objection Duration</h4>
                     </div>
-                    <div class='d-flex'>
+                    <div class='d-flex justify-content-evenly'>
                     <div class='card'>
                             <div> <img src='" . urlroot . "/public/img/start.png' alt='' style='max-height: 40px;max-width:40px'></div>
                             <div class='justify-content-center text-lg mb-1'>Begin</div>

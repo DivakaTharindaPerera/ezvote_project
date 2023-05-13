@@ -258,9 +258,6 @@ class Elections extends Controller
                 $count = trim($_POST["count"]);
                 $partyCount = trim($_POST["partyCount"]);
 
-                for ($k = 0; $k < $count; $k++) {
-                    echo $electionId . "-" . trim($_POST[$k . "party"]) . "-" . trim($_POST[$k . "name"]) . "-" . trim($_POST[$k . "email"]) . "-" . trim($_POST[$k . "position"]) . "<br>";
-                }
                 for ($i = 0; $i < $partyCount; $i++) {
                     $data = [
                         'electionId' => $electionId,
