@@ -64,7 +64,7 @@
                                                 ?>
                                                         <div class="w-100 d-flex flex-column my-1 border-radius-2 bg-primary">
                                                             <div class="w-100 bg-blue-10 border-radius-2 px-1 d-flex text-white">
-                                                                <div class="text-x mr-auto my-auto"><?php echo $objection->ObjectionID; ?><?php echo $objection->Subject; ?></div>
+                                                                <div class="text-x mr-auto my-auto"><?php echo $objection->Subject; ?></div>
                                                                 <input type="hidden" value="<?php echo $objection->ObjectionID; ?>" class="objection-<?php echo $candidate->candidateId ?>">
                                                                 <div class="my-auto ml-auto" style="color: red;" id="status-<?php echo $objection->ObjectionID; ?>">
                                                                     <?php
@@ -73,7 +73,7 @@
                                                                     }
                                                                     ?>
                                                                 </div>
-                                                                <div class="my-auto"><button id="<?php echo $objection->ObjectionID ?>" class="btn bg-blue-10 text-white text-x" onclick="expandDiv(this.id)"><i class="fa-solid fa-angle-right"></i></button></div>
+                                                                <div class="my-auto ml-auto"><button id="<?php echo $objection->ObjectionID ?>" class="btn bg-blue-10 text-white text-x" onclick="expandDiv(this.id)"><i class="fa-solid fa-angle-right"></i></button></div>
                                                             </div>
                                                             <div class="w-100 border-radius-2 my-1 mx-1 text-white " style="display: none;" id="expand-<?php echo $objection->ObjectionID; ?>">
                                                                 <p>
@@ -120,7 +120,7 @@
             <div class="text-2xl text-primary mb-1" id="candidateDeleteName"></div>
             <div class="text-xl text-danger mb-1">This action cannot be undone after confirming</div>
             <form action="<?php echo urlroot; ?>/Elections/removeCanidateFromObjections" method="POST" id="deleteForm">
-                <input type="text" id="candidateDelete" name="cid" value="">
+                <input type="hidden" id="candidateDelete" name="cid" value="">
                 <button type="submit" class="btn btn-danger mt-1 text-xl">Confirm</button>
                 <button type="button" class="btn btn-primary mt-1 text-xl" onclick="removeCand()">Cancel</button>
             </form>

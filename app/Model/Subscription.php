@@ -122,6 +122,12 @@ class Subscription{
         return $this->db->resultSet();
     }
 
+    public function getSubscriptionPlans(){
+        $this->db->query('SELECT * FROM subscription_plan');
+
+        return $this->db->resultSet();
+    }
+
 }
 
 

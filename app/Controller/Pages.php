@@ -19,6 +19,7 @@ class Pages extends Controller
     private $mail;
 
     private $nominationModel;
+    private $planModel;
 
 
     public function __construct()
@@ -39,6 +40,7 @@ class Pages extends Controller
         $this->mail = $this->model('Email');
         $this->logModel = $this->model('log');
         $this->nominationModel = $this->model('Nomination');
+        $this->planModel = $this->model('Subscription');
     }
 
     public function index()
@@ -1062,6 +1064,17 @@ class Pages extends Controller
             }else{
                 $this->view('Supervisor/forbiddenPage');
             }
+        }
+    }
+
+    public function subsPlans(){
+        if (!$this->isLoggedIn()) {
+            redirect('View/login');
+        } else {
+            $data = [
+                'plans' => $this->planModel->getSubscriptionPlans()
+            ];
+            $this->view('Supervisor/subscriptionPlans',$data);
         }
     }
 }
