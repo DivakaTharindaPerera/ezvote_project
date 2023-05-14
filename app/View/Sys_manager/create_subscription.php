@@ -15,7 +15,7 @@ window.onload = function(){
 
 <div class="main-container" id="text-box1">
     <div class="title text-center text-uppercase">Create Subscription Plan</div>
-    <div class="min-w-85 min-h-85 border border-primary border-radius-2 border-3 px-1 py-1 overflow-y">
+    <div class="min-w-85 min-h-85 border border-primary border-radius-2 border-3 px-1 py-1 mb-1 overflow-y">
     <form class="d-flex flex-column min-w-40 py-1 mb-1 " action="./create_process" method="POST">
         <label for="name" class="font-bold">Name</label><br>
         <input class="h-100 border border-primary" type="text" id="name" name="name" placeholder="Name of the subscription plan" required><br><br>

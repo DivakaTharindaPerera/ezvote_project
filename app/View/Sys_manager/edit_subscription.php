@@ -15,7 +15,7 @@ window.onload = function(){
 
 <div class="main-container" id="text-box1">
     <div class="title text-center text-uppercase">Edit Subscription Plan</div>
-    <div class="min-w-85 border border-primary border-radius-2 border-3 px-1 py-1 overflow-y">
+    <div class="min-w-85 border border-primary border-radius-2 border-3 px-1 py-1 mb-1 overflow-y">
     <form class="d-flex flex-column min-w-40 py-1 mb-1" action="../update_process/<?php echo $data[0]->PlanID ;?>" method="POST">
         <label class="font-bold" for="name">Name</label><br>
         <input class="border border-primary" type="text" id="name" name="name" value="<?php echo $data[0]->PlanName; ?>" placeholder="<?php echo $data[0]->PlanName ?>" required><br><br>
@@ -114,7 +114,7 @@ window.onload = function(){
 
         <div class="d-flex gap-4 justify-content-evenly">
             <div class="d-flex">
-            <a href="../System_manager/dashboard">
+            <a href="../../System_manager/dashboard">
             <button type="button" class="btn btn-primary">CANCEL</button>
             </div>
             </a>

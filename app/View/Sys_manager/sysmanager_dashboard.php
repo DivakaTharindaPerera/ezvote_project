@@ -4,10 +4,10 @@
 
 
 <div class="main-container">
-    <div class="min-w-85 overflow-y overflow-x">
-    <div class="title text-uppercase">Recent Activities</div>
+    <div class="min-w-85 overflow-y overflow-x my-1">
+    <div class="title text-uppercase">Recent Plan Activities</div>
     
-    <div class="w-100 h-50 d-flex flex-wrap justify-content-center align-items-center">
+    <div class="w-95 h-50 ml-2 d-flex flex-wrap justify-content-center align-items-center border border-primary border-radius-2 border-3 px-1 mt-2 py-2 overflow-y">
         <div class="d-flex flex-wrap justify-content-center align-items-center ">
 
 
