@@ -59,20 +59,20 @@ class Candidates extends Controller
 
             //getCandidateProfile method of the candidateModel object is called with the $candidate_id as an argument
             $res = $this->candidateModel->getCandidateProfile($candidate_id);
-            //$res = array
+            
 
             $elect= $this->electModel->findelectNameById($res[0]->electionid);
             $position= $this->positionModel->findPositionNameById($res[0]->positionId);
             $party= $this->partyModel->findPartyNameById($res[0]->partyId);
             //$party -array with a single element, which is an object of the stdClass class
-
+            $user=$this->userModel->getUserById($res[0]->userId);
             $user_id=$_SESSION["UserId"];
             $res2 = $this->candidateModel->getCandidateByUser($user_id);
            
             $res3 = $this->candidateModel->findCandidateByUserIdAndCandidateId($user_id,$candidate_id);
             
             //render a view file Candidate/candidateProfile and passes an array of data to the view
-            $this->view('Candidate/candidateProfile', ['res' => $res,'elect' => $elect, 'party' => $party, 'position' => $position, 'res2' => $res2, 'res3' => $res3]);
+            $this->view('Candidate/candidateProfile', ['res' => $res,'elect' => $elect, 'party' => $party, 'position' => $position, 'res2' => $res2, 'res3' => $res3,'user'=>$user]);
             
         }
         // echo "<h3>" . htmlspecialchars($_SESSION["fname"]) . " " . htmlspecialchars($_SESSION["lname"]) . "</h3>";
@@ -409,21 +409,24 @@ class Candidates extends Controller
 
     //function is defined with the parameters $election_id,$candidate_id = null
     public function election($election_id,$candidate_id = null)
+    
     {
+        // $election_id=1305;
         if ($this->isLoggedIn()) {
                    
             //call getElectionByElectionId method of the electModel object
             $data_1 = $this->electModel->getElectionByElectionId($election_id);
             $data_2 = $this->electModel->getPositionsByElectionId($election_id);
             $data_3 = $this->electModel->getCandidatesByElectionId($election_id);
-            // $data_4 = $this->conferenceModel->getConferencesByElectionID($election_id);
-            // // var_dump($data_4);
-            // // exit;
-            // foreach ($data_4 as $conference){
-            //     if($conference->ParticipantsC==1){
-            //         $data_5[]=$conference;
-            //     };
-            // }
+            $data_4 = $this->conferenceModel->getConferencesByElectionID($election_id);
+            // echo '<pre>';
+            // var_dump($data_4);
+            // exit;
+            foreach ($data_4 as $conference){
+                if($conference->ParticipantsC==1){
+                    $data_5[]=$conference;
+                };
+            }
 
             // retrieve the candidate ID associated with the current user and the specified election
             $data_6 = $this->candidateModel->findCandidateByUserIdAndElectionId($_SESSION['UserId'],$election_id);
@@ -467,7 +470,7 @@ class Candidates extends Controller
                     'result' => $result,
                     'voter_id' => $voter_id,
                     'candidate_id'=>$candidate,
-                    // 'conferences' => $data_5,
+                    'conferences' => $data_5,
                 ]);
             }
         } else {

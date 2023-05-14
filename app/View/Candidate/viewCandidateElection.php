@@ -134,23 +134,25 @@ if($result[0]->status == 1){
                     <?php foreach ($data['positions'] as $position) {
                         $position_id = $position->ID; ?>
                         <div id="positions" class="d-flex w-100 flex-wrap mb-2" style="gap: 2rem">
-                            <div id="president" class="d-flex flex-column w-45" style="gap: 0.2rem">
+                            <div id="president" class="d-flex flex-column w-90 ml-5" style="gap: 0.2rem">
                                 <div class="sub-title"><?= $position->positionName ?></div>
                                 <?php $i = 0;
                                 foreach ($data['candidates'] as $candidate) {
                                     if ($candidate->positionId == $position_id) {
                                         $i = $i + 1; ?>
-                                        <div id="candidate" class="d-flex align-center bg-white justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px; width:100vh;">
+                                        <div id="candidate" class="d-flex align-center bg-white w-100 justify-content-between border-2" style="padding: 0.4rem;border-radius: 20px;">
                                             <div id="can-det" class="d-flex" style="gap: 0.5rem">
                                                 <div id="can-ID" class="font-bold"><?= $i ?></div>
                                                 <div id="can-Name"><?= $candidate->candidateName ?></div>
                                             </div>
                                             <div id="btn-panel" class="mr-1">
                                             <?php
-                                                if($candidate->candidateId == $candidate_id){
-                                                ?>
-                                                <button class=" btn btn-primary" onclick="location.href='/ezvote/Candidates/discussionForum/<?= $data['election']->ElectionId ?>/<?= $candidate->candidateId ?>/<?= $voter_id ?>'">Q & A</button>
-                                                <?php } ?>
+                                                // if($candidate->candidateId == $candidate_id){
+                                                // ?>
+                                                <!-- <button class=" btn btn-primary" onclick="location.href='/ezvote/Candidates/discussionForum/<?= $data['election']->ElectionId ?>/<?= $candidate->candidateId ?>/<?= $voter_id ?>'">Q & A</button> -->
+                                                <?php 
+                                            // } 
+                                            ?>
                                                 <?php
                                                 if($candidate->candidateId != $candidate_id){
                                                 ?>
@@ -202,7 +204,34 @@ if($result[0]->status == 1){
             </form>
         </div>
     </div>
-    <a href="/ezvote/Pages/addConference/<?= $data['election']->ElectionId ?>">Schedule a meeting</a>
+    <div class="d-flex flex-column bg-white-0-7  border border-primary  border-3 border-radius-2 shadow justify-content-center align-items-center mx-5 my-1 ">
+                <div class="title">Conferences as Candidate</div>
+                <div class="d-flex justify-content-center align-items-center flex-wrap">
+                    <?php $i=0;
+                    foreach ($data['conferences'][$i] as $conference){
+                        if(isset($data['conferences'][$i])){?>
+                        <div class="card my-1">
+                            <div class="text-xl"><?php echo $conference->ConferenceName?></div>
+                            <div class="">
+                                <img src="" alt="">
+                            </div>
+                            <div class="text-lg"><?php echo $conference->DateAndTime?></div>
+                            <!--                        <div class="sub-title">--><?php //echo $conference->ElectionID?><!--</div>-->
+                            <!--                        <div class="sub-title">--><?php //echo $conference->SupervisorID?><!--</div>-->
+                            <!--                        <div class="sub-title">--><?php //echo $conference->candidateID?><!--</div>-->
+                            <div class="btn btn-primary justify-content-center align-items-center w-50 mx-3">
+                                <a href="<?php echo $conference->ConferenceLink?>" class="text-white">Join</a>
+                                <!--                            <button class=" btn btn-primary " onclick="joinMeeting(--><?php //=$conference->ConferenceLink?>
+                                <!--                            //)">Join</button>-->
+                            </div>
+                        </div>
+
+                    <?php }
+                    $i=$i+1; }?>
+                </div>
+            </div>
+
+    <!-- <a href="/ezvote/Pages/addConference/<?= $data['election']->ElectionId ?>">Schedule a meeting</a> -->
 
 </div>
 <script>
