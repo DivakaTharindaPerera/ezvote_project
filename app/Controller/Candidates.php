@@ -155,7 +155,7 @@ class Candidates extends Controller
         // $this->view('Candidate/discussionForum');
     }
 
-    //function is defined with the parameters $id1,$id2
+    //function to view discussion forum
     public function viewPost($id1,$id2)
     {
         
