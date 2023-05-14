@@ -61,7 +61,7 @@ require approot . '/View/inc/sidebar-new.php';
 <select name="position" class="w-50 selectName" >
 <option value="" disabled selected>Please select...</option>
         <?php foreach ($positions as $position){ ?>
-<option value="<?php echo $position->positionName ?>"><?php echo $position->positionName ?></option>
+<option value="<?php echo $position->ID ?>"><?php echo $position->positionName ?></option>
         <?php } ?> 
 </select>
 <br><br>
@@ -72,7 +72,7 @@ require approot . '/View/inc/sidebar-new.php';
 <select name="party_name" class="w-50 selectName" style="margin-left:1.2rem;">
 <option value="" disabled selected>Please select...</option>
         <?php foreach ($parties as $party){ ?>
-<option value="<?php echo $party->partyName ?>"><?php echo $party->partyName ?></option>
+<option value="<?php echo $party->partyId ?>"><?php echo $party->partyName ?></option>
         <?php } ?> 
 </select>
 <br><br><br>

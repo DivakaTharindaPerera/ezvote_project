@@ -364,8 +364,8 @@ class Voters extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                
             //call getParty_Id method of the nominateModel object
-            $party_id = $this->nominateModel->getParty_Id($_POST['party_name']);
-            $position_id = $this->nominateModel->getPosition_Id($_POST['position']);
+            $party_id = $_POST['party_name'];
+            $position_id = $_POST['position'];
 
             $imageName = $_FILES['imgfile']['name'];
             // var_dump($imageName);
