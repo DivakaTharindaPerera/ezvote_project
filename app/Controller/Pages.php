@@ -101,6 +101,7 @@ class Pages extends Controller
                         //remove duplicate entries
                         $v_ongoing_filtered = array_unique($v_ongoing_filtered, SORT_REGULAR);
 
+
                 }
 //                    echo '<pre>';
 //                    print_r($v_ongoing_filtered);
@@ -113,22 +114,21 @@ class Pages extends Controller
                     foreach ($c_row as $candidate){
                             if($candidate->userId==$_SESSION["UserId"]){
                                 $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+
                                 $c_ongoing_filtered[] = $row;
                             }
                         }
-                    // Remove duplicate entries using ElectionId
-                    $c_ongoing_filtered = array_unique($c_ongoing_filtered, SORT_REGULAR);
-//                    echo '<pre>';
-//                    print_r($c_ongoing_filtered);
-//                    exit();
-//                        if($c_row[0]->userId==$_SESSION["UserId"]){
-//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
-//                            $c_ongoing_filtered[] = $row;
-//                        }
+                        // Remove duplicate entries using ElectionId
+                        $c_ongoing_filtered = array_unique($c_ongoing_filtered, SORT_REGULAR);
+                        //                    echo '<pre>';
+                        //                    print_r($c_ongoing_filtered);
+                        //                    exit();
+                        //                        if($c_row[0]->userId==$_SESSION["UserId"]){
+                        //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                        //                            $c_ongoing_filtered[] = $row;
+                        //                        }
 
-                }
-
-
+                    }
                 }
             }
             //get all upcoming elections
@@ -155,10 +155,10 @@ class Pages extends Controller
                         // Remove duplicate entries using ElectionId
                         $v_upcoming_filtered = array_unique($v_upcoming_filtered, SORT_REGULAR);
 
-//                        if($v_row[0]->userId==$_SESSION["UserId"]){
-//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
-//                            $v_upcoming_filtered[] = $row;
-//                        }
+                        //                        if($v_row[0]->userId==$_SESSION["UserId"]){
+                        //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                        //                            $v_upcoming_filtered[] = $row;
+                        //                        }
 
                     }
                     //                        if($v_row[0]->userId==$_SESSION["UserId"]){
@@ -177,10 +177,10 @@ class Pages extends Controller
 
                         // Remove duplicate entries using ElectionId
                         $c_upcoming_filtered = array_unique($c_upcoming_filtered, SORT_REGULAR);
-//                        if($c_row[0]->userId==$_SESSION["UserId"]){
-//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
-//                            $c_upcoming_filtered[] = $row;
-//                        }
+                        //                        if($c_row[0]->userId==$_SESSION["UserId"]){
+                        //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                        //                            $c_upcoming_filtered[] = $row;
+                        //                        }
 
 
                     }
@@ -204,6 +204,7 @@ class Pages extends Controller
                 }
 
 
+
                 foreach($r_completed as $row){
                     $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
                     //get completed elections for voters
@@ -212,13 +213,14 @@ class Pages extends Controller
                                 $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
                                 $v_completed_filtered[] = $row;
                             }
+
                     }
                     // Remove duplicate entries using ElectionId
                     $v_completed_filtered = array_unique($v_completed_filtered, SORT_REGULAR);
-//                        if($v_row[0]->userId==$_SESSION["UserId"]){
-//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
-//                            $v_completed_filtered[] = $row;
-//                        }
+                    //                        if($v_row[0]->userId==$_SESSION["UserId"]){
+                    //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                    //                            $v_completed_filtered[] = $row;
+                    //                        }
 
                 }
                 foreach ($r_completed as $row) {
@@ -233,10 +235,10 @@ class Pages extends Controller
 
                     // Remove duplicate entries using ElectionId
                     $c_completed_filtered = array_unique($c_completed_filtered, SORT_REGULAR);
-//                        if($c_row[0]->userId==$_SESSION["UserId"]){
-//                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
-//                            $c_completed_filtered[] = $row;
-//                        }
+                    //                        if($c_row[0]->userId==$_SESSION["UserId"]){
+                    //                            $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
+                    //                            $c_completed_filtered[] = $row;
+                    //                        }
 
 
                 }
@@ -388,12 +390,29 @@ class Pages extends Controller
         $this->view('Supervisor/addPositions', $eid);
     }
 
+    public function wayToAddParties($eid)
+    {
+
+        $parties = $this->partyModel->getPartiesByElectionId($eid);
+
+        $data = [
+            'ID' => $eid,
+            'parties' => $parties
+        ];
+
+        $this->view('Supervisor/addParties', $data);
+    }
+
     public function wayToAddCandidates($eid)
     {
         $positionRow = $this->positionModel->getElectionPositionByElectionId($eid);
+        $parties = $this->partyModel->getPartiesByElectionId($eid);
+        $candidates = $this->candidateModel->getCandidatesByElectionId($eid);
         $data = [
             'ID' => $eid,
-            'positionRow' => $positionRow
+            'positions' => $positionRow,
+            'parties' => $parties,
+            'candidates' => $candidates
         ];
         $this->view('Supervisor/addCandidates', $data);
     }
@@ -463,7 +482,7 @@ class Pages extends Controller
             $data = [
                 'plans' => $this->planModel->getSubscriptionPlans()
             ];
-            $this->view('Supervisor/subscriptionPlans',$data);
+            $this->view('Supervisor/subscriptionPlans', $data);
         }
     }
 
@@ -531,7 +550,7 @@ class Pages extends Controller
                 $nominations = $this->nominationModel->getNominationsByElectionId($id);
                 $positions = $this->positionModel->getElectionPositionByElectionId($id);
                 $parties = $this->partyModel->getPartiesByElectionId($id);
-                $data=[
+                $data = [
                     'election' => $electionRow,
                     'nominations' => $nominations,
                     'positions' => $positions,
@@ -631,23 +650,25 @@ class Pages extends Controller
     }
 
 
-    public function planpricing(){
+    public function planpricing()
+    {
         if (!isset($_SESSION["UserId"])) {
             redirect('login');
         } else {
             $data = $this->postModel->pricingPlan();
-            
+
             $this->view('userSubscribe', $data);
         }
     }
 
-    public function payment(){
+    public function payment()
+    {
         $plan = $_GET['plan_id'];
         if (!isset($_SESSION["UserId"])) {
             redirect('View/login');
-        }else{
+        } else {
             $data = $this->postModel->enabledplanbyID($plan);
-            $this->view('userPayment',$data);
+            $this->view('userPayment', $data);
         }
     }
 
@@ -728,6 +749,7 @@ class Pages extends Controller
             }
 
 
+
             foreach ($data2 as $nSConference){
                 $electionId=$nSConference->ElectionID;
                 $votList=$this->voterModel->getVotersByElectionId($electionId);
@@ -735,21 +757,22 @@ class Pages extends Controller
                 foreach ($votList as $vot){
                     if($vot->userId==$_SESSION['UserId']){
                         $data5[]=$this->conferenceModel->getConferenceByConferenceID($nSConference->conferenceID);
+
                     }
                 }
             }
 
-//            $data4=$this->conferenceModel->getCandidatesByElectionID($_SESSION["UserId"]);
-//            $data5=$this->conferenceModel->getVotersByElectionID($_SESSION["UserId"]);
-            $data=$this->candidateModel->getCandidateByUserId();
-//            $data2=[];
-//            foreach ($data as $candidate){
-//                $row=$this->conferenceModel->getConferencesByCandidateId($candidate->candidateId);
-//                $data2[]=$row;
-//
-//            }
-//            var_dump($data);
-//            exit();
+            //            $data4=$this->conferenceModel->getCandidatesByElectionID($_SESSION["UserId"]);
+            //            $data5=$this->conferenceModel->getVotersByElectionID($_SESSION["UserId"]);
+            $data = $this->candidateModel->getCandidateByUserId();
+            //            $data2=[];
+            //            foreach ($data as $candidate){
+            //                $row=$this->conferenceModel->getConferencesByCandidateId($candidate->candidateId);
+            //                $data2[]=$row;
+            //
+            //            }
+            //            var_dump($data);
+            //            exit();
 
             //get current time
             //            $now = new DateTime();
@@ -1031,24 +1054,23 @@ class Pages extends Controller
 //                checking the availability of profile photo
                 if (isset($_FILES['profilePhoto'])) {
                     $image = $_FILES['profilePhoto']['name'];
-                }
-                else{
-                    $image=$this->userModel->getUserById($_SESSION['UserId'])->ProfilePicture;
+                } else {
+                    $image = $this->userModel->getUserById($_SESSION['UserId'])->ProfilePicture;
                     // echo $image;exit();//echo the image name.  this is for testing only.  it is not part of the actual code.  it is just
                 }
-                $data=[
-                    'id'=>$_SESSION['UserId'],
-//                    'profile_pic'=>$_FILES['profilePhoto'],
+                $data = [
+                    'id' => $_SESSION['UserId'],
+                    //                    'profile_pic'=>$_FILES['profilePhoto'],
                     // 'profile_pic'=>$image,
-                    'fname'=>trim($_POST['fname']),
-                    'lname'=>trim($_POST['lname']),
-                    'email'=>trim($_POST['email']),
-                    'old_password'=>trim($_POST['old_password']),
-                    'new_password'=>trim($_POST['new_password']),
-                    'confirmPassword'=>trim($_POST['confirmed_password']),
-                    'old_passwordError'=>'',
-                    'new_passwordError'=>'',
-                    'confirmPasswordError'=>''
+                    'fname' => trim($_POST['fname']),
+                    'lname' => trim($_POST['lname']),
+                    'email' => trim($_POST['email']),
+                    'old_password' => trim($_POST['old_password']),
+                    'new_password' => trim($_POST['new_password']),
+                    'confirmPassword' => trim($_POST['confirmed_password']),
+                    'old_passwordError' => '',
+                    'new_passwordError' => '',
+                    'confirmPasswordError' => ''
                 ];
                 //                else{
                 //                    if($this->userModel->findUserByEmail($data['email'])){
@@ -1155,7 +1177,7 @@ class Pages extends Controller
             $candidates = $this->candidateModel->getCandidatesByElectionId($eid);
             $positions = $this->positionModel->getElectionPositionByElectionId($eid);
 
-            $data =[
+            $data = [
                 'election' => $electionRow,
                 'voters' => $voters,
                 'candidates' => $candidates,
@@ -1169,23 +1191,27 @@ class Pages extends Controller
                     break;
                 }
             }
-            if($check == 1){
-                $this->view('Voter/electionForVoter',$data);
-            }else{
+            if ($check == 1) {
+                $this->view('Voter/electionForVoter', $data);
+            } else {
                 $this->view('Supervisor/forbiddenPage');
             }
         }
     }
 
-    public function subsPlans(){
+    public function subsPlans()
+    {
         if (!$this->isLoggedIn()) {
             redirect('View/login');
         } else {
             $data = [
                 'plans' => $this->planModel->getSubscriptionPlans()
             ];
-            $this->view('Supervisor/subscriptionPlans',$data);
+            $this->view('Supervisor/subscriptionPlans', $data);
         }
     }
-}
 
+    public function createElectionSuccess(){
+        $this->view('Supervisor/addCandidateSuccess');
+    }
+}
