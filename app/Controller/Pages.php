@@ -62,6 +62,7 @@ class Pages extends Controller
     {
     }
 
+    //function to classify upcoming,ongoing and completed elections for candidates and voters
     public function dashboard()
     {
         $s_ongoing_filtered = [];
@@ -74,8 +75,10 @@ class Pages extends Controller
         $c_upcoming_filtered = [];
         $c_completed_filtered = [];
         if ($this->isLoggedIn()) {
+            //get all ongoing elections
             $r_ongoing = $this->electionModel->getOngoingElections();
             if ($r_ongoing != null) {
+                //get ongoing elections for supervisor
                 foreach ($r_ongoing as $row) {
                     if ($row->Supervisor == $_SESSION["UserId"]) {
                         $s_ongoing_filtered[] = $row;
@@ -85,7 +88,9 @@ class Pages extends Controller
                 }
 
                 foreach ($r_ongoing as $row) {
+                    //get voters of the election
                     $v_row = $this->electionModel->getVotersByElectionID($row->ElectionId);
+                    //get ongoing elections for voters
                     foreach ($v_row as $voter) {
                         if ($voter->userId == $_SESSION["UserId"]) {
                             $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
@@ -102,8 +107,10 @@ class Pages extends Controller
 //                    exit;
 
                 foreach($r_ongoing as $row){
+                    //get candidates of the election
                         $c_row=$this->electionModel->getCandidatesByElectionId($row->ElectionId);
-                        foreach ($c_row as $candidate){
+                    //get ongoing elections for candidates
+                    foreach ($c_row as $candidate){
                             if($candidate->userId==$_SESSION["UserId"]){
                                 $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
                                 $c_ongoing_filtered[] = $row;
@@ -124,8 +131,10 @@ class Pages extends Controller
 
                 }
             }
+            //get all upcoming elections
             $r_upcoming = $this->electionModel->getUpcomingElections();
             if ($r_upcoming != null) {
+                //get upcoming elections for supervisor
                 foreach ($r_upcoming as $row) {
                     if ($row->Supervisor == $_SESSION["UserId"]) {
                         $s_upcoming_filtered[] = $row;
@@ -136,6 +145,7 @@ class Pages extends Controller
 
                 foreach ($r_upcoming as $row) {
                     $v_row = $this->electionModel->getVotersByElectionID($row->ElectionId);
+                    //get upcoming elections for candidates
                     foreach ($v_row as $voter) {
                         if ($voter->userId == $_SESSION["UserId"]) {
                             $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
@@ -158,6 +168,7 @@ class Pages extends Controller
                 }
                 foreach ($r_upcoming as $row) {
                     $c_row = $this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                    //get upcoming elections for candidates
                     foreach ($c_row as $candidate) {
                         if ($candidate->userId == $_SESSION["UserId"]) {
                             $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
@@ -180,8 +191,10 @@ class Pages extends Controller
 
                 }
             }
+            //get all completed elections
             $r_completed = $this->electionModel->getCompletedElections();
             if ($r_completed != null) {
+                //get completed elections for supervisor
                 foreach ($r_completed as $row) {
                     if ($row->Supervisor == $_SESSION["UserId"]) {
                         $s_completed_filtered[] = $row;
@@ -193,6 +206,7 @@ class Pages extends Controller
 
                 foreach($r_completed as $row){
                     $v_row=$this->electionModel->getVotersByElectionID($row->ElectionId);
+                    //get completed elections for voters
                     foreach ($v_row as $voter){
                             if($voter->userId==$_SESSION["UserId"]){
                                 $row=$this->electionModel->getElectionByElectionId($row->ElectionId);
@@ -209,6 +223,7 @@ class Pages extends Controller
                 }
                 foreach ($r_completed as $row) {
                     $c_row = $this->electionModel->getCandidatesByElectionId($row->ElectionId);
+                    //get completed elections for candidates
                     foreach ($c_row as $candidate) {
                         if ($candidate->userId == $_SESSION["UserId"]) {
                             $row = $this->electionModel->getElectionByElectionId($row->ElectionId);
@@ -228,7 +243,7 @@ class Pages extends Controller
             }
 
             $voters = $this->voterModel->getVotersByUserId($_SESSION["UserId"]);
-
+            //rendering the view
             $this->view('Voter/viewAllElection', [
                 'data1' => $s_ongoing_filtered,
                 'data2' => $s_upcoming_filtered,
@@ -636,7 +651,7 @@ class Pages extends Controller
         }
     }
 
-
+    //view ongoing elections for supervisor
     public function viewOngoingElection($electionId)
     {
         if ($this->isLoggedIn()) {
@@ -691,16 +706,20 @@ class Pages extends Controller
         //       $this->view('Supervisor/viewAllObjections');
     }
 
+    //function to get all conferences for all elections user participated
     public function viewAllConferences()
     {
         if ($this->isLoggedIn()) {
+            //get created conferences as supervisor
             $data1 = $this->conferenceModel->getConferencesByUserID($_SESSION["UserId"]);
+            //get conferences as candidates and voters
             $data2 = $this->conferenceModel->getNotSupervisingConferences($_SESSION['UserId']);
             $data4 = [];
             $data5 = [];
             foreach ($data2 as $nSConference) {
                 $electionId = $nSConference->ElectionID;
                 $candiList = $this->electionModel->getCandidatesByElectionId($electionId);
+                //get conference details as candidates
                 foreach ($candiList as $candi) {
                     if ($candi->userId == $_SESSION['UserId']) {
                         $data4[] = $this->conferenceModel->getConferenceByConferenceID($nSConference->conferenceID);
@@ -712,6 +731,7 @@ class Pages extends Controller
             foreach ($data2 as $nSConference){
                 $electionId=$nSConference->ElectionID;
                 $votList=$this->voterModel->getVotersByElectionId($electionId);
+                //get conference details as voters
                 foreach ($votList as $vot){
                     if($vot->userId==$_SESSION['UserId']){
                         $data5[]=$this->conferenceModel->getConferenceByConferenceID($nSConference->conferenceID);
@@ -759,7 +779,9 @@ class Pages extends Controller
             //                }
             //            }
             $data3 = $this->electionModel->getElectionsByUserId($_SESSION["UserId"]);
+            //get all elections
             $data6 = $this->electionModel->getElections();
+            //rendering the view
             $this->view(
                 'Supervisor/viewAllConference',
                 [
@@ -778,7 +800,7 @@ class Pages extends Controller
         }
     }
 
-
+    //function to schedule a conference
     public function addConference($electionID)
     {
 
@@ -787,9 +809,11 @@ class Pages extends Controller
             if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 $candidates = false;
                 $voters = false;
+                //check participation of candidates
                 if (isset($_POST['candidate'])) {
                     $candidates = true;
                 }
+                //check participation of voters
                 if (isset($_POST['voter'])) {
                     $voters = true;
                 }
@@ -827,11 +851,15 @@ class Pages extends Controller
                     if ($this->conferenceModel->addConference($data)) {
                         $candidatesList = [];
                         $votersList = [];
+                        //get all candidates for particular election
                         $candidatesList[] = $this->candidateModel->getCandidatesByElectionId($electionID);
+                        //get all voters for particular election
                         $votersList[] = $this->electionModel->getVotersByElectionID($electionID);
+                        //sending mails for candidates about the meeting
                         foreach ($candidatesList[0] as $candidate) {
                             $this->candidateModel->sendEMailCandidates($candidate->candidateId, $data);
                         }
+                        //sending mails for voters about the meeting
                         foreach ($votersList[0] as $voter) {
                             $this->voterModel->sendEMailVoters($voter->voterId, $data);
                         }
@@ -847,6 +875,7 @@ class Pages extends Controller
             }
             $candidates = $this->candidateModel->getCandidatesByElectionId($electionID);
             $data1 = $this->conferenceModel->getConferencesByUserIDAndElectionID($_SESSION["UserId"], $electionID);
+            //rendering the view
             $this->view(
                 'Supervisor/scheduleConference',
 
@@ -998,6 +1027,8 @@ class Pages extends Controller
             ////                var_dump($_FILES);
             //            exit();
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+//                checking the availability of profile photo
                 if (isset($_FILES['profilePhoto'])) {
                     $image = $_FILES['profilePhoto']['name'];
                 }
@@ -1026,7 +1057,8 @@ class Pages extends Controller
                 //                }
                 //                if(empty($data['old_password'])){
                 //                    $data['old_passwordError']="Please enter old password";
-                //                }
+                //
+                //  doing validation              }
                 if (!empty($data['fname']) && !empty($data['lname']) && !empty($data['email']) && empty($data['old_password']) && !empty($data['new_password'])) {
                     $data['old_passwordError'] = "Please enter old password";
                 }
@@ -1048,6 +1080,7 @@ class Pages extends Controller
                             'new_passwordError' => '',
                             'confirmPasswordError' => ''
                         ];
+                        //updating the profile
                         $this->userModel->updateProfile($data);
                         redirect('pages/dashboard');
                     } else {
@@ -1081,6 +1114,7 @@ class Pages extends Controller
         }
     }
 
+    //upload profile image
     public function uploadProfileImage()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

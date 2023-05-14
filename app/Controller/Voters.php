@@ -16,7 +16,8 @@ class Voters extends Controller
     private $partyOwnerRequestModel;
     private $positionModel;
     private $discussionModel;
-    
+
+    //function to construct the voter class
     public function __construct()
     {
         $this->objModel = $this->model('Objection');
@@ -37,6 +38,8 @@ class Voters extends Controller
         $this->discussionModel = $this->model('Discussion');
 
     }
+
+    //submit objections for selected candidates
     public function submitObjections()
     {
         //        if(!$this->isLoggedIn()){
@@ -90,6 +93,7 @@ class Voters extends Controller
         }
     }
 
+    //function to view upvoming election as voter
     public function election($election_id,$candidate_id = null)
     {
         if ($this->isLoggedIn()) {
@@ -142,6 +146,7 @@ class Voters extends Controller
         }
     }
 
+    //function to view objections for selected candidate in selected election
     public function viewObjections($candidate_id, $election_id)
     {
         //        $r=$this->objModel->RetrieveAll();
@@ -209,6 +214,7 @@ class Voters extends Controller
         ]);
     }
 
+    //function to view summary
     public function summary($electionId)
     {
         if($this->isLoggedIn()){
@@ -287,6 +293,7 @@ class Voters extends Controller
         }
     }
 
+    //function to calculate votes for election summary
     public function calculateVotes($eid)
     {
         $candidates = array();
@@ -318,6 +325,7 @@ class Voters extends Controller
         return $candidates;
     }
 
+    //function to question from the candidates
     public function qAndA($electionId,$candidateId)
     {
 
@@ -471,7 +479,7 @@ class Voters extends Controller
     }
 }
 
-public function party_apply()
+    public function party_apply()
 {
     if (!isset($_SESSION["UserId"])) {
         header("Location: " . urlroot . "/View/Login");
