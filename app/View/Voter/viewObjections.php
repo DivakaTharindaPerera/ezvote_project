@@ -33,6 +33,14 @@ require approot . '/View/inc/VoterHeader.php'; ?>
                                             <div class="align-items-center">Subject:<?php echo $value->Subject?></div>
 <!--                                            <label for="Description" class="mr-1 text-left text-md">Description</label>-->
                                             <div class="align-items-center">Description:<?php echo $value->Description?></div>
+                                            <div class="align-items-center">Respond:<?php
+                                            if(empty($value->Respond)){?>
+                                                <div class=" text-lg text-primary">No respond yet</div>
+                                                <?php } else{
+                                                    echo $value->Respond;
+                                                }?>
+                                            </div>
+
                                         </div>
                                     </div>
 
