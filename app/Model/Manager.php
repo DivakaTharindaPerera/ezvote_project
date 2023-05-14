@@ -43,7 +43,8 @@ class Manager{
 
     }
 
-    public function updatePassword($email, $pwd){
+
+    public function editPassword($email, $pwd){
         $this->db->query('UPDATE system_manager SET Password = :Password WHERE Email=:Email');
 
         $this->db->bind(':Email',$email);
@@ -64,10 +65,11 @@ class Manager{
         return $this->db->resultSet();
     }
 
-    public function editProfile($name,$email,$managerid){
-        $this->db->query('UPDATE system_manager SET Name = :Name, Email = :Email WHERE ManagerID=:ManagerID');
+    public function editProfile($name,$email,$pwd,$managerid){
+        $this->db->query('UPDATE system_manager SET Name = :Name, Email =:Email, Password = :Password WHERE ManagerID=:ManagerID');
         
         $this->db->bind(':ManagerID',$managerid);
+        $this->db->bind(':Password',$pwd);
         $this->db->bind(':Name',$name);
         $this->db->bind(':Email',$email);
 

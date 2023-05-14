@@ -105,10 +105,7 @@ window.onload = function(){
         </a>
         </div>
         <div class="d-flex justify-content-end">
-        <a href="#">
-        <button class="btn btn-primary gap-3" type="submit" class="button" id="send" onclick="success()">SEND</button>
-
-        </a>
+            <button class="btn btn-primary gap-3" type="submit" class="button" id="send">SEND</button>
         </div>
     
     </div>
