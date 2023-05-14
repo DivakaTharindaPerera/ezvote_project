@@ -2,10 +2,12 @@
 <?php require approot . '/View/inc/AuthNavbar.php'; ?>
 <?php require approot . '/View/inc/sidebar-new.php'; ?>
 
+
+
+
 <div class="main-container">
 
-    <div id="btn panel" class="d-flex text-center d-flex w-100 bg-blue-1" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4); padding-bottom: 10px;">
-
+    <div id="btn panel" class="d-flex text-center d-flex w-100 p-1 bg-light" style="border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);">
         <a href="<?php echo urlroot; ?>/Pages/electionVoters/<?php echo $data['ID'] ?>" class="btn btn-primary ml-auto card-hover mt-1 mb-1">
             <div><b>Voters</b></div>
         </a>
@@ -114,11 +116,11 @@
             if ($data['electionRow']->ObjectionStatus == 1) {
                 echo "
 
-                    <div id='objDateAndTime' class='d-flex flex-column justify-content-center align-items-center'>
-                    <div id='objTopic' class='text-center text-lg text-primary'>
+                    <div id='objDateAndTime' class='d-flex flex-column'>
+                    <div id='objTopic' class='text-center'>
                        <h4> Objection Duration</h4>
                     </div>
-                    <div class='d-flex justify-content-evenly w-65'>
+                    <div class='d-flex'>
                     <div class='card'>
                             <div> <img src='" . urlroot . "/public/img/start.png' alt='' style='max-height: 40px;max-width:40px'></div>
                             <div class='justify-content-center text-lg mb-1'>Begin</div>

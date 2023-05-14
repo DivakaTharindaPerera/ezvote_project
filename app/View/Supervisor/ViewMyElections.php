@@ -32,10 +32,17 @@
             </div>
         </div>
     </div>
-    <div id="elections" class="d-flex flex-wrap mr-1 ml-3 h-100 my-2 bg-info px-1 py-1">
+    
     <?php
         date_default_timezone_set('Asia/Colombo');
         $currentDate = date('Y-m-d H:i:s');
+
+        if(empty($data)){
+        ?>
+            <div class="text-3xl text-danger mt-3"><b>No elections to show!</b></div>
+        <?php 
+        }else{
+            echo "<div id='elections' class='d-flex flex-wrap mr-1 ml-3 h-100 my-2 bg-info px-1 py-1 min-w-90 max-w-90 min-h-90 justify-content-center'>";
         foreach ($data as $row) :
 
         ?>
@@ -78,8 +85,8 @@
             </div>
         <?php
         endforeach;
-        ?>
-    </div>
+        echo "</div>";
+    }?>
 </div>
 
 

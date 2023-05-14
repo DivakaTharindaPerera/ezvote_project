@@ -135,7 +135,8 @@ class PartyOwnerRequest extends Model
 
     public function getPartyRequests($candidate_id){
        
-        $this->db->query("SELECT * FROM party_owner_request WHERE user_id = $candidate_id");
+        $this->db->query("SELECT * FROM party_owner_request WHERE user_id = $candidate_id ORDER BY request_id DESC;
+        ");
         try {
             $this->db->execute();
             return $this->db->resultSet();

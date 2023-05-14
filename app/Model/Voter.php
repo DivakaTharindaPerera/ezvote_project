@@ -406,7 +406,6 @@ class Voter extends Controller{
 
         try {
             $result = $this->db->resultSet();
-            echo $this->db->rowCount();
             return $result;
         } catch (Exception $e) {
             echo "Something went wrong ".$e->getMessage();
@@ -414,7 +413,8 @@ class Voter extends Controller{
     }
 
 
-    public function sendEmailVoters($voterId,$data){
+    public function sendEmailVoters($voterId,$data)
+    {
         $this->db->query(
             "SELECT Email FROM voter WHERE voterId = :1");
         $this->db->bind(':1', $voterId);
@@ -425,9 +425,9 @@ class Voter extends Controller{
             'email' => $voter->Email,
             'subject' => 'You have a meeting',
             'body' => 'You have a meeting with supervisor.<br>
-                            Topic-'.$data['topic'].'<br>
-                            Date-'.$data['start_date'].'<br>
-                            Password-'.$data['password'].'<br>
+                            Topic-' . $data['topic'] . '<br>
+                            Date-' . $data['start_date'] . '<br>
+                            Password-' . $data['password'] . '<br>
                             Please be sure to log on ezvote platform to attend the meeting.'
         ];
 
@@ -459,9 +459,9 @@ class Voter extends Controller{
     }
 
     public function findVoterByUserIdAndElectionId($uid,$eid){
-        // var_dump($uid);
-        // var_dump($eid);
-        // exit;
+//         var_dump($uid);
+//         var_dump($eid);
+//         exit;
         $this->db->query(
             "SELECT * FROM Voter
             WHERE userId = :1 AND ElectionId = :2"
@@ -478,6 +478,16 @@ class Voter extends Controller{
             die();
         }
 
+    }
+
+    public function insertQuestion()
+    {
+        $this->db->query("INSERT INTO discussion1 (question, electionId,candidateId)VALUES (:1, :2,:3)");
+        $this->db->bind(':1', $_POST['question']);
+        $this->db->bind(':2', $_POST['electionId']);
+        $this->db->bind(':3', $_POST['candidateId']);
+        $this->db->execute();
+        return true;
     }
 
     

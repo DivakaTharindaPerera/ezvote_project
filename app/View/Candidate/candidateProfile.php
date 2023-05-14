@@ -54,7 +54,7 @@ require approot . '/View/inc/sidebar-new.php';
         </div>
     
         <?php 
-        if(!empty($res2)){ 
+        if(!empty($res3)){ 
         ?>
         <div class="d-flex">
         <button onclick="openPopup()" class="btn bg-primary text-white mx-1">Edit Profile</button>

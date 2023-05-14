@@ -7,7 +7,7 @@ require approot . '/View/inc/sidebar-new.php';
 <div class="main-container">
 
     <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light">
-        <form action="/ezvote/Candidates/nomination_apply" method="POST" enctype='multipart/form-data' >
+        <form action="/ezvote/Voters/nomination_apply" method="POST" enctype='multipart/form-data' >
         
     <h2 class="text-center">Apply Nominations</h2>
     <br>
@@ -39,6 +39,9 @@ require approot . '/View/inc/sidebar-new.php';
 
 </div>
 <br>
+
+<!-- Email -->
+<input type="text" name="email" class="hidden" value="<?php echo $data['email']; ?>">
 
 <!-- Election Name -->
 <!-- <label for="election">Election<span class="text-danger">*</span> :</label>
