@@ -13,8 +13,9 @@ require approot . '/View/inc/sidebar-new.php';
 <!-- <div class="d-flex shadow border-radius-1 bg-light" style="margin-left:15vh; margin-top:10vh;">     -->
 <div class="shadow border-radius-5 bg-light w-50 py-3" style="overflow: hidden;">
 
+<!-- get profile from user table -->
     <div class="" style="width:40%; float: left;">       
-        <img src="<?php echo $res4->ProfilePicture?>" alt="" class="w-50" style="border-radius:55vh; height:25vh; "/>        
+        <img src="<?php echo $user->ProfilePicture?>" alt="" class="w-50" style="border-radius:55vh; height:25vh; "/>        
     </div>
 
     <div class="w-60" style="float: left;">
@@ -109,19 +110,19 @@ require approot . '/View/inc/sidebar-new.php';
 <input type="text" name="identity" style="display:none;" value="<?php echo $res2[0]->identity_proof?>" readonly>
 
 
-<div class="d-flex">
+<!-- <div class="d-flex"> -->
 <!-- profile picture -->
-    <div class="column">
+    <!-- <div class="column">
         <p>Upload Profile Picture:
         <input type="file" id="imgfile" style="color: transparent;" name="imgfile"/></p> 
-    </div>
+    </div> -->
 
 <!-- Identity proof -->
     <div class="column">
         <p>Upload Identity Proof:
         <input type="file" name="file" id="files" style="color: transparent;" multiple></p>
     </div>
-</div>
+<!-- </div> -->
 <br>
 
 <!-- candidate description -->

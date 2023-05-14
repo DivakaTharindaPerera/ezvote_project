@@ -147,7 +147,7 @@ if($result[0]->status == 1){
                                                 <div id="can-Name"><?= $candidate->candidateName ?></div>
                                             </div>
                                             <div id="btn-panel" class="mr-1">
-                                                <button class=" btn btn-primary" onclick="questioning(<?=$candidate->candidateId?>)">Q & A</button>
+                                                <!-- <button class=" btn btn-primary" onclick="questioning(<?=$candidate->candidateId?>)">Q & A</button> -->
                                                 <?php
                                                 $dates = date("Y-m-d");
                                                 $times = date("H:i:s");
@@ -160,7 +160,7 @@ if($result[0]->status == 1){
 
                                                 <!--                                    --><?php //var_dump($candidate);
                                                                                             ?>
-                                                <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View</button>
+                                                <button class="btn btn-primary" onclick="viewObjections(<?= $candidate->candidateId ?>,<?= $data['election']->ElectionId ?>)">View Objection</button>
                                                 <button class="btn btn-primary" onclick="location.href='/ezvote/Candidates/candidateProfile/<?= $candidate->candidateId ?>'">View Profile</button>
 
                                             </div>
