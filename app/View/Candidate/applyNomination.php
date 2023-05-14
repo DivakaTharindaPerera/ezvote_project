@@ -2,12 +2,13 @@
 require approot . '/View/inc/VoterHeader.php';
 require approot . '/View/inc/AuthNavbar.php';
 require approot . '/View/inc/sidebar-new.php';
+
 ?>
 
 <div class="main-container">
 
     <div class="overflow-y form border-1 border-dark p-2 text-1xl bg-light">
-        <form action="/ezvote/Voters/nomination_apply" method="POST" enctype='multipart/form-data' >
+        <form action="/ezvote/Voters/nomination_apply/<?= $elect_id ?>" method="POST" enctype='multipart/form-data' >
         
     <h2 class="text-center">Apply Nominations</h2>
     <br>
@@ -60,7 +61,7 @@ require approot . '/View/inc/sidebar-new.php';
 <select name="position" class="w-50 selectName" >
 <option value="" disabled selected>Please select...</option>
         <?php foreach ($positions as $position){ ?>
-<option value="<?php echo $position->positionName ?>"><?php echo $position->positionName ?></option>
+<option value="<?php echo $position->ID ?>"><?php echo $position->positionName ?></option>
         <?php } ?> 
 </select>
 <br><br>
@@ -71,7 +72,7 @@ require approot . '/View/inc/sidebar-new.php';
 <select name="party_name" class="w-50 selectName" style="margin-left:1.2rem;">
 <option value="" disabled selected>Please select...</option>
         <?php foreach ($parties as $party){ ?>
-<option value="<?php echo $party->partyName ?>"><?php echo $party->partyName ?></option>
+<option value="<?php echo $party->partyId ?>"><?php echo $party->partyName ?></option>
         <?php } ?> 
 </select>
 <br><br><br>

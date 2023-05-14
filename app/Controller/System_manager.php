@@ -102,8 +102,9 @@ class System_manager extends Controller
         if ($_POST['v-code'] == $_SESSION['vCode']) {
             unset($_SESSION['vCode']);
             if ($_POST['pwd'] = $_POST['confirm-pwd']) {
-                $pwd = $this->ManagerModel->updatePassword($_POST['pwd']);
                 $mail = $_SESSION['email'];
+                $pwd = $this->ManagerModel->editPassword($mail,$_POST['pwd']);
+                
             }
             else {
                 header("Location: ./reset");
@@ -169,9 +170,20 @@ class System_manager extends Controller
         if (!isset($_SESSION["UserId"])) {
             redirect('System_manager/login');
         } else {
-            $data = $this->ManagerModel->profile($_SESSION['manager_ID']);
+            $manager_id = $_SESSION['manager_ID'];
+            $data = $this->ManagerModel->profile($manager_id);
 
             $this->view('Sys_manager/manager_profile',$data);
+        }
+    }
+
+    public function editManagerDetails($manager_id){
+        if (!isset($_SESSION["UserId"])) {
+            redirect('System_manager/login');
+        } else {
+            $manager_id = $_SESSION['manager_ID'];
+            $data = $this->ManagerModel->profile($manager_id);
+            $this->view('Sys_manager/manager_update_profile',$data);
         }
     }
 
@@ -179,10 +191,66 @@ class System_manager extends Controller
         if (!isset($_SESSION["UserId"])) {
             redirect('System_manager/login');
         } else {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $name = $_POST['name'];
+                $email = $_POST['email'];
+                $current_pwd = $_POST['current_password'];
+                $new_pwd = $_POST['new_password'];
+                $confirm_pwd = $_POST['confirm_password'];
+                $current_pwdError = '';
+                $new_pwdError = '';
+                $confirm_pwdError = '';
+                
+                if(!empty($name) && !empty($email) && empty($current_pwd) && !empty($new_pwd) && !empty($confirm_pwd)){
+                    $current_pwdError = "Please enter current password";
+                }
+                if(!empty($name) && !empty($email) && !empty($current_pwd) && !empty($new_pwd) && empty($confirm_pwd)){
+                    $confirm_pwdError = "Please enter confirm password";
+                }
+                $managerid = $_SESSION['manager_ID'];
+                $res = $this->ManagerModel->profile($managerid);
+                if (empty($current_pwdError)) {
+                    if (empty($current_pwd)) {
+                        $managerid = $_SESSION['manager_ID'];
+                        $name = $_POST['name'];
+                        $email = $_POST['email'];
+                        $current_pwd = $res[0]->Password;
+                        $new_pwd = $res[0]->Password;
+                        $confirm_pwd = $res[0]->Password;
+                        $current_passwordError = '';
+                        $new_passwordError = '';
+                        $confirm_passwordError = '';
+                        
+                        $this->ManagerModel->editProfile($name,$email,$new_pwd,$managerid);
+                        redirect('System_manager/dashboard');
 
-        $this->view('Sys_manager/manager_update_profile');
+                    } else {
+                        if ((password_verify($current_pwd, $res[0]->Password))) {
+                            if ($new_pwd === $confirm_pwd) {
+                                $new_pwd = password_hash($new_pwd, PASSWORD_DEFAULT);
+            
+                                $this->ManagerModel->editProfile($name,$email,$new_pwd,$managerid);
+                                redirect('System_manager/dashboard');
+                            } else {
+                                $confirm_pwdError = "Password does not match";
+                            }
+                        } else {
+                            $current_pwdError = "Password does not match";
+                        }
+                    }
+                    $_SESSION['name'] = $name;
+                    $_SESSION['email'] = $email;
+                    
+                } else {
+                    $current_pwdError = "Please enter current password";
+                }
+                $this->view('Sys_manager/manager_update_profile',$managerid);
+            }
+            $this->view('Sys_manager/manager_update_profile');
+        }
     }
-}
+
+
 
     public function updateProfileProcess($managerid){
         if (!isset($_SESSION["UserId"])) {

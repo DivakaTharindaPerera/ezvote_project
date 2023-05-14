@@ -17,7 +17,7 @@ class Nomination extends Model
     protected $Description='';
 
     public function AddNomination($data){
-        $this->db->query('INSERT INTO nomination (firstname,lastname,email,profile_picture,identity_proof,candidateDescription,msg,ID,partyId) VALUES (:firstname,:lastname,:email,:image_url,:file_urls,:candidateDescription,:msg,:ID,:partyId)');
+        $this->db->query('INSERT INTO nomination (firstname,lastname,email,profile_picture,identity_proof,candidateDescription,msg,ElectionId,ID,partyId) VALUES (:firstname,:lastname,:email,:image_url,:file_urls,:candidateDescription,:msg,:electId,:ID,:partyId)');
         //bind values
 
         $this->db->bind(':firstname',$data['firstname']);
@@ -29,6 +29,7 @@ class Nomination extends Model
         $this->db->bind(':msg',$data['msg']);
         $this->db->bind(':ID',$data['ID']);
         $this->db->bind(':partyId',$data['PartyId']);
+        $this->db->bind(':electId',$data['elect_id']);
         //execute
 
         if($this->db->execute()){

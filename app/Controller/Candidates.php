@@ -16,13 +16,13 @@ class Candidates extends Controller
     private $voterModel;
     private $mailModel;
     private $conferenceModel;
-    
+
 
     public function __construct()
     {
         $this->nominateModel = $this->model('Nomination');
         $this->objModel = $this->model('Objection');
-        $this->discussionModel = $this->model('discussion');
+        $this->discussionModel = $this->model('Discussion');
         $this->candidateModel = $this->model('Candidate');
         $this->electModel = $this->model('Election');
         $this->positionModel = $this->model('electionPositions');
@@ -155,7 +155,7 @@ class Candidates extends Controller
         // $this->view('Candidate/discussionForum');
     }
 
-    //function is defined with the parameters $id1,$id2
+    //function to view discussion forum
     public function viewPost($id1,$id2)
     {
         
@@ -232,7 +232,7 @@ class Candidates extends Controller
 
             //call partyRejected method of the partyOwnerRequestModel object
             $this->partyOwnerRequestModel->partyRejected($data);
-            $user=$this->userModel->getUserByUserId($_SESSION['UserId']);
+            $user=$this->userModel->getUserByUserId($_POST['candidate_id']);
 
             $subject = "Party Request Rejected";
             $msg = "Your party request is rejected because " . $data['reason'];
@@ -257,16 +257,19 @@ class Candidates extends Controller
 
             //call getUserByUserId method of the userModel object
             $res = $this->userModel->getUserByUserId($_SESSION["UserId"]);
-                        
+
+
+
             //call getPartyByEmail method of the partyModel object
             $res2 = $this->partyModel->getPartyByEmail($res[0]->Email);
-
+//            echo '<pre>';
+//            var_dump($res2);
+//            exit;
             if(!empty($res2)){
                             
             //call getPartyRequests method of the partyOwnerRequestModel object
             $requests=$this->partyOwnerRequestModel->getPartyRequests($_SESSION["UserId"]);
-            // var_dump($requests);
-            // exit;
+
             
             $election=[]; // $election - array
 
@@ -296,7 +299,8 @@ class Candidates extends Controller
     public function acceptPartyRequest($request_id,$candidate_id)
     {
         //call getUserByUserId method of the userModel object
-        $user=$this->userModel->getUserByUserId($_SESSION['UserId']);
+//        $user=$this->userModel->getUserByUserId($_SESSION['UserId']);
+        $user=$this->userModel->getUserByUserId($candidate_id);
 
         //call partyAccepted method of the partyOwnerRequestModel object
         $this->partyOwnerRequestModel->partyAccepted($request_id);

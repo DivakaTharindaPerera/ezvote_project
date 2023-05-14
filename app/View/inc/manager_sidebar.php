@@ -70,7 +70,7 @@
                    </a>
                </li>
                <li>
-                    <a href="#">
+                    <a href="<?php echo urlroot; ?>/System_manager/managerProfile">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Edit profile</span>
                     </a>

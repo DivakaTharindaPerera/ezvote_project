@@ -95,7 +95,7 @@ if($result[0]->status == 1){
     <div class="title">
         Apply Nomination
     <br><br>
-    <button onclick="location.href='/ezvote/Voters/applyNomination?id=<?= $data['election']->ElectionId ?>'" class="btn btn-primary">Apply</button>
+    <button onclick="location.href='/ezvote/Voters/applyNomination/<?= $data['election']->ElectionId ?>'" class="btn btn-primary">Apply</button>
     </div>
 
 <?php }else{ ?>

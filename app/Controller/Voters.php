@@ -16,7 +16,8 @@ class Voters extends Controller
     private $partyOwnerRequestModel;
     private $positionModel;
     private $discussionModel;
-    
+
+    //function to construct the voter class
     public function __construct()
     {
         $this->objModel = $this->model('Objection');
@@ -37,6 +38,8 @@ class Voters extends Controller
         $this->discussionModel = $this->model('Discussion');
 
     }
+
+    //submit objections for selected candidates
     public function submitObjections()
     {
         //        if(!$this->isLoggedIn()){
@@ -90,6 +93,7 @@ class Voters extends Controller
         }
     }
 
+    //function to view upvoming election as voter
     public function election($election_id,$candidate_id = null)
     {
         if ($this->isLoggedIn()) {
@@ -142,6 +146,7 @@ class Voters extends Controller
         }
     }
 
+    //function to view objections for selected candidate in selected election
     public function viewObjections($candidate_id, $election_id)
     {
         //        $r=$this->objModel->RetrieveAll();
@@ -209,6 +214,7 @@ class Voters extends Controller
         ]);
     }
 
+    //function to view summary
     public function summary($electionId)
     {
         if($this->isLoggedIn()){
@@ -287,6 +293,7 @@ class Voters extends Controller
         }
     }
 
+    //function to calculate votes for election summary
     public function calculateVotes($eid)
     {
         $candidates = array();
@@ -318,6 +325,7 @@ class Voters extends Controller
         return $candidates;
     }
 
+    //function to question from the candidates
     public function qAndA($electionId,$candidateId)
     {
 
@@ -352,7 +360,7 @@ class Voters extends Controller
         $this->view('Voter/questioning',['result' => $result,'result2' => $result2]);
     }
 
-    public function nomination_apply()
+    public function nomination_apply($id)
     {
         if (!isset($_SESSION["UserId"])) {
             header("Location: " . urlroot . "/View/Login");
@@ -364,8 +372,8 @@ class Voters extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                
             //call getParty_Id method of the nominateModel object
-            $party_id = $this->nominateModel->getParty_Id($_POST['party_name']);
-            $position_id = $this->nominateModel->getPosition_Id($_POST['position']);
+            $party_id = $_POST['party_name'];
+            $position_id = $_POST['position'];
 
             $imageName = $_FILES['imgfile']['name'];
             // var_dump($imageName);
@@ -396,6 +404,7 @@ class Voters extends Controller
                 'identity_proof' => $filename2,
                 'candidateDescription' => trim($_POST['candidateDescription']),
                 'msg' => trim($_POST['msg']),
+                'elect_id' => $id,
 
                 'fname_err' => '',
                 'lname_err' => '',
@@ -452,7 +461,7 @@ class Voters extends Controller
                 $parties = $this->partyModel->getElectionParties();
 
                 //renders the applyNomination view, passing the data array
-                $this->view('Candidate/applyNomination', ['names' => $names, 'positions' => $positions, 'parties' => $parties,'data'=>$data]);
+                $this->view('Voters/applyNomination/'.$id, ['names' => $names, 'positions' => $positions, 'parties' => $parties,'data'=>$data]);
             }
         } else {
             //If there are no form submissions and no data, a default empty data array is created
@@ -470,7 +479,7 @@ class Voters extends Controller
     }
 }
 
-public function party_apply()
+    public function party_apply()
 {
     if (!isset($_SESSION["UserId"])) {
         header("Location: " . urlroot . "/View/Login");
@@ -490,7 +499,9 @@ public function party_apply()
         // var_dump($tempname2);
         $folder2 = "../public/img/candidate/proofDocuments/" . $filename2;
         move_uploaded_file($tempname2, $folder2);
+        $sup_id=$this->partyModel->findPartyNameById($party_id);
 
+        $sup=$sup_id[0]->userId;
         $data = [
             'firstname' => trim($_POST['firstname']),
             'lastname' => trim($_POST['lastname']),
@@ -500,7 +511,8 @@ public function party_apply()
             'identity_proof' => $filename2,
             // 'candidateDescription' => trim($_POST['candidateDescription']),
             'msg' => trim($_POST['msg']),
-            'user_Id'=> $_SESSION['UserId'],  // user id from the form data.  probably a global variable.  probably not needed.  just using it for
+            'user_Id'=> $sup,
+            'candidate_id'=>$_SESSION['UserId'],// user id from the form data.  probably a global variable.  probably not needed.  just using it for
 
 
             'fname_err' => '',
@@ -559,24 +571,24 @@ public function party_apply()
 }
 }
 
-    public function applyNomination()
+    public function applyNomination($elect_id)
     {
-        $query = []; // empty array
+//        $query = []; // empty array
 
         //iterate through each element in the $_GET superglobal array
-        foreach ($_GET as $key => $value) {
-            $query[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
-        }
+//        foreach ($_GET as $key => $value) {
+//            $query[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+//        }
         
         // $names = $this->electModel->getUpcomingElections();
 
         //call getElectionPositionByElectionId method of the positionModel object
-        $positions = $this->positionModel->getElectionPositionByElectionId(intval($query['id']));
-        $parties = $this->partyModel->getPartiesByElectionId(intval($query['id']));
+        $positions = $this->positionModel->getElectionPositionByElectionId(intval($elect_id));
+        $parties = $this->partyModel->getPartiesByElectionId(intval($elect_id));
         $email = $_SESSION['email'];
 
         //renders the applyNomination view, passing the data array including $positions, $parties, $email
-        $this->view('Candidate/applyNomination', ['positions' => $positions, 'parties' => $parties, 'email' => $email]);
+        $this->view('Candidate/applyNomination', ['positions' => $positions, 'parties' => $parties, 'email' => $email,'elect_id'=>$elect_id]);
     }
 
     public function applyParty($id)

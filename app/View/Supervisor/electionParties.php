@@ -35,7 +35,7 @@
         <div class="popup-window-1-content bg-light border-radius-2">
             <span class="text-danger m-1 "></span>
             <input type="hidden" name="partyId" value="">
-            
+
             <div class="m-1">
                 Party name <input type="text" name="" id="" value="" class="border-1 w-50" style="border-radius: 20px;">
             </div>
@@ -75,34 +75,31 @@
         } else {
             foreach ($data['partyRow'] as $party) {
                 $cnt = 0;
-        ?>  
-            <div class="card-pane">
-                <div class="card text-center">
-                    <h4><?php echo $party->partyName; ?></h4>
-                    <?php 
-                        foreach($data['candidateRow'] as $candidate){
-                            if($candidate->partyId == $party->partyId){
+        ?>
+                <div class="card-pane">
+                    <div class="card text-center">
+                        <div class="my-2 text-2xl">
+                            <?php echo $party->partyName; ?>
+                        </div>
+                        <?php
+                        foreach ($data['candidateRow'] as $candidate) {
+                            if ($candidate->partyId == $party->partyId) {
                                 $cnt++;
                             }
                         }
-                    ?>
-                    
-                    <div id="supervisor" class="text-light bg-blue-10 mt-1 border-radius-2 w-100 h-50 p-1">
-                        <h5 class="mb-1">Supervisor</h5>
-                        <h6><?php echo $party->supName; ?></h6>
-                        <h6><?php echo $party->supEmail; ?></h6>
-                    </div>
-                    <h5 class="text-primary mb-1 mb-auto"><?php echo $cnt; ?> Candidates</h5>
-                    <div id="btns" class="d-flex text-center">
-                        <input type="hidden" name="" value="<?php echo $party->partyName;?>">
-                        <input type="hidden" name="" value="<?php echo $party->supName;?>">
-                        <input type="hidden" name="" value="<?php echo $party->supEmail;?>">
-                        <button class="ml-auto btn btn-primary mr-1 card-hover" id="<?php echo $party->partyId;?>" onclick="editParty(this.id)"><i class='fa-sharp fa-solid fa-pen'></i></button>
-                        <button class="mr-auto btn btn-danger card-hover" id="<?php echo $party->partyId;?>" onclick="deleteParty(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
+                        ?>
+
+                        <h5 class="text-primary mb-1 mb-auto"><?php echo $cnt; ?> Candidates</h5>
+                        <div id="btns" class="d-flex text-center mb-1">
+                            <input type="hidden" name="" value="<?php echo $party->partyName; ?>">
+                            <input type="hidden" name="" value="<?php echo $party->supName; ?>">
+                            <input type="hidden" name="" value="<?php echo $party->supEmail; ?>">
+                            <button class="ml-auto btn btn-primary mr-1 card-hover" id="<?php echo $party->partyId; ?>" onclick="editParty(this.id)"><i class='fa-sharp fa-solid fa-pen'></i></button>
+                            <button class="mr-auto btn btn-danger card-hover" id="<?php echo $party->partyId; ?>" onclick="deleteParty(this.id)"><i class='fa-sharp fa-solid fa-trash'></i></button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php  
+        <?php
             }
         }
         ?>
@@ -113,7 +110,7 @@
     const body = document.querySelector('body');
     const eid = document.getElementById("electionId").value;
 
-    function deleteParty(id){
+    function deleteParty(id) {
         document.getElementById("popup-delete-party").style.display = "block";
         document.getElementById("popup-delete-party").getElementsByTagName("input")[0].value = id;
     }
@@ -121,7 +118,7 @@
     function addPartyVisible() {
         document.getElementById("formForParty").style.display = "block";
 
-        
+
     }
 
     function closePartyAddDiv() {
@@ -174,7 +171,7 @@
         }
     }
 
-    function closeDiv(){
+    function closeDiv() {
         document.getElementById("popupForEdit").getElementsByTagName("input")[2].value = "";
         document.getElementById("popupForEdit").getElementsByTagName("input")[3].value = "";
         document.getElementById("popupForEdit").getElementsByTagName("input")[4].value = "";
@@ -186,7 +183,7 @@
         body.classList.remove('no-scroll-for-popup');
     }
 
-    function editParty(id){
+    function editParty(id) {
         document.getElementById("popupForEdit").style.display = "block";
         body.classList.add('no-scroll-for-popup');
 
@@ -202,9 +199,9 @@
 
     }
 
-    function editPartyConfirm(){
+    function editPartyConfirm() {
         const dataFields = document.getElementById("popupForEdit");
-        
+
         const partyId = dataFields.getElementsByTagName("input")[0].value;
         const partyName = dataFields.getElementsByTagName("input")[1].value;
         const supervisorName = dataFields.getElementsByTagName("input")[2].value;
