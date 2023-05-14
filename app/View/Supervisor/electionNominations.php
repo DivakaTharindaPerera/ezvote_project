@@ -67,7 +67,7 @@ require approot . '/View/inc/sidebar-new.php';
                                     echo "<em style='color:red;'>No identity proof provided</em>";
                                 } else {
                                 ?>
-                                    <button class="btn btn-primary">Download</button>
+                                    <a href="<?php echo urlroot; ?>/img/candidate/proofDocuments/<?php echo $nomination->identity_proof; ?>" download="">Download</a>
                                 <?php
                                 }
                                 ?>
