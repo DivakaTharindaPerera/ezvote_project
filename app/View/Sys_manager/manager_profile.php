@@ -5,6 +5,17 @@ require approot . '/View/inc/ManagerNavbar.php'; ?>
 <?php require approot . '/View/inc/manager_sidebar.php'; ?>
 ?>
 
+<script>
+
+window.onload = function(){
+    var element = document.getElementById("dashboard");
+    element.classList.remove("active");
+
+    var element = document.getElementById("profile");
+    element.classList.add("active");
+}
+</script>
+
 <div class="main-container">
     <div class="title mt-1">MANAGER PROFILE</div>
         <div class="d-flex flex-column justify-content-center align-items-center bg-white-0-7 border-radius-2 shadow mb-2 w-50 h-100 mt-1">

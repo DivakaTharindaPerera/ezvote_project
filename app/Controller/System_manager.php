@@ -156,7 +156,7 @@ class System_manager extends Controller
                         $data['email'] = $mails[$i]->Email;
                         $this->mail->sendEmail($data);   
                     }
-                    $this->view('Sys_manager/dashboard');
+                    $this->view('Sys_manager/sysmanager_dashboard');
                 } catch (Exception $e) {
                     echo "Message could not be sent. Please try again later.";
                 }
